@@ -4,10 +4,10 @@ using System.Linq;
 
 namespace PeroTools2.AccessKing
 {
-    public struct DefaultCommandResult : ICommandResult
+    public struct SyncCommandResult : ICommandResult
     {
         private readonly ArrayList m_Results;
-        public DefaultCommandResult(ArrayList results)
+        public SyncCommandResult(ArrayList results)
         {
             m_Results = results;
         }

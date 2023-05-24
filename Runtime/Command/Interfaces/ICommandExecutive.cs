@@ -1,5 +1,5 @@
 ﻿namespace PeroTools2.AccessKing
 {
     public interface ICommandExecutive { }
-    public interface ICommandExecutive<TNotification> : ICommandExecutive where TNotification : INotification { }
+    public interface ICommandExecutive<in TNotification> : ICommandExecutive where TNotification : INotification { }
 }

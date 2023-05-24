@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace PeroTools2.AccessKing
@@ -26,7 +25,18 @@ namespace PeroTools2.AccessKing
         public async Task<IEnumerable<TResult>> GetResultsAsync<TResult>()
         {
             await Task.WhenAll(m_Tasks);
-            var results = m_Tasks.OfType<Task<TResult>>().Select(task => task.Result);
+            var results = new List<TResult>();
+            foreach (var task in m_Tasks)
+            {
+                if (task is Task<TResult> resultTask)
+                {
+                    results.Add(resultTask.Result);
+                }
+                else if (task is Task<object> objectTask && objectTask.Result is TResult result)
+                {
+                    results.Add(result);
+                }
+            }
             return results;
         }
 

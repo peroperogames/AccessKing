@@ -9,7 +9,7 @@ namespace PeroTools2.AccessKing
         bool Unsubscribe<TNotification>(IEventHandler<TNotification> eventHandler) where TNotification : INotification;
         void Clear();
     }
-    public interface IAsyncNotificationEventBus
+    public interface IAsyncNotificationEventBus : IAccessBus
     {
         Task PublishAsync<TNotification>(TNotification eventHandler) where TNotification : INotification;
         void Subscribe<TNotification>(IAsyncEventHandler<TNotification> eventHandler) where TNotification : INotification;

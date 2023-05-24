@@ -9,7 +9,7 @@
         void Publish(in TNotification notification);
         void Clear();
     }
-
+    
     public interface IEventBus : IAccessBus
     {
         bool Unsubscribe<TEventObserver>(TEventObserver eventObserver) where TEventObserver : IEventObserver;

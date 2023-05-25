@@ -14,7 +14,7 @@ namespace PeroTools2.AccessKing
         void IEventBus<TEventHandler, ParameterNotification>.Publish(in ParameterNotification notification) => Publish();
         void IEventBus.Publish<TNotification>(in TNotification notification) => Publish();
 
-        bool IEventBus.Unsubscribe<TEventObserver>(TEventObserver eventObserver)
+        bool IEventBus.Unsubscribe(IEventObserver eventObserver)
         {
             if (eventObserver is TEventHandler eventHandler)
             {
@@ -24,7 +24,7 @@ namespace PeroTools2.AccessKing
             return false;
         }
 
-        void IEventBus.Subscribe<TEventObserver>(TEventObserver eventObserver)
+        void IEventBus.Subscribe(IEventObserver eventObserver)
         {
             if (eventObserver is TEventHandler eventHandler)
             {
@@ -47,7 +47,7 @@ namespace PeroTools2.AccessKing
         void IEventBus<TEventHandler, ParameterNotification<T>>.Subscribe(TEventHandler eventHandler) => Unsubscribe(eventHandler);
         void IEventBus<TEventHandler, ParameterNotification<T>>.Publish(in ParameterNotification<T> notification) => Publish(notification.item);
 
-        bool IEventBus.Unsubscribe<TEventObserver>(TEventObserver eventObserver)
+        bool IEventBus.Unsubscribe(IEventObserver eventObserver)
         {
             if (eventObserver is TEventHandler eventHandler)
             {
@@ -57,7 +57,7 @@ namespace PeroTools2.AccessKing
             return false;
         }
 
-        void IEventBus.Subscribe<TEventObserver>(TEventObserver eventObserver)
+        void IEventBus.Subscribe(IEventObserver eventObserver)
         {
             if (eventObserver is TEventHandler eventHandler)
             {
@@ -91,7 +91,7 @@ namespace PeroTools2.AccessKing
         void IEventBus<TEventHandler, ParameterNotification<T1, T2>>.Subscribe(TEventHandler eventHandler) => Unsubscribe(eventHandler);
         void IEventBus<TEventHandler, ParameterNotification<T1, T2>>.Publish(in ParameterNotification<T1, T2> notification) => Publish(notification.item1, notification.item2);
 
-        bool IEventBus.Unsubscribe<TEventObserver>(TEventObserver eventObserver)
+        bool IEventBus.Unsubscribe(IEventObserver eventObserver)
         {
             if (eventObserver is TEventHandler eventHandler)
             {
@@ -101,7 +101,7 @@ namespace PeroTools2.AccessKing
             return false;
         }
 
-        void IEventBus.Subscribe<TEventObserver>(TEventObserver eventObserver)
+        void IEventBus.Subscribe(IEventObserver eventObserver)
         {
             if (eventObserver is TEventHandler eventHandler)
             {
@@ -135,7 +135,7 @@ namespace PeroTools2.AccessKing
         void IEventBus<TEventHandler, ParameterNotification<T1, T2, T3>>.Subscribe(TEventHandler eventHandler) => Unsubscribe(eventHandler);
         void IEventBus<TEventHandler, ParameterNotification<T1, T2, T3>>.Publish(in ParameterNotification<T1, T2, T3> notification) => Publish(notification.item1, notification.item2, notification.item3);
 
-        bool IEventBus.Unsubscribe<TEventObserver>(TEventObserver eventObserver)
+        bool IEventBus.Unsubscribe(IEventObserver eventObserver)
         {
             if (eventObserver is TEventHandler eventHandler)
             {
@@ -145,7 +145,7 @@ namespace PeroTools2.AccessKing
             return false;
         }
 
-        void IEventBus.Subscribe<TEventObserver>(TEventObserver eventObserver)
+        void IEventBus.Subscribe(IEventObserver eventObserver)
         {
             if (eventObserver is TEventHandler eventHandler)
             {
@@ -179,7 +179,7 @@ namespace PeroTools2.AccessKing
         void IEventBus<TEventHandler, ParameterNotification<T1, T2, T3, T4>>.Subscribe(TEventHandler eventHandler) => Unsubscribe(eventHandler);
         void IEventBus<TEventHandler, ParameterNotification<T1, T2, T3, T4>>.Publish(in ParameterNotification<T1, T2, T3, T4> notification) => Publish(notification.item1, notification.item2, notification.item3, notification.item4);
 
-        bool IEventBus.Unsubscribe<TEventObserver>(TEventObserver eventObserver)
+        bool IEventBus.Unsubscribe(IEventObserver eventObserver)
         {
             if (eventObserver is TEventHandler eventHandler)
             {
@@ -189,7 +189,7 @@ namespace PeroTools2.AccessKing
             return false;
         }
 
-        void IEventBus.Subscribe<TEventObserver>(TEventObserver eventObserver)
+        void IEventBus.Subscribe(IEventObserver eventObserver)
         {
             if (eventObserver is TEventHandler eventHandler)
             {
@@ -223,7 +223,7 @@ namespace PeroTools2.AccessKing
         void IEventBus<TEventHandler, ParameterNotification<T1, T2, T3, T4, T5>>.Subscribe(TEventHandler eventHandler) => Unsubscribe(eventHandler);
         void IEventBus<TEventHandler, ParameterNotification<T1, T2, T3, T4, T5>>.Publish(in ParameterNotification<T1, T2, T3, T4, T5> notification) => Publish(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5);
 
-        bool IEventBus.Unsubscribe<TEventObserver>(TEventObserver eventObserver)
+        bool IEventBus.Unsubscribe(IEventObserver eventObserver)
         {
             if (eventObserver is TEventHandler eventHandler)
             {
@@ -233,7 +233,7 @@ namespace PeroTools2.AccessKing
             return false;
         }
 
-        void IEventBus.Subscribe<TEventObserver>(TEventObserver eventObserver)
+        void IEventBus.Subscribe(IEventObserver eventObserver)
         {
             if (eventObserver is TEventHandler eventHandler)
             {

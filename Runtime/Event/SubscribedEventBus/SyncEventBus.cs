@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace PeroTools2.AccessKing
 {
-    public sealed class SyncEventBus : IEventBus, IWeakEventObserverSubscriable<IEventObserver>, INotificationEventBus, INonNotificationEventBus
+    public sealed class SyncEventBus : IWeakEventObserverSubscriable<IEventObserver>, INotificationEventBus, INonNotificationEventBus
     {
         private readonly List<object> m_Observers = new List<object>();
         public bool Unsubscribe(IEventObserver observer) => m_Observers.Remove(observer);
@@ -15,8 +15,8 @@ namespace PeroTools2.AccessKing
         bool INotificationEventBus.Unsubscribe<TNotification>(IEventHandler<TNotification> eventHandler) => Unsubscribe(eventHandler);
         void INonNotificationEventBus.Subscribe(IEventHandler eventHandler) => Subscribe(eventHandler);
         bool INonNotificationEventBus.Unsubscribe(IEventHandler eventHandler) => Unsubscribe(eventHandler);
-        bool IEventBus.Unsubscribe<TEventObserver>(TEventObserver eventObserver) => Unsubscribe(eventObserver);
-        void IEventBus.Subscribe<TEventObserver>(TEventObserver eventObserver) => Unsubscribe(eventObserver);
+        bool IEventBus.Unsubscribe(IEventObserver eventObserver) => Unsubscribe(eventObserver);
+        void IEventBus.Subscribe(IEventObserver eventObserver) => Unsubscribe(eventObserver);
         void IEventBus.Publish<TNotification>(in TNotification notification)
         {
             if (notification == null || notification is ParameterNotification)

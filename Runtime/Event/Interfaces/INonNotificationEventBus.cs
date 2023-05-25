@@ -2,14 +2,14 @@
 
 namespace PeroTools2.AccessKing
 {
-    public interface INonNotificationEventBus : IAccessBus
+    public interface INonNotificationEventBus : IEventBus
     {
         void Publish();
         void Subscribe(IEventHandler eventHandler);
         bool Unsubscribe(IEventHandler eventHandler);
         void Clear();
     }
-    public interface IAsyncNonNotificationEventBus : IAccessBus
+    public interface IAsyncNonNotificationEventBus : IEventBus
     {
         Task PublishAsync();
         void Subscribe(IAsyncEventHandler eventHandler);

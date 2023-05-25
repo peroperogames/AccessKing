@@ -1,10 +1,12 @@
 ﻿namespace PeroTools2.AccessKing
 {
-    public interface IEventSchedule<in TTheme, in TEventObserver> : IAccessSchedule<INotificationEventBus, TTheme>
-        where TEventObserver : IEventObserver
+    public interface IEventSchedule<in TTheme> : IAccessSchedule<IEventBus, TTheme>
     {
-        void Subscribe<TNotification>(TTheme theme, IEventHandler handler);
-        void UnSubscribe<TNotification>(TTheme theme, IEventHandler handler);
-        void Publish<TNotification>(TTheme theme, in TNotification notification);
+        IEventBus this[TTheme theme] { get; set; }
+
+        bool ContainsBus(TTheme theme);
+        bool TryGetBus(TTheme theme, out IEventBus eventBus);
+
+        bool RemoveTheme(TTheme theme);
     }
 }

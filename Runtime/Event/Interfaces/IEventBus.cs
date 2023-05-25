@@ -12,8 +12,8 @@
     
     public interface IEventBus : IAccessBus
     {
-        bool Unsubscribe<TEventObserver>(TEventObserver eventObserver) where TEventObserver : IEventObserver;
-        void Subscribe<TEventObserver>(TEventObserver eventObserver) where TEventObserver : IEventObserver;
+        bool Unsubscribe(IEventObserver eventObserver);
+        void Subscribe(IEventObserver eventObserver);
         void Publish<TNotification>(in TNotification notification) where TNotification : INotification;
         void Clear();
     }

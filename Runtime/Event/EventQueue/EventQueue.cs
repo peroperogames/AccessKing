@@ -11,7 +11,7 @@ namespace PeroTools2.AccessKing
         void IAccessBus.Dispatch(INotification notification) => ((IEventBus) this).Publish(in notification);
 
 
-        bool IEventBus.Unsubscribe<TEventObserver>(TEventObserver eventObserver)
+        bool IEventBus.Unsubscribe(IEventObserver eventObserver)
         {
             if (eventObserver == null)
             {
@@ -21,7 +21,7 @@ namespace PeroTools2.AccessKing
             return m_NotificationEventHandlerMaps.TryGetValue(notificationType, out var queuePair) && queuePair.eventHandlerQueue.Remove(eventObserver);
         }
 
-        void IEventBus.Subscribe<TEventObserver>(TEventObserver eventObserver)
+        void IEventBus.Subscribe(IEventObserver eventObserver)
         {
             if (eventObserver == null)
             {

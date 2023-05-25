@@ -1,18 +1,33 @@
 ﻿using System.Collections.Generic;
-using PeroTools2.AccessKing;
+using UnityEngine.Assertions;
 
-namespace Event
+namespace PeroTools2.AccessKing
 {
-    public class EventSchedule<TEventHandler,TTheme> where TEventHandler : IEventObserver
+    public class EventSchedule<TTheme> : IEventSchedule<TTheme>
     {
-        private Dictionary<TTheme, IAccessBus> m_EventBusMaps = new Dictionary<TTheme, IAccessBus>();
-        public IEventBus<IEventObserver, TNotification> RequireBus<TNotification>(TTheme theme) where TNotification : INotification
+        private readonly Dictionary<TTheme, IEventBus> m_EventBusMaps = new Dictionary<TTheme, IEventBus>();
+
+        public IEventBus this[TTheme theme]
         {
-            if (m_EventBusMaps.TryGetValue(theme, out var eventBus))
+            get
             {
-                //eventBus = new DelegateEventBus();
+                if (!m_EventBusMaps.TryGetValue(theme, out var eventBus))
+                {
+                    eventBus = new SyncEventBus();
+                    m_EventBusMaps.Add(theme, eventBus);
+                }
+
+                return eventBus;
             }
-            return null;
+            set
+            {
+                Assert.IsNotNull(value);
+                m_EventBusMaps[theme] = value;
+            }
         }
+
+        public bool ContainsBus(TTheme theme) => m_EventBusMaps.ContainsKey(theme);
+        public bool TryGetBus(TTheme theme, out IEventBus eventBus) => m_EventBusMaps.TryGetValue(theme, out eventBus);
+        public bool RemoveTheme(TTheme theme) => m_EventBusMaps.Remove(theme);
     }
 }

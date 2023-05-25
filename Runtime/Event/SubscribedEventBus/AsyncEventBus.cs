@@ -17,8 +17,8 @@ namespace PeroTools2.AccessKing
         bool IAsyncNonNotificationEventBus.Unsubscribe(IAsyncEventHandler eventHandler) => Unsubscribe(eventHandler);
         void IAsyncNonNotificationEventBus.Subscribe(IAsyncEventHandler eventHandler) => Subscribe(eventHandler);
         void IAccessBus.Dispatch(INotification notification) => ((IEventBus) this).Publish(in notification);
-        bool IEventBus.Unsubscribe<TEventObserver>(TEventObserver eventObserver) => Unsubscribe(eventObserver);
-        void IEventBus.Subscribe<TEventObserver>(TEventObserver eventObserver) => Subscribe(eventObserver);
+        bool IEventBus.Unsubscribe(IEventObserver eventObserver) => Unsubscribe(eventObserver);
+        void IEventBus.Subscribe(IEventObserver eventObserver) => Subscribe(eventObserver);
         void IEventBus.Publish<TNotification>(in TNotification notification)
         {
             if (notification == null || notification is ParameterNotification)

@@ -2,7 +2,7 @@
 
 namespace PeroTools2.AccessKing
 {
-    public readonly struct ActionHandler : IEventHandler<ParameterNotification>
+    public class ActionHandler : IEventHandler<ParameterNotification>
     {
         internal readonly IDelegate<Action> invocation;
         public ActionHandler(IDelegate<Action> delegation) => invocation = delegation;
@@ -11,7 +11,7 @@ namespace PeroTools2.AccessKing
         void IEventHandler<ParameterNotification>.Handle(in ParameterNotification notification) => Handle();
     }
 
-    public readonly struct ActionHandler<T> : IEventHandler<ParameterNotification<T>>
+    public class ActionHandler<T> : IEventHandler<ParameterNotification<T>>
     {
         internal readonly IDelegate<Action<T>> invocation;
         public ActionHandler(IDelegate<Action<T>> delegation) => invocation = delegation;
@@ -20,7 +20,7 @@ namespace PeroTools2.AccessKing
         void IEventHandler<ParameterNotification<T>>.Handle(in ParameterNotification<T> notification) => Handle(notification.item);
     }
 
-    public readonly struct ActionHandler<T1, T2> : IEventHandler<ParameterNotification<T1, T2>>
+    public class ActionHandler<T1, T2> : IEventHandler<ParameterNotification<T1, T2>>
     {
         internal readonly IDelegate<Action<T1, T2>> invocation;
         public ActionHandler(IDelegate<Action<T1, T2>> delegation) => invocation = delegation;
@@ -29,7 +29,7 @@ namespace PeroTools2.AccessKing
         void IEventHandler<ParameterNotification<T1, T2>>.Handle(in ParameterNotification<T1, T2> notification) => Handle(notification.item1, notification.item2);
     }
 
-    public readonly struct ActionHandler<T1, T2, T3> : IEventHandler<ParameterNotification<T1, T2, T3>>
+    public class ActionHandler<T1, T2, T3> : IEventHandler<ParameterNotification<T1, T2, T3>>
     {
         internal readonly IDelegate<Action<T1, T2, T3>> invocation;
         public ActionHandler(IDelegate<Action<T1, T2, T3>> delegation) => invocation = delegation;
@@ -38,7 +38,7 @@ namespace PeroTools2.AccessKing
         void IEventHandler<ParameterNotification<T1, T2, T3>>.Handle(in ParameterNotification<T1, T2, T3> notification) => Handle(notification.item1, notification.item2, notification.item3);
     }
 
-    public readonly struct ActionHandler<T1, T2, T3, T4> : IEventHandler<ParameterNotification<T1, T2, T3, T4>>
+    public class ActionHandler<T1, T2, T3, T4> : IEventHandler<ParameterNotification<T1, T2, T3, T4>>
     {
         internal readonly IDelegate<Action<T1, T2, T3, T4>> invocation;
         public ActionHandler(IDelegate<Action<T1, T2, T3, T4>> delegation) => invocation = delegation;
@@ -47,7 +47,7 @@ namespace PeroTools2.AccessKing
         void IEventHandler<ParameterNotification<T1, T2, T3, T4>>.Handle(in ParameterNotification<T1, T2, T3, T4> notification) => Handle(notification.item1, notification.item2, notification.item3, notification.item4);
     }
 
-    public readonly struct ActionHandler<T1, T2, T3, T4, T5> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5>>
+    public class ActionHandler<T1, T2, T3, T4, T5> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5>>
     {
         internal readonly IDelegate<Action<T1, T2, T3, T4, T5>> invocation;
         public ActionHandler(IDelegate<Action<T1, T2, T3, T4, T5>> delegation) => invocation = delegation;

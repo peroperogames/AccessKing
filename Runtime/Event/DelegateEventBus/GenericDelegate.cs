@@ -9,9 +9,7 @@ namespace PeroTools2.AccessKing
 
         public TDelegate delegation { get; private set; }
 
-        public GenericDelegate()
-        {
-        }
+        public GenericDelegate() { }
 
         public GenericDelegate(TDelegate target) => Add(target);
 

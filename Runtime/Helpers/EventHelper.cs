@@ -56,7 +56,13 @@ namespace PeroTools2.AccessKing
 
         public static TEventBus Require<TEventBus>(this IEventSchedule<Type> schedule) where TEventBus : IEventBus, new()
         {
-            return new TEventBus();
+            if (!schedule.TryGetBus(typeof(TEventBus), out var eventBus))
+            {
+                eventBus = new TEventBus();
+                schedule[typeof(TEventBus)] = eventBus;
+            }
+
+            return (TEventBus) eventBus;
         }
 
         public static IEventBus Require<TTheme>(this IEventSchedule<TTheme> schedule, TTheme theme, Type busType = null)
@@ -76,7 +82,6 @@ namespace PeroTools2.AccessKing
             schedule[theme] = eventBus;
             return eventBus;
         }
-        
 
         #endregion
 
@@ -88,21 +93,73 @@ namespace PeroTools2.AccessKing
         public static void Subscribe<T1, T2, T3>(this IEventBus eventBus, Action<T1, T2, T3> action) => eventBus.Subscribe(new ActionHandler<T1, T2, T3>(new GenericDelegate<Action<T1, T2, T3>>(action)));
         public static void Subscribe<T1, T2, T3, T4>(this IEventBus eventBus, Action<T1, T2, T3, T4> action) => eventBus.Subscribe(new ActionHandler<T1, T2, T3, T4>(new GenericDelegate<Action<T1, T2, T3, T4>>(action)));
         public static void Subscribe<T1, T2, T3, T4, T5>(this IEventBus eventBus, Action<T1, T2, T3, T4, T5> action) => eventBus.Subscribe(new ActionHandler<T1, T2, T3, T4, T5>(new GenericDelegate<Action<T1, T2, T3, T4, T5>>(action)));
-
-
+        
+        
         public static bool Unsubscribe(this IEventBus eventBus, Action action) => eventBus.Unsubscribe(new ActionHandler(new GenericDelegate<Action>(action)));
         public static bool Unsubscribe<T>(this IEventBus eventBus, Action<T> action) => eventBus.Unsubscribe(new ActionHandler<T>(new GenericDelegate<Action<T>>(action)));
         public static bool Unsubscribe<T1, T2>(this IEventBus eventBus, Action<T1, T2> action) => eventBus.Unsubscribe(new ActionHandler<T1, T2>(new GenericDelegate<Action<T1, T2>>(action)));
         public static bool Unsubscribe<T1, T2, T3>(this IEventBus eventBus, Action<T1, T2, T3> action) => eventBus.Unsubscribe(new ActionHandler<T1, T2, T3>(new GenericDelegate<Action<T1, T2, T3>>(action)));
         public static bool Unsubscribe<T1, T2, T3, T4>(this IEventBus eventBus, Action<T1, T2, T3, T4> action) => eventBus.Unsubscribe(new ActionHandler<T1, T2, T3, T4>(new GenericDelegate<Action<T1, T2, T3, T4>>(action)));
         public static bool Unsubscribe<T1, T2, T3, T4, T5>(this IEventBus eventBus, Action<T1, T2, T3, T4, T5> action) => eventBus.Unsubscribe(new ActionHandler<T1, T2, T3, T4, T5>(new GenericDelegate<Action<T1, T2, T3, T4, T5>>(action)));
-
-        public static void Publish(this IEventBus eventBus) => eventBus.Publish(in ParameterNotification.Empty);
+        
         public static void Publish<T>(this IEventBus eventBus, T param) => eventBus.Publish(new ParameterNotification<T>(param));
         public static void Publish<T1, T2>(this IEventBus eventBus, T1 param1, T2 param2) => eventBus.Publish(new ParameterNotification<T1, T2>(param1, param2));
         public static void Publish<T1, T2, T3>(this IEventBus eventBus, T1 param1, T2 param2, T3 param3) => eventBus.Publish(new ParameterNotification<T1, T2, T3>(param1, param2, param3));
         public static void Publish<T1, T2, T3, T4>(this IEventBus eventBus, T1 param1, T2 param2, T3 param3, T4 param4) => eventBus.Publish(new ParameterNotification<T1, T2, T3, T4>(param1, param2, param3, param4));
         public static void Publish<T1, T2, T3, T4, T5>(this IEventBus eventBus, T1 param1, T2 param2, T3 param3, T4 param4, T5 param5) => eventBus.Publish(new ParameterNotification<T1, T2, T3, T4, T5>(param1, param2, param3, param4, param5));
+
+
+        public static void Subscribe(this IEventBus<ActionHandler,ParameterNotification> eventBus, Action action)
+            => eventBus.Subscribe(new ActionHandler(new GenericDelegate<Action>(action)));
+        public static void Subscribe<T>(this IEventBus<ActionHandler<T>, ParameterNotification<T>> eventBus, Action<T> action)
+            => eventBus.Subscribe(new ActionHandler<T>(new GenericDelegate<Action<T>>(action)));
+
+        public static void Subscribe<T1, T2>(this IEventBus<ActionHandler<T1, T2>, ParameterNotification<T1, T2>> eventBus, Action<T1, T2> action)
+            => eventBus.Subscribe(new ActionHandler<T1, T2>(new GenericDelegate<Action<T1, T2>>(action)));
+
+        public static void Subscribe<T1, T2, T3>(this IEventBus<ActionHandler<T1, T2, T3>, ParameterNotification<T1, T2, T3>> eventBus, Action<T1, T2, T3> action)
+            => eventBus.Subscribe(new ActionHandler<T1, T2, T3>(new GenericDelegate<Action<T1, T2, T3>>(action)));
+
+        public static void Subscribe<T1, T2, T3, T4>(this IEventBus<ActionHandler<T1, T2, T3, T4>, ParameterNotification<T1, T2, T3, T4>> eventBus, Action<T1, T2, T3, T4> action)
+            => eventBus.Subscribe(new ActionHandler<T1, T2, T3, T4>(new GenericDelegate<Action<T1, T2, T3, T4>>(action)));
+
+        public static void Subscribe<T1, T2, T3, T4, T5>(this IEventBus<ActionHandler<T1, T2, T3, T4, T5>, ParameterNotification<T1, T2, T3, T4, T5>> eventBus, Action<T1, T2, T3, T4, T5> action)
+            => eventBus.Subscribe(new ActionHandler<T1, T2, T3, T4, T5>(new GenericDelegate<Action<T1, T2, T3, T4, T5>>(action)));
+
+
+        public static bool Unsubscribe(this IEventBus<ActionHandler,ParameterNotification> eventBus, Action action)
+            => eventBus.Unsubscribe(new ActionHandler(new GenericDelegate<Action>(action)));
+
+        public static bool Unsubscribe<T>(this IEventBus<ActionHandler<T>, ParameterNotification<T>> eventBus, Action<T> action)
+            => eventBus.Unsubscribe(new ActionHandler<T>(new GenericDelegate<Action<T>>(action)));
+
+        public static bool Unsubscribe<T1, T2>(this IEventBus<ActionHandler<T1, T2>, ParameterNotification<T1, T2>> eventBus, Action<T1, T2> action)
+            => eventBus.Unsubscribe(new ActionHandler<T1, T2>(new GenericDelegate<Action<T1, T2>>(action)));
+
+        public static bool Unsubscribe<T1, T2, T3>(this IEventBus<ActionHandler<T1, T2, T3>, ParameterNotification<T1, T2, T3>> eventBus, Action<T1, T2, T3> action)
+            => eventBus.Unsubscribe(new ActionHandler<T1, T2, T3>(new GenericDelegate<Action<T1, T2, T3>>(action)));
+
+        public static bool Unsubscribe<T1, T2, T3, T4>(this IEventBus<ActionHandler<T1, T2, T3, T4>, ParameterNotification<T1, T2, T3, T4>> eventBus, Action<T1, T2, T3, T4> action)
+            => eventBus.Unsubscribe(new ActionHandler<T1, T2, T3, T4>(new GenericDelegate<Action<T1, T2, T3, T4>>(action)));
+
+        public static bool Unsubscribe<T1, T2, T3, T4, T5>(this IEventBus<ActionHandler<T1, T2, T3, T4, T5>, ParameterNotification<T1, T2, T3, T4, T5>> eventBus, Action<T1, T2, T3, T4, T5> action)
+            => eventBus.Unsubscribe(new ActionHandler<T1, T2, T3, T4, T5>(new GenericDelegate<Action<T1, T2, T3, T4, T5>>(action)));
+
+
+        public static void Publish<T>(this IEventBus<ActionHandler<T>, ParameterNotification<T>> eventBus, T param)
+            => eventBus.Publish(new ParameterNotification<T>(param));
+
+        public static void Publish<T1, T2>(this IEventBus<ActionHandler<T1, T2>, ParameterNotification<T1, T2>> eventBus, T1 param1, T2 param2)
+            => eventBus.Publish(new ParameterNotification<T1, T2>(param1, param2));
+
+        public static void Publish<T1, T2, T3>(this IEventBus<ActionHandler<T1, T2, T3>, ParameterNotification<T1, T2, T3>> eventBus, T1 param1, T2 param2, T3 param3)
+            => eventBus.Publish(new ParameterNotification<T1, T2, T3>(param1, param2, param3));
+
+        public static void Publish<T1, T2, T3, T4>(this IEventBus<ActionHandler<T1, T2, T3, T4>, ParameterNotification<T1, T2, T3, T4>> eventBus, T1 param1, T2 param2, T3 param3, T4 param4)
+            => eventBus.Publish(new ParameterNotification<T1, T2, T3, T4>(param1, param2, param3, param4));
+
+        public static void Publish<T1, T2, T3, T4, T5>(this IEventBus<ActionHandler<T1, T2, T3, T4, T5>, ParameterNotification<T1, T2, T3, T4, T5>> eventBus, T1 param1, T2 param2, T3 param3, T4 param4, T5 param5)
+            => eventBus.Publish(new ParameterNotification<T1, T2, T3, T4, T5>(param1, param2, param3, param4, param5));
         #endregion
     }
 }

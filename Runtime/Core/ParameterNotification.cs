@@ -2,7 +2,7 @@
 {
     public struct ParameterNotification : INotification
     {
-        public static ParameterNotification Empty = new ParameterNotification();
+        
     }
 
     public struct ParameterNotification<T> : INotification

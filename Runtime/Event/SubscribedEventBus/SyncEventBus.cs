@@ -3,31 +3,39 @@ using System.Collections.Generic;
 
 namespace PeroTools2.AccessKing
 {
-    public sealed class SyncEventBus : IWeakEventObserverSubscriable<IEventObserver>, INotificationEventBus, INonNotificationEventBus
+    public class SyncEventBus : IWeakEventObserverSubscriable<IEventObserver>, IEventBus
     {
         private readonly List<object> m_Observers = new List<object>();
-        public bool Unsubscribe(IEventObserver observer) => m_Observers.Remove(observer);
+
+        public bool Unsubscribe(IEventObserver observer)
+        {
+            if (observer == null)
+                return false;
+            var isRemoved = false;
+            for (var index = m_Observers.Count - 1; index >= 0; index--)
+            {
+                var target = m_Observers[index];
+                if (target is WeakReference weakHandler && !weakHandler.IsAlive)
+                {
+                    if (!weakHandler.IsAlive)
+                        m_Observers.RemoveAt(index);
+                    else
+                        target = weakHandler.Target;
+                }
+
+                if (!observer.Equals(target))
+                    continue;
+
+                m_Observers.RemoveAt(index);
+                isRemoved = true;
+            }
+            return isRemoved;
+        }
+
         public void Subscribe(IEventObserver eventObserver) => m_Observers.Add(eventObserver);
         public void SubscribeWeakly(IEventObserver observer) => m_Observers.Add(new WeakReference(observer));
         public void Clear() => m_Observers.Clear();
         void IAccessBus.Dispatch(INotification notification) => ((IEventBus) this).Publish(in notification);
-        void INotificationEventBus.Subscribe<TNotification>(IEventHandler<TNotification> eventHandler) => Subscribe(eventHandler);
-        bool INotificationEventBus.Unsubscribe<TNotification>(IEventHandler<TNotification> eventHandler) => Unsubscribe(eventHandler);
-        void INonNotificationEventBus.Subscribe(IEventHandler eventHandler) => Subscribe(eventHandler);
-        bool INonNotificationEventBus.Unsubscribe(IEventHandler eventHandler) => Unsubscribe(eventHandler);
-        bool IEventBus.Unsubscribe(IEventObserver eventObserver) => Unsubscribe(eventObserver);
-        void IEventBus.Subscribe(IEventObserver eventObserver) => Unsubscribe(eventObserver);
-        void IEventBus.Publish<TNotification>(in TNotification notification)
-        {
-            if (notification == null || notification is ParameterNotification)
-            {
-                Publish();
-            }
-            else
-            {
-                Publish(notification);
-            }
-        }
 
         /// <summary>
         /// Publish event with notifications.
@@ -93,9 +101,6 @@ namespace PeroTools2.AccessKing
 
                 switch (observer)
                 {
-                    case IEventHandler<ParameterNotification> eventHandler:
-                        eventHandler.Handle(ParameterNotification.Empty);
-                        break;
                     case IEventHandler eventHandler:
                         eventHandler.Handle();
                         break;

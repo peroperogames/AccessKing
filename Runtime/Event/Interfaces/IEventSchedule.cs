@@ -2,8 +2,6 @@
 {
     public interface IEventSchedule<in TTheme> : IAccessSchedule<IEventBus, TTheme>
     {
-        IEventBus this[TTheme theme] { get; set; }
-
         bool ContainsBus(TTheme theme);
         bool TryGetBus(TTheme theme, out IEventBus eventBus);
 

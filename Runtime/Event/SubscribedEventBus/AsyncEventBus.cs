@@ -1,70 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using PeroTools2.Asynchronization;
 
 namespace PeroTools2.AccessKing
 {
-    public sealed class AsyncEventBus : IEventBus, IWeakEventObserverSubscriable<IEventObserver>, IAsyncNonNotificationEventBus, IAsyncNotificationEventBus
+    public sealed class AsyncEventBus : IWeakEventObserverSubscriable<IEventObserver>, IEventBus
     {
         private readonly List<object> m_Observers = new List<object>();
         private readonly object m_Locker = new object();
 
-        bool IAsyncNotificationEventBus.Unsubscribe<TNotification>(IAsyncEventHandler<TNotification> eventHandler) => Unsubscribe(eventHandler);
-        void IAsyncNotificationEventBus.Subscribe<TNotification>(IAsyncEventHandler<TNotification> eventHandler) => Subscribe(eventHandler);
-        bool IAsyncNonNotificationEventBus.Unsubscribe(IAsyncEventHandler eventHandler) => Unsubscribe(eventHandler);
-        void IAsyncNonNotificationEventBus.Subscribe(IAsyncEventHandler eventHandler) => Subscribe(eventHandler);
-        void IAccessBus.Dispatch(INotification notification) => ((IEventBus) this).Publish(in notification);
-        bool IEventBus.Unsubscribe(IEventObserver eventObserver) => Unsubscribe(eventObserver);
-        void IEventBus.Subscribe(IEventObserver eventObserver) => Subscribe(eventObserver);
-        void IEventBus.Publish<TNotification>(in TNotification notification)
-        {
-            if (notification == null || notification is ParameterNotification)
-            {
-                PublishAsync().Wait();
-            }
-            else
-            {
-                lock (m_Locker)
-                {
-                    var parameters = new object[1];
-                    for (var index = m_Observers.Count - 1; index >= 0; index--)
-                    {
-                        var observer = m_Observers[index];
-                        if (observer is WeakReference weakHandler)
-                        {
-                            if (weakHandler.IsAlive)
-                                observer = weakHandler.Target;
-                            else
-                            {
-                                m_Observers.RemoveAt(index);
-                                continue;
-                            }
-                        }
+        void IAccessBus.Dispatch(INotification notification) => ((IEventBus) this).Publish(notification);
+        public void Publish<TNotification>(in TNotification notification) where TNotification : INotification => Publish(notification);
 
-                        foreach (var iEventHandler in observer.GetType().GetInterfaces())
-                        {
-                            var interfaceName = Regex.Replace(iEventHandler.Name, @"/[.*/]", "TNotification");
-                            var notificationType = iEventHandler.GenericTypeArguments[0];
-                            parameters[0] = notification;
-                            if (interfaceName.Equals(typeof(IEventHandler<>).Name))
-                            {
-                                EventHelper.RequireEventHandlerHandleMethod(iEventHandler, notificationType).Invoke(observer, parameters);
-                                break;
-                            }
-
-                            if (interfaceName.Equals(typeof(IAsyncEventHandler<>).Name))
-                            {
-                                EventHelper.RequireAsyncEventHandlerHandleMethod(iEventHandler, notificationType).Invoke(observer, parameters);
-                                break;
-                            }
-                        }
-                    }
-                }
-            }
-        }
 
         public void Clear()
         {
@@ -126,9 +74,8 @@ namespace PeroTools2.AccessKing
         /// <item>IEventHandler&lt;TNotification&gt;</item>
         /// </list>
         /// </exception>
-        public async Task PublishAsync<TNotification>(TNotification notification) where TNotification : INotification
+        private void Publish<TNotification>(TNotification notification) where TNotification : INotification
         {
-            await ThreadSwitcher.SwitchToRandomThread();
             long finishedCount = 0;
             Exception exception = null;
             var lockSlim = new ReaderWriterLockSlim();
@@ -152,9 +99,6 @@ namespace PeroTools2.AccessKing
                         {
                             switch (observer)
                             {
-                                case IAsyncEventHandler<TNotification> eventHandler:
-                                    await eventHandler.HandleAsync(notification);
-                                    break;
                                 case IEventHandler<TNotification> eventHandler:
                                     eventHandler.Handle(notification);
                                     break;
@@ -195,9 +139,8 @@ namespace PeroTools2.AccessKing
         /// <item>IEventHandler&lt;TNotification&gt;</item>
         /// </list>
         /// </exception>
-        public async Task PublishAsync()
+        public void Publish()
         {
-            await ThreadSwitcher.SwitchToRandomThread();
             long finishedCount = 0;
             Exception exception = null;
             var lockSlim = new ReaderWriterLockSlim();
@@ -214,27 +157,12 @@ namespace PeroTools2.AccessKing
                     {
                         var observer = m_Observers[index];
                         if (observer is WeakReference weakHandler)
-                        {
                             observer = weakHandler.IsAlive ? weakHandler.Target : null;
-                        }
 
-                        switch (observer)
-                        {
-                            case IAsyncEventHandler<ParameterNotification> eventHandler:
-                                await eventHandler.HandleAsync(ParameterNotification.Empty);
-                                break;
-                            case IAsyncEventHandler eventHandler:
-                                await eventHandler.HandleAsync();
-                                break;
-                            case IEventHandler<ParameterNotification> eventHandler:
-                                eventHandler.Handle(ParameterNotification.Empty);
-                                break;
-                            case IEventHandler eventHandler:
-                                eventHandler.Handle();
-                                break;
-                            default:
-                                throw new NotSupportedException($"Unknown event observer type: {observer.GetType()} .");
-                        }
+                        if (observer is IEventHandler eventHandler)
+                            eventHandler.Handle();
+                        else
+                            throw new NotSupportedException($"Unknown event observer type: {observer.GetType()} .");
 
                         lockSlim.EnterWriteLock();
                         if (observer == null)

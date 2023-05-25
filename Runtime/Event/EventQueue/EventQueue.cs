@@ -4,11 +4,13 @@ using UnityEngine.Assertions;
 
 namespace PeroTools2.AccessKing
 {
-    public class EventQueue : IEventBus, INotificationEventBus
+    public class EventQueue : IEventBus
     {
         private readonly Dictionary<Type, (List<INotification> notificationQueue, List<IEventObserver> eventHandlerQueue)> m_NotificationEventHandlerMaps = new Dictionary<Type, (List<INotification>, List<IEventObserver>)>();
+
         public void Clear() => m_NotificationEventHandlerMaps.Clear();
         void IAccessBus.Dispatch(INotification notification) => ((IEventBus) this).Publish(in notification);
+        void IEventBus.Publish() => throw new InvalidOperationException();
 
 
         bool IEventBus.Unsubscribe(IEventObserver eventObserver)

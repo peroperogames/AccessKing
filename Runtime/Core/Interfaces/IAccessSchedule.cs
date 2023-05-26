@@ -1,7 +1,11 @@
-﻿namespace PeroTools2.AccessKing
+﻿using System.Collections.Generic;
+
+namespace PeroTools2.AccessKing
 {
-    public interface IAccessSchedule<TAccessBus,in TTheme> where TAccessBus : IAccessBus
+    public interface IAccessSchedule<in TTheme> : IEnumerable<IAccessBus>
     {
-        TAccessBus this[TTheme theme] { get; set; }
+        IAccessBus this[TTheme theme] { get;}
+        bool TryGetBus(TTheme theme, out IAccessBus bus);
+        void AddBus(TTheme theme, IAccessBus bus);
     }
 }

@@ -3,37 +3,36 @@ using System.Threading.Tasks;
 
 namespace PeroTools2.AccessKing
 {
-    public class AsyncCommandBus : ICommandBus, ICommandBus<AsyncCommandResult>
+    public class AsyncCommandBus : ICommandBus, ICommandBus<AsyncCommandOperation>
     {
-        private readonly ICommandExecutiveFactory m_HandlerFactory;
+        private readonly ICommandHandlerFactory m_HandlerFactory;
 
-        public AsyncCommandBus(ICommandExecutiveFactory handlerFactory) => m_HandlerFactory = handlerFactory;
+        public AsyncCommandBus(ICommandHandlerFactory handlerFactory) => m_HandlerFactory = handlerFactory;
 
         void IAccessBus.Dispatch(INotification notification) => Execute(notification);
 
-        ICommandResult ICommandBus.Execute<TNotification>(TNotification notification) => Execute(notification);
+        ICommandOperation ICommandBus.Execute<TNotification>(TNotification notification) => Execute(notification);
 
-        public AsyncCommandResult Execute<TNotification>(TNotification notification) where TNotification : INotification
+        public AsyncCommandOperation Execute<TNotification>(TNotification notification) where TNotification : INotification
         {
             var executives = m_HandlerFactory.RequireExecutives<TNotification>();
-            var list = ObjectPool<List<Task>>.Require();
-            foreach (var executive in executives)
+            var results = ObjectPool<List<Task>>.Require();
+            foreach (var handler in executives)
             {
-                var result = executive.TryHandle(notification);
-                switch (result)
+                handler.Handle(notification);
+                if (handler is IResultAvailable resultGetter)
                 {
-                    case null:
-                        list.Add(Task.CompletedTask);
-                        break;
-                    case Task taskResult:
-                        list.Add(taskResult);
-                        break;
-                    default:
-                        list.Add(Task.FromResult(result));
-                        break;
+                    if (resultGetter is IResultAvailable<Task> taskResultGetter)
+                    {
+                        results.Add(taskResultGetter.GetResult());
+                    }
+                    else
+                    {
+                        results.Add(Task.FromResult(resultGetter.GetResult()));
+                    }
                 }
             }
-            return new AsyncCommandResult(list);
+            return new AsyncCommandOperation(results, executives.Count);
         }
     }
 }

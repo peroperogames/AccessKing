@@ -4,6 +4,6 @@ namespace PeroTools2.AccessKing
 {
     public interface ICommandHandlerFactory
     {
-        IReadOnlyList<ICommandHandler<TNotification>> RequireExecutives<TNotification>() where TNotification : INotification;
+        IReadOnlyList<ICommandHandler<TNotification>> RequireHandlers<TNotification>() where TNotification : INotification;
     }
 }

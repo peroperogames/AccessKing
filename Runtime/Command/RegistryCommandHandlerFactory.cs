@@ -8,7 +8,7 @@ namespace PeroTools2.AccessKing
     {
         private readonly Dictionary<Type, List<object>> m_HandlerMaps = new Dictionary<Type, List<object>>();
 
-        public void RegisterExecutive<TNotification>(ICommandHandler<TNotification> handler) where TNotification : INotification
+        public void RegisterHandler<TNotification>(ICommandHandler<TNotification> handler) where TNotification : INotification
         {
             if (!m_HandlerMaps.TryGetValue(typeof(TNotification), out var handlers))
             {
@@ -18,17 +18,17 @@ namespace PeroTools2.AccessKing
             handlers.Add(handler);
         }
 
-        public bool UnRegisterExecutive<TNotification>(ICommandHandler<TNotification> handler) where TNotification : INotification
+        public bool UnRegisterHandler<TNotification>(ICommandHandler<TNotification> handler) where TNotification : INotification
         {
             return m_HandlerMaps.TryGetValue(typeof(TNotification), out var executives) && executives.Remove(handler);
         }
 
 
-        public IReadOnlyList<ICommandHandler<TNotification>> RequireExecutives<TNotification>() where TNotification : INotification
+        public IReadOnlyList<ICommandHandler<TNotification>> RequireHandlers<TNotification>() where TNotification : INotification
         {
             return m_HandlerMaps.TryGetValue(typeof(TNotification), out var handlers)
                 ? handlers.Select(handler => (ICommandHandler<TNotification>) handler).ToList()
-                : Array.Empty<ICommandHandler<TNotification>>();
+                : Array.Empty<ICommandHandler<TNotification>>().ToList();
         }
     }
 }

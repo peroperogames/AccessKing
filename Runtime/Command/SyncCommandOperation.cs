@@ -10,7 +10,7 @@ namespace PeroTools2.AccessKing
         private readonly ArrayList m_Results;
         public readonly int count;
 
-        internal SyncCommandOperation(ArrayList results, int count)
+        public SyncCommandOperation(ArrayList results, int count)
         {
             m_Results = results;
             this.count = count;

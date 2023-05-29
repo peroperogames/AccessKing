@@ -2,6 +2,6 @@
 {
     public interface IAccessBus
     {
-        public void Dispatch(INotification notification);
+        void Dispatch(INotification notification);
     }
 }

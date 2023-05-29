@@ -4,7 +4,6 @@ namespace PeroTools2.AccessKing
 {
     public static class EventExtensions
     {
-
         #region Subscribe
 
         public static void Subscribe(this IEventBus<ParameterNotification> eventBus, Action action)

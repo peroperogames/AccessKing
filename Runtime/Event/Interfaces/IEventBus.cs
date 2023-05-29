@@ -1,7 +1,7 @@
 ﻿namespace PeroTools2.AccessKing
 {
     
-    public interface IEventBus<TNotification> : IAccessBus where TNotification : INotification
+    public interface IEventBus<TNotification> where TNotification : INotification
     {
         bool Unsubscribe(IEventHandler<TNotification> handler);
         void Subscribe(IEventHandler<TNotification> handler);

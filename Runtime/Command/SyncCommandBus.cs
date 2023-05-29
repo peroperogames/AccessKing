@@ -2,7 +2,7 @@
 
 namespace PeroTools2.AccessKing
 {
-    public class SyncCommandBus : ICommandBus, ICommandBus<SyncCommandOperation>
+    public class SyncCommandBus : IAccessBus, ICommandBus<SyncCommandOperation>
     {
         private readonly ICommandHandlerFactory m_HandlerFactory;
 
@@ -10,11 +10,9 @@ namespace PeroTools2.AccessKing
 
         void IAccessBus.Dispatch(INotification notification) => Execute(notification);
 
-        ICommandOperation ICommandBus.Execute<TNotification>(TNotification notification) => Execute(notification);
-
         public SyncCommandOperation Execute<TNotification>(TNotification notification) where TNotification : INotification
         {
-            var handlers = m_HandlerFactory.RequireExecutives<TNotification>();
+            var handlers = m_HandlerFactory.RequireHandlers<TNotification>();
             var results = ObjectPool<ArrayList>.Require();
             foreach (var handler in handlers)
             {

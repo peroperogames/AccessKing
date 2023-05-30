@@ -63,10 +63,10 @@ namespace PeroTools2.AccessKing
                 bus = new ParameterEventBus<T>();
                 AddBus(theme, bus);
             }
-
+        
             return bus;
         }
-
+        
         public IEventBus<ParameterNotification<T1, T2>> Require<T1, T2>(TTheme theme)
         {
             if (!TryGetBus<ParameterNotification<T1, T2>>(theme, out var bus))
@@ -74,10 +74,10 @@ namespace PeroTools2.AccessKing
                 bus = new ParameterEventBus<T1, T2>();
                 AddBus(theme, bus);
             }
-
+        
             return bus;
         }
-
+        
         public IEventBus<ParameterNotification<T1, T2, T3>> Require<T1, T2, T3>(TTheme theme)
         {
             if (!TryGetBus<ParameterNotification<T1, T2, T3>>(theme, out var bus))
@@ -85,10 +85,10 @@ namespace PeroTools2.AccessKing
                 bus = new ParameterEventBus<T1, T2, T3>();
                 AddBus(theme, bus);
             }
-
+        
             return bus;
         }
-
+        
         public IEventBus<ParameterNotification<T1, T2, T3, T4>> Require<T1, T2, T3, T4>(TTheme theme)
         {
             if (!TryGetBus<ParameterNotification<T1, T2, T3, T4>>(theme, out var bus))
@@ -96,10 +96,10 @@ namespace PeroTools2.AccessKing
                 bus = new ParameterEventBus<T1, T2, T3, T4>();
                 AddBus(theme, bus);
             }
-
+        
             return bus;
         }
-
+        
         public IEventBus<ParameterNotification<T1, T2, T3, T4, T5>> Require<T1, T2, T3, T4, T5>(TTheme theme)
         {
             if (!TryGetBus<ParameterNotification<T1, T2, T3, T4, T5>>(theme, out var bus))
@@ -107,7 +107,7 @@ namespace PeroTools2.AccessKing
                 bus = new ParameterEventBus<T1, T2, T3, T4, T5>();
                 AddBus(theme, bus);
             }
-
+        
             return bus;
         }
     }

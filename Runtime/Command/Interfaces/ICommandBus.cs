@@ -1,7 +1,9 @@
 ﻿namespace PeroTools2.AccessKing
 {
-    public interface ICommandBus<out TResult> where TResult : ICommandOperation
+    public interface ICommandBus<in TNotification, out TOperation>
+        where TNotification : INotification
+        where TOperation : ICommandOperation
     {
-        TResult Execute<TNotification>(TNotification notification) where TNotification : INotification;
+        TOperation Execute(TNotification notification);
     }
 }

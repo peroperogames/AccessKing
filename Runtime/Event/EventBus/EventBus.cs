@@ -10,12 +10,10 @@ namespace PeroTools2.AccessKing
 
         void IAccessBus.Dispatch(INotification notification)
         {
-            if (notification is TNotification t_notification)
-            {
-                Broadcast(t_notification);
-                return;
-            }
-            throw new InvalidOperationException();
+            if (notification is TNotification tNotification)
+                Broadcast(tNotification);
+            else
+                ThrowHelper.ThrowWhenNotificationCastFailed<TNotification>(notification);
         }
 
         public void Clear()
@@ -23,7 +21,7 @@ namespace PeroTools2.AccessKing
             m_Handlers.Clear();
             m_WeakHandlers.Clear();
         }
-        
+
         public bool Unsubscribe(IEventHandler<TNotification> handler)
         {
             if (handler == null)

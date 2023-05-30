@@ -4,6 +4,6 @@
         where TNotification : INotification
         where TOperation : ICommandOperation
     {
-        TOperation Execute(TNotification notification);
+        TOperation Execute(ICommandHandlerFactory commandHandlerFactory, TNotification notification);
     }
 }

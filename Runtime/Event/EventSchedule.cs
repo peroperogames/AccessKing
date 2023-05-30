@@ -45,7 +45,7 @@ namespace PeroTools2.AccessKing
                 throw new InvalidOperationException("bus must implement from IAccessBus");
         }
 
-        public IEventBus<ParameterNotification> Require(TTheme theme)
+        public IEventBus<ParameterNotification> RequireWithParams(TTheme theme)
         {
             if (!TryGetBus<ParameterNotification>(theme, out var bus))
             {
@@ -56,7 +56,7 @@ namespace PeroTools2.AccessKing
             return bus;
         }
 
-        public IEventBus<ParameterNotification<T>> Require<T>(TTheme theme)
+        public IEventBus<ParameterNotification<T>> RequireWithParams<T>(TTheme theme)
         {
             if (!TryGetBus<ParameterNotification<T>>(theme, out var bus))
             {
@@ -67,7 +67,7 @@ namespace PeroTools2.AccessKing
             return bus;
         }
         
-        public IEventBus<ParameterNotification<T1, T2>> Require<T1, T2>(TTheme theme)
+        public IEventBus<ParameterNotification<T1, T2>> RequireWithParams<T1, T2>(TTheme theme)
         {
             if (!TryGetBus<ParameterNotification<T1, T2>>(theme, out var bus))
             {
@@ -78,7 +78,7 @@ namespace PeroTools2.AccessKing
             return bus;
         }
         
-        public IEventBus<ParameterNotification<T1, T2, T3>> Require<T1, T2, T3>(TTheme theme)
+        public IEventBus<ParameterNotification<T1, T2, T3>> RequireWithParams<T1, T2, T3>(TTheme theme)
         {
             if (!TryGetBus<ParameterNotification<T1, T2, T3>>(theme, out var bus))
             {
@@ -89,7 +89,7 @@ namespace PeroTools2.AccessKing
             return bus;
         }
         
-        public IEventBus<ParameterNotification<T1, T2, T3, T4>> Require<T1, T2, T3, T4>(TTheme theme)
+        public IEventBus<ParameterNotification<T1, T2, T3, T4>> RequireWithParams<T1, T2, T3, T4>(TTheme theme)
         {
             if (!TryGetBus<ParameterNotification<T1, T2, T3, T4>>(theme, out var bus))
             {
@@ -100,7 +100,7 @@ namespace PeroTools2.AccessKing
             return bus;
         }
         
-        public IEventBus<ParameterNotification<T1, T2, T3, T4, T5>> Require<T1, T2, T3, T4, T5>(TTheme theme)
+        public IEventBus<ParameterNotification<T1, T2, T3, T4, T5>> RequireWithParams<T1, T2, T3, T4, T5>(TTheme theme)
         {
             if (!TryGetBus<ParameterNotification<T1, T2, T3, T4, T5>>(theme, out var bus))
             {

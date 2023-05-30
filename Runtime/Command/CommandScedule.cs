@@ -1,73 +1,79 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace PeroTools2.AccessKing
 {
     public class CommandSchedule<TTheme> : IAccessSchedule<TTheme>, ICommandSchedule<TTheme>
     {
-        private readonly Dictionary<TTheme, CommandExecutive> m_CommandBusMaps = new Dictionary<TTheme, CommandExecutive>();
+        private readonly Dictionary<TTheme, CommandScheduleEntry> m_CommandBusMaps = new Dictionary<TTheme, CommandScheduleEntry>();
         private readonly Dictionary<TTheme, ICommandHandlerFactory> m_FactoryMaps = new Dictionary<TTheme, ICommandHandlerFactory>();
 
-        public CommandExecutive<TNotification, TOperation> Require<TNotification, TOperation>(TTheme theme) where TNotification : INotification where TOperation : ICommandOperation
+        public ICommandBus<TNotification, TOperation> Require<TNotification, TOperation>(TTheme theme) where TNotification : INotification where TOperation : ICommandOperation
         {
-            if (m_CommandBusMaps.TryGetValue(theme, out var executive))
+            if (m_CommandBusMaps.TryGetValue(theme, out var entry))
             {
-                return executive as CommandExecutive<TNotification, TOperation>;
+                return entry.GetBus<TNotification, TOperation>();
             }
 
             ThrowHelper.ThrowWhenAccessBusRequireFailed(typeof(ICommandBus<TNotification, TOperation>));
             return null;
         }
 
-        public CommandExecutive<ParameterNotification, TOperation> RequireWithParams<TOperation>(TTheme theme) where TOperation : ICommandOperation
+        public ICommandBus<ParameterNotification, TOperation> RequireWithParams<TOperation>(TTheme theme) where TOperation : ICommandOperation
             => Require<ParameterNotification, TOperation>(theme);
 
-        public CommandExecutive<ParameterNotification<T>, TOperation> RequireWithParams<T, TOperation>(TTheme theme) where TOperation : ICommandOperation
+        public ICommandBus<ParameterNotification<T>, TOperation> RequireWithParams<T, TOperation>(TTheme theme) where TOperation : ICommandOperation
             => Require<ParameterNotification<T>, TOperation>(theme);
 
-        public CommandExecutive<ParameterNotification<T1, T2>, TOperation> RequireWithParams<T1, T2, TOperation>(TTheme theme) where TOperation : ICommandOperation
+        public ICommandBus<ParameterNotification<T1, T2>, TOperation> RequireWithParams<T1, T2, TOperation>(TTheme theme) where TOperation : ICommandOperation
             => Require<ParameterNotification<T1, T2>, TOperation>(theme);
 
-        public CommandExecutive<ParameterNotification<T1, T2, T3>, TOperation> RequireWithParams<T1, T2, T3, TOperation>(TTheme theme) where TOperation : ICommandOperation
+        public ICommandBus<ParameterNotification<T1, T2, T3>, TOperation> RequireWithParams<T1, T2, T3, TOperation>(TTheme theme) where TOperation : ICommandOperation
             => Require<ParameterNotification<T1, T2, T3>, TOperation>(theme);
 
-        public CommandExecutive<ParameterNotification<T1, T2, T3, T4>, TOperation> RequireWithParams<T1, T2, T3, T4, TOperation>(TTheme theme) where TOperation : ICommandOperation
+        public ICommandBus<ParameterNotification<T1, T2, T3, T4>, TOperation> RequireWithParams<T1, T2, T3, T4, TOperation>(TTheme theme) where TOperation : ICommandOperation
             => Require<ParameterNotification<T1, T2, T3, T4>, TOperation>(theme);
 
-        public CommandExecutive<ParameterNotification<T1, T2, T3, T4, T5>, TOperation> RequireWithParams<T1, T2, T3, T4, T5, TOperation>(TTheme theme) where TOperation : ICommandOperation
+        public ICommandBus<ParameterNotification<T1, T2, T3, T4, T5>, TOperation> RequireWithParams<T1, T2, T3, T4, T5, TOperation>(TTheme theme) where TOperation : ICommandOperation
             => Require<ParameterNotification<T1, T2, T3, T4, T5>, TOperation>(theme);
 
-        public void AddFactory(TTheme theme, ICommandHandlerFactory factory)
-        {
-            m_FactoryMaps.Add(theme, factory);
-        }
+        public void AddFactory(TTheme theme, ICommandHandlerFactory factory) => m_FactoryMaps.Add(theme, factory);
 
-        public void AddBus<TNotification, TOperation>(TTheme theme, ICommandBus<TNotification, TOperation> bus) where TNotification : INotification where TOperation : ICommandOperation
+        public void AddBus<TBus>(TTheme theme) where TBus : ICommandBus, IAccessBus
         {
-            if (m_CommandBusMaps.TryGetValue(theme, out var executive))
+            var busType = typeof(TBus);
+            if (!typeof(IAccessBus).IsAssignableFrom(busType) || !typeof(ICommandBus).IsAssignableFrom(busType))
+                throw new InvalidCastException();
+
+            if (m_FactoryMaps.TryGetValue(theme, out var factory))
             {
-                if (bus is IAccessBus accessBus)
-                    executive.Add<TNotification>(accessBus);
-                else
-                    ThrowHelper.ThrowWhenAccessBusCastFailed(bus.GetType());
-            }
-            else if (m_FactoryMaps.TryGetValue(theme, out var factory))
-            {
-                executive = new CommandExecutive<TNotification, TOperation>(factory);
-                m_CommandBusMaps.Add(theme, executive);
-                if (bus is IAccessBus accessBus)
-                    executive.Add<TNotification>(accessBus);
-                else
-                    ThrowHelper.ThrowWhenAccessBusCastFailed(bus.GetType());
+                var ctor = busType.GetConstructor(new[] {typeof(ICommandHandlerFactory)});
+                Assert.IsNotNull(ctor, "The CommandBus must have a constructor with ICommandHandlerFactory parameters");
+
+                var bus = (IAccessBus) ctor.Invoke(new object[] {factory});
+
+                if (!m_CommandBusMaps.TryGetValue(theme, out var entry))
+                {
+                    entry = new CommandScheduleEntry();
+                    m_CommandBusMaps.Add(theme, entry);
+                }
+
+                entry.Add(bus);
             }
             else
                 ThrowHelper.ThrowWhenHandlerFactoryNeverBeenRegistered(theme);
         }
 
-
         public IEnumerator<IAccessBus> GetEnumerator()
         {
-            throw new System.NotImplementedException();
+            return m_CommandBusMaps.Values.SelectMany(entry => entry
+                    .GetAllAccessBus()
+                    .Select(item => item))
+                .GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -75,16 +81,36 @@ namespace PeroTools2.AccessKing
             return GetEnumerator();
         }
 
-        IAccessBus IAccessSchedule<TTheme>.this[TTheme theme] => throw new System.NotImplementedException();
+        IAccessBus IAccessSchedule<TTheme>.this[TTheme theme] => m_CommandBusMaps[theme].FirstOrDefault();
 
         bool IAccessSchedule<TTheme>.TryGetBus(TTheme theme, out IAccessBus bus)
         {
-            throw new System.NotImplementedException();
+            if (m_CommandBusMaps.TryGetValue(theme, out var entry))
+            {
+                bus = entry.FirstOrDefault();
+                return true;
+            }
+
+            bus = null;
+            return false;
         }
 
         void IAccessSchedule<TTheme>.AddBus(TTheme theme, IAccessBus bus)
         {
-            throw new System.NotImplementedException();
+            if (!m_FactoryMaps.TryGetValue(theme, out var factory))
+                ThrowHelper.ThrowWhenHandlerFactoryNeverBeenRegistered(theme);
+            if (bus is ICommandBus commandBus)
+            {
+                if (commandBus.handlerFactory != factory)
+                    ThrowHelper.ThrowWhenHandlerFactoryRepeat(theme);
+            }
+            else
+                ThrowHelper.ThrowWhenCommandBusCastFailed();
+
+            if (m_CommandBusMaps.TryGetValue(theme, out var entry))
+            {
+                entry.Add(bus);
+            }
         }
     }
 }

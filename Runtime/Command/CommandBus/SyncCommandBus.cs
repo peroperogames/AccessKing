@@ -8,9 +8,9 @@ namespace PeroTools2.AccessKing
         {
         }
 
-        public override SyncCommandOperation Execute(ICommandHandlerFactory factory, TNotification notification)
+        protected override SyncCommandOperation Execute(ICommandHandlerFactory handlerFactory, TNotification notification)
         {
-            var handlers = factory.RequireHandlers<TNotification>();
+            var handlers = handlerFactory.RequireHandlers<TNotification>();
             var results = ObjectPool<ArrayList>.Require();
             foreach (var handler in handlers)
             {
@@ -20,6 +20,7 @@ namespace PeroTools2.AccessKing
                     results.Add(resultGetter.GetResult());
                 }
             }
+
             return new SyncCommandOperation(results, handlers.Count);
         }
     }

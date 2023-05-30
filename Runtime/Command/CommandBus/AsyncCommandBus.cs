@@ -7,9 +7,9 @@ namespace PeroTools2.AccessKing
     {
         public AsyncCommandBus(ICommandHandlerFactory factory) : base(factory) { }
 
-        public override AsyncCommandOperation Execute(ICommandHandlerFactory factory,TNotification notification)
+        protected override AsyncCommandOperation Execute(ICommandHandlerFactory handlerFactory, TNotification notification)
         {
-            var executives = factory.RequireHandlers<TNotification>();
+            var executives = handlerFactory.RequireHandlers<TNotification>();
             var results = ObjectPool<List<Task>>.Require();
             foreach (var handler in executives)
             {

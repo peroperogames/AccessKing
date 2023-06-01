@@ -18,13 +18,13 @@ namespace PeroTools2.AccessKing
             if (notification is TNotification tNotification)
                 Execute(tNotification);
             else
-                ThrowHelper.ThrowWhenNotificationCastFailed<TNotification>(notification);
+                ThrowHelper.NotificationCastFailed<TNotification>(notification);
         }
 
         public CommandOperation Execute(TNotification notification)
         {
             var handlers = m_HandlerFactory.RequireHandlers<TNotification>();
-            var results = ObjectPool<ArrayList>.Require();
+            var results = new ArrayList();
             foreach (var handler in handlers)
             {
                 handler.Handle(notification);
@@ -33,7 +33,6 @@ namespace PeroTools2.AccessKing
                     results.Add(resultGetter.GetResult());
                 }
             }
-            
             return new CommandOperation(results);
         }
     }

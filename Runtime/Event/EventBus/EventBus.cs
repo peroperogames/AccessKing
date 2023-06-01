@@ -13,7 +13,7 @@ namespace PeroTools2.AccessKing
             if (notification is TNotification tNotification)
                 Broadcast(tNotification);
             else
-                ThrowHelper.ThrowWhenNotificationCastFailed<TNotification>(notification);
+                ThrowHelper.NotificationCastFailed<TNotification>(notification);
         }
 
         public void Clear()

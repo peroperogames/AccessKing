@@ -9,7 +9,7 @@ namespace PeroTools2.AccessKing
         public static implicit operator ActionHandler(Action delegation) => new ActionHandler(delegation);
         public void Clear() => m_Invocation = null;
         public void Handle() => m_Invocation?.Invoke();
-        void IEventHandler<ParameterNotification>.Handle(in ParameterNotification notification) => Handle();
+        void IEventHandler<Empty>.Handle(in Empty notification) => Handle();
     }
 
     public sealed class ActionHandler<T> : IEventHandler<ParameterNotification<T>>

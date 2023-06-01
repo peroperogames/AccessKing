@@ -1,8 +1,9 @@
 ﻿namespace PeroTools2.AccessKing
 {
-    public struct ParameterNotification : INotification
+    public struct Empty : INotification { }
+    public static class ParameterNotification
     {
-        public static ParameterNotification Default => new ParameterNotification();
+        public static Empty Empty => new Empty();
         public static ParameterNotification<T> Create<T>(T param) => new ParameterNotification<T>(param);
         public static ParameterNotification<T1, T2> Create<T1, T2>(T1 param1, T2 param2) => new ParameterNotification<T1, T2>(param1,param2);
         public static ParameterNotification<T1, T2, T3> Create<T1, T2, T3>(T1 param1, T2 param2, T3 param3) => new ParameterNotification<T1, T2, T3>(param1, param2, param3);

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace PeroTools2.AccessKing
 {
@@ -36,6 +37,11 @@ namespace PeroTools2.AccessKing
             {
                 if (item is TResult result)
                     results.Add(result);
+                else if (item is Task<TResult> resultTask)
+                {
+                    resultTask.Wait();
+                    results.Add(resultTask.Result);
+                }
             }
 
             return results;
@@ -59,20 +65,13 @@ namespace PeroTools2.AccessKing
 
         public static async Task<IEnumerable<TResult>> GetResultsAsync<TResult>(this CommandOperation operation)
         {
-            var tasks = operation.GetAllAsyncTask();
-            await tasks.WhenAllDone();
-
             var results = new List<TResult>();
-            foreach (var task in tasks)
+            foreach (var item in operation.handleResults)
             {
-                if (task is Task<TResult> resultTask)
-                {
-                    results.Add(resultTask.Result);
-                }
-                else if (task is Task<object> objectTask && objectTask.Result is TResult result)
-                {
-                    results.Add(result);
-                }
+                if (item is Task<TResult> resultTask)
+                    results.Add(await resultTask);
+                else if (item is TResult tResult)
+                    results.Add(tResult);
             }
 
             return results;
@@ -83,8 +82,8 @@ namespace PeroTools2.AccessKing
 
         #region Command bus execute
 
-        public static CommandOperation Execute(this ICommandBus<ParameterNotification> bus)
-            => bus.Execute(ParameterNotification.Default);
+        public static CommandOperation Execute(this ICommandBus<Empty> bus)
+            => bus.Execute(ParameterNotification.Empty);
 
         public static CommandOperation Execute<T>(this ICommandBus<ParameterNotification<T>> bus, T param)
             => bus.Execute(ParameterNotification.Create(param));

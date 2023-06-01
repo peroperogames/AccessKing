@@ -45,9 +45,9 @@ namespace PeroTools2.AccessKing
                 throw new InvalidOperationException("bus must implement from IAccessBus");
         }
 
-        public IEventBus<ParameterNotification> RequireWithParams(TTheme theme)
+        public IEventBus<Empty> RequireWithParams(TTheme theme)
         {
-            if (!TryGetBus<ParameterNotification>(theme, out var bus))
+            if (!TryGetBus<Empty>(theme, out var bus))
             {
                 bus = new ParameterEventBus();
                 AddBus(theme, bus);

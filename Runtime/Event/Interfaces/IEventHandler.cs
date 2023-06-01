@@ -5,5 +5,5 @@
     {
         void Handle(in TNotification notification);
     }
-    public interface IEventHandler : IEventHandler<ParameterNotification> { }
+    public interface IEventHandler : IEventHandler<Empty> { }
 }

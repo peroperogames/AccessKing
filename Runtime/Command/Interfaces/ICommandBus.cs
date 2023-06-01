@@ -5,10 +5,9 @@
         ICommandHandlerFactory handlerFactory { get; }
     }
 
-    public interface ICommandBus<in TNotification, out TOperation> : ICommandBus
+    public interface ICommandBus<in TNotification> : ICommandBus
         where TNotification : INotification
-        where TOperation : ICommandOperation
     {
-        TOperation Execute(TNotification notification);
+        CommandOperation Execute(TNotification notification);
     }
 }

@@ -12,7 +12,7 @@ namespace PeroTools2.AccessKing
         internal static Type GetNotificationType(Type busType)
         {
             Type notificationType = null;
-            var commandBusName = typeof(ICommandBus<>).FullName;
+            var commandBusName = typeof(ISchedulableCommandBus<>).FullName;
             foreach (var @interface in busType.GetInterfaces())
             {
                 var genericTypeName = Regex.Replace(@interface.FullName, @"\[\[.*\]\]", "");
@@ -27,7 +27,7 @@ namespace PeroTools2.AccessKing
 
         #endregion
 
-        #region Sync command operation
+        #region SyncOperation
 
         public static IReadOnlyList<TResult> GetResults<TResult>(this CommandOperation operation)
         {
@@ -48,7 +48,7 @@ namespace PeroTools2.AccessKing
 
         #endregion
 
-        #region Async command operation
+        #region AsyncOperation
 
         public static IReadOnlyList<Task> GetAllAsyncTask(this CommandOperation operation) => operation.GetResults<Task>();
 
@@ -78,8 +78,47 @@ namespace PeroTools2.AccessKing
 
         #endregion
 
+        #region RegisterHandler
 
-        #region Command bus execute
+        public static void RegisterActionHandler(this RegistryCommandHandlerFactory factory, Action action)
+            => factory.RegisterHandler(new ActionCommandHandler(action));
+        
+        public static void RegisterActionHandler<T>(this RegistryCommandHandlerFactory factory, Action<T> action)
+            => factory.RegisterHandler(new ActionCommandHandler<T>(action));
+        
+        public static void RegisterActionHandler<T1, T2>(this RegistryCommandHandlerFactory factory, Action<T1, T2> action)
+            => factory.RegisterHandler(new ActionCommandHandler<T1, T2>(action));
+        
+        public static void RegisterActionHandler<T1, T2, T3>(this RegistryCommandHandlerFactory factory, Action<T1, T2, T3> action)
+            => factory.RegisterHandler(new ActionCommandHandler<T1, T2, T3>(action));
+        
+        public static void RegisterActionHandler<T1, T2, T3, T4>(this RegistryCommandHandlerFactory factory, Action<T1, T2, T3, T4> action)
+            => factory.RegisterHandler(new ActionCommandHandler<T1, T2, T3, T4>(action));
+        
+        public static void RegisterActionHandler<T1, T2, T3, T4, T5>(this RegistryCommandHandlerFactory factory, Action<T1, T2, T3, T4, T5> action)
+            => factory.RegisterHandler(new ActionCommandHandler<T1, T2, T3, T4, T5>(action));
+
+        public static void RegisterFuncHandler<TResult>(this RegistryCommandHandlerFactory factory, Func<TResult> func)
+            => factory.RegisterHandler(new FuncCommandHandler<TResult>(func));
+
+        public static void RegisterFuncHandler<T, TResult>(this RegistryCommandHandlerFactory factory, Func<T, TResult> func)
+            => factory.RegisterHandler(new FuncCommandHandler<T, TResult>(func));
+
+        public static void RegisterFuncHandler<T1, T2, TResult>(this RegistryCommandHandlerFactory factory, Func<T1, T2, TResult> func)
+            => factory.RegisterHandler(new FuncCommandHandler<T1, T2, TResult>(func));
+
+        public static void RegisterFuncHandler<T1, T2, T3, TResult>(this RegistryCommandHandlerFactory factory, Func<T1, T2, T3, TResult> func)
+            => factory.RegisterHandler(new FuncCommandHandler<T1, T2, T3, TResult>(func));
+
+        public static void RegisterFuncHandler<T1, T2, T3, T4, TResult>(this RegistryCommandHandlerFactory factory, Func<T1, T2, T3, T4, TResult> func)
+            => factory.RegisterHandler(new FuncCommandHandler<T1, T2, T3, T4, TResult>(func));
+
+        public static void RegisterFuncHandler<T1, T2, T3, T4, T5, TResult>(this RegistryCommandHandlerFactory factory, Func<T1, T2, T3, T4, T5, TResult> func)
+            => factory.RegisterHandler(new FuncCommandHandler<T1, T2, T3, T4, T5, TResult>(func));
+
+        #endregion
+
+        #region Execute
 
         public static CommandOperation Execute(this ICommandBus<Empty> bus)
             => bus.Execute(ParameterNotification.Empty);

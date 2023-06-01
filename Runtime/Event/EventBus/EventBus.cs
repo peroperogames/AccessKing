@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace PeroTools2.AccessKing
 {
-    public class EventBus<TNotification> : IEventBus<TNotification>, IAccessBus, IWeakEventSubscriable<TNotification> where TNotification : INotification
+    public class EventBus<TNotification> : ISchedulableEventBus<TNotification>, IWeakEventSubscriable<TNotification> where TNotification : INotification
     {
         private readonly List<IEventHandler<TNotification>> m_Handlers = new List<IEventHandler<TNotification>>();
         private readonly List<WeakReference<IEventHandler<TNotification>>> m_WeakHandlers = new List<WeakReference<IEventHandler<TNotification>>>();

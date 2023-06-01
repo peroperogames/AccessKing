@@ -3,17 +3,20 @@ using System.Collections.Generic;
 
 namespace PeroTools2.AccessKing
 {
-    public class CommandSchedule<TTheme> : IAccessSchedule<TTheme>, ICommandSchedule<TTheme>
+    public class CommandSchedule<TTheme, TCommandHandlerFactory> : IAccessSchedule<TTheme>, ICommandSchedule<TTheme> where TCommandHandlerFactory : ICommandHandlerFactory
     {
+        public readonly TCommandHandlerFactory handlerFactory;
         private readonly Dictionary<TTheme, IAccessBus> m_CommandBusMaps = new Dictionary<TTheme, IAccessBus>();
         IAccessBus IAccessSchedule<TTheme>.this[TTheme theme] => m_CommandBusMaps[theme];
+
+        public CommandSchedule(TCommandHandlerFactory handlerFactory) => this.handlerFactory = handlerFactory;
 
         bool IAccessSchedule<TTheme>.TryGetBus(TTheme theme, out IAccessBus bus) => m_CommandBusMaps.TryGetValue(theme, out bus);
 
         void IAccessSchedule<TTheme>.AddBus(TTheme theme, IAccessBus bus)
         {
-            if (CommandExtensions.GetNotificationType(bus.GetType()) == null)
-                ThrowHelper.CommandBusCastFailed();
+            if (!(bus is ICommandHandlerFactoryModifiable) || CommandExtensions.GetNotificationType(bus.GetType()) == null)
+                ThrowHelper.ScheduleCommandBusCastFailed();
             m_CommandBusMaps.Add(theme, bus);
         }
 
@@ -23,12 +26,10 @@ namespace PeroTools2.AccessKing
 
         public bool RemoveTheme(TTheme theme) => m_CommandBusMaps.Remove(theme);
 
-        public void AddBus<TNotification>(TTheme theme, ICommandBus<TNotification> bus) where TNotification : INotification
+        public void AddBus<TNotification>(TTheme theme, ISchedulableCommandBus<TNotification> bus) where TNotification : INotification
         {
-            if (bus is IAccessBus accessBus)
-                m_CommandBusMaps.Add(theme, accessBus);
-            else
-                ThrowHelper.AccessBusCastFailed();
+            bus.SetFactory(handlerFactory);
+            m_CommandBusMaps.Add(theme, bus);
         }
 
 
@@ -59,22 +60,82 @@ namespace PeroTools2.AccessKing
             return null;
         }
 
-        public ICommandBus<Empty> GetBusWithParameter(TTheme theme)
-            => GetBus<Empty>(theme);
+        public ICommandBus<Empty> Require(TTheme theme)
+        {
+            if (!TryGetBus<Empty>(theme, out var bus))
+            {
+                var commandBus = new ParameterCommandBus();
+                commandBus.SetFactory(handlerFactory);
+                AddBus(theme, commandBus);
+                bus = commandBus;
+            }
 
-        public ICommandBus<ParameterNotification<T>> GetBusWithParameter<T>(TTheme theme)
-            => GetBus<ParameterNotification<T>>(theme);
+            return bus;
+        }
 
-        public ICommandBus<ParameterNotification<T1, T2>> GetBusWithParameter<T1, T2>(TTheme theme)
-            => GetBus<ParameterNotification<T1, T2>>(theme);
+        public ICommandBus<ParameterNotification<T>> Require<T>(TTheme theme)
+        {
+            if (!TryGetBus<ParameterNotification<T>>(theme, out var bus))
+            {
+                var commandBus = new ParameterCommandBus<T>();
+                commandBus.SetFactory(handlerFactory);
+                AddBus(theme, commandBus);
+                bus = commandBus;
+            }
 
-        public ICommandBus<ParameterNotification<T1, T2, T3>> GetBusWithParameter<T1, T2, T3>(TTheme theme)
-            => GetBus<ParameterNotification<T1, T2, T3>>(theme);
+            return bus;
+        }
 
-        public ICommandBus<ParameterNotification<T1, T2, T3, T4>> GetBusWithParameter<T1, T2, T3, T4>(TTheme theme)
-            => GetBus<ParameterNotification<T1, T2, T3, T4>>(theme);
+        public ICommandBus<ParameterNotification<T1, T2>> Require<T1, T2>(TTheme theme)
+        {
+            if (!TryGetBus<ParameterNotification<T1, T2>>(theme, out var bus))
+            {
+                var commandBus = new ParameterCommandBus<T1, T2>();
+                commandBus.SetFactory(handlerFactory);
+                AddBus(theme, commandBus);
+                bus = commandBus;
+            }
 
-        public ICommandBus<ParameterNotification<T1, T2, T3, T4, T5>> GetBusWithParameter<T1, T2, T3, T4, T5>(TTheme theme)
-            => GetBus<ParameterNotification<T1, T2, T3, T4, T5>>(theme);
+            return bus;
+        }
+
+        public ICommandBus<ParameterNotification<T1, T2, T3>> Require<T1, T2, T3>(TTheme theme)
+        {
+            if (!TryGetBus<ParameterNotification<T1, T2, T3>>(theme, out var bus))
+            {
+                var commandBus = new ParameterCommandBus<T1, T2, T3>();
+                commandBus.SetFactory(handlerFactory);
+                AddBus(theme, commandBus);
+                bus = commandBus;
+            }
+
+            return bus;
+        }
+
+        public ICommandBus<ParameterNotification<T1, T2, T3, T4>> Require<T1, T2, T3, T4>(TTheme theme)
+        {
+            if (!TryGetBus<ParameterNotification<T1, T2, T3, T4>>(theme, out var bus))
+            {
+                var commandBus = new ParameterCommandBus<T1, T2, T3, T4>();
+                commandBus.SetFactory(handlerFactory);
+                AddBus(theme, commandBus);
+                bus = commandBus;
+            }
+
+            return bus;
+        }
+
+        public ICommandBus<ParameterNotification<T1, T2, T3, T4, T5>> Require<T1, T2, T3, T4, T5>(TTheme theme)
+        {
+            if (!TryGetBus<ParameterNotification<T1, T2, T3, T4, T5>>(theme, out var bus))
+            {
+                var commandBus = new ParameterCommandBus<T1, T2, T3, T4, T5>();
+                commandBus.SetFactory(handlerFactory);
+                AddBus(theme, commandBus);
+                bus = commandBus;
+            }
+
+            return bus;
+        }
     }
 }

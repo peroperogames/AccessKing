@@ -15,6 +15,7 @@ namespace PeroTools2.AccessKing
                 handlers = new List<object>();
                 m_HandlerMaps[typeof(TNotification)] = handlers;
             }
+
             handlers.Add(handler);
         }
 
@@ -22,7 +23,6 @@ namespace PeroTools2.AccessKing
         {
             return m_HandlerMaps.TryGetValue(typeof(TNotification), out var executives) && executives.Remove(handler);
         }
-
 
         public IReadOnlyList<ICommandHandler<TNotification>> RequireHandlers<TNotification>() where TNotification : INotification
         {

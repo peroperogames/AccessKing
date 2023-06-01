@@ -7,44 +7,44 @@ namespace PeroTools2.AccessKing
         #region Subscribe
 
         public static void Subscribe(this IEventBus<Empty> eventBus, Action action)
-            => eventBus.Subscribe(new ActionHandler(action));
+            => eventBus.Subscribe(new ActionEventHandler(action));
 
         public static void Subscribe<T>(this IEventBus<ParameterNotification<T>> eventBus, Action<T> action)
-            => eventBus.Subscribe(new ActionHandler<T>(action));
+            => eventBus.Subscribe(new ActionEventHandler<T>(action));
 
         public static void Subscribe<T1, T2>(this IEventBus<ParameterNotification<T1, T2>> eventBus, Action<T1, T2> action)
-            => eventBus.Subscribe(new ActionHandler<T1, T2>(action));
+            => eventBus.Subscribe(new ActionEventHandler<T1, T2>(action));
 
         public static void Subscribe<T1, T2, T3>(this IEventBus<ParameterNotification<T1, T2, T3>> eventBus, Action<T1, T2, T3> action)
-            => eventBus.Subscribe(new ActionHandler<T1, T2, T3>(action));
+            => eventBus.Subscribe(new ActionEventHandler<T1, T2, T3>(action));
 
         public static void Subscribe<T1, T2, T3, T4>(this IEventBus<ParameterNotification<T1, T2, T3, T4>> eventBus, Action<T1, T2, T3, T4> action)
-            => eventBus.Subscribe(new ActionHandler<T1, T2, T3, T4>(action));
+            => eventBus.Subscribe(new ActionEventHandler<T1, T2, T3, T4>(action));
 
         public static void Subscribe<T1, T2, T3, T4, T5>(this IEventBus<ParameterNotification<T1, T2, T3, T4, T5>> eventBus, Action<T1, T2, T3, T4, T5> action)
-            => eventBus.Subscribe(new ActionHandler<T1, T2, T3, T4, T5>(action));
+            => eventBus.Subscribe(new ActionEventHandler<T1, T2, T3, T4, T5>(action));
 
         #endregion
 
         #region Unsubscribe
 
         public static bool Unsubscribe(this IEventBus<Empty> eventBus, Action action)
-            => eventBus.Unsubscribe(new ActionHandler(action));
+            => eventBus.Unsubscribe(new ActionEventHandler(action));
 
         public static bool Unsubscribe<T>(this IEventBus<ParameterNotification<T>> eventBus, Action<T> action)
-            => eventBus.Unsubscribe(new ActionHandler<T>(action));
+            => eventBus.Unsubscribe(new ActionEventHandler<T>(action));
 
         public static bool Unsubscribe<T1, T2>(this IEventBus<ParameterNotification<T1, T2>> eventBus, Action<T1, T2> action)
-            => eventBus.Unsubscribe(new ActionHandler<T1, T2>(action));
+            => eventBus.Unsubscribe(new ActionEventHandler<T1, T2>(action));
 
         public static bool Unsubscribe<T1, T2, T3>(this IEventBus<ParameterNotification<T1, T2, T3>> eventBus, Action<T1, T2, T3> action)
-            => eventBus.Unsubscribe(new ActionHandler<T1, T2, T3>(action));
+            => eventBus.Unsubscribe(new ActionEventHandler<T1, T2, T3>(action));
 
         public static bool Unsubscribe<T1, T2, T3, T4>(this IEventBus<ParameterNotification<T1, T2, T3, T4>> eventBus, Action<T1, T2, T3, T4> action)
-            => eventBus.Unsubscribe(new ActionHandler<T1, T2, T3, T4>(action));
+            => eventBus.Unsubscribe(new ActionEventHandler<T1, T2, T3, T4>(action));
 
         public static bool Unsubscribe<T1, T2, T3, T4, T5>(this IEventBus<ParameterNotification<T1, T2, T3, T4, T5>> eventBus, Action<T1, T2, T3, T4, T5> action)
-            => eventBus.Unsubscribe(new ActionHandler<T1, T2, T3, T4, T5>(action));
+            => eventBus.Unsubscribe(new ActionEventHandler<T1, T2, T3, T4, T5>(action));
 
         #endregion
 

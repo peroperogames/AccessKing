@@ -7,8 +7,5 @@ namespace PeroTools2.AccessKing
         void Handle(TNotification notification);
     }
 
-    public interface ICommandHandler<in TNotification, out TResult> : ICommandHandler<TNotification>, IResultAvailable<TResult> where TNotification : INotification
-    {
-        
-    }
+    public interface ICommandHandler<in TNotification, out TResult> : ICommandHandler<TNotification>, IResultAvailable<TResult> where TNotification : INotification { }
 }

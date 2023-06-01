@@ -2,12 +2,12 @@
 
 namespace PeroTools2.AccessKing
 {
-    public class CommandBus<TNotification> : ICommandBus<TNotification>, IAccessBus
+    public class CommandBus<TNotification> : ISchedulableCommandBus<TNotification>
         where TNotification : INotification
     {
-        private readonly ICommandHandlerFactory m_HandlerFactory;
-        public CommandBus(ICommandHandlerFactory factory) => m_HandlerFactory = factory;
+        private ICommandHandlerFactory m_HandlerFactory;
 
+        public void SetFactory(ICommandHandlerFactory factory) => m_HandlerFactory = factory;
 
         void IAccessBus.Dispatch(INotification notification)
         {

@@ -6,8 +6,6 @@ namespace PeroTools2.AccessKing
         where TNotification : INotification
     {
         private readonly ICommandHandlerFactory m_HandlerFactory;
-        ICommandHandlerFactory ICommandBus.handlerFactory => m_HandlerFactory;
-
         public CommandBus(ICommandHandlerFactory factory) => m_HandlerFactory = factory;
 
 
@@ -33,6 +31,7 @@ namespace PeroTools2.AccessKing
                     results.Add(resultGetter.GetResult());
                 }
             }
+
             return new CommandOperation(results);
         }
     }

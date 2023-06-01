@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using UnityEngine;
 
 namespace PeroTools2.AccessKing
 {
@@ -10,11 +9,11 @@ namespace PeroTools2.AccessKing
     {
         #region Reflection
 
-        internal static Type GetNotificationType<TBus>() where TBus : ICommandBus
+        internal static Type GetNotificationType(Type busType)
         {
             Type notificationType = null;
             var commandBusName = typeof(ICommandBus<>).FullName;
-            foreach (var @interface in typeof(TBus).GetInterfaces())
+            foreach (var @interface in busType.GetInterfaces())
             {
                 var genericTypeName = Regex.Replace(@interface.FullName, @"\[\[.*\]\]", "");
                 if (genericTypeName.Equals(commandBusName))

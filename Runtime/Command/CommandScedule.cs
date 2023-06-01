@@ -8,13 +8,46 @@ namespace PeroTools2.AccessKing
         private readonly Dictionary<TTheme, IAccessBus> m_CommandBusMaps = new Dictionary<TTheme, IAccessBus>();
         IAccessBus IAccessSchedule<TTheme>.this[TTheme theme] => m_CommandBusMaps[theme];
 
-        public ICommandBus this[TTheme theme]
+        bool IAccessSchedule<TTheme>.TryGetBus(TTheme theme, out IAccessBus bus) => m_CommandBusMaps.TryGetValue(theme, out bus);
+
+        void IAccessSchedule<TTheme>.AddBus(TTheme theme, IAccessBus bus)
         {
-            get => m_CommandBusMaps[theme] as ICommandBus;
-            set => m_CommandBusMaps[theme] = (IAccessBus) value;
+            if (CommandExtensions.GetNotificationType(bus.GetType()) == null)
+                ThrowHelper.CommandBusCastFailed();
+            m_CommandBusMaps.Add(theme, bus);
         }
 
-        public ICommandBus<TNotification> Require<TNotification>(TTheme theme) where TNotification : INotification
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+        public IEnumerator<IAccessBus> GetEnumerator() => m_CommandBusMaps.Values.GetEnumerator();
+
+        public bool RemoveTheme(TTheme theme) => m_CommandBusMaps.Remove(theme);
+
+        public void AddBus<TNotification>(TTheme theme, ICommandBus<TNotification> bus) where TNotification : INotification
+        {
+            if (bus is IAccessBus accessBus)
+                m_CommandBusMaps.Add(theme, accessBus);
+            else
+                ThrowHelper.AccessBusCastFailed();
+        }
+
+
+        public bool TryGetBus<TNotification>(TTheme theme, out ICommandBus<TNotification> bus) where TNotification : INotification
+        {
+            if (m_CommandBusMaps.TryGetValue(theme, out var accessBus))
+            {
+                if (accessBus is ICommandBus<TNotification> commandBus)
+                {
+                    bus = commandBus;
+                    return true;
+                }
+            }
+
+            bus = null;
+            return false;
+        }
+
+        public ICommandBus<TNotification> GetBus<TNotification>(TTheme theme) where TNotification : INotification
         {
             if (m_CommandBusMaps.TryGetValue(theme, out var bus))
             {
@@ -26,37 +59,22 @@ namespace PeroTools2.AccessKing
             return null;
         }
 
-        public ICommandBus<Empty> RequireWithParams(TTheme theme)
-            => Require<Empty>(theme);
+        public ICommandBus<Empty> GetBusWithParameter(TTheme theme)
+            => GetBus<Empty>(theme);
 
-        public ICommandBus<ParameterNotification<T>> RequireWithParams<T>(TTheme theme)
-            => Require<ParameterNotification<T>>(theme);
+        public ICommandBus<ParameterNotification<T>> GetBusWithParameter<T>(TTheme theme)
+            => GetBus<ParameterNotification<T>>(theme);
 
-        public ICommandBus<ParameterNotification<T1, T2>> RequireWithParams<T1, T2>(TTheme theme)
-            => Require<ParameterNotification<T1, T2>>(theme);
+        public ICommandBus<ParameterNotification<T1, T2>> GetBusWithParameter<T1, T2>(TTheme theme)
+            => GetBus<ParameterNotification<T1, T2>>(theme);
 
-        public ICommandBus<ParameterNotification<T1, T2, T3>> RequireWithParams<T1, T2, T3>(TTheme theme)
-            => Require<ParameterNotification<T1, T2, T3>>(theme);
+        public ICommandBus<ParameterNotification<T1, T2, T3>> GetBusWithParameter<T1, T2, T3>(TTheme theme)
+            => GetBus<ParameterNotification<T1, T2, T3>>(theme);
 
-        public ICommandBus<ParameterNotification<T1, T2, T3, T4>> RequireWithParams<T1, T2, T3, T4>(TTheme theme)
-            => Require<ParameterNotification<T1, T2, T3, T4>>(theme);
+        public ICommandBus<ParameterNotification<T1, T2, T3, T4>> GetBusWithParameter<T1, T2, T3, T4>(TTheme theme)
+            => GetBus<ParameterNotification<T1, T2, T3, T4>>(theme);
 
-        public ICommandBus<ParameterNotification<T1, T2, T3, T4, T5>> RequireWithParams<T1, T2, T3, T4, T5>(TTheme theme)
-            => Require<ParameterNotification<T1, T2, T3, T4, T5>>(theme);
-
-        public void AddBus<TBus>(TTheme theme, TBus bus) where TBus : ICommandBus, IAccessBus => m_CommandBusMaps.Add(theme, bus);
-
-        public IEnumerator<IAccessBus> GetEnumerator() => m_CommandBusMaps.Values.GetEnumerator();
-
-        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-
-        bool IAccessSchedule<TTheme>.TryGetBus(TTheme theme, out IAccessBus bus) => m_CommandBusMaps.TryGetValue(theme, out bus);
-
-        void IAccessSchedule<TTheme>.AddBus(TTheme theme, IAccessBus bus)
-        {
-            if (bus is ICommandBus)
-                m_CommandBusMaps.Add(theme, bus);
-            ThrowHelper.CommandBusCastFailed();
-        }
+        public ICommandBus<ParameterNotification<T1, T2, T3, T4, T5>> GetBusWithParameter<T1, T2, T3, T4, T5>(TTheme theme)
+            => GetBus<ParameterNotification<T1, T2, T3, T4, T5>>(theme);
     }
 }

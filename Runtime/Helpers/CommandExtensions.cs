@@ -1,7 +1,26 @@
-﻿namespace PeroTools2.AccessKing
+﻿using System;
+using System.Text.RegularExpressions;
+
+namespace PeroTools2.AccessKing
 {
     public static class CommandExtensions
     {
+        internal static Type GetNotificationType<TBus>() where TBus : ICommandBus
+        {
+            Type notificationType = null;
+            var commandBusName = typeof(ICommandBus<,>).FullName;
+            foreach (var @interface in typeof(TBus).GetInterfaces())
+            {
+                var genericTypeName = Regex.Replace(@interface.FullName, @"\[\[.*\]\]", "");
+                if (genericTypeName.Equals(commandBusName))
+                {
+                    notificationType = @interface.GenericTypeArguments[0];
+                }
+            }
+
+            return notificationType;
+        }
+
         public static TOperation Execute<TOperation>(this ICommandBus<ParameterNotification, TOperation> bus) where TOperation : ICommandOperation
             => bus.Execute(ParameterNotification.Default);
 

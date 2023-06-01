@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace PeroTools2.AccessKing
@@ -16,7 +15,10 @@ namespace PeroTools2.AccessKing
         {
             if (m_CommandBusMaps.TryGetValue(theme, out var entry))
             {
-                return entry.GetBus<TNotification, TOperation>();
+                if (entry.notificationType == typeof(TNotification))
+                    return entry.GetBus<TNotification,TOperation>();
+                else
+                    ThrowHelper.ThrowWhenNotificationCastFailed<TNotification>(entry.GetType().GenericTypeArguments[0]);
             }
 
             ThrowHelper.ThrowWhenAccessBusRequireFailed(typeof(ICommandBus<TNotification, TOperation>));
@@ -58,10 +60,12 @@ namespace PeroTools2.AccessKing
 
                 if (!m_CommandBusMaps.TryGetValue(theme, out var entry))
                 {
-                    entry = new CommandScheduleEntry();
+                    var notificationType = CommandExtensions.GetNotificationType<TBus>();
+                    Assert.IsNotNull(notificationType);
+                    entry = new CommandScheduleEntry(notificationType);
                     m_CommandBusMaps.Add(theme, entry);
                 }
-
+                
                 entry.Add(bus);
             }
             else
@@ -76,10 +80,7 @@ namespace PeroTools2.AccessKing
                 .GetEnumerator();
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         IAccessBus IAccessSchedule<TTheme>.this[TTheme theme] => m_CommandBusMaps[theme].FirstOrDefault();
 
@@ -112,5 +113,50 @@ namespace PeroTools2.AccessKing
                 entry.Add(bus);
             }
         }
+
+        private class CommandScheduleEntry : IEnumerable<IAccessBus>
+        {
+            public readonly Type notificationType;
+            private readonly List<IAccessBus> m_Buses = new List<IAccessBus>();
+
+            public CommandScheduleEntry(Type notificationType)
+            {
+                Assert.IsTrue(typeof(INotification).IsAssignableFrom(notificationType));
+                this.notificationType = notificationType;
+            }
+
+            internal void Add(IAccessBus accessBus)
+            {
+                m_Buses.Add(accessBus);
+            }
+
+            internal IEnumerable<IAccessBus> GetAllAccessBus() => m_Buses;
+
+            public ICommandBus<TNotification, TOperation> GetBus<TNotification, TOperation>() where TNotification : INotification where TOperation : ICommandOperation
+            {
+                for (var index = 0; index < m_Buses.Count; index++)
+                {
+                    if (m_Buses[index] is ICommandBus<TNotification, TOperation> bus)
+                    {
+                        return bus;
+                    }
+                }
+                return default;
+            }
+
+            public IEnumerator<IAccessBus> GetEnumerator() => m_Buses.GetEnumerator();
+
+            IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+        }
+
+        private class CommandScheduleEntry<TNotification> : CommandScheduleEntry where TNotification : INotification
+        {
+            public CommandScheduleEntry() : base(typeof(TNotification)) { }
+            public ICommandBus<TNotification, TOperation> GetBus<TOperation>() where TOperation : ICommandOperation
+            {
+                return base.GetBus<TNotification, TOperation>();
+            }
+        }
+
     }
 }

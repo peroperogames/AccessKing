@@ -15,6 +15,8 @@ namespace PeroTools2.AccessKing
         public static void ThrowWhenHandlerFactoryRepeat<TTheme>(TTheme theme) => throw new InvalidOperationException($"The handler factory is not same with the one registered. Theme : {theme}");
         
         public static void ThrowWhenNotificationCastFailed<TNotification>(INotification notification) => throw new InvalidCastException($"{notification.GetType()} is not a ${typeof(TNotification)} type. ");
+        
+        public static void ThrowWhenNotificationCastFailed<TNotification>(Type targetType) => throw new InvalidCastException($"{typeof(TNotification)} is not a ${targetType} type. ");
 
         public static void ThrowWhenThemeHasBeenRegistered<TTheme>(TTheme theme) => throw new ArgumentException($"An item with the same theme has already been registered. Key : {theme}. ");
     }

@@ -3,20 +3,18 @@ using System.Collections.Generic;
 
 namespace PeroTools2.AccessKing
 {
-    public class CommandSchedule<TTheme, TCommandHandlerFactory> : IAccessSchedule<TTheme>, ICommandSchedule<TTheme> where TCommandHandlerFactory : ICommandHandlerFactory
+    public class CommandSchedule<TTheme, TCommandHandlerFactory> : IAccessSchedule<TTheme>, ICommandSchedule<TTheme> where TCommandHandlerFactory : ICommandHandlerFactory, new()
     {
-        public readonly TCommandHandlerFactory handlerFactory;
         private readonly Dictionary<TTheme, IAccessBus> m_CommandBusMaps = new Dictionary<TTheme, IAccessBus>();
+        private readonly Dictionary<TTheme, TCommandHandlerFactory> m_FactoryMaps = new Dictionary<TTheme, TCommandHandlerFactory>();
         IAccessBus IAccessSchedule<TTheme>.this[TTheme theme] => m_CommandBusMaps[theme];
-
-        public CommandSchedule(TCommandHandlerFactory handlerFactory) => this.handlerFactory = handlerFactory;
 
         bool IAccessSchedule<TTheme>.TryGetBus(TTheme theme, out IAccessBus bus) => m_CommandBusMaps.TryGetValue(theme, out bus);
 
         void IAccessSchedule<TTheme>.AddBus(TTheme theme, IAccessBus bus)
         {
             if (bus is ICommandHandlerFactoryModifiable factoryModifiable)
-                factoryModifiable.SetFactory(handlerFactory);
+                factoryModifiable.SetFactory(RequireHandlerFactory(theme));
             else
                 ThrowHelper.ScheduleCommandBusCastFailed();
             if (CommandExtensions.GetNotificationType(bus.GetType()) == null)
@@ -28,11 +26,23 @@ namespace PeroTools2.AccessKing
 
         public IEnumerator<IAccessBus> GetEnumerator() => m_CommandBusMaps.Values.GetEnumerator();
 
+        public void AddFactory(TTheme theme, TCommandHandlerFactory factory) => m_FactoryMaps.Add(theme, factory);
+
+        public TCommandHandlerFactory RequireHandlerFactory(TTheme theme)
+        {
+            if (!m_FactoryMaps.TryGetValue(theme, out var factory))
+            {
+                factory = new TCommandHandlerFactory();
+                AddFactory(theme, factory);
+            }
+            return factory;
+        }
+
         public bool RemoveTheme(TTheme theme) => m_CommandBusMaps.Remove(theme);
 
         public void AddBus<TNotification>(TTheme theme, ISchedulableCommandBus<TNotification> bus) where TNotification : INotification
         {
-            bus.SetFactory(handlerFactory);
+            bus.SetFactory(RequireHandlerFactory(theme));
             m_CommandBusMaps.Add(theme, bus);
         }
 
@@ -69,7 +79,7 @@ namespace PeroTools2.AccessKing
             if (!TryGetBus<Empty>(theme, out var bus))
             {
                 var commandBus = new ParameterCommandBus();
-                ((ICommandHandlerFactoryModifiable) commandBus).SetFactory(handlerFactory);
+                ((ICommandHandlerFactoryModifiable) commandBus).SetFactory(RequireHandlerFactory(theme));
                 AddBus(theme, commandBus);
                 bus = commandBus;
             }
@@ -82,7 +92,7 @@ namespace PeroTools2.AccessKing
             if (!TryGetBus<ParameterNotification<T>>(theme, out var bus))
             {
                 var commandBus = new ParameterCommandBus<T>();
-                ((ICommandHandlerFactoryModifiable) commandBus).SetFactory(handlerFactory);
+                ((ICommandHandlerFactoryModifiable) commandBus).SetFactory(RequireHandlerFactory(theme));
                 AddBus(theme, commandBus);
                 bus = commandBus;
             }
@@ -95,7 +105,7 @@ namespace PeroTools2.AccessKing
             if (!TryGetBus<ParameterNotification<T1, T2>>(theme, out var bus))
             {
                 var commandBus = new ParameterCommandBus<T1, T2>();
-                ((ICommandHandlerFactoryModifiable) commandBus).SetFactory(handlerFactory);
+                ((ICommandHandlerFactoryModifiable) commandBus).SetFactory(RequireHandlerFactory(theme));
                 AddBus(theme, commandBus);
                 bus = commandBus;
             }
@@ -108,7 +118,7 @@ namespace PeroTools2.AccessKing
             if (!TryGetBus<ParameterNotification<T1, T2, T3>>(theme, out var bus))
             {
                 var commandBus = new ParameterCommandBus<T1, T2, T3>();
-                ((ICommandHandlerFactoryModifiable) commandBus).SetFactory(handlerFactory);
+                ((ICommandHandlerFactoryModifiable) commandBus).SetFactory(RequireHandlerFactory(theme));
                 AddBus(theme, commandBus);
                 bus = commandBus;
             }
@@ -121,7 +131,7 @@ namespace PeroTools2.AccessKing
             if (!TryGetBus<ParameterNotification<T1, T2, T3, T4>>(theme, out var bus))
             {
                 var commandBus = new ParameterCommandBus<T1, T2, T3, T4>();
-                ((ICommandHandlerFactoryModifiable) commandBus).SetFactory(handlerFactory);
+                ((ICommandHandlerFactoryModifiable) commandBus).SetFactory(RequireHandlerFactory(theme));
                 AddBus(theme, commandBus);
                 bus = commandBus;
             }
@@ -134,7 +144,7 @@ namespace PeroTools2.AccessKing
             if (!TryGetBus<ParameterNotification<T1, T2, T3, T4, T5>>(theme, out var bus))
             {
                 var commandBus = new ParameterCommandBus<T1, T2, T3, T4, T5>();
-                ((ICommandHandlerFactoryModifiable) commandBus).SetFactory(handlerFactory);
+                ((ICommandHandlerFactoryModifiable) commandBus).SetFactory(RequireHandlerFactory(theme));
                 AddBus(theme, commandBus);
                 bus = commandBus;
             }

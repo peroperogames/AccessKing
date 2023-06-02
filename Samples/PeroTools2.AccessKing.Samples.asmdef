@@ -1,0 +1,15 @@
+{
+    "name": "PeroTools2.AccessKing.Samples",
+    "references": [
+        "GUID:f55989aa114b25240999f405ea15627b"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

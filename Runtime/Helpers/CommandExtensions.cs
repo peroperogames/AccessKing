@@ -7,6 +7,7 @@ namespace PeroTools2.AccessKing
 {
     public static class CommandExtensions
     {
+
         #region Reflection
 
         internal static Type GetNotificationType(Type busType)
@@ -38,7 +39,8 @@ namespace PeroTools2.AccessKing
                     results.Add(result);
                 else if (item is Task<TResult> resultTask)
                 {
-                    resultTask.Wait();
+                    if (!resultTask.IsCompleted)
+                        resultTask.Wait();
                     results.Add(resultTask.Result);
                 }
             }

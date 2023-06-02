@@ -1,7 +1,8 @@
 ﻿namespace PeroTools2.AccessKing
 {
-    public interface ICommandHandlerFactoryModifiable
+    public interface ICommandHandlerFactoryModifiable 
     {
-        void SetFactory(ICommandHandlerFactory factory);
+        //ICommandHandlerFactory<TNotification> handlerFactory { get; }
+        void SetFactory(ICommandHandlerFactory handlerFactory);
     }
 }

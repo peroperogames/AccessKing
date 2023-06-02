@@ -1,4 +1,4 @@
 ﻿namespace PeroTools2.AccessKing
 {
-    public interface ISchedulableCommandBus<in TNotification> : IAccessBus, ICommandBus<TNotification>, ICommandHandlerFactoryModifiable where TNotification : INotification { }
+    public interface ISchedulableCommandBus<TNotification> : IAccessBus, ICommandBus<TNotification>, ICommandHandlerFactoryModifiable where TNotification : INotification { }
 }

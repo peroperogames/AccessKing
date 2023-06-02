@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using UnityEngine.Assertions;
 
 namespace PeroTools2.AccessKing
 {
@@ -7,25 +8,30 @@ namespace PeroTools2.AccessKing
     {
         private ICommandHandlerFactory m_HandlerFactory;
 
-        public void SetFactory(ICommandHandlerFactory factory) => m_HandlerFactory = factory;
+        public CommandBus(ICommandHandlerFactory handlerFactory) => m_HandlerFactory = handlerFactory;
+
+        public CommandBus() { }
+
+        void ICommandHandlerFactoryModifiable.SetFactory(ICommandHandlerFactory factory) => m_HandlerFactory = factory;
 
         void IAccessBus.Dispatch(INotification notification)
         {
             if (m_HandlerFactory == null)
                 return;
             if (notification is TNotification tNotification)
-                Execute(tNotification);
+                Execute(ref tNotification);
             else
                 ThrowHelper.NotificationCastFailed<TNotification>(notification);
         }
 
-        public CommandOperation Execute(TNotification notification)
+        public CommandOperation Execute(ref TNotification notification)
         {
+            Assert.IsNotNull(m_HandlerFactory);
             var handlers = m_HandlerFactory.RequireHandlers<TNotification>();
             var results = new ArrayList();
             foreach (var handler in handlers)
             {
-                handler.Handle(notification);
+                handler.Handle(ref notification);
                 if (handler is IResultAvailable resultGetter)
                 {
                     results.Add(resultGetter.GetResult());

@@ -17,7 +17,8 @@ namespace PeroTools2.AccessKing
                 bus = new TBus();
                 schedule.AddBus(typeof(TBus), bus);
             }
-            if(bus is TBus result)
+
+            if (bus is TBus result)
                 return result;
             throw new InvalidCastException($"The access bus is not {typeof(TBus)} type.");
         }

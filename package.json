@@ -10,9 +10,6 @@
   },
   "documentationUrl": "https://git.peropero.net/unity-packages/accountsystem/-/blob/master/README.md",
   "changelogUrl": "https://git.peropero.net/unity-packages/accountsystem/-/releases",
-  "dependencies": {
-    "com.prpr.asynchronization": "2.0.2"
-  },
   "samples": [
     {
       "displayName": "Sample",

@@ -82,19 +82,19 @@ namespace PeroTools2.AccessKing
 
         public static void RegisterActionHandler(this RegistryCommandHandlerFactory factory, Action action)
             => factory.RegisterHandler(new ActionCommandHandler(action));
-        
+
         public static void RegisterActionHandler<T>(this RegistryCommandHandlerFactory factory, Action<T> action)
             => factory.RegisterHandler(new ActionCommandHandler<T>(action));
-        
+
         public static void RegisterActionHandler<T1, T2>(this RegistryCommandHandlerFactory factory, Action<T1, T2> action)
             => factory.RegisterHandler(new ActionCommandHandler<T1, T2>(action));
-        
+
         public static void RegisterActionHandler<T1, T2, T3>(this RegistryCommandHandlerFactory factory, Action<T1, T2, T3> action)
             => factory.RegisterHandler(new ActionCommandHandler<T1, T2, T3>(action));
-        
+
         public static void RegisterActionHandler<T1, T2, T3, T4>(this RegistryCommandHandlerFactory factory, Action<T1, T2, T3, T4> action)
             => factory.RegisterHandler(new ActionCommandHandler<T1, T2, T3, T4>(action));
-        
+
         public static void RegisterActionHandler<T1, T2, T3, T4, T5>(this RegistryCommandHandlerFactory factory, Action<T1, T2, T3, T4, T5> action)
             => factory.RegisterHandler(new ActionCommandHandler<T1, T2, T3, T4, T5>(action));
 
@@ -121,22 +121,40 @@ namespace PeroTools2.AccessKing
         #region Execute
 
         public static CommandOperation Execute(this ICommandBus<Empty> bus)
-            => bus.Execute(ParameterNotification.Empty);
+        {
+            var notification = ParameterNotification.Empty;
+            return bus.Execute(ref notification);
+        }
 
         public static CommandOperation Execute<T>(this ICommandBus<ParameterNotification<T>> bus, T param)
-            => bus.Execute(ParameterNotification.Create(param));
+        {
+            var notification = ParameterNotification.Create(param);
+            return bus.Execute(ref notification);
+        }
 
         public static CommandOperation Execute<T1, T2>(this ICommandBus<ParameterNotification<T1, T2>> bus, T1 param1, T2 param2)
-            => bus.Execute(ParameterNotification.Create(param1, param2));
+        {
+            var notification = ParameterNotification.Create(param1, param2);
+            return bus.Execute(ref notification);
+        }
 
         public static CommandOperation Execute<T1, T2, T3>(this ICommandBus<ParameterNotification<T1, T2, T3>> bus, T1 param1, T2 param2, T3 param3)
-            => bus.Execute(ParameterNotification.Create(param1, param2, param3));
+        {
+            var notification = ParameterNotification.Create(param1, param2, param3);
+            return bus.Execute(ref notification);
+        }
 
         public static CommandOperation Execute<T1, T2, T3, T4>(this ICommandBus<ParameterNotification<T1, T2, T3, T4>> bus, T1 param1, T2 param2, T3 param3, T4 param4)
-            => bus.Execute(ParameterNotification.Create(param1, param2, param3, param4));
+        {
+            var notification = ParameterNotification.Create(param1, param2, param3, param4);
+            return bus.Execute(ref notification);
+        }
 
         public static CommandOperation Execute<T1, T2, T3, T4, T5>(this ICommandBus<ParameterNotification<T1, T2, T3, T4, T5>> bus, T1 param1, T2 param2, T3 param3, T4 param4, T5 param5)
-            => bus.Execute(ParameterNotification.Create(param1, param2, param3, param4, param5));
+        {
+            var notification = ParameterNotification.Create(param1, param2, param3, param4, param5);
+            return bus.Execute(ref notification);
+        }
 
         #endregion
     }

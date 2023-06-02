@@ -21,7 +21,7 @@ namespace PeroTools2.AccessKing
 
         public bool UnRegisterHandler<TNotification>(ICommandHandler<TNotification> handler) where TNotification : INotification
         {
-            return m_HandlerMaps.TryGetValue(typeof(TNotification), out var executives) && executives.Remove(handler);
+            return m_HandlerMaps.TryGetValue(typeof(TNotification), out var handlers) && handlers.Remove(handler);
         }
 
         public IReadOnlyList<ICommandHandler<TNotification>> RequireHandlers<TNotification>() where TNotification : INotification

@@ -50,7 +50,7 @@ namespace PeroTools2.AccessKing
 
         #region Broadcast
 
-        public static void Broadcast<T>(this IEventBus<Empty> eventBus)
+        public static void Broadcast(this IEventBus<Empty> eventBus)
             => eventBus.Broadcast(ParameterNotification.Empty);
 
         public static void Broadcast<T>(this IEventBus<ParameterNotification<T>> eventBus, T param)

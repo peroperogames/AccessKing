@@ -1,4 +1,11 @@
-﻿using System;
+﻿/*
+ * Copyright (c) PeroPeroGames Co., Ltd.
+ * Author: 关东关
+ * Created On: 2023年05月26日
+ * Description: Default event bus implementation.
+ */
+ 
+using System;
 using System.Collections.Generic;
 
 namespace PeroTools2.AccessKing

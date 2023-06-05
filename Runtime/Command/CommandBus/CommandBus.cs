@@ -1,4 +1,11 @@
-﻿using System.Collections;
+﻿/*
+ * Copyright (c) PeroPeroGames Co., Ltd.
+ * Author: 关东关
+ * Created On: 2023年05月29日
+ * Description: Default command bus implementation.
+ */
+
+using System.Collections;
 using UnityEngine.Assertions;
 
 namespace PeroTools2.AccessKing

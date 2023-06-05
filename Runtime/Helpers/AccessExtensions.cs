@@ -1,4 +1,11 @@
-﻿using System;
+﻿/*
+ * Copyright (c) PeroPeroGames Co., Ltd.
+ * Author: 关东关
+ * Created On: 2023年05月26日
+ * Description: Access bus/schedule extensions.
+ */
+
+using System;
 
 namespace PeroTools2.AccessKing
 {
@@ -8,14 +15,14 @@ namespace PeroTools2.AccessKing
         /// Required access bus from the schedule. If it never been registered, it will create a new one.
         /// </summary>
         /// <typeparam name="TBus">Access bus with a public parameterless constructor.</typeparam>
-        /// <returns></returns>
+        /// <returns>Access bus for the corresponding topic.</returns>
         /// <exception cref="InvalidCastException">Throw out when the required type cannot match the first registered bus type.</exception>
         public static TBus Require<TBus>(this IAccessSchedule<Type> schedule) where TBus : IAccessBus, new()
         {
             if (!schedule.TryGetBus(typeof(TBus), out var bus))
             {
                 bus = new TBus();
-                schedule.AddBus(typeof(TBus), bus);
+                schedule.AddThemeMapping(typeof(TBus), bus);
             }
 
             if (bus is TBus result)

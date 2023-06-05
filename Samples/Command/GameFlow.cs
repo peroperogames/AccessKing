@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using Game.Access;
+﻿using Game.Access;
 using PeroTools2.AccessKing;
 using UnityEngine;
 using UnityEngine.UI;
@@ -33,19 +31,19 @@ namespace Game.Core
 
             txtTurnCount.text = m_Turn.ToString();
 
-            await GameCommands.Global
+            await GameCommands.global
                 .Require<GameCommands.GameInit>()
                 .Execute()
                 .GetAllAsyncTask()
                 .WhenAllDone();
             
-            await GameCommands.Global
+            await GameCommands.global
                 .Require<GameCommands.StartPlayerStage>()
                 .Execute()
                 .GetAllAsyncTask()
                 .WhenAllDone();
 
-            await GameCommands.Global
+            await GameCommands.global
                 .Require<GameCommands.StartEnemyStage>()
                 .Execute()
                 .GetAllAsyncTask()

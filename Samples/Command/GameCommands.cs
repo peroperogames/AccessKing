@@ -6,7 +6,7 @@ namespace Game.Access
     public class GameCommands : CommandSchedule<Type, RegistryCommandHandlerFactory>
     {
         private static readonly Lazy<GameCommands> s_Instance = new Lazy<GameCommands>(()=>new GameCommands());
-        public static GameCommands Global = s_Instance.Value;
+        public static readonly GameCommands global = s_Instance.Value;
 
         #region CommandLists
         

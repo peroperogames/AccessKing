@@ -1,4 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿/*
+ * Copyright (c) PeroPeroGames Co., Ltd.
+ * Author: 关东关
+ * Created On: 2023年05月23日
+ * Description: CommandHandler with task result.
+ */
+
+using System.Threading.Tasks;
 
 namespace PeroTools2.AccessKing
 {

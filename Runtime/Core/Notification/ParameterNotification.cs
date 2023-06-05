@@ -1,4 +1,11 @@
-﻿namespace PeroTools2.AccessKing
+﻿/*
+ * Copyright (c) PeroPeroGames Co., Ltd.
+ * Author: 关东关
+ * Created On: 2023年05月26日
+ * Description: Structure for wrapping method argument parameters into notification.
+ */
+
+namespace PeroTools2.AccessKing
 {
     public struct Empty : INotification { }
     public static class ParameterNotification

@@ -10,7 +10,7 @@ namespace Game.Stage.Enemy
         private const string log_color = "#FF4500";
         public void Awake()
         {
-            GameCommands.Global
+            GameCommands.global
                 .RequireHandlerFactory(typeof(GameCommands.StartEnemyStage))
                 .RegisterFuncHandler(StartEnemyStageFlow);
         }

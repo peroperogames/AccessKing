@@ -1,4 +1,11 @@
-﻿using System;
+﻿/*
+ * Copyright (c) PeroPeroGames Co., Ltd.
+ * Author: 关东关
+ * Created On: 2023年05月23日
+ * Description: Command handler factory registered in a hard coding manner.
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -19,7 +26,7 @@ namespace PeroTools2.AccessKing
             handlers.Add(handler);
         }
     
-        public bool UnRegisterHandler<TNotification>(ICommandHandler<TNotification> handler) where TNotification : INotification
+        public bool UnregisterHandler<TNotification>(ICommandHandler<TNotification> handler) where TNotification : INotification
         {
             return m_HandlerMaps.TryGetValue(typeof(TNotification), out var handlers) && handlers.Remove(handler);
         }

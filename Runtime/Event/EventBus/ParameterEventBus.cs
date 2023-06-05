@@ -1,4 +1,11 @@
-﻿namespace PeroTools2.AccessKing
+﻿/*
+ * Copyright (c) PeroPeroGames Co., Ltd.
+ * Author: 关东关
+ * Created On: 2023年05月26日
+ * Description: Event bus with ParameterNotification wrapper.
+ */
+ 
+namespace PeroTools2.AccessKing
 {
     public class ParameterEventBus : EventBus<Empty> { }
     public class ParameterEventBus<T> : EventBus<ParameterNotification<T>> { }

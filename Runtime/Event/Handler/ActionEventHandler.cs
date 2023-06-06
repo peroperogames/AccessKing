@@ -17,9 +17,10 @@ namespace PeroTools2.AccessKing
         public void Handle() => m_Invocation?.Invoke();
         void IEventHandler<Empty>.Handle(in Empty notification) => Handle();
         public override int GetHashCode() => m_Invocation != null ? m_Invocation.GetHashCode() : 0;
-        public static bool operator ==(ActionEventHandler left, object right) => left != null && left.Equals(right);
+        public static bool operator ==(ActionEventHandler left, object right) => !Equals(left, null) && left.Equals(right);
         public static bool operator !=(ActionEventHandler left, object right) => !(left == right);
         public bool Equals(ActionEventHandler other) => other != null && m_Invocation == other.m_Invocation;
+
         public override bool Equals(object obj)
         {
             if (obj is ActionEventHandler other)
@@ -38,7 +39,7 @@ namespace PeroTools2.AccessKing
         public void Handle(T param) => m_Invocation?.Invoke(param);
         void IEventHandler<ParameterNotification<T>>.Handle(in ParameterNotification<T> notification) => Handle(notification.item);
         public override int GetHashCode() => m_Invocation != null ? m_Invocation.GetHashCode() : 0;
-        public static bool operator ==(ActionEventHandler<T> left, object right) => left != null && left.Equals(right);
+        public static bool operator ==(ActionEventHandler<T> left, object right) => !Equals(left, null) && left.Equals(right);
         public static bool operator !=(ActionEventHandler<T> left, object right) => !(left == right);
         public bool Equals(ActionEventHandler<T> other) => other != null && m_Invocation == other.m_Invocation;
         public override bool Equals(object obj)
@@ -59,7 +60,7 @@ namespace PeroTools2.AccessKing
         public void Handle(T1 param1, T2 param2) => m_Invocation?.Invoke(param1, param2);
         void IEventHandler<ParameterNotification<T1, T2>>.Handle(in ParameterNotification<T1, T2> notification) => Handle(notification.item1, notification.item2);
         public override int GetHashCode() => m_Invocation != null ? m_Invocation.GetHashCode() : 0;
-        public static bool operator ==(ActionEventHandler<T1, T2> left, object right) => left != null && left.Equals(right);
+        public static bool operator ==(ActionEventHandler<T1, T2> left, object right) => !Equals(left, null) && left.Equals(right);
         public static bool operator !=(ActionEventHandler<T1, T2> left, object right) => !(left == right);
         public bool Equals(ActionEventHandler<T1, T2> other) => other != null && m_Invocation == other.m_Invocation;
         public override bool Equals(object obj)
@@ -80,7 +81,7 @@ namespace PeroTools2.AccessKing
         public void Handle(T1 param1, T2 param2, T3 param3) => m_Invocation?.Invoke(param1, param2, param3);
         void IEventHandler<ParameterNotification<T1, T2, T3>>.Handle(in ParameterNotification<T1, T2, T3> notification) => Handle(notification.item1, notification.item2, notification.item3);
         public override int GetHashCode() => m_Invocation != null ? m_Invocation.GetHashCode() : 0;
-        public static bool operator ==(ActionEventHandler<T1, T2, T3> left, object right) => left != null && left.Equals(right);
+        public static bool operator ==(ActionEventHandler<T1, T2, T3> left, object right) => !Equals(left, null) && left.Equals(right);
         public static bool operator !=(ActionEventHandler<T1, T2, T3> left, object right) => !(left == right);
         public bool Equals(ActionEventHandler<T1, T2, T3> other) => other != null && m_Invocation == other.m_Invocation;
         public override bool Equals(object obj)
@@ -101,7 +102,7 @@ namespace PeroTools2.AccessKing
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4) => m_Invocation?.Invoke(param1, param2, param3, param4);
         void IEventHandler<ParameterNotification<T1, T2, T3, T4>>.Handle(in ParameterNotification<T1, T2, T3, T4> notification) => Handle(notification.item1, notification.item2, notification.item3, notification.item4);
         public override int GetHashCode() => m_Invocation != null ? m_Invocation.GetHashCode() : 0;
-        public static bool operator ==(ActionEventHandler<T1, T2, T3, T4> left, object right) => left != null && left.Equals(right);
+        public static bool operator ==(ActionEventHandler<T1, T2, T3, T4> left, object right) => !Equals(left, null) && left.Equals(right);
         public static bool operator !=(ActionEventHandler<T1, T2, T3, T4> left, object right) => !(left == right);
         public bool Equals(ActionEventHandler<T1, T2, T3, T4> other) => other != null && m_Invocation == other.m_Invocation;
         public override bool Equals(object obj)
@@ -122,7 +123,7 @@ namespace PeroTools2.AccessKing
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5) => m_Invocation?.Invoke(param1, param2, param3, param4, param5);
         void IEventHandler<ParameterNotification<T1, T2, T3, T4, T5>>.Handle(in ParameterNotification<T1, T2, T3, T4, T5> notification) => Handle(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5);
         public override int GetHashCode() => m_Invocation != null ? m_Invocation.GetHashCode() : 0;
-        public static bool operator ==(ActionEventHandler<T1, T2, T3, T4, T5> left, object right) => left != null && left.Equals(right);
+        public static bool operator ==(ActionEventHandler<T1, T2, T3, T4, T5> left, object right) => !Equals(left, null) && left.Equals(right);
         public static bool operator !=(ActionEventHandler<T1, T2, T3, T4, T5> left, object right) => !(left == right);
         public bool Equals(ActionEventHandler<T1, T2, T3, T4, T5> other) => other != null && m_Invocation == other.m_Invocation;
         public override bool Equals(object obj)

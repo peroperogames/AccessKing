@@ -35,7 +35,7 @@ namespace PeroTools2.AccessKing
                 return false;
             for (var index = m_Handlers.Count - 1; index >= 0; index--)
             {
-                if (m_Handlers[index] != handler)
+                if (!m_Handlers[index].Equals(handler))
                     continue;
                 m_Handlers.RemoveAt(index);
                 return true;
@@ -46,7 +46,7 @@ namespace PeroTools2.AccessKing
                 var weakTarget = m_WeakHandlers[index];
                 if (weakTarget.TryGetTarget(out var targetHandler))
                 {
-                    if (targetHandler != handler)
+                    if (targetHandler.Equals(handler))
                         continue;
                     m_WeakHandlers.RemoveAt(index);
                     return true;

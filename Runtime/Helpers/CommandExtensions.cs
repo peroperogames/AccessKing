@@ -227,7 +227,7 @@ namespace PeroTools2.AccessKing
         /// <param name="factory">Command handler factory.</param>
         /// <param name="action">The delegate which convert to ActionCommandHandler.</param>
         /// <returns>Is removed succeed.</returns>
-        public static void UnregisterActionHandler(this RegistryCommandHandlerFactory factory, Action action)
+        public static bool UnregisterActionHandler(this RegistryCommandHandlerFactory factory, Action action)
             => factory.UnregisterHandler(new ActionCommandHandler(action));
 
         /// <summary>
@@ -236,7 +236,7 @@ namespace PeroTools2.AccessKing
         /// <param name="factory">Command handler factory.</param>
         /// <param name="action">The delegate which convert to ActionCommandHandler.</param>
         /// <returns>Is removed succeed.</returns>
-        public static void UnregisterActionHandler<T>(this RegistryCommandHandlerFactory factory, Action<T> action)
+        public static bool UnregisterActionHandler<T>(this RegistryCommandHandlerFactory factory, Action<T> action)
             => factory.UnregisterHandler(new ActionCommandHandler<T>(action));
 
         /// <summary>
@@ -245,7 +245,7 @@ namespace PeroTools2.AccessKing
         /// <param name="factory">Command handler factory.</param>
         /// <param name="action">The delegate which convert to ActionCommandHandler.</param>
         /// <returns>Is removed succeed.</returns>
-        public static void UnregisterActionHandler<T1, T2>(this RegistryCommandHandlerFactory factory, Action<T1, T2> action)
+        public static bool UnregisterActionHandler<T1, T2>(this RegistryCommandHandlerFactory factory, Action<T1, T2> action)
             => factory.UnregisterHandler(new ActionCommandHandler<T1, T2>(action));
 
         /// <summary>
@@ -254,7 +254,7 @@ namespace PeroTools2.AccessKing
         /// <param name="factory">Command handler factory.</param>
         /// <param name="action">The delegate which convert to ActionCommandHandler.</param>
         /// <returns>Is removed succeed.</returns>
-        public static void UnregisterActionHandler<T1, T2, T3>(this RegistryCommandHandlerFactory factory, Action<T1, T2, T3> action)
+        public static bool UnregisterActionHandler<T1, T2, T3>(this RegistryCommandHandlerFactory factory, Action<T1, T2, T3> action)
             => factory.UnregisterHandler(new ActionCommandHandler<T1, T2, T3>(action));
 
         /// <summary>
@@ -263,7 +263,7 @@ namespace PeroTools2.AccessKing
         /// <param name="factory">Command handler factory.</param>
         /// <param name="action">The delegate which convert to ActionCommandHandler.</param>
         /// <returns>Is removed succeed.</returns>
-        public static void UnregisterActionHandler<T1, T2, T3, T4>(this RegistryCommandHandlerFactory factory, Action<T1, T2, T3, T4> action)
+        public static bool UnregisterActionHandler<T1, T2, T3, T4>(this RegistryCommandHandlerFactory factory, Action<T1, T2, T3, T4> action)
             => factory.UnregisterHandler(new ActionCommandHandler<T1, T2, T3, T4>(action));
 
         /// <summary>
@@ -272,7 +272,7 @@ namespace PeroTools2.AccessKing
         /// <param name="factory">Command handler factory.</param>
         /// <param name="action">The delegate which convert to ActionCommandHandler.</param>
         /// <returns>Is removed succeed.</returns>
-        public static void UnregisterActionHandler<T1, T2, T3, T4, T5>(this RegistryCommandHandlerFactory factory, Action<T1, T2, T3, T4, T5> action)
+        public static bool UnregisterActionHandler<T1, T2, T3, T4, T5>(this RegistryCommandHandlerFactory factory, Action<T1, T2, T3, T4, T5> action)
             => factory.UnregisterHandler(new ActionCommandHandler<T1, T2, T3, T4, T5>(action));
 
         /// <summary>
@@ -281,7 +281,7 @@ namespace PeroTools2.AccessKing
         /// <param name="factory">Command handler factory.</param>
         /// <param name="func">The delegate which convert to FuncCommandHandler.</param>
         /// <returns>Is removed succeed.</returns>
-        public static void UnregisterFuncHandler<TResult>(this RegistryCommandHandlerFactory factory, Func<TResult> func)
+        public static bool UnregisterFuncHandler<TResult>(this RegistryCommandHandlerFactory factory, Func<TResult> func)
             => factory.UnregisterHandler(new FuncCommandHandler<TResult>(func));
 
         /// <summary>
@@ -290,7 +290,7 @@ namespace PeroTools2.AccessKing
         /// <param name="factory">Command handler factory.</param>
         /// <param name="func">The delegate which convert to FuncCommandHandler.</param>
         /// <returns>Is removed succeed.</returns>
-        public static void UnregisterFuncHandler<T, TResult>(this RegistryCommandHandlerFactory factory, Func<T, TResult> func)
+        public static bool UnregisterFuncHandler<T, TResult>(this RegistryCommandHandlerFactory factory, Func<T, TResult> func)
             => factory.UnregisterHandler(new FuncCommandHandler<T, TResult>(func));
 
         /// <summary>
@@ -299,7 +299,7 @@ namespace PeroTools2.AccessKing
         /// <param name="factory">Command handler factory.</param>
         /// <param name="func">The delegate which convert to FuncCommandHandler.</param>
         /// <returns>Is removed succeed.</returns>
-        public static void UnregisterFuncHandler<T1, T2, TResult>(this RegistryCommandHandlerFactory factory, Func<T1, T2, TResult> func)
+        public static bool UnregisterFuncHandler<T1, T2, TResult>(this RegistryCommandHandlerFactory factory, Func<T1, T2, TResult> func)
             => factory.UnregisterHandler(new FuncCommandHandler<T1, T2, TResult>(func));
 
         /// <summary>
@@ -308,7 +308,7 @@ namespace PeroTools2.AccessKing
         /// <param name="factory">Command handler factory.</param>
         /// <param name="func">The delegate which convert to FuncCommandHandler.</param>
         /// <returns>Is removed succeed.</returns>
-        public static void UnregisterFuncHandler<T1, T2, T3, TResult>(this RegistryCommandHandlerFactory factory, Func<T1, T2, T3, TResult> func)
+        public static bool UnregisterFuncHandler<T1, T2, T3, TResult>(this RegistryCommandHandlerFactory factory, Func<T1, T2, T3, TResult> func)
             => factory.UnregisterHandler(new FuncCommandHandler<T1, T2, T3, TResult>(func));
 
         /// <summary>
@@ -317,7 +317,7 @@ namespace PeroTools2.AccessKing
         /// <param name="factory">Command handler factory.</param>
         /// <param name="func">The delegate which convert to FuncCommandHandler.</param>
         /// <returns>Is removed succeed.</returns>
-        public static void UnregisterFuncHandler<T1, T2, T3, T4, TResult>(this RegistryCommandHandlerFactory factory, Func<T1, T2, T3, T4, TResult> func)
+        public static bool UnregisterFuncHandler<T1, T2, T3, T4, TResult>(this RegistryCommandHandlerFactory factory, Func<T1, T2, T3, T4, TResult> func)
             => factory.UnregisterHandler(new FuncCommandHandler<T1, T2, T3, T4, TResult>(func));
 
         /// <summary>
@@ -326,7 +326,7 @@ namespace PeroTools2.AccessKing
         /// <param name="factory">Command handler factory.</param>
         /// <param name="func">The delegate which convert to FuncCommandHandler.</param>
         /// <returns>Is removed succeed.</returns>
-        public static void UnregisterFuncHandler<T1, T2, T3, T4, T5, TResult>(this RegistryCommandHandlerFactory factory, Func<T1, T2, T3, T4, T5, TResult> func)
+        public static bool UnregisterFuncHandler<T1, T2, T3, T4, T5, TResult>(this RegistryCommandHandlerFactory factory, Func<T1, T2, T3, T4, T5, TResult> func)
             => factory.UnregisterHandler(new FuncCommandHandler<T1, T2, T3, T4, T5, TResult>(func));
 
         #endregion

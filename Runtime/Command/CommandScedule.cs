@@ -25,7 +25,7 @@ namespace PeroTools2.AccessKing
         {
             if (bus is ICommandHandlerFactoryModifiable factoryModifiable)
             {
-                if (!m_FactoryMaps.ContainsKey(theme))
+                if (!m_FactoryMaps.ContainsKey(theme) || factoryModifiable.factory == null)
                     factoryModifiable.factory = RequireFactory(theme);
                 else if(factoryModifiable.factory is TCommandHandlerFactory factory)
                     m_FactoryMaps[theme] = factory;

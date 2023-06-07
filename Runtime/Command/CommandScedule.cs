@@ -24,7 +24,14 @@ namespace PeroTools2.AccessKing
         void IAccessSchedule<TTheme>.AddThemeMapping(TTheme theme, IAccessBus bus)
         {
             if (bus is ICommandHandlerFactoryModifiable factoryModifiable)
-                factoryModifiable.SetFactory(RequireHandlerFactory(theme));
+            {
+                if (!m_FactoryMaps.ContainsKey(theme))
+                    factoryModifiable.factory = RequireFactory(theme);
+                else if(factoryModifiable.factory is TCommandHandlerFactory factory)
+                    m_FactoryMaps[theme] = factory;
+                else
+                    ThrowHelper.FactoryCastFailed<TCommandHandlerFactory>();
+            }
             else
                 ThrowHelper.ScheduleCommandBusCastFailed();
             if (typeof(ISchedulableCommandBus<>).IsInstanceOfType(bus))
@@ -42,13 +49,24 @@ namespace PeroTools2.AccessKing
         /// <param name="theme">Theme.</param>
         /// <param name="factory">Command handler factory.</param>
         public void AddFactory(TTheme theme, TCommandHandlerFactory factory) => m_FactoryMaps.Add(theme, factory);
+
+        /// <summary>
+        /// Set factory by theme.
+        /// </summary>
+        /// <param name="theme">Theme.</param>
+        /// <param name="factory">Command handler factory.</param>
+        public void SetFactory(TTheme theme, TCommandHandlerFactory factory)
+        {
+            m_FactoryMaps[theme] = factory;  
+            ((ICommandHandlerFactoryModifiable)m_CommandBusMaps[theme]).factory =factory;
+        } 
         
         /// <summary>
         /// Get or create a command handler factory by theme.
         /// </summary>
         /// <param name="theme">Theme.</param>
         /// <returns>Command handler factory.</returns>
-        public TCommandHandlerFactory RequireHandlerFactory(TTheme theme)
+        public TCommandHandlerFactory RequireFactory(TTheme theme)
         {
             if (!m_FactoryMaps.TryGetValue(theme, out var factory))
             {
@@ -73,7 +91,12 @@ namespace PeroTools2.AccessKing
 
         public void AddThemeMapping<TNotification>(TTheme theme, ISchedulableCommandBus<TNotification> bus) where TNotification : INotification
         {
-            bus.SetFactory(RequireHandlerFactory(theme));
+            if (!m_FactoryMaps.ContainsKey(theme))
+                bus.factory = RequireFactory(theme);
+            else if(bus.factory is TCommandHandlerFactory factory)
+                m_FactoryMaps[theme] = factory;
+            else
+                ThrowHelper.FactoryCastFailed<TCommandHandlerFactory>();
             m_CommandBusMaps.Add(theme, bus);
         }
 

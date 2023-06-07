@@ -11,7 +11,7 @@ namespace Game.Stage.Enemy
         public void Awake()
         {
             GameCommands.global
-                .RequireHandlerFactory(typeof(GameCommands.StartEnemyStage))
+                .RequireFactory(typeof(GameCommands.StartEnemyStage))
                 .RegisterFuncHandler(StartEnemyStageFlow);
         }
 

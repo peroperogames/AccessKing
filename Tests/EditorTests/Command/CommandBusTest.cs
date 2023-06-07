@@ -1,6 +1,5 @@
 ﻿using NUnit.Framework;
 using PeroTools2.AccessKing.Editor.Tests.AccessTests;
-using UnityEngine;
 
 namespace PeroTools2.AccessKing.Editor.Tests.CommandTests
 {
@@ -34,7 +33,7 @@ namespace PeroTools2.AccessKing.Editor.Tests.CommandTests
             var factory2 = new RegistryCommandHandlerFactory();
             factory2.RegisterHandler(new TestHandler<TestNotification>());
             var bus = new CommandBus<TestNotification>(factory1);
-            ((ICommandHandlerFactoryModifiable) bus).SetFactory(factory2);
+            ((ICommandHandlerFactoryModifiable) bus).factory = factory2;
             bus.Execute(ref testNotification);
             Assert.IsTrue(testNotification.isSucceed);
         }

@@ -48,6 +48,17 @@ namespace PeroTools2.AccessKing.Editor.Tests.CommandTests
         }
 
         [Test]
+        public void CommandHandlerFactoryModifyTest()
+        {
+            var schedule = new CommandSchedule<string, TestHandlerFactory>();
+            var bus = new CommandBus<TestNotification>();
+            schedule.AddThemeMapping(theme, bus);
+            var newFactory = new TestHandlerFactory();
+            schedule.SetFactory(theme, newFactory);
+            Assert.IsTrue(schedule.RequireFactory(theme) == newFactory);
+        }
+
+        [Test]
         public void CommandScheduleTryGetBusTest()
         {
             var schedule = new CommandSchedule<string, TestHandlerFactory>();

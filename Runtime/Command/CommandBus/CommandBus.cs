@@ -19,7 +19,11 @@ namespace PeroTools2.AccessKing
 
         public CommandBus() { }
 
-        void ICommandHandlerFactoryModifiable.SetFactory(ICommandHandlerFactory factory) => m_HandlerFactory = factory;
+        ICommandHandlerFactory ICommandHandlerFactoryModifiable.factory
+        {
+            get => m_HandlerFactory;
+            set => m_HandlerFactory = value;
+        }
 
         void IAccessBus.Dispatch(INotification notification)
         {
@@ -47,5 +51,6 @@ namespace PeroTools2.AccessKing
 
             return new CommandOperation(results);
         }
+
     }
 }

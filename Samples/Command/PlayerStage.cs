@@ -12,7 +12,7 @@ namespace Game.Stage.Player
         public void Awake()
         {
             GameCommands.global
-                .RequireHandlerFactory(typeof(GameCommands.StartPlayerStage))
+                .RequireFactory(typeof(GameCommands.StartPlayerStage))
                 .RegisterFuncHandler(StartPlayerStageFlow);
         }
 

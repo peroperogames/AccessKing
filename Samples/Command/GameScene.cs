@@ -12,7 +12,7 @@ namespace Game.Stage
         private bool hasInit;
         public void Awake()
         {
-            GameCommands.global.RequireHandlerFactory(typeof(GameCommands.GameInit)).RegisterActionHandler(GameInit);
+            GameCommands.global.RequireFactory(typeof(GameCommands.GameInit)).RegisterActionHandler(GameInit);
         }
 
         public void GameInit()

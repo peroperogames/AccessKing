@@ -75,13 +75,11 @@ namespace PeroTools2.AccessKing.Editor.Tests.AccessTests
 
         private class TestBus : ISchedulableCommandBus<TestNotification>, ISchedulableEventBus<TestNotification>
         {
-            private ICommandHandlerFactory m_Factory;
+            public ICommandHandlerFactory factory { get; set; }
             
             public void Dispatch(INotification notification) => throw new NotImplementedException();
 
             public CommandOperation Execute(ref TestNotification notification) => throw new NotImplementedException();
-
-            public void SetFactory(ICommandHandlerFactory handlerFactory) => m_Factory = handlerFactory;
 
             public bool Unsubscribe(IEventHandler<TestNotification> handler) => throw new NotImplementedException();
 

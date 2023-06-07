@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using NUnit.Framework;
+using PeroTools2.AccessKing.Editor.Tests.AccessTests;
 
 namespace PeroTools2.AccessKing.Editor.Tests.EventTests
 {
-    public class EventBusTest
+    public class EventBusTest : AccessBusTest
     {
         private static int s_HandleCount;
         private IEventHandler<TestNotification> m_Handler;
@@ -15,6 +16,17 @@ namespace PeroTools2.AccessKing.Editor.Tests.EventTests
         {
             s_HandleCount = 0;
             m_Handler = null;
+        }
+        
+        [Test]
+        public override void DispatchTest()
+        {
+            var testNotification = new TestNotification();
+            var bus = new EventBus<TestNotification>();
+            var testHandler = new TestHandler<TestNotification>();
+            bus.Subscribe(testHandler);
+            ((IAccessBus)bus).Dispatch(testNotification);
+            Assert.IsTrue(testNotification.isSucceed);
         }
 
         [TestCase(0)]

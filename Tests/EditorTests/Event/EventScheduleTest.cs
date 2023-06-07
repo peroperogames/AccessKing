@@ -1,14 +1,13 @@
 ﻿using System;
 using NUnit.Framework;
+using PeroTools2.AccessKing.Editor.Tests.AccessTests;
 
 namespace PeroTools2.AccessKing.Editor.Tests.EventTests
 {
-    public class EventScheduleTest
+    public class EventScheduleTest : AccessScheduleTest
     {
-        private const string theme = "TestEvent";
-
         [Test]
-        public void ScheduleRegisterTest()
+        public void EventScheduleRegisterTest()
         {
             var schedule = new EventSchedule<string>();
             var bus = new EventBus<TestNotification>();
@@ -18,7 +17,7 @@ namespace PeroTools2.AccessKing.Editor.Tests.EventTests
         }
 
         [Test]
-        public void ScheduleRegisterRepeatTest()
+        public void EventScheduleRegisterRepeatTest()
         {
             var schedule = new EventSchedule<string>();
             Assert.Catch(() =>
@@ -29,7 +28,7 @@ namespace PeroTools2.AccessKing.Editor.Tests.EventTests
         }
 
         [Test]
-        public void ScheduleRemoveThemeTest()
+        public void EventScheduleRemoveThemeTest()
         {
             var schedule = new EventSchedule<string>();
             var bus = new EventBus<TestNotification>();
@@ -39,7 +38,7 @@ namespace PeroTools2.AccessKing.Editor.Tests.EventTests
         }
 
         [Test]
-        public void ScheduleRemoveBusTest()
+        public void EventScheduleRemoveBusTest()
         {
             var schedule = new EventSchedule<string>();
             var bus = new EventBus<TestNotification>();
@@ -49,7 +48,7 @@ namespace PeroTools2.AccessKing.Editor.Tests.EventTests
         }
 
         [Test]
-        public void ScheduleTryGetBusTest()
+        public void EventScheduleTryGetBusTest()
         {
             var schedule = new EventSchedule<string>();
             var bus = new EventBus<TestNotification>();
@@ -60,7 +59,7 @@ namespace PeroTools2.AccessKing.Editor.Tests.EventTests
         }
 
         [Test]
-        public void ScheduleGetBusTest()
+        public void EventScheduleGetBusTest()
         {
             var schedule = new EventSchedule<string>();
             var bus = new EventBus<TestNotification>();
@@ -70,22 +69,13 @@ namespace PeroTools2.AccessKing.Editor.Tests.EventTests
             Assert.Catch(() => schedule.GetBus<TestNotification>(theme));
         }
 
-        [Test]
-        public void ScheduleRequireByTypeThemeTest()
-        {
-            var schedule = new EventSchedule<Type>();
-            var bus = schedule.Require<TestBus>();
-            Assert.IsTrue(schedule.ContainsBus(typeof(TestBus)));
-            Assert.IsTrue(schedule.GetBus<TestNotification>(typeof(TestBus)) == bus);
-        }
-
         [TestCase(0)]
         [TestCase(1)]
         [TestCase(2)]
         [TestCase(3)]
         [TestCase(4)]
         [TestCase(5)]
-        public void ScheduleRequireByStringThemeTest(int argumentCount)
+        public void EventScheduleRequireByStringThemeTest(int argumentCount)
         {
             var schedule = new EventSchedule<string>();
             switch (argumentCount)
@@ -123,8 +113,14 @@ namespace PeroTools2.AccessKing.Editor.Tests.EventTests
             }
         }
 
-        private class TestBus : EventBus<TestNotification> { }
+        protected override IAccessSchedule<TTheme> RequireAccessSchedule<TTheme>()
+        {
+            return new EventSchedule<TTheme>();
+        }
 
-        private class TestNotification : INotification { }
+        protected override IAccessBus RequireAccessBus<TNotification>()
+        {
+            return new EventBus<TNotification>();
+        }
     }
 }

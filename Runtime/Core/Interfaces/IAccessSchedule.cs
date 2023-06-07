@@ -59,5 +59,10 @@ namespace PeroTools2.AccessKing
         /// <param name="theme">Theme.</param>
         /// <returns>The bus is contained in schedule.</returns>
         bool ContainsBus(TTheme theme);
+        
+        /// <summary>
+        /// Clear all themes and its buses in the schedule.
+        /// </summary>
+        void ClearTheme();
     }
 }

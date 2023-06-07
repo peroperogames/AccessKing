@@ -1,9 +1,10 @@
 ﻿using NUnit.Framework;
+using PeroTools2.AccessKing.Editor.Tests.AccessTests;
 using UnityEngine;
 
 namespace PeroTools2.AccessKing.Editor.Tests.CommandTests
 {
-    public class CommandBusTest
+    public class CommandBusTest : AccessBusTest
     {
         private static int s_HandleCount;
 
@@ -11,6 +12,31 @@ namespace PeroTools2.AccessKing.Editor.Tests.CommandTests
         public void SetUp()
         {
             s_HandleCount = 0;
+        }
+        
+        [Test]
+        public override void DispatchTest()
+        {
+            var testNotification = new TestNotification();
+            var factory = new RegistryCommandHandlerFactory();
+            var bus = new CommandBus<TestNotification>(factory);
+            var testHandler = new TestHandler<TestNotification>();
+            factory.RegisterHandler(testHandler);
+            ((IAccessBus)bus).Dispatch(testNotification);
+            Assert.IsTrue(testNotification.isSucceed);
+        }
+        
+        [Test]
+        public void CommandHandlerFactoryModifyTest()
+        {
+            var testNotification = new TestNotification();
+            var factory1 = new RegistryCommandHandlerFactory();
+            var factory2 = new RegistryCommandHandlerFactory();
+            factory2.RegisterHandler(new TestHandler<TestNotification>());
+            var bus = new CommandBus<TestNotification>(factory1);
+            ((ICommandHandlerFactoryModifiable)bus).SetFactory(factory2);
+            bus.Execute(ref testNotification);
+            Assert.IsTrue(testNotification.isSucceed);
         }
 
         [TestCase(0)]
@@ -37,7 +63,7 @@ namespace PeroTools2.AccessKing.Editor.Tests.CommandTests
         [TestCase(1, ExpectedResult = 0)]
         [TestCase(2, ExpectedResult = 1)]
         [TestCase(10, ExpectedResult = 9)]
-        public int CommandFactoryUnregisterTest(int handlerCount)
+        public int CommandHandlerFactoryUnregisterTest(int handlerCount)
         {
             var testNotification = new TestNotification();
             var factory = new RegistryCommandHandlerFactory();
@@ -57,12 +83,12 @@ namespace PeroTools2.AccessKing.Editor.Tests.CommandTests
                 Assert.IsFalse(testNotification.isSucceed);
             return s_HandleCount;
         }
-        
+
         [TestCase(0, ExpectedResult = 0)]
         [TestCase(1, ExpectedResult = 0)]
         [TestCase(2, ExpectedResult = 0)]
         [TestCase(10, ExpectedResult = 0)]
-        public int CommandFactoryClearTest(int handlerCount)
+        public int CommandHandlerFactoryClearTest(int handlerCount)
         {
             var testNotification = new TestNotification();
             var factory = new RegistryCommandHandlerFactory();
@@ -72,6 +98,7 @@ namespace PeroTools2.AccessKing.Editor.Tests.CommandTests
                 var testHandler = new TestHandler<TestNotification>();
                 factory.RegisterHandler(testHandler);
             }
+
             factory.ClearHandlers();
             bus.Execute(ref testNotification);
             Assert.IsFalse(testNotification.isSucceed);

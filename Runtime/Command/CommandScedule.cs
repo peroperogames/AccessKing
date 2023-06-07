@@ -69,6 +69,8 @@ namespace PeroTools2.AccessKing
         
         public bool ContainsBus(TTheme theme) => m_CommandBusMaps.ContainsKey(theme);
 
+        public void ClearTheme() => m_CommandBusMaps.Clear();
+
         public void AddThemeMapping<TNotification>(TTheme theme, ISchedulableCommandBus<TNotification> bus) where TNotification : INotification
         {
             bus.SetFactory(RequireHandlerFactory(theme));

@@ -45,6 +45,8 @@ namespace PeroTools2.AccessKing
 
         public bool ContainsBus(TTheme theme) => m_EventBusMaps.ContainsKey(theme);
 
+        public void ClearTheme() => m_EventBusMaps.Clear();
+
         public IEventBus<TNotification> GetBus<TNotification>(TTheme theme) where TNotification : INotification
         {
             if (m_EventBusMaps.TryGetValue(theme, out var bus))

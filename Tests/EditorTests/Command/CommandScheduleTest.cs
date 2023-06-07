@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using NUnit.Framework;
+using PeroTools2.AccessKing.Editor.Tests.AccessTests;
 
 namespace PeroTools2.AccessKing.Editor.Tests.CommandTests
 {
-    public class CommandScheduleTest
+    public class CommandScheduleTest : AccessScheduleTest
     {
-        private const string theme = "TestCommand";
-
         [Test]
-        public void ScheduleRegisterTest()
+        public void CommandScheduleRegisterTest()
         {
             var schedule = new CommandSchedule<string, TestHandlerFactory>();
             var bus = new CommandBus<TestNotification>();
@@ -19,7 +18,7 @@ namespace PeroTools2.AccessKing.Editor.Tests.CommandTests
         }
 
         [Test]
-        public void ScheduleRegisterRepeatTest()
+        public void CommandScheduleRegisterRepeatTest()
         {
             var schedule = new CommandSchedule<string, TestHandlerFactory>();
             Assert.Catch(() =>
@@ -30,7 +29,7 @@ namespace PeroTools2.AccessKing.Editor.Tests.CommandTests
         }
 
         [Test]
-        public void ScheduleRemoveThemeTest()
+        public void CommandScheduleRemoveThemeTest()
         {
             var schedule = new CommandSchedule<string, TestHandlerFactory>();
             var bus = new CommandBus<TestNotification>();
@@ -40,7 +39,7 @@ namespace PeroTools2.AccessKing.Editor.Tests.CommandTests
         }
 
         [Test]
-        public void ScheduleRemoveBusTest()
+        public void CommandScheduleRemoveBusTest()
         {
             var schedule = new CommandSchedule<string, TestHandlerFactory>();
             var bus = new CommandBus<TestNotification>();
@@ -50,7 +49,7 @@ namespace PeroTools2.AccessKing.Editor.Tests.CommandTests
         }
 
         [Test]
-        public void ScheduleTryGetBusTest()
+        public void CommandScheduleTryGetBusTest()
         {
             var schedule = new CommandSchedule<string, TestHandlerFactory>();
             var bus = new CommandBus<TestNotification>();
@@ -61,7 +60,7 @@ namespace PeroTools2.AccessKing.Editor.Tests.CommandTests
         }
 
         [Test]
-        public void ScheduleGetBusTest()
+        public void CommandScheduleGetBusTest()
         {
             var schedule = new CommandSchedule<string, TestHandlerFactory>();
             var bus = new CommandBus<TestNotification>();
@@ -71,22 +70,13 @@ namespace PeroTools2.AccessKing.Editor.Tests.CommandTests
             Assert.Catch(() => schedule.GetBus<TestNotification>(theme));
         }
 
-        [Test]
-        public void ScheduleRequireByTypeThemeTest()
-        {
-            var schedule = new CommandSchedule<Type,TestHandlerFactory>();
-            var bus = schedule.Require<TestBus>();
-            Assert.IsTrue(schedule.ContainsBus(typeof(TestBus)));
-            Assert.IsTrue(schedule.GetBus<TestNotification>(typeof(TestBus)) == bus);
-        }
-
         [TestCase(0)]
         [TestCase(1)]
         [TestCase(2)]
         [TestCase(3)]
         [TestCase(4)]
         [TestCase(5)]
-        public void ScheduleRequireByStringThemeTest(int argumentCount)
+        public void CommandScheduleRequireByStringThemeTest(int argumentCount)
         {
             var schedule = new CommandSchedule<string, TestHandlerFactory>();
             switch (argumentCount)
@@ -132,12 +122,14 @@ namespace PeroTools2.AccessKing.Editor.Tests.CommandTests
             }
         }
 
-        private class TestBus : CommandBus<TestNotification>
+        protected override IAccessSchedule<TTheme> RequireAccessSchedule<TTheme>()
         {
+            return new CommandSchedule<TTheme, TestHandlerFactory>();
         }
 
-        private class TestNotification : INotification
+        protected override IAccessBus RequireAccessBus<TNotification>()
         {
+            return new CommandBus<TNotification>();
         }
     }
 }

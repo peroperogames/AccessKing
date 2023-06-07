@@ -14,7 +14,12 @@ namespace PeroTools2.AccessKing
     public class RegistryCommandHandlerFactory : ICommandHandlerFactory
     {
         private readonly Dictionary<Type, List<object>> m_HandlerMaps = new Dictionary<Type, List<object>>();
-
+        
+        /// <summary>
+        /// Register command handler to factory.
+        /// </summary>
+        /// <param name="handler">The command handler with notification.</param>
+        /// <typeparam name="TNotification">Notification type.</typeparam>
         public void RegisterHandler<TNotification>(ICommandHandler<TNotification> handler) where TNotification : INotification
         {
             if (!m_HandlerMaps.TryGetValue(typeof(TNotification), out var handlers))
@@ -25,7 +30,13 @@ namespace PeroTools2.AccessKing
 
             handlers.Add(handler);
         }
-
+        
+        /// <summary>
+        /// Unregister command handler from
+        /// </summary>
+        /// <param name="handler">The command handler with notification.</param>
+        /// <typeparam name="TNotification">Notification type.</typeparam>
+        /// <returns></returns>
         public bool UnregisterHandler<TNotification>(ICommandHandler<TNotification> handler) where TNotification : INotification
             => m_HandlerMaps.TryGetValue(typeof(TNotification), out var handlers) && handlers.Remove(handler);
 

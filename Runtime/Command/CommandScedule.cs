@@ -7,6 +7,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PeroTools2.AccessKing
 {
@@ -26,7 +27,7 @@ namespace PeroTools2.AccessKing
                 factoryModifiable.SetFactory(RequireHandlerFactory(theme));
             else
                 ThrowHelper.ScheduleCommandBusCastFailed();
-            if (CommandExtensions.GetNotificationType(bus.GetType()) == null)
+            if (typeof(ISchedulableCommandBus<>).IsInstanceOfType(bus))
                 ThrowHelper.ScheduleCommandBusCastFailed();
             m_CommandBusMaps.Add(theme, bus);
         }
@@ -59,6 +60,14 @@ namespace PeroTools2.AccessKing
         }
 
         public bool RemoveTheme(TTheme theme) => m_CommandBusMaps.Remove(theme);
+
+        public bool RemoveBus(IAccessBus accessBus)
+        {
+            var pair = m_CommandBusMaps.FirstOrDefault(kv => kv.Value.Equals(accessBus));
+            return pair.Key != null && m_CommandBusMaps.Remove(pair.Key);
+        }
+        
+        public bool ContainsBus(TTheme theme) => m_CommandBusMaps.ContainsKey(theme);
 
         public void AddThemeMapping<TNotification>(TTheme theme, ISchedulableCommandBus<TNotification> bus) where TNotification : INotification
         {

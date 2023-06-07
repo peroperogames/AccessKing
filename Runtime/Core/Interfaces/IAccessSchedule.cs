@@ -45,5 +45,19 @@ namespace PeroTools2.AccessKing
         /// <param name="theme">Theme.</param>
         /// <returns>Remove succeed.</returns>
         bool RemoveTheme(TTheme theme);
+        
+        /// <summary>
+        /// Remove access bus from schedule.
+        /// </summary>
+        /// <param name="accessBus">Access bus.</param>
+        /// <returns>Remove successfully</returns>
+        bool RemoveBus(IAccessBus accessBus);
+        
+        /// <summary>
+        /// Check if the bus is contained in the schedule.
+        /// </summary>
+        /// <param name="theme">Theme.</param>
+        /// <returns>The bus is contained in schedule.</returns>
+        bool ContainsBus(TTheme theme);
     }
 }

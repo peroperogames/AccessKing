@@ -7,6 +7,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PeroTools2.AccessKing
 {
@@ -21,7 +22,7 @@ namespace PeroTools2.AccessKing
 
         void IAccessSchedule<TTheme>.AddThemeMapping(TTheme theme, IAccessBus bus)
         {
-            if (bus.GetType() != typeof(IEventBus<>))
+            if (typeof(ISchedulableEventBus<>).IsInstanceOfType(bus) )
             {
                 ThrowHelper.ScheduleEventBusCastFailed();
             }
@@ -35,6 +36,14 @@ namespace PeroTools2.AccessKing
         public IEnumerator<IAccessBus> GetEnumerator() => m_EventBusMaps.Values.GetEnumerator();
 
         public bool RemoveTheme(TTheme theme) => m_EventBusMaps.Remove(theme);
+        
+        public bool RemoveBus(IAccessBus accessBus)
+        {
+            var pair = m_EventBusMaps.FirstOrDefault(kv => kv.Value.Equals(accessBus));
+            return pair.Key != null && m_EventBusMaps.Remove(pair.Key);
+        }
+
+        public bool ContainsBus(TTheme theme) => m_EventBusMaps.ContainsKey(theme);
 
         public IEventBus<TNotification> GetBus<TNotification>(TTheme theme) where TNotification : INotification
         {

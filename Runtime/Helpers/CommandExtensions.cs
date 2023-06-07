@@ -8,7 +8,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace PeroTools2.AccessKing
@@ -16,33 +15,6 @@ namespace PeroTools2.AccessKing
     [SuppressMessage("ReSharper", "InvalidXmlDocComment")]
     public static class CommandExtensions
     {
-        #region Reflection
-
-        /// <summary>
-        /// Try parsing command bus's notification argument.
-        /// </summary>
-        /// <param name="busType">Command bus type.</param>
-        /// <returns>Notification type when it succeed or null when it failed.</returns>
-        internal static Type GetNotificationType(Type busType)
-        {
-            Type notificationType = null;
-            var commandBusName = typeof(ISchedulableCommandBus<>).FullName;
-            foreach (var @interface in busType.GetInterfaces())
-            {
-                if (@interface.FullName == null) continue;
-
-                var genericTypeName = Regex.Replace(@interface.FullName, @"\[\[.*\]\]", "");
-                if (genericTypeName.Equals(commandBusName))
-                {
-                    notificationType = @interface.GenericTypeArguments[0];
-                }
-            }
-
-            return notificationType;
-        }
-
-        #endregion
-
         #region SyncOperation
 
         /// <summary>

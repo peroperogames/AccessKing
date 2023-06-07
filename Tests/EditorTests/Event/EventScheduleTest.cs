@@ -1,5 +1,4 @@
-﻿using System;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using PeroTools2.AccessKing.Editor.Tests.AccessTests;
 
 namespace PeroTools2.AccessKing.Editor.Tests.EventTests

@@ -6,7 +6,6 @@ namespace PeroTools2.AccessKing.Editor.Tests.AccessTests
     public abstract class AccessScheduleTest
     {
         protected const string theme = "TestTheme";
-
         protected abstract IAccessSchedule<TTheme> RequireAccessSchedule<TTheme>();
         protected abstract IAccessBus RequireAccessBus<TNotification>() where TNotification : INotification;
 

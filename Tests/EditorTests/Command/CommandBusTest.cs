@@ -13,7 +13,7 @@ namespace PeroTools2.AccessKing.Editor.Tests.CommandTests
         {
             s_HandleCount = 0;
         }
-        
+
         [Test]
         public override void DispatchTest()
         {
@@ -22,10 +22,10 @@ namespace PeroTools2.AccessKing.Editor.Tests.CommandTests
             var bus = new CommandBus<TestNotification>(factory);
             var testHandler = new TestHandler<TestNotification>();
             factory.RegisterHandler(testHandler);
-            ((IAccessBus)bus).Dispatch(testNotification);
+            ((IAccessBus) bus).Dispatch(testNotification);
             Assert.IsTrue(testNotification.isSucceed);
         }
-        
+
         [Test]
         public void CommandHandlerFactoryModifyTest()
         {
@@ -34,7 +34,7 @@ namespace PeroTools2.AccessKing.Editor.Tests.CommandTests
             var factory2 = new RegistryCommandHandlerFactory();
             factory2.RegisterHandler(new TestHandler<TestNotification>());
             var bus = new CommandBus<TestNotification>(factory1);
-            ((ICommandHandlerFactoryModifiable)bus).SetFactory(factory2);
+            ((ICommandHandlerFactoryModifiable) bus).SetFactory(factory2);
             bus.Execute(ref testNotification);
             Assert.IsTrue(testNotification.isSucceed);
         }
@@ -102,7 +102,6 @@ namespace PeroTools2.AccessKing.Editor.Tests.CommandTests
             factory.ClearHandlers();
             bus.Execute(ref testNotification);
             Assert.IsFalse(testNotification.isSucceed);
-            Debug.Log(s_HandleCount);
             return s_HandleCount;
         }
 

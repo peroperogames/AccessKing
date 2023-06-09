@@ -75,7 +75,7 @@ namespace PeroTools2.AccessKing
         /// </summary>
         /// <param name="operation">Result operation.</param>
         /// <returns>Results of task type collection.</returns>
-        public static async Task<IEnumerable<TResult>> GetResultsAsync<TResult>(this CommandOperation operation)
+        public static async Task<IReadOnlyList<TResult>> GetResultsAsync<TResult>(this CommandOperation operation)
         {
             var results = new List<TResult>();
             foreach (var item in operation.handleResults)

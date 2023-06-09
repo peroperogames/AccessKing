@@ -44,6 +44,21 @@ namespace PeroTools2.AccessKing
         public IEnumerator<IAccessBus> GetEnumerator() => m_CommandBusMaps.Values.GetEnumerator();
         
         /// <summary>
+        /// Check if the command handler factory is contained in the schedule.
+        /// </summary>
+        /// <param name="theme">Theme.</param>
+        /// <returns>The factory is contained in schedule.</returns>
+        public bool ContainsFactory(TTheme theme) => m_FactoryMaps.ContainsKey(theme);
+        
+        /// <summary>
+        /// Try get command handler factory by theme.
+        /// </summary>
+        /// <param name="theme">Theme.</param>
+        /// <param name="factory">Command handler factory.</param>
+        /// <returns>Contains any theme to command handler factory mapping.</returns>
+        public bool TryGetFactory(TTheme theme,out TCommandHandlerFactory factory) => m_FactoryMaps.TryGetValue(theme,out factory);
+        
+        /// <summary>
         /// Add a command handler factory by theme.
         /// </summary>
         /// <param name="theme">Theme.</param>

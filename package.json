@@ -1,0 +1,21 @@
+{
+  "name": "com.prpr.accessking",
+  "displayName": "AccessKing",
+  "description": "PeroTools2's access bus with  cross-domain service access, includes: \n- Event bus\n- Command bus\n- Query bus",
+  "version": "0.0.1",
+  "unity": "2019.4",
+  "author": {
+    "name": "Peropero",
+    "email": "unity@peropero.net"
+  },
+  "documentationUrl": "https://git.peropero.net/unity-packages/accessking/-/blob/master/README.md",
+  "changelogUrl": "https://git.peropero.net/unity-packages/accessking/-/releases",
+  "samples": [
+    {
+      "displayName": "Sample",
+      "description": "Command/Event Samples",
+      "path": "Samples~"
+    }
+  ],
+  "type": "tool"
+}

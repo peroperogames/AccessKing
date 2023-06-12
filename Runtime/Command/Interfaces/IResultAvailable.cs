@@ -22,6 +22,6 @@ namespace PeroTools2.AccessKing
         /// Get the handle Result.
         /// </summary>
         /// <returns>Result</returns>
-        TResult GetResult();
+        new TResult GetResult();
     }
 }

@@ -9,6 +9,9 @@ namespace PeroTools2.AccessKing
 {
     public interface ICommandHandlerFactoryModifiable
     {
+        /// <summary>
+        /// Command handler factory.
+        /// </summary>
         ICommandHandlerFactory factory { get; set; }
     }
 }

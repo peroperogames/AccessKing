@@ -1,138 +1,928 @@
 ﻿/*
  * Copyright (c) PeroPeroGames Co., Ltd.
- * Author: 关东关
- * Created On: 2023年05月26日
- * Description: EventHandler wrapping of Action delegates.
+ * Author: Gatongone
+ * Created On: 2023/05/26 15:05:25
  */
 
 using System;
 
 namespace PeroTools2.AccessKing
 {
+    /// <summary>
+    /// Event handler with System.Action.
+    /// </summary>
     public sealed class ActionEventHandler : IEventHandler, IEquatable<ActionEventHandler>
     {
+        /// <summary>
+        /// Delegate with instance method provider.
+        /// </summary>
         private readonly Action m_Invocation;
+
+        /// <summary>
+        /// Create a event handler from a System.Action
+        /// </summary>
+        /// <param name="delegation">Delegation for creating EventHandler.</param>
         public ActionEventHandler(Action delegation) => m_Invocation = delegation;
-        public static implicit operator ActionEventHandler(Action delegation) => new ActionEventHandler(delegation);
+
+        /// <inheritdoc cref="PeroTools2.AccessKing.IEventHandler.Handle"/>
         public void Handle() => m_Invocation?.Invoke();
-        void IEventHandler<Empty>.Handle(in Empty notification) => Handle();
+
+        /// <inheritdoc cref="PeroTools2.AccessKing.IEventHandler.Handle"/>
+        public void Handle(in Empty notification) => Handle();
+
+        /// <inheritdoc cref="PeroTools2.AccessKing.ActionEventHandler"/>
+        public static implicit operator ActionEventHandler(Action delegation) => new(delegation);
+
+        /// <inheritdoc cref="System.Object.GetHashCode()"/>
         public override int GetHashCode() => m_Invocation != null ? m_Invocation.GetHashCode() : 0;
+
+        /// <summary>
+        /// Verify if the target equals to event handler.
+        /// </summary>
         public static bool operator ==(ActionEventHandler left, object right) => !Equals(left, null) && left.Equals(right);
+
+        /// <summary>
+        /// Verify if the target not equals to event handler.
+        /// </summary>
         public static bool operator !=(ActionEventHandler left, object right) => !(left == right);
+
+        /// <summary>
+        /// Verify if the target equals to event handler.
+        /// </summary>
         public bool Equals(ActionEventHandler other) => other != null && m_Invocation == other.m_Invocation;
 
-        public override bool Equals(object obj)
+        /// <summary>
+        /// Verify if the target equals to event handler.
+        /// </summary>
+        public override bool Equals(object obj) => obj switch
         {
-            if (obj is ActionEventHandler other)
-                return Equals(other);
-            if (obj is Action action)
-                return action == m_Invocation;
-            return false;
-        }
+            ActionEventHandler other => Equals(other),
+            Action action => action == m_Invocation,
+            _ => false
+        };
     }
 
-    public sealed class ActionEventHandler<T> : IEventHandler<ParameterNotification<T>>
+    /// <summary>
+    /// Event handler with System.Action.
+    /// </summary>
+    public sealed class ActionEventHandler<T> : IEventHandler<ParameterNotification<T>>, IEquatable<ActionEventHandler<T>>
     {
+        /// <summary>
+        /// Delegate with instance method provider.
+        /// </summary>
         private readonly Action<T> m_Invocation;
+
+        /// <summary>
+        /// Create a event handler from a System.Action
+        /// </summary>
+        /// <param name="delegation">Delegation for creating EventHandler.</param>
         public ActionEventHandler(Action<T> delegation) => m_Invocation = delegation;
-        public static implicit operator ActionEventHandler<T>(Action<T> delegation) => new ActionEventHandler<T>(delegation);
+
+        /// <inheritdoc cref="PeroTools2.AccessKing.IEventHandler.Handle"/>
         public void Handle(T param) => m_Invocation?.Invoke(param);
-        void IEventHandler<ParameterNotification<T>>.Handle(in ParameterNotification<T> notification) => Handle(notification.item);
+
+        /// <inheritdoc cref="PeroTools2.AccessKing.IEventHandler.Handle"/>
+        public void Handle(in ParameterNotification<T> notification) => Handle(notification.item);
+
+        /// <inheritdoc cref="PeroTools2.AccessKing.ActionEventHandler{T}"/>
+        public static implicit operator ActionEventHandler<T>(Action<T> delegation) => new(delegation);
+
+        /// <inheritdoc cref="System.Object.GetHashCode()"/>
         public override int GetHashCode() => m_Invocation != null ? m_Invocation.GetHashCode() : 0;
+
+        /// <summary>
+        /// Verify if the target equals to event handler.
+        /// </summary>
         public static bool operator ==(ActionEventHandler<T> left, object right) => !Equals(left, null) && left.Equals(right);
+
+        /// <summary>
+        /// Verify if the target not equals to event handler.
+        /// </summary>
         public static bool operator !=(ActionEventHandler<T> left, object right) => !(left == right);
+
+        /// <summary>
+        /// Verify if the target equals to event handler.
+        /// </summary>
         public bool Equals(ActionEventHandler<T> other) => other != null && m_Invocation == other.m_Invocation;
-        public override bool Equals(object obj)
+
+        /// <summary>
+        /// Verify if the target equals to event handler.
+        /// </summary>
+        public override bool Equals(object obj) => obj switch
         {
-            if (obj is ActionEventHandler<T> other)
-                return Equals(other);
-            if (obj is Action<T> action)
-                return action == m_Invocation;
-            return false;
-        }
+            ActionEventHandler<T> other => Equals(other),
+            Action<T> action => action == m_Invocation,
+            _ => false
+        };
     }
 
-    public sealed class ActionEventHandler<T1, T2> : IEventHandler<ParameterNotification<T1, T2>>
+    /// <summary>
+    /// Event handler with System.Action.
+    /// </summary>
+    public sealed class ActionEventHandler<T1, T2> : IEventHandler<ParameterNotification<T1, T2>>, IEquatable<ActionEventHandler<T1, T2>>
     {
+        /// <summary>
+        /// Delegate with instance method provider.
+        /// </summary>
         private readonly Action<T1, T2> m_Invocation;
+
+        /// <summary>
+        /// Create a event handler from a System.Action
+        /// </summary>
+        /// <param name="delegation">Delegation for creating EventHandler.</param>
         public ActionEventHandler(Action<T1, T2> delegation) => m_Invocation = delegation;
-        public static implicit operator ActionEventHandler<T1, T2>(Action<T1, T2> delegation) => new ActionEventHandler<T1, T2>(delegation);
+
+        /// <inheritdoc cref="PeroTools2.AccessKing.IEventHandler.Handle"/>
         public void Handle(T1 param1, T2 param2) => m_Invocation?.Invoke(param1, param2);
-        void IEventHandler<ParameterNotification<T1, T2>>.Handle(in ParameterNotification<T1, T2> notification) => Handle(notification.item1, notification.item2);
+
+        /// <inheritdoc cref="PeroTools2.AccessKing.IEventHandler.Handle"/>
+        public void Handle(in ParameterNotification<T1, T2> notification) => Handle(notification.item1, notification.item2);
+
+        /// <inheritdoc cref="PeroTools2.AccessKing.ActionEventHandler{T1, T2}"/>
+        public static implicit operator ActionEventHandler<T1, T2>(Action<T1, T2> delegation) => new(delegation);
+
+        /// <inheritdoc cref="System.Object.GetHashCode()"/>
         public override int GetHashCode() => m_Invocation != null ? m_Invocation.GetHashCode() : 0;
+
+        /// <summary>
+        /// Verify if the target equals to event handler.
+        /// </summary>
         public static bool operator ==(ActionEventHandler<T1, T2> left, object right) => !Equals(left, null) && left.Equals(right);
+
+        /// <summary>
+        /// Verify if the target not equals to event handler.
+        /// </summary>
         public static bool operator !=(ActionEventHandler<T1, T2> left, object right) => !(left == right);
+
+        /// <summary>
+        /// Verify if the target equals to event handler.
+        /// </summary>
         public bool Equals(ActionEventHandler<T1, T2> other) => other != null && m_Invocation == other.m_Invocation;
-        public override bool Equals(object obj)
+
+        /// <summary>
+        /// Verify if the target equals to event handler.
+        /// </summary>
+        public override bool Equals(object obj) => obj switch
         {
-            if (obj is ActionEventHandler<T1, T2> other)
-                return Equals(other);
-            if (obj is Action<T1, T2> action)
-                return action == m_Invocation;
-            return false;
-        }
+            ActionEventHandler<T1, T2> other => Equals(other),
+            Action<T1, T2> action => action == m_Invocation,
+            _ => false
+        };
     }
 
-    public sealed class ActionEventHandler<T1, T2, T3> : IEventHandler<ParameterNotification<T1, T2, T3>>
+    /// <summary>
+    /// Event handler with System.Action.
+    /// </summary>
+    public sealed class ActionEventHandler<T1, T2, T3> : IEventHandler<ParameterNotification<T1, T2, T3>>, IEquatable<ActionEventHandler<T1, T2, T3>>
     {
+        /// <summary>
+        /// Delegate with instance method provider.
+        /// </summary>
         private readonly Action<T1, T2, T3> m_Invocation;
+
+        /// <summary>
+        /// Create a event handler from a System.Action
+        /// </summary>
+        /// <param name="delegation">Delegation for creating EventHandler.</param>
         public ActionEventHandler(Action<T1, T2, T3> delegation) => m_Invocation = delegation;
-        public static implicit operator ActionEventHandler<T1, T2, T3>(Action<T1, T2, T3> delegation) => new ActionEventHandler<T1, T2, T3>(delegation);
+
+        /// <inheritdoc cref="PeroTools2.AccessKing.IEventHandler.Handle"/>
         public void Handle(T1 param1, T2 param2, T3 param3) => m_Invocation?.Invoke(param1, param2, param3);
-        void IEventHandler<ParameterNotification<T1, T2, T3>>.Handle(in ParameterNotification<T1, T2, T3> notification) => Handle(notification.item1, notification.item2, notification.item3);
+
+        /// <inheritdoc cref="PeroTools2.AccessKing.IEventHandler.Handle"/>
+        public void Handle(in ParameterNotification<T1, T2, T3> notification) => Handle(notification.item1, notification.item2, notification.item3);
+
+        /// <inheritdoc cref="PeroTools2.AccessKing.ActionEventHandler{T1, T2, T3}"/>
+        public static implicit operator ActionEventHandler<T1, T2, T3>(Action<T1, T2, T3> delegation) => new(delegation);
+
+        /// <inheritdoc cref="System.Object.GetHashCode()"/>
         public override int GetHashCode() => m_Invocation != null ? m_Invocation.GetHashCode() : 0;
+
+        /// <summary>
+        /// Verify if the target equals to event handler.
+        /// </summary>
         public static bool operator ==(ActionEventHandler<T1, T2, T3> left, object right) => !Equals(left, null) && left.Equals(right);
+
+        /// <summary>
+        /// Verify if the target not equals to event handler.
+        /// </summary>
         public static bool operator !=(ActionEventHandler<T1, T2, T3> left, object right) => !(left == right);
+
+        /// <summary>
+        /// Verify if the target equals to event handler.
+        /// </summary>
         public bool Equals(ActionEventHandler<T1, T2, T3> other) => other != null && m_Invocation == other.m_Invocation;
-        public override bool Equals(object obj)
+
+        /// <summary>
+        /// Verify if the target equals to event handler.
+        /// </summary>
+        public override bool Equals(object obj) => obj switch
         {
-            if (obj is ActionEventHandler<T1, T2, T3> other)
-                return Equals(other);
-            if (obj is Action<T1, T2, T3> action)
-                return action == m_Invocation;
-            return false;
-        }
+            ActionEventHandler<T1, T2, T3> other => Equals(other),
+            Action<T1, T2, T3> action => action == m_Invocation,
+            _ => false
+        };
     }
 
-    public sealed class ActionEventHandler<T1, T2, T3, T4> : IEventHandler<ParameterNotification<T1, T2, T3, T4>>
+    /// <summary>
+    /// Event handler with System.Action.
+    /// </summary>
+    public sealed class ActionEventHandler<T1, T2, T3, T4> : IEventHandler<ParameterNotification<T1, T2, T3, T4>>, IEquatable<ActionEventHandler<T1, T2, T3, T4>>
     {
+        /// <summary>
+        /// Delegate with instance method provider.
+        /// </summary>
         private readonly Action<T1, T2, T3, T4> m_Invocation;
+
+        /// <summary>
+        /// Create a event handler from a System.Action
+        /// </summary>
+        /// <param name="delegation">Delegation for creating EventHandler.</param>
         public ActionEventHandler(Action<T1, T2, T3, T4> delegation) => m_Invocation = delegation;
-        public static implicit operator ActionEventHandler<T1, T2, T3, T4>(Action<T1, T2, T3, T4> delegation) => new ActionEventHandler<T1, T2, T3, T4>(delegation);
+
+        /// <inheritdoc cref="PeroTools2.AccessKing.IEventHandler.Handle"/>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4) => m_Invocation?.Invoke(param1, param2, param3, param4);
-        void IEventHandler<ParameterNotification<T1, T2, T3, T4>>.Handle(in ParameterNotification<T1, T2, T3, T4> notification) => Handle(notification.item1, notification.item2, notification.item3, notification.item4);
+
+        /// <inheritdoc cref="PeroTools2.AccessKing.IEventHandler.Handle"/>
+        public void Handle(in ParameterNotification<T1, T2, T3, T4> notification) => Handle(notification.item1, notification.item2, notification.item3, notification.item4);
+
+        /// <inheritdoc cref="PeroTools2.AccessKing.ActionEventHandler{T1, T2, T3, T4}"/>
+        public static implicit operator ActionEventHandler<T1, T2, T3, T4>(Action<T1, T2, T3, T4> delegation) => new(delegation);
+
+        /// <inheritdoc cref="System.Object.GetHashCode()"/>
         public override int GetHashCode() => m_Invocation != null ? m_Invocation.GetHashCode() : 0;
+
+        /// <summary>
+        /// Verify if the target equals to event handler.
+        /// </summary>
         public static bool operator ==(ActionEventHandler<T1, T2, T3, T4> left, object right) => !Equals(left, null) && left.Equals(right);
+
+        /// <summary>
+        /// Verify if the target not equals to event handler.
+        /// </summary>
         public static bool operator !=(ActionEventHandler<T1, T2, T3, T4> left, object right) => !(left == right);
+
+        /// <summary>
+        /// Verify if the target equals to event handler.
+        /// </summary>
         public bool Equals(ActionEventHandler<T1, T2, T3, T4> other) => other != null && m_Invocation == other.m_Invocation;
-        public override bool Equals(object obj)
+
+        /// <summary>
+        /// Verify if the target equals to event handler.
+        /// </summary>
+        public override bool Equals(object obj) => obj switch
         {
-            if (obj is ActionEventHandler<T1, T2, T3, T4> other)
-                return Equals(other);
-            if (obj is Action<T1, T2, T3, T4> action)
-                return action == m_Invocation;
-            return false;
-        }
+            ActionEventHandler<T1, T2, T3, T4> other => Equals(other),
+            Action<T1, T2, T3, T4> action => action == m_Invocation,
+            _ => false
+        };
     }
 
-    public sealed class ActionEventHandler<T1, T2, T3, T4, T5> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5>>
+    /// <summary>
+    /// Event handler with System.Action.
+    /// </summary>
+    public sealed class ActionEventHandler<T1, T2, T3, T4, T5> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5>>, IEquatable<ActionEventHandler<T1, T2, T3, T4, T5>>
     {
+        /// <summary>
+        /// Delegate with instance method provider.
+        /// </summary>
         private readonly Action<T1, T2, T3, T4, T5> m_Invocation;
+
+        /// <summary>
+        /// Create a event handler from a System.Action
+        /// </summary>
+        /// <param name="delegation">Delegation for creating EventHandler.</param>
         public ActionEventHandler(Action<T1, T2, T3, T4, T5> delegation) => m_Invocation = delegation;
-        public static implicit operator ActionEventHandler<T1, T2, T3, T4, T5>(Action<T1, T2, T3, T4, T5> delegation) => new ActionEventHandler<T1, T2, T3, T4, T5>(delegation);
+
+        /// <inheritdoc cref="PeroTools2.AccessKing.IEventHandler.Handle"/>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5) => m_Invocation?.Invoke(param1, param2, param3, param4, param5);
-        void IEventHandler<ParameterNotification<T1, T2, T3, T4, T5>>.Handle(in ParameterNotification<T1, T2, T3, T4, T5> notification) => Handle(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5);
+
+        /// <inheritdoc cref="PeroTools2.AccessKing.IEventHandler.Handle"/>
+        public void Handle(in ParameterNotification<T1, T2, T3, T4, T5> notification) => Handle(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5);
+
+        /// <inheritdoc cref="PeroTools2.AccessKing.ActionEventHandler{T1, T2, T3, T4, T5}"/>
+        public static implicit operator ActionEventHandler<T1, T2, T3, T4, T5>(Action<T1, T2, T3, T4, T5> delegation) => new(delegation);
+
+        /// <inheritdoc cref="System.Object.GetHashCode()"/>
         public override int GetHashCode() => m_Invocation != null ? m_Invocation.GetHashCode() : 0;
+
+        /// <summary>
+        /// Verify if the target equals to event handler.
+        /// </summary>
         public static bool operator ==(ActionEventHandler<T1, T2, T3, T4, T5> left, object right) => !Equals(left, null) && left.Equals(right);
+
+        /// <summary>
+        /// Verify if the target not equals to event handler.
+        /// </summary>
         public static bool operator !=(ActionEventHandler<T1, T2, T3, T4, T5> left, object right) => !(left == right);
+
+        /// <summary>
+        /// Verify if the target equals to event handler.
+        /// </summary>
         public bool Equals(ActionEventHandler<T1, T2, T3, T4, T5> other) => other != null && m_Invocation == other.m_Invocation;
-        public override bool Equals(object obj)
+
+        /// <summary>
+        /// Verify if the target equals to event handler.
+        /// </summary>
+        public override bool Equals(object obj) => obj switch
         {
-            if (obj is ActionEventHandler<T1, T2, T3, T4, T5> other)
-                return Equals(other);
-            if (obj is Action<T1, T2, T3, T4, T5> action)
-                return action == m_Invocation;
-            return false;
-        }
+            ActionEventHandler<T1, T2, T3, T4, T5> other => Equals(other),
+            Action<T1, T2, T3, T4, T5> action => action == m_Invocation,
+            _ => false
+        };
+    }
+
+    /// <summary>
+    /// Event handler with System.Action.
+    /// </summary>
+    public sealed class ActionEventHandler<T1, T2, T3, T4, T5, T6> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6>>, IEquatable<ActionEventHandler<T1, T2, T3, T4, T5, T6>>
+    {
+        /// <summary>
+        /// Delegate with instance method provider.
+        /// </summary>
+        private readonly Action<T1, T2, T3, T4, T5, T6> m_Invocation;
+
+        /// <summary>
+        /// Create a event handler from a System.Action
+        /// </summary>
+        /// <param name="delegation">Delegation for creating EventHandler.</param>
+        public ActionEventHandler(Action<T1, T2, T3, T4, T5, T6> delegation) => m_Invocation = delegation;
+
+        /// <inheritdoc cref="PeroTools2.AccessKing.IEventHandler.Handle"/>
+        public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6) => m_Invocation?.Invoke(param1, param2, param3, param4, param5, param6);
+
+        /// <inheritdoc cref="PeroTools2.AccessKing.IEventHandler.Handle"/>
+        public void Handle(in ParameterNotification<T1, T2, T3, T4, T5, T6> notification) => Handle(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6);
+
+        /// <inheritdoc cref="PeroTools2.AccessKing.ActionEventHandler{T1, T2, T3, T4, T5, T6}"/>
+        public static implicit operator ActionEventHandler<T1, T2, T3, T4, T5, T6>(Action<T1, T2, T3, T4, T5, T6> delegation) => new(delegation);
+
+        /// <inheritdoc cref="System.Object.GetHashCode()"/>
+        public override int GetHashCode() => m_Invocation != null ? m_Invocation.GetHashCode() : 0;
+
+        /// <summary>
+        /// Verify if the target equals to event handler.
+        /// </summary>
+        public static bool operator ==(ActionEventHandler<T1, T2, T3, T4, T5, T6> left, object right) => !Equals(left, null) && left.Equals(right);
+
+        /// <summary>
+        /// Verify if the target not equals to event handler.
+        /// </summary>
+        public static bool operator !=(ActionEventHandler<T1, T2, T3, T4, T5, T6> left, object right) => !(left == right);
+
+        /// <summary>
+        /// Verify if the target equals to event handler.
+        /// </summary>
+        public bool Equals(ActionEventHandler<T1, T2, T3, T4, T5, T6> other) => other != null && m_Invocation == other.m_Invocation;
+
+        /// <summary>
+        /// Verify if the target equals to event handler.
+        /// </summary>
+        public override bool Equals(object obj) => obj switch
+        {
+            ActionEventHandler<T1, T2, T3, T4, T5, T6> other => Equals(other),
+            Action<T1, T2, T3, T4, T5, T6> action => action == m_Invocation,
+            _ => false
+        };
+    }
+
+    /// <summary>
+    /// Event handler with System.Action.
+    /// </summary>
+    public sealed class ActionEventHandler<T1, T2, T3, T4, T5, T6, T7> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7>>, IEquatable<ActionEventHandler<T1, T2, T3, T4, T5, T6, T7>>
+    {
+        /// <summary>
+        /// Delegate with instance method provider.
+        /// </summary>
+        private readonly Action<T1, T2, T3, T4, T5, T6, T7> m_Invocation;
+
+        /// <summary>
+        /// Create a event handler from a System.Action
+        /// </summary>
+        /// <param name="delegation">Delegation for creating EventHandler.</param>
+        public ActionEventHandler(Action<T1, T2, T3, T4, T5, T6, T7> delegation) => m_Invocation = delegation;
+
+        /// <inheritdoc cref="PeroTools2.AccessKing.IEventHandler.Handle"/>
+        public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7) => m_Invocation?.Invoke(param1, param2, param3, param4, param5, param6, param7);
+
+        /// <inheritdoc cref="PeroTools2.AccessKing.IEventHandler.Handle"/>
+        public void Handle(in ParameterNotification<T1, T2, T3, T4, T5, T6, T7> notification) => Handle(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7);
+
+        /// <inheritdoc cref="PeroTools2.AccessKing.ActionEventHandler{T1, T2, T3, T4, T5, T6, T7}"/>
+        public static implicit operator ActionEventHandler<T1, T2, T3, T4, T5, T6, T7>(Action<T1, T2, T3, T4, T5, T6, T7> delegation) => new(delegation);
+
+        /// <inheritdoc cref="System.Object.GetHashCode()"/>
+        public override int GetHashCode() => m_Invocation != null ? m_Invocation.GetHashCode() : 0;
+
+        /// <summary>
+        /// Verify if the target equals to event handler.
+        /// </summary>
+        public static bool operator ==(ActionEventHandler<T1, T2, T3, T4, T5, T6, T7> left, object right) => !Equals(left, null) && left.Equals(right);
+
+        /// <summary>
+        /// Verify if the target not equals to event handler.
+        /// </summary>
+        public static bool operator !=(ActionEventHandler<T1, T2, T3, T4, T5, T6, T7> left, object right) => !(left == right);
+
+        /// <summary>
+        /// Verify if the target equals to event handler.
+        /// </summary>
+        public bool Equals(ActionEventHandler<T1, T2, T3, T4, T5, T6, T7> other) => other != null && m_Invocation == other.m_Invocation;
+
+        /// <summary>
+        /// Verify if the target equals to event handler.
+        /// </summary>
+        public override bool Equals(object obj) => obj switch
+        {
+            ActionEventHandler<T1, T2, T3, T4, T5, T6, T7> other => Equals(other),
+            Action<T1, T2, T3, T4, T5, T6, T7> action => action == m_Invocation,
+            _ => false
+        };
+    }
+
+    /// <summary>
+    /// Event handler with System.Action.
+    /// </summary>
+    public sealed class ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8>>, IEquatable<ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8>>
+    {
+        /// <summary>
+        /// Delegate with instance method provider.
+        /// </summary>
+        private readonly Action<T1, T2, T3, T4, T5, T6, T7, T8> m_Invocation;
+
+        /// <summary>
+        /// Create a event handler from a System.Action
+        /// </summary>
+        /// <param name="delegation">Delegation for creating EventHandler.</param>
+        public ActionEventHandler(Action<T1, T2, T3, T4, T5, T6, T7, T8> delegation) => m_Invocation = delegation;
+
+        /// <inheritdoc cref="PeroTools2.AccessKing.IEventHandler.Handle"/>
+        public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8) => m_Invocation?.Invoke(param1, param2, param3, param4, param5, param6, param7, param8);
+
+        /// <inheritdoc cref="PeroTools2.AccessKing.IEventHandler.Handle"/>
+        public void Handle(in ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8> notification) => Handle(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7, notification.item8);
+
+        /// <inheritdoc cref="PeroTools2.AccessKing.ActionEventHandler{T1, T2, T3, T4, T5, T6, T7, T8}"/>
+        public static implicit operator ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8>(Action<T1, T2, T3, T4, T5, T6, T7, T8> delegation) => new(delegation);
+
+        /// <inheritdoc cref="System.Object.GetHashCode()"/>
+        public override int GetHashCode() => m_Invocation != null ? m_Invocation.GetHashCode() : 0;
+
+        /// <summary>
+        /// Verify if the target equals to event handler.
+        /// </summary>
+        public static bool operator ==(ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8> left, object right) => !Equals(left, null) && left.Equals(right);
+
+        /// <summary>
+        /// Verify if the target not equals to event handler.
+        /// </summary>
+        public static bool operator !=(ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8> left, object right) => !(left == right);
+
+        /// <summary>
+        /// Verify if the target equals to event handler.
+        /// </summary>
+        public bool Equals(ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8> other) => other != null && m_Invocation == other.m_Invocation;
+
+        /// <summary>
+        /// Verify if the target equals to event handler.
+        /// </summary>
+        public override bool Equals(object obj) => obj switch
+        {
+            ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8> other => Equals(other),
+            Action<T1, T2, T3, T4, T5, T6, T7, T8> action => action == m_Invocation,
+            _ => false
+        };
+    }
+
+    /// <summary>
+    /// Event handler with System.Action.
+    /// </summary>
+    public sealed class ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9>>, IEquatable<ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9>>
+    {
+        /// <summary>
+        /// Delegate with instance method provider.
+        /// </summary>
+        private readonly Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> m_Invocation;
+
+        /// <summary>
+        /// Create a event handler from a System.Action
+        /// </summary>
+        /// <param name="delegation">Delegation for creating EventHandler.</param>
+        public ActionEventHandler(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> delegation) => m_Invocation = delegation;
+
+        /// <inheritdoc cref="PeroTools2.AccessKing.IEventHandler.Handle"/>
+        public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9) => m_Invocation?.Invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9);
+
+        /// <inheritdoc cref="PeroTools2.AccessKing.IEventHandler.Handle"/>
+        public void Handle(in ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9> notification) => Handle(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7, notification.item8, notification.item9);
+
+        /// <inheritdoc cref="PeroTools2.AccessKing.ActionEventHandler{T1, T2, T3, T4, T5, T6, T7, T8, T9}"/>
+        public static implicit operator ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> delegation) => new(delegation);
+
+        /// <inheritdoc cref="System.Object.GetHashCode()"/>
+        public override int GetHashCode() => m_Invocation != null ? m_Invocation.GetHashCode() : 0;
+
+        /// <summary>
+        /// Verify if the target equals to event handler.
+        /// </summary>
+        public static bool operator ==(ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9> left, object right) => !Equals(left, null) && left.Equals(right);
+
+        /// <summary>
+        /// Verify if the target not equals to event handler.
+        /// </summary>
+        public static bool operator !=(ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9> left, object right) => !(left == right);
+
+        /// <summary>
+        /// Verify if the target equals to event handler.
+        /// </summary>
+        public bool Equals(ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9> other) => other != null && m_Invocation == other.m_Invocation;
+
+        /// <summary>
+        /// Verify if the target equals to event handler.
+        /// </summary>
+        public override bool Equals(object obj) => obj switch
+        {
+            ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9> other => Equals(other),
+            Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> action => action == m_Invocation,
+            _ => false
+        };
+    }
+
+    /// <summary>
+    /// Event handler with System.Action.
+    /// </summary>
+    public sealed class ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>>, IEquatable<ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>>
+    {
+        /// <summary>
+        /// Delegate with instance method provider.
+        /// </summary>
+        private readonly Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> m_Invocation;
+
+        /// <summary>
+        /// Create a event handler from a System.Action
+        /// </summary>
+        /// <param name="delegation">Delegation for creating EventHandler.</param>
+        public ActionEventHandler(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> delegation) => m_Invocation = delegation;
+
+        /// <inheritdoc cref="PeroTools2.AccessKing.IEventHandler.Handle"/>
+        public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10) => m_Invocation?.Invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10);
+
+        /// <inheritdoc cref="PeroTools2.AccessKing.IEventHandler.Handle"/>
+        public void Handle(in ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> notification) => Handle(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7, notification.item8, notification.item9, notification.item10);
+
+        /// <inheritdoc cref="PeroTools2.AccessKing.ActionEventHandler{T1, T2, T3, T4, T5, T6, T7, T8, T9, T10}"/>
+        public static implicit operator ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> delegation) => new(delegation);
+
+        /// <inheritdoc cref="System.Object.GetHashCode()"/>
+        public override int GetHashCode() => m_Invocation != null ? m_Invocation.GetHashCode() : 0;
+
+        /// <summary>
+        /// Verify if the target equals to event handler.
+        /// </summary>
+        public static bool operator ==(ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> left, object right) => !Equals(left, null) && left.Equals(right);
+
+        /// <summary>
+        /// Verify if the target not equals to event handler.
+        /// </summary>
+        public static bool operator !=(ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> left, object right) => !(left == right);
+
+        /// <summary>
+        /// Verify if the target equals to event handler.
+        /// </summary>
+        public bool Equals(ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> other) => other != null && m_Invocation == other.m_Invocation;
+
+        /// <summary>
+        /// Verify if the target equals to event handler.
+        /// </summary>
+        public override bool Equals(object obj) => obj switch
+        {
+            ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> other => Equals(other),
+            Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> action => action == m_Invocation,
+            _ => false
+        };
+    }
+
+    /// <summary>
+    /// Event handler with System.Action.
+    /// </summary>
+    public sealed class ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>>, IEquatable<ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>>
+    {
+        /// <summary>
+        /// Delegate with instance method provider.
+        /// </summary>
+        private readonly Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> m_Invocation;
+
+        /// <summary>
+        /// Create a event handler from a System.Action
+        /// </summary>
+        /// <param name="delegation">Delegation for creating EventHandler.</param>
+        public ActionEventHandler(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> delegation) => m_Invocation = delegation;
+
+        /// <inheritdoc cref="PeroTools2.AccessKing.IEventHandler.Handle"/>
+        public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11) => m_Invocation?.Invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11);
+
+        /// <inheritdoc cref="PeroTools2.AccessKing.IEventHandler.Handle"/>
+        public void Handle(in ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> notification) => Handle(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7, notification.item8, notification.item9, notification.item10, notification.item11);
+
+        /// <inheritdoc cref="PeroTools2.AccessKing.ActionEventHandler{T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11}"/>
+        public static implicit operator ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> delegation) => new(delegation);
+
+        /// <inheritdoc cref="System.Object.GetHashCode()"/>
+        public override int GetHashCode() => m_Invocation != null ? m_Invocation.GetHashCode() : 0;
+
+        /// <summary>
+        /// Verify if the target equals to event handler.
+        /// </summary>
+        public static bool operator ==(ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> left, object right) => !Equals(left, null) && left.Equals(right);
+
+        /// <summary>
+        /// Verify if the target not equals to event handler.
+        /// </summary>
+        public static bool operator !=(ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> left, object right) => !(left == right);
+
+        /// <summary>
+        /// Verify if the target equals to event handler.
+        /// </summary>
+        public bool Equals(ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> other) => other != null && m_Invocation == other.m_Invocation;
+
+        /// <summary>
+        /// Verify if the target equals to event handler.
+        /// </summary>
+        public override bool Equals(object obj) => obj switch
+        {
+            ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> other => Equals(other),
+            Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> action => action == m_Invocation,
+            _ => false
+        };
+    }
+
+    /// <summary>
+    /// Event handler with System.Action.
+    /// </summary>
+    public sealed class ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>>, IEquatable<ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>>
+    {
+        /// <summary>
+        /// Delegate with instance method provider.
+        /// </summary>
+        private readonly Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> m_Invocation;
+
+        /// <summary>
+        /// Create a event handler from a System.Action
+        /// </summary>
+        /// <param name="delegation">Delegation for creating EventHandler.</param>
+        public ActionEventHandler(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> delegation) => m_Invocation = delegation;
+
+        /// <inheritdoc cref="PeroTools2.AccessKing.IEventHandler.Handle"/>
+        public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11, T12 param12) => m_Invocation?.Invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12);
+
+        /// <inheritdoc cref="PeroTools2.AccessKing.IEventHandler.Handle"/>
+        public void Handle(in ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> notification) => Handle(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7, notification.item8, notification.item9, notification.item10, notification.item11, notification.item12);
+
+        /// <inheritdoc cref="PeroTools2.AccessKing.ActionEventHandler{T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12}"/>
+        public static implicit operator ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> delegation) => new(delegation);
+
+        /// <inheritdoc cref="System.Object.GetHashCode()"/>
+        public override int GetHashCode() => m_Invocation != null ? m_Invocation.GetHashCode() : 0;
+
+        /// <summary>
+        /// Verify if the target equals to event handler.
+        /// </summary>
+        public static bool operator ==(ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> left, object right) => !Equals(left, null) && left.Equals(right);
+
+        /// <summary>
+        /// Verify if the target not equals to event handler.
+        /// </summary>
+        public static bool operator !=(ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> left, object right) => !(left == right);
+
+        /// <summary>
+        /// Verify if the target equals to event handler.
+        /// </summary>
+        public bool Equals(ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> other) => other != null && m_Invocation == other.m_Invocation;
+
+        /// <summary>
+        /// Verify if the target equals to event handler.
+        /// </summary>
+        public override bool Equals(object obj) => obj switch
+        {
+            ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> other => Equals(other),
+            Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> action => action == m_Invocation,
+            _ => false
+        };
+    }
+
+    /// <summary>
+    /// Event handler with System.Action.
+    /// </summary>
+    public sealed class ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>>, IEquatable<ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>>
+    {
+        /// <summary>
+        /// Delegate with instance method provider.
+        /// </summary>
+        private readonly Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> m_Invocation;
+
+        /// <summary>
+        /// Create a event handler from a System.Action
+        /// </summary>
+        /// <param name="delegation">Delegation for creating EventHandler.</param>
+        public ActionEventHandler(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> delegation) => m_Invocation = delegation;
+
+        /// <inheritdoc cref="PeroTools2.AccessKing.IEventHandler.Handle"/>
+        public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11, T12 param12, T13 param13) => m_Invocation?.Invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12, param13);
+
+        /// <inheritdoc cref="PeroTools2.AccessKing.IEventHandler.Handle"/>
+        public void Handle(in ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> notification) => Handle(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7, notification.item8, notification.item9, notification.item10, notification.item11, notification.item12, notification.item13);
+
+        /// <inheritdoc cref="PeroTools2.AccessKing.ActionEventHandler{T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13}"/>
+        public static implicit operator ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> delegation) => new(delegation);
+
+        /// <inheritdoc cref="System.Object.GetHashCode()"/>
+        public override int GetHashCode() => m_Invocation != null ? m_Invocation.GetHashCode() : 0;
+
+        /// <summary>
+        /// Verify if the target equals to event handler.
+        /// </summary>
+        public static bool operator ==(ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> left, object right) => !Equals(left, null) && left.Equals(right);
+
+        /// <summary>
+        /// Verify if the target not equals to event handler.
+        /// </summary>
+        public static bool operator !=(ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> left, object right) => !(left == right);
+
+        /// <summary>
+        /// Verify if the target equals to event handler.
+        /// </summary>
+        public bool Equals(ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> other) => other != null && m_Invocation == other.m_Invocation;
+
+        /// <summary>
+        /// Verify if the target equals to event handler.
+        /// </summary>
+        public override bool Equals(object obj) => obj switch
+        {
+            ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> other => Equals(other),
+            Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> action => action == m_Invocation,
+            _ => false
+        };
+    }
+
+    /// <summary>
+    /// Event handler with System.Action.
+    /// </summary>
+    public sealed class ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>>, IEquatable<ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>>
+    {
+        /// <summary>
+        /// Delegate with instance method provider.
+        /// </summary>
+        private readonly Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> m_Invocation;
+
+        /// <summary>
+        /// Create a event handler from a System.Action
+        /// </summary>
+        /// <param name="delegation">Delegation for creating EventHandler.</param>
+        public ActionEventHandler(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> delegation) => m_Invocation = delegation;
+
+        /// <inheritdoc cref="PeroTools2.AccessKing.IEventHandler.Handle"/>
+        public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11, T12 param12, T13 param13, T14 param14) => m_Invocation?.Invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12, param13, param14);
+
+        /// <inheritdoc cref="PeroTools2.AccessKing.IEventHandler.Handle"/>
+        public void Handle(in ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> notification) => Handle(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7, notification.item8, notification.item9, notification.item10, notification.item11, notification.item12, notification.item13, notification.item14);
+
+        /// <inheritdoc cref="PeroTools2.AccessKing.ActionEventHandler{T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14}"/>
+        public static implicit operator ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> delegation) => new(delegation);
+
+        /// <inheritdoc cref="System.Object.GetHashCode()"/>
+        public override int GetHashCode() => m_Invocation != null ? m_Invocation.GetHashCode() : 0;
+
+        /// <summary>
+        /// Verify if the target equals to event handler.
+        /// </summary>
+        public static bool operator ==(ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> left, object right) => !Equals(left, null) && left.Equals(right);
+
+        /// <summary>
+        /// Verify if the target not equals to event handler.
+        /// </summary>
+        public static bool operator !=(ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> left, object right) => !(left == right);
+
+        /// <summary>
+        /// Verify if the target equals to event handler.
+        /// </summary>
+        public bool Equals(ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> other) => other != null && m_Invocation == other.m_Invocation;
+
+        /// <summary>
+        /// Verify if the target equals to event handler.
+        /// </summary>
+        public override bool Equals(object obj) => obj switch
+        {
+            ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> other => Equals(other),
+            Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> action => action == m_Invocation,
+            _ => false
+        };
+    }
+
+    /// <summary>
+    /// Event handler with System.Action.
+    /// </summary>
+    public sealed class ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>>, IEquatable<ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>>
+    {
+        /// <summary>
+        /// Delegate with instance method provider.
+        /// </summary>
+        private readonly Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> m_Invocation;
+
+        /// <summary>
+        /// Create a event handler from a System.Action
+        /// </summary>
+        /// <param name="delegation">Delegation for creating EventHandler.</param>
+        public ActionEventHandler(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> delegation) => m_Invocation = delegation;
+
+        /// <inheritdoc cref="PeroTools2.AccessKing.IEventHandler.Handle"/>
+        public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11, T12 param12, T13 param13, T14 param14, T15 param15) => m_Invocation?.Invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12, param13, param14, param15);
+
+        /// <inheritdoc cref="PeroTools2.AccessKing.IEventHandler.Handle"/>
+        public void Handle(in ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> notification) => Handle(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7, notification.item8, notification.item9, notification.item10, notification.item11, notification.item12, notification.item13, notification.item14, notification.item15);
+
+        /// <inheritdoc cref="PeroTools2.AccessKing.ActionEventHandler{T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15}"/>
+        public static implicit operator ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> delegation) => new(delegation);
+
+        /// <inheritdoc cref="System.Object.GetHashCode()"/>
+        public override int GetHashCode() => m_Invocation != null ? m_Invocation.GetHashCode() : 0;
+
+        /// <summary>
+        /// Verify if the target equals to event handler.
+        /// </summary>
+        public static bool operator ==(ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> left, object right) => !Equals(left, null) && left.Equals(right);
+
+        /// <summary>
+        /// Verify if the target not equals to event handler.
+        /// </summary>
+        public static bool operator !=(ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> left, object right) => !(left == right);
+
+        /// <summary>
+        /// Verify if the target equals to event handler.
+        /// </summary>
+        public bool Equals(ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> other) => other != null && m_Invocation == other.m_Invocation;
+
+        /// <summary>
+        /// Verify if the target equals to event handler.
+        /// </summary>
+        public override bool Equals(object obj) => obj switch
+        {
+            ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> other => Equals(other),
+            Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> action => action == m_Invocation,
+            _ => false
+        };
+    }
+
+    /// <summary>
+    /// Event handler with System.Action.
+    /// </summary>
+    public sealed class ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>>, IEquatable<ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>>
+    {
+        /// <summary>
+        /// Delegate with instance method provider.
+        /// </summary>
+        private readonly Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> m_Invocation;
+
+        /// <summary>
+        /// Create a event handler from a System.Action
+        /// </summary>
+        /// <param name="delegation">Delegation for creating EventHandler.</param>
+        public ActionEventHandler(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> delegation) => m_Invocation = delegation;
+
+        /// <inheritdoc cref="PeroTools2.AccessKing.IEventHandler.Handle"/>
+        public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11, T12 param12, T13 param13, T14 param14, T15 param15, T16 param16) => m_Invocation?.Invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12, param13, param14, param15, param16);
+
+        /// <inheritdoc cref="PeroTools2.AccessKing.IEventHandler.Handle"/>
+        public void Handle(in ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> notification) => Handle(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7, notification.item8, notification.item9, notification.item10, notification.item11, notification.item12, notification.item13, notification.item14, notification.item15, notification.item16);
+
+        /// <inheritdoc cref="PeroTools2.AccessKing.ActionEventHandler{T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16}"/>
+        public static implicit operator ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> delegation) => new(delegation);
+
+        /// <inheritdoc cref="System.Object.GetHashCode()"/>
+        public override int GetHashCode() => m_Invocation != null ? m_Invocation.GetHashCode() : 0;
+
+        /// <summary>
+        /// Verify if the target equals to event handler.
+        /// </summary>
+        public static bool operator ==(ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> left, object right) => !Equals(left, null) && left.Equals(right);
+
+        /// <summary>
+        /// Verify if the target not equals to event handler.
+        /// </summary>
+        public static bool operator !=(ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> left, object right) => !(left == right);
+
+        /// <summary>
+        /// Verify if the target equals to event handler.
+        /// </summary>
+        public bool Equals(ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> other) => other != null && m_Invocation == other.m_Invocation;
+
+        /// <summary>
+        /// Verify if the target equals to event handler.
+        /// </summary>
+        public override bool Equals(object obj) => obj switch
+        {
+            ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> other => Equals(other),
+            Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> action => action == m_Invocation,
+            _ => false
+        };
     }
 }

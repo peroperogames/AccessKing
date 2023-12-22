@@ -1,0 +1,90 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ import namespace="System.Linq" #>
+<#@ assembly name="System.Core" #>
+<#@ output extension=".cs" #>
+/*
+ * Copyright (c) PeroPeroGames Co., Ltd.
+ * Author: Gatongone
+ * Created On: 2023/06/01 15:06:16
+ */
+
+using System;
+
+namespace PeroTools2.AccessKing
+{<#
+    for (var i = 0; i < 17; i++)
+    {
+        var genericArgs = string.Empty;
+        var parameterDefinitions = string.Empty;
+        var parameters = string.Empty;
+        var notificationItems = string.Empty;
+        if (i > 0)
+        {
+            genericArgs = i == 1 ? "T" : string.Join(", ", from index in Enumerable.Range(1, i) select $"T{index}");
+            parameters = i == 1 ? "param" : string.Join(", ", from index in Enumerable.Range(1, i) select $"param{index}");
+            parameterDefinitions = i == 1 ? "T param" : string.Join(", ", from index in Enumerable.Range(1, i) select $"T{index} param{index}");
+            notificationItems = i == 1 ? "notification.item" : string.Join(", ", from index in Enumerable.Range(1, i) select $"notification.item{index}");
+        }
+        var parameterNotification = i == 0 ? "Empty" : $"ParameterNotification<{genericArgs}>";
+        var action = i == 0 ? "Action" : $"Action<{genericArgs}>";
+        var evenHandler = $"ActionCommandHandler{(i == 0 ? string.Empty : $"<{genericArgs}>")}";
+        var ievenHandler = $"ICommandHandler{(i == 0 ? string.Empty : $"<{parameterNotification}>")}";
+#>
+
+    /// <summary>
+    /// Command handler with System.Action.
+    /// </summary>
+    public sealed class <#=evenHandler#> : <#=ievenHandler#>, IEquatable<<#=evenHandler#>>
+    {
+        /// <summary>
+        /// Delegate with instance method provider.
+        /// </summary>
+        private readonly <#=action#> m_Invocation;
+
+        /// <summary>
+        /// Create a command handler from a System.Action
+        /// </summary>
+        /// <param name="delegation">Delegation for creating CommandHandler.</param>
+        public ActionCommandHandler(<#=action#> delegation) => m_Invocation = delegation;
+
+        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        public void Handle(<#=parameterDefinitions#>) => m_Invocation?.Invoke(<#=parameters#>);
+
+        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        public void Handle(ref <#=parameterNotification#> notification) => Handle(<#=notificationItems#>);
+
+        /// <inheritdoc cref="PeroTools2.AccessKing.<#=evenHandler.Replace('<','{').Replace('>','}')#>"/>
+        public static implicit operator <#=evenHandler#>(<#=action#> delegation) => new(delegation);
+
+        /// <inheritdoc cref="System.Object.GetHashCode()"/>
+        public override int GetHashCode() => m_Invocation != null ? m_Invocation.GetHashCode() : 0;
+
+        /// <summary>
+        /// Verify if the target equals to command handler.
+        /// </summary>
+        public static bool operator ==(<#=evenHandler#> left, object right) => !Equals(left, null) && left.Equals(right);
+
+        /// <summary>
+        /// Verify if the target not equals to command handler.
+        /// </summary>
+        public static bool operator !=(<#=evenHandler#> left, object right) => !(left == right);
+
+        /// <summary>
+        /// Verify if the target equals to command handler.
+        /// </summary>
+        public bool Equals(<#=evenHandler#> other) => other != null && m_Invocation == other.m_Invocation;
+
+        /// <summary>
+        /// Verify if the target equals to command handler.
+        /// </summary>
+        public override bool Equals(object obj) => obj switch
+        {
+            <#=evenHandler#> other => Equals(other),
+            <#=action#> action => action == m_Invocation,
+            _ => false
+        };
+    }
+<#
+    }
+#>
+}

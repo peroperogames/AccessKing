@@ -1,0 +1,101 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ import namespace="System.Linq" #>
+<#@ assembly name="System.Core" #>
+<#@ output extension=".cs" #>
+/*
+ * Copyright (c) PeroPeroGames Co., Ltd.
+ * Author: Gatongone
+ * Created On: 2023/06/01 15:06:34
+ */
+
+using System;
+
+namespace PeroTools2.AccessKing
+{<#
+    for (var i = 0; i < 16; i++)
+    {
+        var genericArgs = string.Empty;
+        var parameterDefinitions = string.Empty;
+        var parameters = string.Empty;
+        var notificationItems = string.Empty;
+        if (i > 0)
+        {
+            genericArgs = i == 1 ? "T" : string.Join(", ", from index in Enumerable.Range(1, i) select $"T{index}");
+            parameters = i == 1 ? "param" : string.Join(", ", from index in Enumerable.Range(1, i) select $"param{index}");
+            parameterDefinitions = i == 1 ? "T param" : string.Join(", ", from index in Enumerable.Range(1, i) select $"T{index} param{index}");
+            notificationItems = i == 1 ? "notification.item" : string.Join(", ", from index in Enumerable.Range(1, i) select $"notification.item{index}");
+        }
+        var parameterNotification = i == 0 ? "Empty" : $"ParameterNotification<{genericArgs}>";
+        var func = i == 0 ? "Func<TResult>" : $"Func<{genericArgs}, TResult>";
+        var evenHandler = $"FuncCommandHandler{(i == 0 ? "<TResult>" : $"<{genericArgs}, TResult>")}";
+        var ievenHandler = $"ICommandHandler{(i == 0 ? "<Empty, TResult>" : $"<{parameterNotification}, TResult>")}";
+#>
+
+    /// <summary>
+    /// Command handler with System.Func.
+    /// </summary>
+    public sealed class <#=evenHandler#> : <#=ievenHandler#>, IEquatable<<#=evenHandler#>>
+    {
+        /// <summary>
+        /// Result of command.
+        /// </summary>
+        private TResult m_Result;
+
+        /// <summary>
+        /// Delegate with instance method provider.
+        /// </summary>
+        private readonly <#=func#> m_Invocation;
+
+        /// <summary>
+        /// Create a command handler from a System.Func
+        /// </summary>
+        /// <param name="delegation">Delegation for creating CommandHandler.</param>
+        public FuncCommandHandler(<#=func#> delegation) => m_Invocation = delegation;
+
+        /// <inheritdoc cref="IResultAvailable{TResult}.GetResult()"/>
+        public TResult GetResult() => m_Result;
+
+        /// <inheritdoc cref="IResultAvailable.GetResult()"/>
+        object IResultAvailable.GetResult() => GetResult();
+
+        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        public void Handle(<#=parameterDefinitions#>) => m_Result = m_Invocation.Invoke(<#=parameters#>);
+
+        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        public void Handle(ref <#=parameterNotification#> notification) => Handle(<#=notificationItems#>);
+
+        /// <inheritdoc cref="PeroTools2.AccessKing.<#=evenHandler.Replace('<','{').Replace('>','}')#>"/>
+        public static implicit operator <#=evenHandler#>(<#=func#> delegation) => new(delegation);
+
+        /// <inheritdoc cref="System.Object.GetHashCode()"/>
+        public override int GetHashCode() => m_Invocation != null ? m_Invocation.GetHashCode() : 0;
+
+        /// <summary>
+        /// Verify if the target equals to command handler.
+        /// </summary>
+        public static bool operator ==(<#=evenHandler#> left, object right) => !Equals(left, null) && left.Equals(right);
+
+        /// <summary>
+        /// Verify if the target not equals to command handler.
+        /// </summary>
+        public static bool operator !=(<#=evenHandler#> left, object right) => !(left == right);
+
+        /// <summary>
+        /// Verify if the target equals to command handler.
+        /// </summary>
+        public bool Equals(<#=evenHandler#> other) => other != null && m_Invocation == other.m_Invocation;
+
+        /// <summary>
+        /// Verify if the target equals to command handler.
+        /// </summary>
+        public override bool Equals(object obj) => obj switch
+        {
+            <#=evenHandler#> other => Equals(other),
+            <#=func#> func => func == m_Invocation,
+            _ => false
+        };
+    }
+<#
+    }
+#>
+}

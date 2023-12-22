@@ -13,6 +13,7 @@ namespace PeroTools2.AccessKing
         /// Dispatch notification to handlers.
         /// </summary>
         /// <param name="notification">Notification of messages with data.</param>
-        void Dispatch(INotification notification);
+        /// <returns>The message result.</returns>
+        object Dispatch(INotification notification);
     }
 }

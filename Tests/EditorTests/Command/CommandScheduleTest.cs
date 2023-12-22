@@ -1,17 +1,22 @@
-﻿using System.Collections.Generic;
+﻿/*
+ * Copyright (c) PeroPeroGames Co., Ltd.
+ * Author: Gatongone
+ * Created On: 2023/06/07 16:06:40
+ */
+
+using System;
 using NUnit.Framework;
-using PeroTools2.AccessKing.Editor.Tests.AccessTests;
 
 namespace PeroTools2.AccessKing.Editor.Tests.CommandTests
 {
-    public class CommandScheduleTest : AccessScheduleTest
+    public sealed class CommandScheduleTest : AccessScheduleTest
     {
         [Test]
         public void CommandScheduleRegisterTest()
         {
-            var schedule = new CommandSchedule<string, TestHandlerFactory>();
+            var schedule = new CommandSchedule<string>();
             var bus = new CommandBus<TestNotification>();
-            schedule.AddThemeMapping(theme, bus);
+            schedule.AddBus(theme, bus);
             Assert.IsTrue(schedule.ContainsBus(theme));
             Assert.IsTrue(schedule.GetBus<TestNotification>(theme) == bus);
         }
@@ -19,76 +24,62 @@ namespace PeroTools2.AccessKing.Editor.Tests.CommandTests
         [Test]
         public void CommandScheduleRegisterRepeatTest()
         {
-            var schedule = new CommandSchedule<string, TestHandlerFactory>();
+            var schedule = new CommandSchedule<string>();
             Assert.Catch(() =>
             {
-                schedule.AddThemeMapping(theme, new CommandBus<TestNotification>());
-                schedule.AddThemeMapping(theme, new CommandBus<TestNotification>());
+                schedule.AddBus(theme, new CommandBus<TestNotification>());
+                schedule.AddBus(theme, new CommandBus<TestNotification>());
             });
         }
 
         [Test]
         public void CommandScheduleRemoveThemeTest()
         {
-            var schedule = new CommandSchedule<string, TestHandlerFactory>();
+            var schedule = new CommandSchedule<string>();
             var bus = new CommandBus<TestNotification>();
-            schedule.AddThemeMapping(theme, bus);
-            Assert.IsTrue(schedule.RemoveTheme(theme));
+            schedule.AddBus(theme, bus);
+            Assert.IsTrue(schedule.RemoveBus(theme));
             Assert.IsFalse(schedule.ContainsBus(theme));
         }
 
         [Test]
         public void CommandScheduleRemoveBusTest()
         {
-            var schedule = new CommandSchedule<string, TestHandlerFactory>();
+            var schedule = new CommandSchedule<string>();
             var bus = new CommandBus<TestNotification>();
-            schedule.AddThemeMapping(theme, bus);
+            schedule.AddBus(theme, bus);
             Assert.IsTrue(schedule.RemoveBus(bus));
             Assert.IsFalse(schedule.ContainsBus(theme));
         }
 
         [Test]
-        public void CommandHandlerFactoryModifyTest()
-        {
-            var schedule = new CommandSchedule<string, TestHandlerFactory>();
-            var bus = new CommandBus<TestNotification>();
-            schedule.AddThemeMapping(theme, bus);
-            var newFactory = new TestHandlerFactory();
-            schedule.SetFactory(theme, newFactory);
-            Assert.IsTrue(schedule.RequireFactory(theme) == newFactory);
-        }
-
-        [Test]
         public void CommandScheduleTryGetBusTest()
         {
-            var schedule = new CommandSchedule<string, TestHandlerFactory>();
+            var schedule = new CommandSchedule<string>();
             var bus = new CommandBus<TestNotification>();
-            schedule.AddThemeMapping(theme, bus);
+            schedule.AddBus(theme, bus);
             Assert.IsTrue(schedule.TryGetBus<TestNotification>(theme, out _));
-            schedule.RemoveTheme(theme);
+            schedule.RemoveBus(theme);
             Assert.IsFalse(schedule.TryGetBus<TestNotification>(theme, out _));
         }
 
         [Test]
         public void CommandScheduleGetBusTest()
         {
-            var schedule = new CommandSchedule<string, TestHandlerFactory>();
+            var schedule = new CommandSchedule<string>();
             var bus = new CommandBus<TestNotification>();
-            schedule.AddThemeMapping(theme, bus);
+            schedule.AddBus(theme, bus);
             Assert.IsNotNull(schedule.GetBus<TestNotification>(theme));
-            schedule.RemoveTheme(theme);
+            schedule.RemoveBus(theme);
             Assert.Catch(() => schedule.GetBus<TestNotification>(theme));
         }
 
         [TestCase(0)]
         [TestCase(1)]
         [TestCase(2)]
-        [TestCase(3)]
-        [TestCase(4)]
-        [TestCase(5)]
         public void CommandScheduleRequireByStringThemeTest(int argumentCount)
         {
-            var schedule = new CommandSchedule<string, TestHandlerFactory>();
+            var schedule = new CommandSchedule<string>();
             switch (argumentCount)
             {
                 case 0:
@@ -124,22 +115,22 @@ namespace PeroTools2.AccessKing.Editor.Tests.CommandTests
             }
         }
 
-        private class TestHandlerFactory : ICommandHandlerFactory
+        [Test]
+        public void CommandScheduleRequireByTypeThemeTest()
         {
-            public IReadOnlyList<ICommandHandler<TNotification>> RequireHandlers<TNotification>() where TNotification : INotification
-            {
-                return new ICommandHandler<TNotification>[] { };
-            }
+            var schedule = new CommandSchedule<Type>();
+            var bus = schedule.Require<TestBus>();
+            Assert.IsTrue(schedule.ContainsBus(typeof(TestBus)));
+            Assert.IsTrue(schedule.GetBus<TestNotification>(typeof(TestBus)) == bus);
         }
 
-        protected override IAccessSchedule<TTheme> RequireAccessSchedule<TTheme>()
-        {
-            return new CommandSchedule<TTheme, TestHandlerFactory>();
-        }
+        protected override IAccessSchedule<TTheme> RequireAccessSchedule<TTheme>() => new CommandSchedule<TTheme>();
 
-        protected override IAccessBus RequireAccessBus<TNotification>()
+        protected override object RequireAccessBus<TNotification>() => new CommandBus<TNotification>();
+
+        private class TestBus : ICommandBus<TestNotification>
         {
-            return new CommandBus<TNotification>();
+            public CommandOperation Execute(ref TestNotification notification) => throw new NotImplementedException();
         }
     }
 }

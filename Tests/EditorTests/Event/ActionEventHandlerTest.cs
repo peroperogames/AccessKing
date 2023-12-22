@@ -1,26 +1,146 @@
-﻿using System;
+﻿/*
+ * Copyright (c) PeroPeroGames Co., Ltd.
+ * Author: Gatongone
+ * Created On: 2023/06/01 16:06:12
+ */
+
+using System;
 using NUnit.Framework;
 
-namespace PeroTools2.AccessKing.Editor.Tests.EventTests
+namespace PeroTools2.AccessKing.Editor.Tests
 {
-    public class ActionEventHandlerTest
+    // ReSharper disable All
+    public sealed class ActionEventHandlerTest
     {
-        private bool m_IsInvoke;
         private int m_HandleCount;
+        private bool m_IsInvoke;
 
         [SetUp]
         public void SetUp()
         {
-            m_IsInvoke = false;
             m_HandleCount = 0;
+            m_IsInvoke = false;
         }
 
-        [TestCase(0)]
-        [TestCase(1)]
-        [TestCase(2)]
-        [TestCase(3)]
-        [TestCase(4)]
-        [TestCase(5)]
+        private void Test()
+        {
+            m_HandleCount++;
+            m_IsInvoke = true;
+        }
+
+        private void Test(object p)
+        {
+            m_HandleCount++;
+            m_IsInvoke = true;
+        }
+
+        private void Test(object p1, object p2)
+        {
+            m_HandleCount++;
+            m_IsInvoke = true;
+        }
+
+        private void Test(object p1, object p2, object p3)
+        {
+            m_HandleCount++;
+            m_IsInvoke = true;
+        }
+
+        private void Test(object p1, object p2, object p3, object p4)
+        {
+            m_HandleCount++;
+            m_IsInvoke = true;
+        }
+
+        private void Test(object p1, object p2, object p3, object p4, object p5)
+        {
+            m_HandleCount++;
+            m_IsInvoke = true;
+        }
+
+        private void Test(object p1, object p2, object p3, object p4, object p5, object p6)
+        {
+            m_HandleCount++;
+            m_IsInvoke = true;
+        }
+
+        private void Test(object p1, object p2, object p3, object p4, object p5, object p6, object p7)
+        {
+            m_HandleCount++;
+            m_IsInvoke = true;
+        }
+
+        private void Test(object p1, object p2, object p3, object p4, object p5, object p6, object p7, object p8)
+        {
+            m_HandleCount++;
+            m_IsInvoke = true;
+        }
+
+        private void Test(object p1, object p2, object p3, object p4, object p5, object p6, object p7, object p8, object p9)
+        {
+            m_HandleCount++;
+            m_IsInvoke = true;
+        }
+
+        private void Test(object p1, object p2, object p3, object p4, object p5, object p6, object p7, object p8, object p9, object p10)
+        {
+            m_HandleCount++;
+            m_IsInvoke = true;
+        }
+
+        private void Test(object p1, object p2, object p3, object p4, object p5, object p6, object p7, object p8, object p9, object p10, object p11)
+        {
+            m_HandleCount++;
+            m_IsInvoke = true;
+        }
+
+        private void Test(object p1, object p2, object p3, object p4, object p5, object p6, object p7, object p8, object p9, object p10, object p11, object p12)
+        {
+            m_HandleCount++;
+            m_IsInvoke = true;
+        }
+
+        private void Test(object p1, object p2, object p3, object p4, object p5, object p6, object p7, object p8, object p9, object p10, object p11, object p12, object p13)
+        {
+            m_HandleCount++;
+            m_IsInvoke = true;
+        }
+
+        private void Test(object p1, object p2, object p3, object p4, object p5, object p6, object p7, object p8, object p9, object p10, object p11, object p12, object p13, object p14)
+        {
+            m_HandleCount++;
+            m_IsInvoke = true;
+        }
+
+        private void Test(object p1, object p2, object p3, object p4, object p5, object p6, object p7, object p8, object p9, object p10, object p11, object p12, object p13, object p14, object p15)
+        {
+            m_HandleCount++;
+            m_IsInvoke = true;
+        }
+
+        private void Test(object p1, object p2, object p3, object p4, object p5, object p6, object p7, object p8, object p9, object p10, object p11, object p12, object p13, object p14, object p15, object p16)
+        {
+            m_HandleCount++;
+            m_IsInvoke = true;
+        }
+
+		[TestCase(0)]
+		[TestCase(1)]
+		[TestCase(2)]
+		[TestCase(3)]
+		[TestCase(4)]
+		[TestCase(5)]
+		[TestCase(6)]
+		[TestCase(7)]
+		[TestCase(8)]
+		[TestCase(9)]
+		[TestCase(10)]
+		[TestCase(11)]
+		[TestCase(12)]
+		[TestCase(13)]
+		[TestCase(14)]
+		[TestCase(15)]
+		[TestCase(16)]
         public void HandlerInvokeTest(int argumentCount)
         {
             switch (argumentCount)
@@ -49,17 +169,71 @@ namespace PeroTools2.AccessKing.Editor.Tests.EventTests
                     var handler5 = new ActionEventHandler<object, object, object, object, object>(Test);
                     handler5.Handle(default, default, default, default, default);
                     break;
+                case 6:
+                    var handler6 = new ActionEventHandler<object, object, object, object, object, object>(Test);
+                    handler6.Handle(default, default, default, default, default, default);
+                    break;
+                case 7:
+                    var handler7 = new ActionEventHandler<object, object, object, object, object, object, object>(Test);
+                    handler7.Handle(default, default, default, default, default, default, default);
+                    break;
+                case 8:
+                    var handler8 = new ActionEventHandler<object, object, object, object, object, object, object, object>(Test);
+                    handler8.Handle(default, default, default, default, default, default, default, default);
+                    break;
+                case 9:
+                    var handler9 = new ActionEventHandler<object, object, object, object, object, object, object, object, object>(Test);
+                    handler9.Handle(default, default, default, default, default, default, default, default, default);
+                    break;
+                case 10:
+                    var handler10 = new ActionEventHandler<object, object, object, object, object, object, object, object, object, object>(Test);
+                    handler10.Handle(default, default, default, default, default, default, default, default, default, default);
+                    break;
+                case 11:
+                    var handler11 = new ActionEventHandler<object, object, object, object, object, object, object, object, object, object, object>(Test);
+                    handler11.Handle(default, default, default, default, default, default, default, default, default, default, default);
+                    break;
+                case 12:
+                    var handler12 = new ActionEventHandler<object, object, object, object, object, object, object, object, object, object, object, object>(Test);
+                    handler12.Handle(default, default, default, default, default, default, default, default, default, default, default, default);
+                    break;
+                case 13:
+                    var handler13 = new ActionEventHandler<object, object, object, object, object, object, object, object, object, object, object, object, object>(Test);
+                    handler13.Handle(default, default, default, default, default, default, default, default, default, default, default, default, default);
+                    break;
+                case 14:
+                    var handler14 = new ActionEventHandler<object, object, object, object, object, object, object, object, object, object, object, object, object, object>(Test);
+                    handler14.Handle(default, default, default, default, default, default, default, default, default, default, default, default, default, default);
+                    break;
+                case 15:
+                    var handler15 = new ActionEventHandler<object, object, object, object, object, object, object, object, object, object, object, object, object, object, object>(Test);
+                    handler15.Handle(default, default, default, default, default, default, default, default, default, default, default, default, default, default, default);
+                    break;
+                case 16:
+                    var handler16 = new ActionEventHandler<object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object>(Test);
+                    handler16.Handle(default, default, default, default, default, default, default, default, default, default, default, default, default, default, default, default);
+                    break;
             }
-
             Assert.IsTrue(m_IsInvoke);
         }
 
-        [TestCase(0)]
-        [TestCase(1)]
-        [TestCase(2)]
-        [TestCase(3)]
-        [TestCase(4)]
-        [TestCase(5)]
+		[TestCase(0)]
+		[TestCase(1)]
+		[TestCase(2)]
+		[TestCase(3)]
+		[TestCase(4)]
+		[TestCase(5)]
+		[TestCase(6)]
+		[TestCase(7)]
+		[TestCase(8)]
+		[TestCase(9)]
+		[TestCase(10)]
+		[TestCase(11)]
+		[TestCase(12)]
+		[TestCase(13)]
+		[TestCase(14)]
+		[TestCase(15)]
+		[TestCase(16)]
         public void EqualsWithActionEventHandlerTest(int argumentCount)
         {
             switch (argumentCount)
@@ -100,15 +274,92 @@ namespace PeroTools2.AccessKing.Editor.Tests.EventTests
                     Assert.IsTrue(handler5_1 == handler5_2);
                     Assert.IsTrue(handler5_1.Equals(handler5_2));
                     break;
+                case 6:
+                    var handler6_1 = new ActionEventHandler<object, object, object, object, object, object>(Test);
+                    var handler6_2 = new ActionEventHandler<object, object, object, object, object, object>(Test);
+                    Assert.IsTrue(handler6_1 == handler6_2);
+                    Assert.IsTrue(handler6_1.Equals(handler6_2));
+                    break;
+                case 7:
+                    var handler7_1 = new ActionEventHandler<object, object, object, object, object, object, object>(Test);
+                    var handler7_2 = new ActionEventHandler<object, object, object, object, object, object, object>(Test);
+                    Assert.IsTrue(handler7_1 == handler7_2);
+                    Assert.IsTrue(handler7_1.Equals(handler7_2));
+                    break;
+                case 8:
+                    var handler8_1 = new ActionEventHandler<object, object, object, object, object, object, object, object>(Test);
+                    var handler8_2 = new ActionEventHandler<object, object, object, object, object, object, object, object>(Test);
+                    Assert.IsTrue(handler8_1 == handler8_2);
+                    Assert.IsTrue(handler8_1.Equals(handler8_2));
+                    break;
+                case 9:
+                    var handler9_1 = new ActionEventHandler<object, object, object, object, object, object, object, object, object>(Test);
+                    var handler9_2 = new ActionEventHandler<object, object, object, object, object, object, object, object, object>(Test);
+                    Assert.IsTrue(handler9_1 == handler9_2);
+                    Assert.IsTrue(handler9_1.Equals(handler9_2));
+                    break;
+                case 10:
+                    var handler10_1 = new ActionEventHandler<object, object, object, object, object, object, object, object, object, object>(Test);
+                    var handler10_2 = new ActionEventHandler<object, object, object, object, object, object, object, object, object, object>(Test);
+                    Assert.IsTrue(handler10_1 == handler10_2);
+                    Assert.IsTrue(handler10_1.Equals(handler10_2));
+                    break;
+                case 11:
+                    var handler11_1 = new ActionEventHandler<object, object, object, object, object, object, object, object, object, object, object>(Test);
+                    var handler11_2 = new ActionEventHandler<object, object, object, object, object, object, object, object, object, object, object>(Test);
+                    Assert.IsTrue(handler11_1 == handler11_2);
+                    Assert.IsTrue(handler11_1.Equals(handler11_2));
+                    break;
+                case 12:
+                    var handler12_1 = new ActionEventHandler<object, object, object, object, object, object, object, object, object, object, object, object>(Test);
+                    var handler12_2 = new ActionEventHandler<object, object, object, object, object, object, object, object, object, object, object, object>(Test);
+                    Assert.IsTrue(handler12_1 == handler12_2);
+                    Assert.IsTrue(handler12_1.Equals(handler12_2));
+                    break;
+                case 13:
+                    var handler13_1 = new ActionEventHandler<object, object, object, object, object, object, object, object, object, object, object, object, object>(Test);
+                    var handler13_2 = new ActionEventHandler<object, object, object, object, object, object, object, object, object, object, object, object, object>(Test);
+                    Assert.IsTrue(handler13_1 == handler13_2);
+                    Assert.IsTrue(handler13_1.Equals(handler13_2));
+                    break;
+                case 14:
+                    var handler14_1 = new ActionEventHandler<object, object, object, object, object, object, object, object, object, object, object, object, object, object>(Test);
+                    var handler14_2 = new ActionEventHandler<object, object, object, object, object, object, object, object, object, object, object, object, object, object>(Test);
+                    Assert.IsTrue(handler14_1 == handler14_2);
+                    Assert.IsTrue(handler14_1.Equals(handler14_2));
+                    break;
+                case 15:
+                    var handler15_1 = new ActionEventHandler<object, object, object, object, object, object, object, object, object, object, object, object, object, object, object>(Test);
+                    var handler15_2 = new ActionEventHandler<object, object, object, object, object, object, object, object, object, object, object, object, object, object, object>(Test);
+                    Assert.IsTrue(handler15_1 == handler15_2);
+                    Assert.IsTrue(handler15_1.Equals(handler15_2));
+                    break;
+                case 16:
+                    var handler16_1 = new ActionEventHandler<object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object>(Test);
+                    var handler16_2 = new ActionEventHandler<object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object>(Test);
+                    Assert.IsTrue(handler16_1 == handler16_2);
+                    Assert.IsTrue(handler16_1.Equals(handler16_2));
+                    break;
             }
         }
 
-        [TestCase(0)]
-        [TestCase(1)]
-        [TestCase(2)]
-        [TestCase(3)]
-        [TestCase(4)]
-        [TestCase(5)]
+		[TestCase(0)]
+		[TestCase(1)]
+		[TestCase(2)]
+		[TestCase(3)]
+		[TestCase(4)]
+		[TestCase(5)]
+		[TestCase(6)]
+		[TestCase(7)]
+		[TestCase(8)]
+		[TestCase(9)]
+		[TestCase(10)]
+		[TestCase(11)]
+		[TestCase(12)]
+		[TestCase(13)]
+		[TestCase(14)]
+		[TestCase(15)]
+		[TestCase(16)]
         public void EqualsWithActionDelegateTest(int argumentCount)
         {
             switch (argumentCount)
@@ -149,18 +400,94 @@ namespace PeroTools2.AccessKing.Editor.Tests.EventTests
                     Assert.IsTrue(handler5_1 == handler5_2);
                     Assert.IsTrue(handler5_1.Equals(handler5_2));
                     break;
+                case 6:
+                    var handler6_1 = new ActionEventHandler<object, object, object, object, object, object>(Test);
+                    var handler6_2 = new Action<object, object, object, object, object, object>(Test);
+                    Assert.IsTrue(handler6_1 == handler6_2);
+                    Assert.IsTrue(handler6_1.Equals(handler6_2));
+                    break;
+                case 7:
+                    var handler7_1 = new ActionEventHandler<object, object, object, object, object, object, object>(Test);
+                    var handler7_2 = new Action<object, object, object, object, object, object, object>(Test);
+                    Assert.IsTrue(handler7_1 == handler7_2);
+                    Assert.IsTrue(handler7_1.Equals(handler7_2));
+                    break;
+                case 8:
+                    var handler8_1 = new ActionEventHandler<object, object, object, object, object, object, object, object>(Test);
+                    var handler8_2 = new Action<object, object, object, object, object, object, object, object>(Test);
+                    Assert.IsTrue(handler8_1 == handler8_2);
+                    Assert.IsTrue(handler8_1.Equals(handler8_2));
+                    break;
+                case 9:
+                    var handler9_1 = new ActionEventHandler<object, object, object, object, object, object, object, object, object>(Test);
+                    var handler9_2 = new Action<object, object, object, object, object, object, object, object, object>(Test);
+                    Assert.IsTrue(handler9_1 == handler9_2);
+                    Assert.IsTrue(handler9_1.Equals(handler9_2));
+                    break;
+                case 10:
+                    var handler10_1 = new ActionEventHandler<object, object, object, object, object, object, object, object, object, object>(Test);
+                    var handler10_2 = new Action<object, object, object, object, object, object, object, object, object, object>(Test);
+                    Assert.IsTrue(handler10_1 == handler10_2);
+                    Assert.IsTrue(handler10_1.Equals(handler10_2));
+                    break;
+                case 11:
+                    var handler11_1 = new ActionEventHandler<object, object, object, object, object, object, object, object, object, object, object>(Test);
+                    var handler11_2 = new Action<object, object, object, object, object, object, object, object, object, object, object>(Test);
+                    Assert.IsTrue(handler11_1 == handler11_2);
+                    Assert.IsTrue(handler11_1.Equals(handler11_2));
+                    break;
+                case 12:
+                    var handler12_1 = new ActionEventHandler<object, object, object, object, object, object, object, object, object, object, object, object>(Test);
+                    var handler12_2 = new Action<object, object, object, object, object, object, object, object, object, object, object, object>(Test);
+                    Assert.IsTrue(handler12_1 == handler12_2);
+                    Assert.IsTrue(handler12_1.Equals(handler12_2));
+                    break;
+                case 13:
+                    var handler13_1 = new ActionEventHandler<object, object, object, object, object, object, object, object, object, object, object, object, object>(Test);
+                    var handler13_2 = new Action<object, object, object, object, object, object, object, object, object, object, object, object, object>(Test);
+                    Assert.IsTrue(handler13_1 == handler13_2);
+                    Assert.IsTrue(handler13_1.Equals(handler13_2));
+                    break;
+                case 14:
+                    var handler14_1 = new ActionEventHandler<object, object, object, object, object, object, object, object, object, object, object, object, object, object>(Test);
+                    var handler14_2 = new Action<object, object, object, object, object, object, object, object, object, object, object, object, object, object>(Test);
+                    Assert.IsTrue(handler14_1 == handler14_2);
+                    Assert.IsTrue(handler14_1.Equals(handler14_2));
+                    break;
+                case 15:
+                    var handler15_1 = new ActionEventHandler<object, object, object, object, object, object, object, object, object, object, object, object, object, object, object>(Test);
+                    var handler15_2 = new Action<object, object, object, object, object, object, object, object, object, object, object, object, object, object, object>(Test);
+                    Assert.IsTrue(handler15_1 == handler15_2);
+                    Assert.IsTrue(handler15_1.Equals(handler15_2));
+                    break;
+                case 16:
+                    var handler16_1 = new ActionEventHandler<object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object>(Test);
+                    var handler16_2 = new Action<object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object>(Test);
+                    Assert.IsTrue(handler16_1 == handler16_2);
+                    Assert.IsTrue(handler16_1.Equals(handler16_2));
+                    break;
             }
         }
 
-        [TestCase(0)]
-        [TestCase(1)]
-        [TestCase(2)]
-        [TestCase(3)]
-        [TestCase(4)]
-        [TestCase(5)]
+		[TestCase(0)]
+		[TestCase(1)]
+		[TestCase(2)]
+		[TestCase(3)]
+		[TestCase(4)]
+		[TestCase(5)]
+		[TestCase(6)]
+		[TestCase(7)]
+		[TestCase(8)]
+		[TestCase(9)]
+		[TestCase(10)]
+		[TestCase(11)]
+		[TestCase(12)]
+		[TestCase(13)]
+		[TestCase(14)]
+		[TestCase(15)]
+		[TestCase(16)]
         public void EventBusInvokeWithActionHandlerTest(int argumentCount)
         {
-            object defaultParameter = null;
             switch (argumentCount)
             {
                 case 0:
@@ -171,43 +498,106 @@ namespace PeroTools2.AccessKing.Editor.Tests.EventTests
                 case 1:
                     var bus1 = new EventBus<ParameterNotification<object>>();
                     bus1.Subscribe(Test);
-                    bus1.Broadcast(defaultParameter);
+                    bus1.Broadcast(default);
                     break;
                 case 2:
                     var bus2 = new EventBus<ParameterNotification<object, object>>();
                     bus2.Subscribe(Test);
-                    bus2.Broadcast(defaultParameter, defaultParameter);
+                    bus2.Broadcast(default, default);
                     break;
                 case 3:
                     var bus3 = new EventBus<ParameterNotification<object, object, object>>();
                     bus3.Subscribe(Test);
-                    bus3.Broadcast(defaultParameter, defaultParameter, defaultParameter);
+                    bus3.Broadcast(default, default, default);
                     break;
                 case 4:
                     var bus4 = new EventBus<ParameterNotification<object, object, object, object>>();
                     bus4.Subscribe(Test);
-                    bus4.Broadcast(defaultParameter, defaultParameter, defaultParameter, defaultParameter);
+                    bus4.Broadcast(default, default, default, default);
                     break;
                 case 5:
                     var bus5 = new EventBus<ParameterNotification<object, object, object, object, object>>();
                     bus5.Subscribe(Test);
-                    bus5.Broadcast(defaultParameter, defaultParameter, defaultParameter, defaultParameter, defaultParameter);
+                    bus5.Broadcast(default, default, default, default, default);
+                    break;
+                case 6:
+                    var bus6 = new EventBus<ParameterNotification<object, object, object, object, object, object>>();
+                    bus6.Subscribe(Test);
+                    bus6.Broadcast(default, default, default, default, default, default);
+                    break;
+                case 7:
+                    var bus7 = new EventBus<ParameterNotification<object, object, object, object, object, object, object>>();
+                    bus7.Subscribe(Test);
+                    bus7.Broadcast(default, default, default, default, default, default, default);
+                    break;
+                case 8:
+                    var bus8 = new EventBus<ParameterNotification<object, object, object, object, object, object, object, object>>();
+                    bus8.Subscribe(Test);
+                    bus8.Broadcast(default, default, default, default, default, default, default, default);
+                    break;
+                case 9:
+                    var bus9 = new EventBus<ParameterNotification<object, object, object, object, object, object, object, object, object>>();
+                    bus9.Subscribe(Test);
+                    bus9.Broadcast(default, default, default, default, default, default, default, default, default);
+                    break;
+                case 10:
+                    var bus10 = new EventBus<ParameterNotification<object, object, object, object, object, object, object, object, object, object>>();
+                    bus10.Subscribe(Test);
+                    bus10.Broadcast(default, default, default, default, default, default, default, default, default, default);
+                    break;
+                case 11:
+                    var bus11 = new EventBus<ParameterNotification<object, object, object, object, object, object, object, object, object, object, object>>();
+                    bus11.Subscribe(Test);
+                    bus11.Broadcast(default, default, default, default, default, default, default, default, default, default, default);
+                    break;
+                case 12:
+                    var bus12 = new EventBus<ParameterNotification<object, object, object, object, object, object, object, object, object, object, object, object>>();
+                    bus12.Subscribe(Test);
+                    bus12.Broadcast(default, default, default, default, default, default, default, default, default, default, default, default);
+                    break;
+                case 13:
+                    var bus13 = new EventBus<ParameterNotification<object, object, object, object, object, object, object, object, object, object, object, object, object>>();
+                    bus13.Subscribe(Test);
+                    bus13.Broadcast(default, default, default, default, default, default, default, default, default, default, default, default, default);
+                    break;
+                case 14:
+                    var bus14 = new EventBus<ParameterNotification<object, object, object, object, object, object, object, object, object, object, object, object, object, object>>();
+                    bus14.Subscribe(Test);
+                    bus14.Broadcast(default, default, default, default, default, default, default, default, default, default, default, default, default, default);
+                    break;
+                case 15:
+                    var bus15 = new EventBus<ParameterNotification<object, object, object, object, object, object, object, object, object, object, object, object, object, object, object>>();
+                    bus15.Subscribe(Test);
+                    bus15.Broadcast(default, default, default, default, default, default, default, default, default, default, default, default, default, default, default);
+                    break;
+                case 16:
+                    var bus16 = new EventBus<ParameterNotification<object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object>>();
+                    bus16.Subscribe(Test);
+                    bus16.Broadcast(default, default, default, default, default, default, default, default, default, default, default, default, default, default, default, default);
                     break;
             }
-
-            Assert.IsTrue(m_IsInvoke);
         }
 
-        [TestCase(0)]
-        [TestCase(1)]
-        [TestCase(2)]
-        [TestCase(3)]
-        [TestCase(4)]
-        [TestCase(5)]
+		[TestCase(0)]
+		[TestCase(1)]
+		[TestCase(2)]
+		[TestCase(3)]
+		[TestCase(4)]
+		[TestCase(5)]
+		[TestCase(6)]
+		[TestCase(7)]
+		[TestCase(8)]
+		[TestCase(9)]
+		[TestCase(10)]
+		[TestCase(11)]
+		[TestCase(12)]
+		[TestCase(13)]
+		[TestCase(14)]
+		[TestCase(15)]
+		[TestCase(16)]
         public void EventBusUnsubscribeWithActionHandlerTest(int argumentCount)
         {
             const int handlerCount = 5;
-            object defaultParameter = null;
             switch (argumentCount)
             {
                 case 0:
@@ -217,7 +607,7 @@ namespace PeroTools2.AccessKing.Editor.Tests.EventTests
                         bus0.Subscribe(Test);
                     }
                     Assert.IsTrue(bus0.Unsubscribe(Test));
-                    bus0.Broadcast(ParameterNotification.Empty);
+                    bus0.Broadcast();
                     break;
                 case 1:
                     var bus1 = new EventBus<ParameterNotification<object>>();
@@ -226,7 +616,7 @@ namespace PeroTools2.AccessKing.Editor.Tests.EventTests
                         bus1.Subscribe(Test);
                     }
                     Assert.IsTrue(bus1.Unsubscribe(Test));
-                    bus1.Broadcast(defaultParameter);
+                    bus1.Broadcast(default);
                     break;
                 case 2:
                     var bus2 = new EventBus<ParameterNotification<object, object>>();
@@ -235,7 +625,7 @@ namespace PeroTools2.AccessKing.Editor.Tests.EventTests
                         bus2.Subscribe(Test);
                     }
                     Assert.IsTrue(bus2.Unsubscribe(Test));
-                    bus2.Broadcast(defaultParameter, defaultParameter);
+                    bus2.Broadcast(default, default);
                     break;
                 case 3:
                     var bus3 = new EventBus<ParameterNotification<object, object, object>>();
@@ -244,7 +634,7 @@ namespace PeroTools2.AccessKing.Editor.Tests.EventTests
                         bus3.Subscribe(Test);
                     }
                     Assert.IsTrue(bus3.Unsubscribe(Test));
-                    bus3.Broadcast(defaultParameter, defaultParameter, defaultParameter);
+                    bus3.Broadcast(default, default, default);
                     break;
                 case 4:
                     var bus4 = new EventBus<ParameterNotification<object, object, object, object>>();
@@ -253,7 +643,7 @@ namespace PeroTools2.AccessKing.Editor.Tests.EventTests
                         bus4.Subscribe(Test);
                     }
                     Assert.IsTrue(bus4.Unsubscribe(Test));
-                    bus4.Broadcast(defaultParameter, defaultParameter, defaultParameter, defaultParameter);
+                    bus4.Broadcast(default, default, default, default);
                     break;
                 case 5:
                     var bus5 = new EventBus<ParameterNotification<object, object, object, object, object>>();
@@ -262,47 +652,109 @@ namespace PeroTools2.AccessKing.Editor.Tests.EventTests
                         bus5.Subscribe(Test);
                     }
                     Assert.IsTrue(bus5.Unsubscribe(Test));
-                    bus5.Broadcast(defaultParameter, defaultParameter, defaultParameter, defaultParameter, defaultParameter);
+                    bus5.Broadcast(default, default, default, default, default);
+                    break;
+                case 6:
+                    var bus6 = new EventBus<ParameterNotification<object, object, object, object, object, object>>();
+                    for (var i = 0; i < handlerCount; i++)
+                    {
+                        bus6.Subscribe(Test);
+                    }
+                    Assert.IsTrue(bus6.Unsubscribe(Test));
+                    bus6.Broadcast(default, default, default, default, default, default);
+                    break;
+                case 7:
+                    var bus7 = new EventBus<ParameterNotification<object, object, object, object, object, object, object>>();
+                    for (var i = 0; i < handlerCount; i++)
+                    {
+                        bus7.Subscribe(Test);
+                    }
+                    Assert.IsTrue(bus7.Unsubscribe(Test));
+                    bus7.Broadcast(default, default, default, default, default, default, default);
+                    break;
+                case 8:
+                    var bus8 = new EventBus<ParameterNotification<object, object, object, object, object, object, object, object>>();
+                    for (var i = 0; i < handlerCount; i++)
+                    {
+                        bus8.Subscribe(Test);
+                    }
+                    Assert.IsTrue(bus8.Unsubscribe(Test));
+                    bus8.Broadcast(default, default, default, default, default, default, default, default);
+                    break;
+                case 9:
+                    var bus9 = new EventBus<ParameterNotification<object, object, object, object, object, object, object, object, object>>();
+                    for (var i = 0; i < handlerCount; i++)
+                    {
+                        bus9.Subscribe(Test);
+                    }
+                    Assert.IsTrue(bus9.Unsubscribe(Test));
+                    bus9.Broadcast(default, default, default, default, default, default, default, default, default);
+                    break;
+                case 10:
+                    var bus10 = new EventBus<ParameterNotification<object, object, object, object, object, object, object, object, object, object>>();
+                    for (var i = 0; i < handlerCount; i++)
+                    {
+                        bus10.Subscribe(Test);
+                    }
+                    Assert.IsTrue(bus10.Unsubscribe(Test));
+                    bus10.Broadcast(default, default, default, default, default, default, default, default, default, default);
+                    break;
+                case 11:
+                    var bus11 = new EventBus<ParameterNotification<object, object, object, object, object, object, object, object, object, object, object>>();
+                    for (var i = 0; i < handlerCount; i++)
+                    {
+                        bus11.Subscribe(Test);
+                    }
+                    Assert.IsTrue(bus11.Unsubscribe(Test));
+                    bus11.Broadcast(default, default, default, default, default, default, default, default, default, default, default);
+                    break;
+                case 12:
+                    var bus12 = new EventBus<ParameterNotification<object, object, object, object, object, object, object, object, object, object, object, object>>();
+                    for (var i = 0; i < handlerCount; i++)
+                    {
+                        bus12.Subscribe(Test);
+                    }
+                    Assert.IsTrue(bus12.Unsubscribe(Test));
+                    bus12.Broadcast(default, default, default, default, default, default, default, default, default, default, default, default);
+                    break;
+                case 13:
+                    var bus13 = new EventBus<ParameterNotification<object, object, object, object, object, object, object, object, object, object, object, object, object>>();
+                    for (var i = 0; i < handlerCount; i++)
+                    {
+                        bus13.Subscribe(Test);
+                    }
+                    Assert.IsTrue(bus13.Unsubscribe(Test));
+                    bus13.Broadcast(default, default, default, default, default, default, default, default, default, default, default, default, default);
+                    break;
+                case 14:
+                    var bus14 = new EventBus<ParameterNotification<object, object, object, object, object, object, object, object, object, object, object, object, object, object>>();
+                    for (var i = 0; i < handlerCount; i++)
+                    {
+                        bus14.Subscribe(Test);
+                    }
+                    Assert.IsTrue(bus14.Unsubscribe(Test));
+                    bus14.Broadcast(default, default, default, default, default, default, default, default, default, default, default, default, default, default);
+                    break;
+                case 15:
+                    var bus15 = new EventBus<ParameterNotification<object, object, object, object, object, object, object, object, object, object, object, object, object, object, object>>();
+                    for (var i = 0; i < handlerCount; i++)
+                    {
+                        bus15.Subscribe(Test);
+                    }
+                    Assert.IsTrue(bus15.Unsubscribe(Test));
+                    bus15.Broadcast(default, default, default, default, default, default, default, default, default, default, default, default, default, default, default);
+                    break;
+                case 16:
+                    var bus16 = new EventBus<ParameterNotification<object, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object>>();
+                    for (var i = 0; i < handlerCount; i++)
+                    {
+                        bus16.Subscribe(Test);
+                    }
+                    Assert.IsTrue(bus16.Unsubscribe(Test));
+                    bus16.Broadcast(default, default, default, default, default, default, default, default, default, default, default, default, default, default, default, default);
                     break;
             }
-
             Assert.IsTrue(m_HandleCount == handlerCount - 1);
-        }
-
-        private void Test()
-        {
-            m_HandleCount++;
-            m_IsInvoke = true;
-        }
-
-        private void Test(object p)
-        {
-            m_HandleCount++;
-            m_IsInvoke = true;
-        }
-
-        private void Test(object p1, object p2)
-        {
-            m_HandleCount++;
-            m_IsInvoke = true;
-        }
-
-        private void Test(object p1, object p2, object p3)
-        {
-            m_HandleCount++;
-            m_IsInvoke = true;
-        }
-
-        private void Test(object p1, object p2, object p3, object p4)
-        {
-            m_HandleCount++;
-            m_IsInvoke = true;
-        }
-
-        private void Test(object p1, object p2, object p3, object p4, object p5)
-        {
-            m_HandleCount++;
-            m_IsInvoke = true;
         }
     }
 }

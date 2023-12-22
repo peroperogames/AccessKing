@@ -1,68 +1,65 @@
-﻿/*
+/*
  * Copyright (c) PeroPeroGames Co., Ltd.
- * Author: 关东关
- * Created On: 2023年05月24日
- * Description:  Access bus schedule which allows access buses mapping to custom themes.
+ * Author: Gatongone
+ * Created On: 2023/12/06 18:12:09
  */
-
-using System.Collections.Generic;
 
 namespace PeroTools2.AccessKing
 {
-    public interface IAccessSchedule<in TTheme> : IEnumerable<IAccessBus>
+    /// <summary>
+    /// The access bus locator which allows access buses mapping to custom themes.
+    /// </summary>
+    /// <typeparam name="TTheme">Access bus's only id in the schedule.</typeparam>
+    public interface IAccessSchedule<in TTheme>
     {
-        /// <summary>
-        /// Get access bus by theme.
-        /// </summary>
-        /// <param name="theme">Theme.</param>
-        IAccessBus this[TTheme theme] { get; }
-
-        /// <summary>
-        /// Get event bus by theme.
-        /// </summary>
-        /// <param name="theme">Theme.</param>
-        /// <returns>Access bus for the corresponding theme.</returns>
-        IAccessBus GetBus(TTheme theme);
-
-        /// <summary>
-        /// Try get access bus by theme.
-        /// </summary>
-        /// <param name="theme">Theme.</param>
-        /// <param name="bus">Access bus for the corresponding theme.</param>
-        /// <returns>Contains any theme to access bus mapping.</returns>
-        bool TryGetBus(TTheme theme, out IAccessBus bus);
-
-        /// <summary>
-        /// Add a theme to access bus mapping.
-        /// </summary>
-        /// <param name="theme">Theme.</param>
-        /// <param name="bus">Access bus.</param>
-        void AddThemeMapping(TTheme theme, IAccessBus bus);
+        int busCount { get; }
 
         /// <summary>
         /// Remove the theme and all its access buses.
         /// </summary>
-        /// <param name="theme">Theme.</param>
+        /// <param name="theme">Theme of the bus that need to be removed.</param>
         /// <returns>Remove succeed.</returns>
-        bool RemoveTheme(TTheme theme);
-        
+        bool RemoveBus(TTheme theme);
+
         /// <summary>
-        /// Remove access bus from schedule.
+        /// Remove the theme and all its access buses.
         /// </summary>
-        /// <param name="accessBus">Access bus.</param>
-        /// <returns>Remove successfully</returns>
-        bool RemoveBus(IAccessBus accessBus);
-        
+        /// <param name="bus">The bus that need to be removed.</param>
+        /// <returns>Remove succeed.</returns>
+        bool RemoveBus(object bus);
+
         /// <summary>
         /// Check if the bus is contained in the schedule.
         /// </summary>
         /// <param name="theme">Theme.</param>
         /// <returns>The bus is contained in schedule.</returns>
         bool ContainsBus(TTheme theme);
-        
+
         /// <summary>
         /// Clear all themes and its buses in the schedule.
         /// </summary>
-        void ClearTheme();
+        void Clear();
+
+        /// <summary>
+        /// Get access bus by theme.
+        /// </summary>
+        /// <param name="theme">Theme.</param>
+        /// <returns>Command bus for the corresponding theme.</returns>
+        object GetBus(TTheme theme);
+
+        /// <summary>
+        /// Try get event bus by theme.
+        /// </summary>
+        /// <param name="theme">Theme.</param>
+        /// <param name="bus">Bus for the corresponding theme.</param>
+        /// <returns>Contains any theme to event bus mapping.</returns>
+        bool TryGetBus(TTheme theme, out object bus);
+
+        /// <summary>
+        /// Add a theme to bus mapping.
+        /// </summary>
+        /// <param name="theme">Theme.</param>
+        /// <param name="bus">Access bus.</param>
+        void AddBus(TTheme theme, object bus);
     }
 }

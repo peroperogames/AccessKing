@@ -1,0 +1,155 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ import namespace="System.Linq" #>
+<#@ assembly name="System.Core" #>
+<#@ output extension=".cs" #>
+/*
+ * Copyright (c) PeroPeroGames Co., Ltd.
+ * Author: Gatongone
+ * Created On: 2023/05/23 16:05:45
+ */
+
+using System;
+using System.Diagnostics.CodeAnalysis;
+
+#pragma warning disable CS1573 // Parameter has no matching param tag in the XML comment (but other parameters do)
+
+namespace PeroTools2.AccessKing
+{
+    /// <summary>
+    /// Extensions for <see cref="IEventBus{TNotification}"/>.
+    /// </summary>
+    [SuppressMessage("ReSharper", "InvalidXmlDocComment")]
+    public static class EventBusExtensions
+    {
+        #region Subscribe
+<#
+    for (var i = 0; i < 17; i++)
+    {
+        var genericArgs = string.Empty;
+        var genericArgsWithAngleBrackets = string.Empty;
+        if (i > 0)
+        {
+            genericArgs = i == 1 ? "T" : string.Join(", ", from index in Enumerable.Range(1, i) select $"T{index}");
+            genericArgsWithAngleBrackets = i == 1 ? "<T>" : $"<{string.Join(", ", from index in Enumerable.Range(1, i) select $"T{index}")}>";
+        }
+        var parameterNotification = i == 0 ? "Empty" : $"ParameterNotification<{genericArgs}>";
+        var action = i == 0 ? "Action" : $"Action<{genericArgs}>";
+        var evenHandler = $"ActionEventHandler{(i == 0 ? string.Empty : $"<{genericArgs}>")}";
+        var evenBus = $"IEventSubscriable{(i == 0 ? "<Empty>" : $"<{parameterNotification}>")}";
+#>
+
+        /// <summary>
+        /// Convert action delegate to ActionEventHandler, then register to event bus.
+        /// </summary>
+        /// <param name="eventBus">Event bus.</param>
+        /// <param name="action">The delegate which convert to ActionEventHandler.</param>
+        public static void Subscribe<#=genericArgsWithAngleBrackets#>(this <#=evenBus#> eventBus, <#=action#> action)
+            => eventBus.Subscribe(new <#=evenHandler#>(action));
+<#
+    }
+#>
+
+        #endregion
+
+        #region SubscribeWeakly
+
+        /// <summary>
+        /// Convert action delegate to ActionEventHandler, then register to event bus.
+        /// </summary>
+        /// <param name="eventBus">Event bus.</param>
+        /// <param name="eventHandler">The handler that would be referenced weakly by the event bus.</param>
+        public static void SubscribeWeakly<TNotification>(this IWeakEventSubscriable<TNotification> eventBus, IEventHandler<TNotification> eventHandler) where TNotification : INotification
+            => eventBus.SubscribeWeakly(new WeakEventHandler<TNotification>(eventHandler));
+<#
+    for (var i = 0; i < 16; i++)
+    {
+        var genericArgs = string.Empty;
+        var genericArgsWithAngleBrackets = "<TEventSource>";
+        if (i > 0)
+        {
+            genericArgs = i == 1 ? "T" : string.Join(", ", from index in Enumerable.Range(1, i) select $"T{index}");
+            genericArgsWithAngleBrackets = i == 1 ? "<TEventSource, T>" : $"<TEventSource, {string.Join(", ", from index in Enumerable.Range(1, i) select $"T{index}")}>";
+        }
+        var parameterNotification = i == 0 ? "Empty" : $"ParameterNotification<{genericArgs}>";
+        var action = i == 0 ? "Action" : $"Action<{genericArgs}>";
+        var evenHandler = $"WeakActionEventHandler{(i == 0 ? "<TEventSource>" : $"<TEventSource, {genericArgs}>")}";
+        var eventBus = $"IWeakEventSubscriable{(i == 0 ? "<Empty>" : $"<{parameterNotification}>")}";
+#>
+
+        /// <summary>
+        /// Convert action delegate to ActionEventHandler, then register to event bus.
+        /// </summary>
+        /// <param name="eventBus">Event bus.</param>
+        /// <param name="action">The delegate which convert to ActionEventHandler.</param>
+        public static void SubscribeWeakly<#=genericArgsWithAngleBrackets#>(this <#=eventBus#> eventBus, <#=action#> action, TEventSource provider) where TEventSource : class
+            => eventBus.SubscribeWeakly(new <#=evenHandler#>(action, provider));
+<#
+    }
+#>
+
+        #endregion
+
+        #region Unsubscribe
+<#
+    for (var i = 0; i < 17; i++)
+    {
+        var genericArgs = string.Empty;
+        var genericArgsWithAngleBrackets = string.Empty;
+        if (i > 0)
+        {
+            genericArgs = i == 1 ? "T" : string.Join(", ", from index in Enumerable.Range(1, i) select $"T{index}");
+            genericArgsWithAngleBrackets = i == 1 ? "<T>" : $"<{string.Join(", ", from index in Enumerable.Range(1, i) select $"T{index}")}>";
+        }
+        var parameterNotification = i == 0 ? "Empty" : $"ParameterNotification<{genericArgs}>";
+        var action = i == 0 ? "Action" : $"Action<{genericArgs}>";
+        var evenHandler = $"ActionEventHandler{(i == 0 ? string.Empty : $"<{genericArgs}>")}";
+        var evenBus = $"IEventSubscriable{(i == 0 ? "<Empty>" : $"<{parameterNotification}>")}";
+#>
+
+        /// <summary>
+        /// Convert action delegate to ActionEventHandler, then unsubscribe from event bus.
+        /// </summary>
+        /// <param name="eventBus">Event bus.</param>
+        /// <param name="action">The delegate which convert to ActionEventHandler.</param>
+        /// <returns>Is removed succeed.</returns>
+        public static bool Unsubscribe<#=genericArgsWithAngleBrackets#>(this <#=evenBus#> eventBus, <#=action#> action)
+            => eventBus.Unsubscribe(new <#=evenHandler#>(action));
+<#
+    }
+#>
+
+        #endregion
+
+        #region Broadcast
+<#
+    for (var i = 0; i < 17; i++)
+    {
+        var genericArgs = string.Empty;
+        var parameterDefinitions = string.Empty;
+        var parameters = string.Empty;
+        var genericArgsWithAngleBrackets = string.Empty;
+        
+        if (i > 0)
+        {
+            genericArgs = i == 1 ? "T" : string.Join(", ", from index in Enumerable.Range(1, i) select $"T{index}");
+            parameters = i == 1 ? "param" : string.Join(", ", from index in Enumerable.Range(1, i) select $"param{index}");
+            parameterDefinitions = i == 1 ? ", T param" : $", {string.Join(", ", from index in Enumerable.Range(1, i) select $"T{index} param{index}")}";
+            genericArgsWithAngleBrackets = i == 1 ? "<T>" : $"<{string.Join(", ", from index in Enumerable.Range(1, i) select $"T{index}")}>";
+        }
+        var parameterNotification = i == 0 ? "Empty" : $"ParameterNotification<{genericArgs}>";
+        var eventBus = $"IEventBroadcastable{(i == 0 ? "<Empty>" : $"<{parameterNotification}>")}";
+#>
+
+        /// <summary>
+        /// Execute all handler's handle method in bus with argument<#= i == 0 || i == 1 ? string.Empty : "s"#> argument types parameter notification.
+        /// </summary>
+        /// <param name="eventBus">Event bus.</param>
+        public static void Broadcast<#=genericArgsWithAngleBrackets#>(this <#=eventBus#> eventBus<#=parameterDefinitions#>)
+            => eventBus.Broadcast(<#= i == 0 ? "ParameterNotification.Empty" : $"ParameterNotification.Create({parameters})"#>);
+<#
+    }
+#>
+
+        #endregion
+    }
+}

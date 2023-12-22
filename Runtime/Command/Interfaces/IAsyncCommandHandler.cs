@@ -1,21 +1,34 @@
 ﻿/*
  * Copyright (c) PeroPeroGames Co., Ltd.
- * Author: 关东关
- * Created On: 2023年05月23日
- * Description: CommandHandler with task result.
+ * Author: Gatongone
+ * Created On: 2023/05/23 16:05:45
  */
 
 using System.Threading.Tasks;
 
 namespace PeroTools2.AccessKing
 {
+    /// <summary>
+    /// Command handler with task result.
+    /// </summary>
+    /// <typeparam name="TNotification">Implementation type of <see cref="INotification"/>.</typeparam>
+    /// <typeparam name="TTaskResult"></typeparam>
     public interface ITaskCommandHandler<TNotification, out TTaskResult> : ICommandHandler<TNotification, TTaskResult>
-        where TNotification : INotification 
+        where TNotification : INotification
         where TTaskResult : Task { }
-    
-    public interface IAsyncCommandHandler<TNotification> : ITaskCommandHandler<TNotification, Task> 
+
+    /// <summary>
+    /// Command handler with async task.
+    /// </summary>
+    /// <typeparam name="TNotification">Implementation type of <see cref="INotification"/>.</typeparam>
+    public interface IAsyncCommandHandler<TNotification> : ITaskCommandHandler<TNotification, Task>
         where TNotification : INotification { }
-    
-    public interface IAsyncCommandHandler<TNotification, TResult> : ITaskCommandHandler<TNotification, Task<TResult>> 
+
+    /// <summary>
+    /// Command handler with async task result.
+    /// </summary>
+    /// <typeparam name="TNotification">Implementation type of <see cref="INotification"/>.</typeparam>
+    /// <typeparam name="TResult">Result of handling.</typeparam>
+    public interface IAsyncCommandHandler<TNotification, TResult> : ITaskCommandHandler<TNotification, Task<TResult>>
         where TNotification : INotification { }
 }

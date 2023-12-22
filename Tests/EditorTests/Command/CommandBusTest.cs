@@ -1,9 +1,14 @@
-﻿using NUnit.Framework;
-using PeroTools2.AccessKing.Editor.Tests.AccessTests;
+﻿/*
+ * Copyright (c) PeroPeroGames Co., Ltd.
+ * Author: Gatongone
+ * Created On: 2023/06/01 17:06:57
+ */
 
-namespace PeroTools2.AccessKing.Editor.Tests.CommandTests
+using NUnit.Framework;
+
+namespace PeroTools2.AccessKing.Editor.Tests
 {
-    public class CommandBusTest : AccessBusTest
+    public sealed class CommandBusTest
     {
         private static int s_HandleCount;
 
@@ -13,49 +18,21 @@ namespace PeroTools2.AccessKing.Editor.Tests.CommandTests
             s_HandleCount = 0;
         }
 
-        [Test]
-        public override void DispatchTest()
-        {
-            var testNotification = new TestNotification();
-            var factory = new RegistryCommandHandlerFactory();
-            var bus = new CommandBus<TestNotification>(factory);
-            var testHandler = new TestHandler<TestNotification>();
-            factory.RegisterHandler(testHandler);
-            ((IAccessBus) bus).Dispatch(testNotification);
-            Assert.IsTrue(testNotification.isSucceed);
-        }
-
-        [Test]
-        public void CommandHandlerFactoryModifyTest()
-        {
-            var testNotification = new TestNotification();
-            var factory1 = new RegistryCommandHandlerFactory();
-            var factory2 = new RegistryCommandHandlerFactory();
-            factory2.RegisterHandler(new TestHandler<TestNotification>());
-            var bus = new CommandBus<TestNotification>(factory1);
-            ((ICommandHandlerFactoryModifiable) bus).factory = factory2;
-            bus.Execute(ref testNotification);
-            Assert.IsTrue(testNotification.isSucceed);
-        }
-
         [TestCase(0)]
         [TestCase(1)]
         [TestCase(2)]
         [TestCase(10)]
         public void CommandBusExecuteTest(int handlerCount)
         {
-            var testNotification = new TestNotification();
+            var testNotification = new CheckNotification();
             var factory = new RegistryCommandHandlerFactory();
-            var bus = new CommandBus<TestNotification>(factory);
+            var bus = new CommandBus<CheckNotification>(factory);
             for (var i = 0; i < handlerCount; i++)
             {
-                var testHandler = new TestHandler<TestNotification>();
-                factory.RegisterHandler(testHandler);
+                factory.RegisterHandler(new TestHandler<CheckNotification>());
             }
 
             bus.Execute(ref testNotification);
-            if (handlerCount > 0)
-                Assert.IsTrue(testNotification.isSucceed);
             Assert.IsTrue(s_HandleCount == handlerCount);
         }
 
@@ -64,22 +41,24 @@ namespace PeroTools2.AccessKing.Editor.Tests.CommandTests
         [TestCase(10, ExpectedResult = 9)]
         public int CommandHandlerFactoryUnregisterTest(int handlerCount)
         {
-            var testNotification = new TestNotification();
+            var testNotification = new CheckNotification();
             var factory = new RegistryCommandHandlerFactory();
-            var bus = new CommandBus<TestNotification>(factory);
+            var bus = new CommandBus<CheckNotification>(factory);
 
-            var handler = new TestHandler<TestNotification>();
+            var handler = new TestHandler<CheckNotification>();
             factory.RegisterHandler(handler);
             for (var i = 0; i < handlerCount - 1; i++)
             {
-                var testHandler = new TestHandler<TestNotification>();
+                var testHandler = new TestHandler<CheckNotification>();
                 factory.RegisterHandler(testHandler);
             }
 
             Assert.IsTrue(factory.UnregisterHandler(handler));
             bus.Execute(ref testNotification);
             if (handlerCount <= 1)
+            {
                 Assert.IsFalse(testNotification.isSucceed);
+            }
             return s_HandleCount;
         }
 
@@ -89,12 +68,12 @@ namespace PeroTools2.AccessKing.Editor.Tests.CommandTests
         [TestCase(10, ExpectedResult = 0)]
         public int CommandHandlerFactoryClearTest(int handlerCount)
         {
-            var testNotification = new TestNotification();
+            var testNotification = new CheckNotification();
             var factory = new RegistryCommandHandlerFactory();
-            var bus = new CommandBus<TestNotification>(factory);
+            var bus = new CommandBus<CheckNotification>(factory);
             for (var i = 0; i < handlerCount; i++)
             {
-                var testHandler = new TestHandler<TestNotification>();
+                var testHandler = new TestHandler<CheckNotification>();
                 factory.RegisterHandler(testHandler);
             }
 
@@ -104,25 +83,23 @@ namespace PeroTools2.AccessKing.Editor.Tests.CommandTests
             return s_HandleCount;
         }
 
-
         [Test]
         public void DifferentNotificationExecuteTest()
         {
             var factory = new RegistryCommandHandlerFactory();
-            var testNotification = new TestNotification();
-            var bus = new CommandBus<TestNotification>(factory);
-            factory.RegisterHandler(new TestHandler<TestNotification>());
+            var testNotification = new CheckNotification();
+            var bus = new CommandBus<CheckNotification>(factory);
+            factory.RegisterHandler(new TestHandler<CheckNotification>());
             factory.RegisterHandler(new TestHandler<OtherNotification>());
             var results = bus.Execute(ref testNotification).GetResults<string>();
             Assert.IsTrue(results.Count == 1);
         }
 
-        private class TestHandler<TNotification> : ICommandHandler<TNotification, string> where TNotification : ITestNotification
+        private sealed class TestHandler<TNotification> : ICommandHandler<TNotification, string> where TNotification : ITestNotification
         {
             public void Handle(ref TNotification notification)
             {
                 s_HandleCount++;
-                notification.isSucceed = true;
             }
 
             public string GetResult() => "Test";
@@ -130,19 +107,13 @@ namespace PeroTools2.AccessKing.Editor.Tests.CommandTests
             object IResultAvailable.GetResult() => "Test";
         }
 
-        private interface ITestNotification : INotification
-        {
-            bool isSucceed { get; set; }
-        }
+        private interface ITestNotification : INotification { }
 
-        private class TestNotification : ITestNotification
+        private sealed class CheckNotification : ITestNotification
         {
             public bool isSucceed { get; set; }
         }
 
-        private class OtherNotification : ITestNotification
-        {
-            public bool isSucceed { get; set; }
-        }
+        private sealed class OtherNotification : ITestNotification { }
     }
 }

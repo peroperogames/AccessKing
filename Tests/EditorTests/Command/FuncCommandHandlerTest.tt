@@ -1,0 +1,174 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ import namespace="System.Linq" #>
+<#@ assembly name="System.Core" #>
+<#@ output extension=".cs" #>
+/*
+ * Copyright (c) PeroPeroGames Co., Ltd.
+ * Author: Gatongone
+ * Created On: 2023/06/01 16:06:12
+ */
+<#
+    var testCase = string.Join("\n", from index in Enumerable.Range(0, 16) select $"\t\t[TestCase({index})]");
+#>
+
+using System;
+using NUnit.Framework;
+
+namespace PeroTools2.AccessKing.Editor.Tests
+{
+    // ReSharper disable All
+    public sealed class FuncCommandHandlerTest
+    {
+        private int m_HandleCount;
+        private bool m_IsInvoke;
+        private const string result = "FUNC_RESULT";
+
+        [SetUp]
+        public void SetUp()
+        {
+            m_HandleCount = 0;
+            m_IsInvoke = false;
+        }
+<#
+    for (var i = 0; i < 16; i++)
+    {
+        var parameters = string.Empty;
+        if (i > 0)
+        {
+            parameters = i == 1 ? "object p" : string.Join(", ", from index in Enumerable.Range(1, i) select $"object p{index}");
+        }
+#>
+
+        private object Test(<#= parameters #>)
+        {
+            m_HandleCount++;
+            m_IsInvoke = true;
+            return result;
+        }
+<#
+    }
+#>
+
+<#=testCase#>
+        public void HandlerInvokeTest(int argumentCount)
+        {
+            switch (argumentCount)
+            {
+<#
+            for (var i = 0; i < 16; i++)
+            {
+                var objectArg = i == 0 ? "<object>" : $"<{string.Join(", ", from index in Enumerable.Range(1, i) select "object")}, object>";
+                var param = i == 0 ? string.Empty : string.Join(", ", from index in Enumerable.Range(1, i) select "default");
+#>
+                case <#= i #>:
+                    var handler<#= i #> = new FuncCommandHandler<#= objectArg #>(Test);
+                    handler<#= i #>.Handle(<#=param#>);
+                    break;
+<#
+            }
+#>
+            }
+            Assert.IsTrue(m_IsInvoke);
+        }
+
+<#=testCase#>
+        public void EqualsWithFuncCommandHandlerTest(int argumentCount)
+        {
+            switch (argumentCount)
+            {
+<#
+            for (var i = 0; i < 16; i++)
+            {
+                var objectArg = i == 0 ? "<object>"  : $"<{string.Join(", ", from index in Enumerable.Range(1, i) select "object")}>";
+#>
+                case <#= i #>:
+                    var handler<#= i #>_1 = new FuncCommandHandler<#= objectArg #>(Test);
+                    var handler<#= i #>_2 = new FuncCommandHandler<#= objectArg #>(Test);
+                    Assert.IsTrue(handler<#= i #>_1 == handler<#= i #>_2);
+                    Assert.IsTrue(handler<#= i #>_1.Equals(handler<#= i #>_2));
+                    break;
+<#
+            }
+#>
+            }
+        }
+
+<#=testCase#>
+        public void EqualsWithFuncDelegateTest(int argumentCount)
+        {
+            switch (argumentCount)
+            {
+<#
+            for (var i = 0; i < 16; i++)
+            {
+                var objectArg = i == 0 ? "<object>" : $"<{string.Join(", ", from index in Enumerable.Range(1, i) select "object")}>";
+#>
+                case <#= i #>:
+                    var handler<#= i #>_1 = new FuncCommandHandler<#= objectArg #>(Test);
+                    var handler<#= i #>_2 = new Func<#= objectArg #>(Test);
+                    Assert.IsTrue(handler<#= i #>_1 == handler<#= i #>_2);
+                    Assert.IsTrue(handler<#= i #>_1.Equals(handler<#= i #>_2));
+                    break;
+<#
+            }
+#>
+            }
+        }
+
+<#=testCase#>
+        public void InvokeTest(int argumentCount)
+        {
+            var factory = new RegistryCommandHandlerFactory();
+            switch (argumentCount)
+            {
+<#
+            for (var i = 0; i < 16; i++)
+            {
+                
+                var param = i == 0 ? string.Empty : string.Join(", ", from index in Enumerable.Range(1, i) select "default");
+                var paramArg = i == 0 ? "<object>" : $"<{string.Join(", ", from index in Enumerable.Range(1, i) select "object")}, object>";
+
+#>
+                case <#= i #>:
+                    var handler<#= i #> = new FuncCommandHandler<#=paramArg#>(Test);
+                    handler<#= i #>.Handle(<#=param#>);
+                    Assert.IsTrue(handler<#= i #>.GetResult().Equals(result));
+                    break;
+<#
+            }
+#>
+            }
+        }
+
+<#=testCase#>
+        public void CommandBusUnsubscribeWithFuncHandlerTest(int argumentCount)
+        {
+            const int handlerCount = 5;
+            var factory = new RegistryCommandHandlerFactory();
+            switch (argumentCount)
+            {
+<#
+            for (var i = 0; i < 16; i++)
+            {
+                
+                var objectArg = i == 0 ? "Empty" : $"ParameterNotification<{string.Join(", ", from index in Enumerable.Range(1, i) select "object")}>";
+                var param = i == 0 ? string.Empty : string.Join(", ", from index in Enumerable.Range(1, i) select "default");
+                var paramArg = i == 0 ? string.Empty : $"<{string.Join(", ", from index in Enumerable.Range(1, i) select "object")}, object>";
+#>
+                case <#= i #>:
+                    var bus<#= i #> = new CommandBus<<#=objectArg#>>(factory);
+                    for (var i = 0; i < handlerCount; i++)
+                    {
+                        factory.RegisterFuncHandler<#=paramArg#>(Test);
+                    }
+                    Assert.IsTrue(factory.UnregisterFuncHandler<#=paramArg#>(Test));
+                    bus<#= i #>.Execute(<#=param#>);
+                    break;
+<#
+            }
+#>
+            }
+            Assert.IsTrue(m_HandleCount == handlerCount - 1);
+        }
+    }
+}

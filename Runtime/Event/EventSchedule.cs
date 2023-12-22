@@ -1,64 +1,55 @@
 ﻿/*
  * Copyright (c) PeroPeroGames Co., Ltd.
- * Author: 关东关
- * Created On: 2023年05月26日
- * Description: Default event schedule implementation.
+ * Author: Gatongone
+ * Created On: 2023/05/26 15:05:25
  */
 
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.Assertions;
 
 namespace PeroTools2.AccessKing
 {
-    public class EventSchedule<TTheme> : IEventSchedule<TTheme>, IAccessSchedule<TTheme>
+    /// <summary>
+    /// Default event schedule implementation.
+    /// </summary>
+    /// <typeparam name="TTheme">Theme of the event bus</typeparam>
+    public partial class EventSchedule<TTheme> : IEventSchedule<TTheme>
     {
-        private readonly Dictionary<TTheme, IAccessBus> m_EventBusMaps = new Dictionary<TTheme, IAccessBus>();
-        IAccessBus IAccessSchedule<TTheme>.this[TTheme theme] => m_EventBusMaps[theme];
-        
-        IAccessBus IAccessSchedule<TTheme>.GetBus(TTheme theme) => m_EventBusMaps[theme];
-        
-        bool IAccessSchedule<TTheme>.TryGetBus(TTheme theme, out IAccessBus bus) => m_EventBusMaps.TryGetValue(theme, out bus);
+        /// <summary>
+        /// Theme to event bus mapping.
+        /// </summary>
+        private readonly Dictionary<TTheme, object> m_EventBusMaps = new();
 
-        void IAccessSchedule<TTheme>.AddThemeMapping(TTheme theme, IAccessBus bus)
+        /// <inheritdoc cref="IAccessSchedule{TTheme}.busCount"/>
+        public int busCount => m_EventBusMaps.Count;
+
+        /// <inheritdoc cref="IAccessSchedule{TTheme}.RemoveBus(TTheme)"/>
+        public bool RemoveBus(TTheme theme) => m_EventBusMaps.Remove(theme);
+
+        bool IAccessSchedule<TTheme>.RemoveBus(object bus)
         {
-            if (typeof(ISchedulableEventBus<>).IsInstanceOfType(bus) )
-            {
-                ThrowHelper.ScheduleEventBusCastFailed();
-            }
-
-            m_EventBusMaps.Add(theme, bus);
+            var kv = m_EventBusMaps.FirstOrDefault(kv => kv.Value == bus);
+            return m_EventBusMaps.Remove(kv.Key);
         }
 
+        /// <inheritdoc cref="IEventSchedule{TTheme}.RemoveBus{TNotification}(IEventBus{TNotification})"/>
+        public bool RemoveBus<TNotification>(IEventBus<TNotification> bus) where TNotification : INotification => ((IAccessSchedule<TTheme>)this).RemoveBus(bus);
 
-        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-
-        public IEnumerator<IAccessBus> GetEnumerator() => m_EventBusMaps.Values.GetEnumerator();
-
-        public bool RemoveTheme(TTheme theme) => m_EventBusMaps.Remove(theme);
-        
-        public bool RemoveBus(IAccessBus accessBus)
-        {
-            var pair = m_EventBusMaps.FirstOrDefault(kv => kv.Value.Equals(accessBus));
-            return pair.Key != null && m_EventBusMaps.Remove(pair.Key);
-        }
-
+        /// <inheritdoc cref="IAccessSchedule{TTheme}.ContainsBus(TTheme)"/>
         public bool ContainsBus(TTheme theme) => m_EventBusMaps.ContainsKey(theme);
 
-        public void ClearTheme() => m_EventBusMaps.Clear();
+        /// <inheritdoc cref="IAccessSchedule{TTheme}.Clear()"/>
+        public void Clear() => m_EventBusMaps.Clear();
 
-        public IEventBus<TNotification> GetBus<TNotification>(TTheme theme) where TNotification : INotification
-        {
-            if (m_EventBusMaps.TryGetValue(theme, out var bus))
-            {
-                if (bus is IEventBus<TNotification> eventBus)
-                    return eventBus;
-            }
+        /// <inheritdoc cref="IEventSchedule{TTheme}.GetBus{TNotification}(TTheme)"/>
+        public IEventBus<TNotification> GetBus<TNotification>(TTheme theme) where TNotification : INotification => m_EventBusMaps[theme] as IEventBus<TNotification>;
 
-            ThrowHelper.AccessBusRequireFailed(typeof(ICommandBus<TNotification>));
-            return null;
-        }
+        /// <inheritdoc cref="IAccessSchedule{TTheme}.GetBus(TTheme)"/>
+        object IAccessSchedule<TTheme>.GetBus(TTheme theme) => m_EventBusMaps[theme];
 
+        /// <inheritdoc cref="IEventSchedule{TTheme}.TryGetBus{TNotification}(TTheme, out IEventBus{TNotification})"/>
         public bool TryGetBus<TNotification>(TTheme theme, out IEventBus<TNotification> bus) where TNotification : INotification
         {
             if (m_EventBusMaps.TryGetValue(theme, out var accessBus))
@@ -71,108 +62,27 @@ namespace PeroTools2.AccessKing
             return false;
         }
 
-        public void AddThemeMapping<TNotification>(TTheme theme, ISchedulableEventBus<TNotification> bus) where TNotification : INotification => m_EventBusMaps.Add(theme, bus);
+        /// <inheritdoc cref="IEventSchedule{TTheme}.TryGetBus(TTheme, out object)"/>
+        bool IAccessSchedule<TTheme>.TryGetBus(TTheme theme, out object bus) => m_EventBusMaps.TryGetValue(theme, out bus);
 
-        /// <summary>
-        /// Get or create a event bus with 0 argument type parameter notification from schedule by theme.
-        /// </summary>
-        /// <param name="theme">Theme.</param>
-        /// <returns>Event bus for the corresponding theme.</returns>
-        public IEventBus<Empty> Require(TTheme theme)
+        /// <inheritdoc cref="IAccessSchedule{TTheme}.AddBus(TTheme, object)"/>
+        /// <exception cref="ArgumentException">Throw when the bus can't assign to <see cref="IEventBus{TNotification}"/> type.</exception>
+        void IAccessSchedule<TTheme>.AddBus(TTheme theme, object bus)
         {
-            if (!TryGetBus<Empty>(theme, out var bus))
-            {
-                var eventBus = new ParameterEventBus();
-                bus = eventBus;
-                AddThemeMapping(theme, eventBus);
-            }
+            Assert.IsNotNull(bus);
 
-            return bus;
+            // ReSharper disable once UseIsOperator.2
+            // Check whether implements IEventBus<>
+            if (!bus.GetType().GetInterfaces().Any(@interface =>
+                    @interface.IsGenericType &&
+                    @interface.GetGenericTypeDefinition() == typeof(IEventBus<>)))
+            {
+                throw new ArgumentException($"The bus must be an instance of {typeof(IEventBus<>)} type. Bus type: {bus.GetType()}.");
+            }
+            m_EventBusMaps.Add(theme, bus);
         }
 
-        /// <summary>
-        /// Get or create a event bus with 1 argument type parameter notification from schedule by theme.
-        /// </summary>
-        /// <param name="theme">Theme.</param>
-        /// <returns>Event bus for the corresponding theme.</returns>
-        public IEventBus<ParameterNotification<T>> Require<T>(TTheme theme)
-        {
-            if (!TryGetBus<ParameterNotification<T>>(theme, out var bus))
-            {
-                var eventBus = new ParameterEventBus<T>();
-                bus = eventBus;
-                AddThemeMapping(theme, eventBus);
-            }
-
-            return bus;
-        }
-
-        /// <summary>
-        /// Get or create a event bus with 2 argument types parameter notification from schedule by theme.
-        /// </summary>
-        /// <param name="theme">Theme.</param>
-        /// <returns>Event bus for the corresponding theme.</returns>
-        public IEventBus<ParameterNotification<T1, T2>> Require<T1, T2>(TTheme theme)
-        {
-            if (!TryGetBus<ParameterNotification<T1, T2>>(theme, out var bus))
-            {
-                var eventBus = new ParameterEventBus<T1, T2>();
-                bus = eventBus;
-                AddThemeMapping(theme, eventBus);
-            }
-
-            return bus;
-        }
-
-        /// <summary>
-        /// Get or create a event bus with 3 argument types parameter notification from schedule by theme.
-        /// </summary>
-        /// <param name="theme">Theme.</param>
-        /// <returns>Event bus for the corresponding theme.</returns>
-        public IEventBus<ParameterNotification<T1, T2, T3>> Require<T1, T2, T3>(TTheme theme)
-        {
-            if (!TryGetBus<ParameterNotification<T1, T2, T3>>(theme, out var bus))
-            {
-                var eventBus = new ParameterEventBus<T1, T2, T3>();
-                bus = eventBus;
-                AddThemeMapping(theme, eventBus);
-            }
-
-            return bus;
-        }
-
-        /// <summary>
-        /// Get or create a event bus with 4 argument types parameter notification from schedule by theme.
-        /// </summary>
-        /// <param name="theme">Theme.</param>
-        /// <returns>Event bus for the corresponding theme.</returns>
-        public IEventBus<ParameterNotification<T1, T2, T3, T4>> Require<T1, T2, T3, T4>(TTheme theme)
-        {
-            if (!TryGetBus<ParameterNotification<T1, T2, T3, T4>>(theme, out var bus))
-            {
-                var eventBus = new ParameterEventBus<T1, T2, T3, T4>();
-                bus = eventBus;
-                AddThemeMapping(theme, eventBus);
-            }
-
-            return bus;
-        }
-
-        /// <summary>
-        /// Get or create a event bus with 5 argument types parameter notification from schedule by theme.
-        /// </summary>
-        /// <param name="theme">Theme.</param>
-        /// <returns>Event bus for the corresponding theme.</returns>
-        public IEventBus<ParameterNotification<T1, T2, T3, T4, T5>> Require<T1, T2, T3, T4, T5>(TTheme theme)
-        {
-            if (!TryGetBus<ParameterNotification<T1, T2, T3, T4, T5>>(theme, out var bus))
-            {
-                var eventBus = new ParameterEventBus<T1, T2, T3, T4, T5>();
-                bus = eventBus;
-                AddThemeMapping(theme, eventBus);
-            }
-
-            return bus;
-        }
+        /// <inheritdoc cref="IEventSchedule{TTheme}.AddBus{TNotification}(TTheme, IEventBus{TNotification})"/>
+        public void AddBus<TNotification>(TTheme theme, IEventBus<TNotification> bus) where TNotification : INotification => m_EventBusMaps.Add(theme, bus);
     }
 }

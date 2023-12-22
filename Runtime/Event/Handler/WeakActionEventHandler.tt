@@ -1,0 +1,148 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ import namespace="System.Linq" #>
+<#@ assembly name="System.Core" #>
+<#@ output extension=".cs" #>
+/*
+ * Copyright (c) PeroPeroGames Co., Ltd.
+ * Author: Gatongone
+ * Created On: 2023/12/05 16:12:42
+ */
+
+using System;
+using System.Reflection;
+
+#pragma warning disable CS1712 // Type parameter has no matching typeparam tag in the XML comment (but other type parameters do)
+
+// ReSharper disable InvalidXmlDocComment
+namespace PeroTools2.AccessKing
+{<#
+    for (var i = 0; i < 16; i++)
+    {
+        var genericArgs = string.Empty;
+        var parameterDefinitions = string.Empty;
+        var parameters = string.Empty;
+        var notificationItems = string.Empty;
+        if (i > 0)
+        {
+            genericArgs = i == 1 ? "T" : string.Join(", ", from index in Enumerable.Range(1, i) select $"T{index}");
+            parameters = i == 1 ? ", param" : string.Concat(from index in Enumerable.Range(1, i) select $", param{index}");
+            parameterDefinitions = i == 1 ? "T param" : string.Join(", ", from index in Enumerable.Range(1, i) select $"T{index} param{index}");
+            notificationItems = i == 1 ? ", notification.item" : string.Concat(from index in Enumerable.Range(1, i) select $", notification.item{index}");
+        }
+        var parameterNotification = i == 0 ? "Empty" : $"ParameterNotification<{genericArgs}>";
+        var action = i == 0 ? "Action" : $"Action<{genericArgs}>";
+        var sourceAction = i == 0 ? "Action<TEventSource>" : $"Action<TEventSource, {genericArgs}>";
+        var weakEvenHandler = $"WeakActionEventHandler<TEventSource{(i == 0 ? string.Empty : $", {genericArgs}")}>";
+        var ievenHandler = $"IEventHandler{(i == 0 ? string.Empty : $"<{parameterNotification}>")}";
+        var iweakEvenHandler = $"IWeakEventHandler{(i == 0 ? string.Empty : $"<{parameterNotification}>")}";
+#>
+
+    /// <summary>
+    /// Event handler with System.Action which would reference the event provider by weak.
+    /// </summary>
+    /// <typeparam name="TEventSource">Event provider which would be referenced by handler.</typeparam>
+    public sealed class <#=weakEvenHandler#> : <#=ievenHandler#>, <#=iweakEvenHandler#>, IEquatable<<#=weakEvenHandler#>> where TEventSource : class
+    {
+        /// <summary>
+        /// Delegate with instance method provider.
+        /// </summary>
+        private readonly <#=sourceAction#> m_Invocation;
+
+        /// <summary>
+        /// The event provider.
+        /// </summary>
+        private readonly WeakReference<TEventSource> m_WeakEventProvider;
+
+        /// <summary>
+        /// Raw method of the event provider.
+        /// </summary>
+        private readonly MethodInfo m_Method;
+
+        /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
+        public bool isAlive => m_WeakEventProvider.TryGetTarget(out _);
+
+        /// <summary>
+        /// Create a weak event handler from a System.Action.
+        /// </summary>
+        /// <param name="delegation">Delegation for creating EventHandler.</param>
+        /// <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+        public WeakActionEventHandler(<#=action#> delegation, TEventSource provider)
+        {
+            m_WeakEventProvider = new WeakReference<TEventSource>(provider);
+            var method = delegation.Method;
+            m_Invocation = method.CreateDelegate(typeof(<#=sourceAction#>)) as <#=sourceAction#>;
+            m_Method = method;
+        }
+
+        /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
+        public bool TryHandle(in <#=parameterNotification#> notification)
+        {
+            if (!m_WeakEventProvider.TryGetTarget(out var provider))
+            {
+                return false;
+            }
+            m_Invocation.Invoke(provider<#=notificationItems#>);
+            return true;
+        }
+
+        /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
+        public bool TryHandle(<#=parameterDefinitions#>)
+        {
+            if (!m_WeakEventProvider.TryGetTarget(out var provider))
+            {
+                return false;
+            }
+            m_Invocation.Invoke(provider<#=parameters#>);
+            return true;
+        }
+
+        /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
+        public void Handle(in <#=parameterNotification#> notification)
+        {
+            if (m_WeakEventProvider.TryGetTarget(out var provider))
+            {
+                m_Invocation.Invoke(provider<#=notificationItems#>);
+            }
+        }
+
+        /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
+        public void Handle(<#=parameterDefinitions#>)
+        {
+            if (m_WeakEventProvider.TryGetTarget(out var provider))
+            {
+                m_Invocation.Invoke(provider<#=parameters#>);
+            }
+        }
+
+        /// <inheritdoc cref="System.Object.GetHashCode()"/>
+        public override int GetHashCode() => m_Invocation != null ? m_Invocation.GetHashCode() : 0;
+
+        /// <summary>
+        /// Verify if the target equals to event handler.
+        /// </summary>
+        public static bool operator ==(<#=weakEvenHandler#> left, object right) => !Equals(left, null) && left.Equals(right);
+
+        /// <summary>
+        /// Verify if the target not equals to event handler.
+        /// </summary>
+        public static bool operator !=(<#=weakEvenHandler#> left, object right) => !(left == right);
+
+        /// <summary>
+        /// Verify if the target equals to event handler.
+        /// </summary>
+        public bool Equals(<#=weakEvenHandler#> other) => m_Method == other?.m_Method;
+
+        /// <summary>
+        /// Verify if the target equals to event handler.
+        /// </summary>
+        public override bool Equals(object obj) => obj switch
+        {
+            <#=weakEvenHandler#> other => Equals(other),
+            <#=action#> action => action.Method == m_Method,
+            _ => false
+        };
+    }
+<#
+    }
+#>
+}

@@ -1,41 +1,27 @@
-﻿using System;
+﻿/*
+ * Copyright (c) PeroPeroGames Co., Ltd.
+ * Author: Gatongone
+ * Created On: 2023/06/07 17:06:05
+ */
+
 using NUnit.Framework;
 
-namespace PeroTools2.AccessKing.Editor.Tests.AccessTests
+namespace PeroTools2.AccessKing.Editor.Tests
 {
     public abstract class AccessScheduleTest
     {
         protected const string theme = "TestTheme";
         protected abstract IAccessSchedule<TTheme> RequireAccessSchedule<TTheme>();
-        protected abstract IAccessBus RequireAccessBus<TNotification>() where TNotification : INotification;
-
-        [Test]
-        public void AccessScheduleRequireByTypeThemeTest()
-        {
-            var schedule = RequireAccessSchedule<Type>();
-            var bus = schedule.Require<TestBus>();
-            Assert.IsTrue(schedule.ContainsBus(typeof(TestBus)));
-            Assert.IsTrue(schedule.GetBus(typeof(TestBus)) == bus);
-        }
+        protected abstract object RequireAccessBus<TNotification>() where TNotification : INotification;
 
         [Test]
         public void AccessScheduleRegisterTest()
         {
             var schedule = RequireAccessSchedule<string>();
             var bus = RequireAccessBus<TestNotification>();
-            schedule.AddThemeMapping(theme, bus);
+            schedule.AddBus(theme, bus);
             Assert.IsTrue(schedule.ContainsBus(theme));
             Assert.IsTrue(schedule.GetBus(theme) == bus);
-        }
-
-        [Test]
-        public void AccessScheduleRemoveThemeTest()
-        {
-            var schedule = RequireAccessSchedule<string>();
-            var bus = RequireAccessBus<TestNotification>();
-            schedule.AddThemeMapping(theme, bus);
-            Assert.IsTrue(schedule.RemoveTheme(theme));
-            Assert.IsFalse(schedule.ContainsBus(theme));
         }
 
         [Test]
@@ -43,8 +29,8 @@ namespace PeroTools2.AccessKing.Editor.Tests.AccessTests
         {
             var schedule = RequireAccessSchedule<string>();
             var bus = RequireAccessBus<TestNotification>();
-            schedule.AddThemeMapping(theme, bus);
-            Assert.IsTrue(schedule.RemoveBus(bus));
+            schedule.AddBus(theme, bus);
+            Assert.IsTrue(schedule.RemoveBus(theme));
             Assert.IsFalse(schedule.ContainsBus(theme));
         }
 
@@ -53,41 +39,21 @@ namespace PeroTools2.AccessKing.Editor.Tests.AccessTests
         {
             var schedule = RequireAccessSchedule<string>();
             var bus = RequireAccessBus<TestNotification>();
-            schedule.AddThemeMapping("1", bus);
-            schedule.AddThemeMapping("2", bus);
-            schedule.AddThemeMapping("3", bus);
-            schedule.ClearTheme();
-            foreach (var _ in schedule)
-            {
-                Assert.IsTrue(false);
-            }
+            schedule.AddBus("1", bus);
+            schedule.AddBus("2", bus);
+            schedule.AddBus("3", bus);
+            schedule.Clear();
+            Assert.IsTrue(schedule.busCount == 0);
         }
 
         [Test]
         public void AccessScheduleAccessorTest()
         {
             var schedule = RequireAccessSchedule<string>();
-            Assert.Catch(() => { _ = schedule[theme]; });
+            Assert.Catch(() => { _ = schedule.GetBus(theme); });
             var bus = RequireAccessBus<TestNotification>();
-            schedule.AddThemeMapping(theme, bus);
-            Assert.IsTrue(bus == schedule[theme]);
-        }
-
-        private class TestBus : ISchedulableCommandBus<TestNotification>, ISchedulableEventBus<TestNotification>
-        {
-            public ICommandHandlerFactory factory { get; set; }
-            
-            public void Dispatch(INotification notification) => throw new NotImplementedException();
-
-            public CommandOperation Execute(ref TestNotification notification) => throw new NotImplementedException();
-
-            public bool Unsubscribe(IEventHandler<TestNotification> handler) => throw new NotImplementedException();
-
-            public void Subscribe(IEventHandler<TestNotification> handler) => throw new NotImplementedException();
-
-            public void Broadcast(in TestNotification notification) => throw new NotImplementedException();
-
-            public void Clear() => throw new NotImplementedException();
+            schedule.AddBus(theme, bus);
+            Assert.IsTrue(bus == schedule.GetBus(theme));
         }
 
         protected struct TestNotification : INotification { }

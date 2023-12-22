@@ -1,11 +1,13 @@
 ﻿/*
  * Copyright (c) PeroPeroGames Co., Ltd.
- * Author: 关东关
- * Created On: 2023年05月23日
- * Description: Message notification with data
+ * Author: Gatongone
+ * Created On: 2023/05/23 16:05:SS
  */
 
 namespace PeroTools2.AccessKing
 {
+    /// <summary>
+    /// Message notification with data.
+    /// </summary>
     public interface INotification { }
 }

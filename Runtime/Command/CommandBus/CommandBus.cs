@@ -1,56 +1,86 @@
 ﻿/*
  * Copyright (c) PeroPeroGames Co., Ltd.
- * Author: 关东关
- * Created On: 2023年05月29日
- * Description: Default command bus implementation.
+ * Author: Gatongone
+ * Created On: 2023/05/29 17:05:57
  */
 
+using System;
 using System.Collections;
-using UnityEngine.Assertions;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace PeroTools2.AccessKing
 {
-    public class CommandBus<TNotification> : ISchedulableCommandBus<TNotification>
-        where TNotification : INotification
+    /// <inheritdoc cref="ICommandBus{TNotification}"/>
+    public class CommandBus<TNotification> : IAccessBus, ICommandBus<TNotification>, IMultipleTypeCommandHandlerFactoryContainer where TNotification : INotification
     {
-        private ICommandHandlerFactory m_HandlerFactory;
+        /// <summary>
+        /// Handler collections.
+        /// </summary>
+        private readonly Dictionary<Type, ICommandHandlerFactory> m_HandlerFactories;
 
-        public CommandBus(ICommandHandlerFactory handlerFactory) => m_HandlerFactory = handlerFactory;
+        /// <param name="handlerFactories">
+        /// Factories that locate the handlers about specific notification.
+        /// The factory type must be different.
+        /// </param>
+        public CommandBus(params ICommandHandlerFactory[] handlerFactories) => m_HandlerFactories = handlerFactories.ToDictionary(item => item.GetType());
 
-        public CommandBus() { }
+        public CommandBus() => m_HandlerFactories = new Dictionary<Type, ICommandHandlerFactory>();
 
-        ICommandHandlerFactory ICommandHandlerFactoryModifiable.factory
+        /// <inheritdoc cref="IAccessBus.Dispatch(INotification)"/>
+        /// <exception cref="InvalidCastException">Throw when the notification cannot match to the generic type.</exception>
+        object IAccessBus.Dispatch(INotification notification)
         {
-            get => m_HandlerFactory;
-            set => m_HandlerFactory = value;
-        }
-
-        void IAccessBus.Dispatch(INotification notification)
-        {
-            if (m_HandlerFactory == null)
-                return;
+            if (m_HandlerFactories == null)
+            {
+                return null;
+            }
             if (notification is TNotification tNotification)
-                Execute(ref tNotification);
-            else
-                ThrowHelper.NotificationCastFailed<TNotification>(notification);
+            {
+                return Execute(ref tNotification);
+            }
+            throw new InvalidCastException($"{notification.GetType()} is not a ${typeof(TNotification)} type. ");
         }
 
+        /// <inheritdoc cref="ICommandBus{TNotification}.Execute(ref TNotification)"/>.
+        public CommandOperation Execute(TNotification notification) => Execute(ref notification);
+
+        /// <inheritdoc cref="ICommandBus{TNotification}.Execute(ref TNotification)"/>.
         public CommandOperation Execute(ref TNotification notification)
         {
-            Assert.IsNotNull(m_HandlerFactory);
-            var handlers = m_HandlerFactory.RequireHandlers<TNotification>();
             var results = new ArrayList();
-            foreach (var handler in handlers)
+            foreach (var factory in m_HandlerFactories.Values)
             {
-                handler.Handle(ref notification);
-                if (handler is IResultAvailable resultGetter)
+                var handlers = factory.GetHandlers<TNotification>();
+                foreach (var handler in handlers)
                 {
-                    results.Add(resultGetter.GetResult());
+                    handler.Handle(ref notification);
+                    if (handler is IResultAvailable resultGetter)
+                    {
+                        results.Add(resultGetter.GetResult());
+                    }
                 }
             }
 
             return new CommandOperation(results);
         }
 
+        /// <inheritdoc cref="IMultipleTypeCommandHandlerFactoryContainer.TryGetFactory(Type, out ICommandHandlerFactory)"/>.
+        public bool TryGetFactory(Type factoryType, out ICommandHandlerFactory commandHandlerFactory) => m_HandlerFactories.TryGetValue(factoryType, out commandHandlerFactory);
+
+        /// <inheritdoc cref="IMultipleTypeCommandHandlerFactoryContainer.ContainsFactory(Type)"/>.
+        public bool ContainsFactory(Type factoryType) => m_HandlerFactories.ContainsKey(factoryType);
+
+        /// <inheritdoc cref="IMultipleTypeCommandHandlerFactoryContainer.ClearFactories()"/>.
+        public void ClearFactories() => m_HandlerFactories.Clear();
+
+        /// <inheritdoc cref="IMultipleTypeCommandHandlerFactoryContainer.GetFactory(Type)"/>.
+        public ICommandHandlerFactory GetFactory(Type factoryType) => m_HandlerFactories[factoryType];
+
+        /// <inheritdoc cref="IMultipleTypeCommandHandlerFactoryContainer.AddFactory(ICommandHandlerFactory)"/>.
+        public void AddFactory(ICommandHandlerFactory factory) => m_HandlerFactories.Add(factory.GetType(), factory);
+
+        /// <inheritdoc cref="IMultipleTypeCommandHandlerFactoryContainer.RemoveFactory(Type)"/>.
+        public bool RemoveFactory(Type factoryType) => m_HandlerFactories.Remove(factoryType);
     }
 }

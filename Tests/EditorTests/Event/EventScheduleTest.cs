@@ -1,16 +1,22 @@
-﻿using NUnit.Framework;
-using PeroTools2.AccessKing.Editor.Tests.AccessTests;
+﻿/*
+ * Copyright (c) PeroPeroGames Co., Ltd.
+ * Author: Gatongone
+ * Created On: 2023/06/06 21:06:07
+ */
 
-namespace PeroTools2.AccessKing.Editor.Tests.EventTests
+using System;
+using NUnit.Framework;
+
+namespace PeroTools2.AccessKing.Editor.Tests
 {
-    public class EventScheduleTest : AccessScheduleTest
+    public sealed class EventScheduleTest : AccessScheduleTest
     {
         [Test]
         public void EventScheduleRegisterTest()
         {
             var schedule = new EventSchedule<string>();
             var bus = new EventBus<TestNotification>();
-            schedule.AddThemeMapping(theme, bus);
+            schedule.AddBus(theme, bus);
             Assert.IsTrue(schedule.ContainsBus(theme));
             Assert.IsTrue(schedule.GetBus<TestNotification>(theme) == bus);
         }
@@ -21,8 +27,8 @@ namespace PeroTools2.AccessKing.Editor.Tests.EventTests
             var schedule = new EventSchedule<string>();
             Assert.Catch(() =>
             {
-                schedule.AddThemeMapping(theme, new EventBus<TestNotification>());
-                schedule.AddThemeMapping(theme, new EventBus<TestNotification>());
+                schedule.AddBus(theme, new EventBus<TestNotification>());
+                schedule.AddBus(theme, new EventBus<TestNotification>());
             });
         }
 
@@ -31,8 +37,8 @@ namespace PeroTools2.AccessKing.Editor.Tests.EventTests
         {
             var schedule = new EventSchedule<string>();
             var bus = new EventBus<TestNotification>();
-            schedule.AddThemeMapping(theme, bus);
-            Assert.IsTrue(schedule.RemoveTheme(theme));
+            schedule.AddBus(theme, bus);
+            Assert.IsTrue(schedule.RemoveBus(theme));
             Assert.IsFalse(schedule.ContainsBus(theme));
         }
 
@@ -41,7 +47,7 @@ namespace PeroTools2.AccessKing.Editor.Tests.EventTests
         {
             var schedule = new EventSchedule<string>();
             var bus = new EventBus<TestNotification>();
-            schedule.AddThemeMapping(theme, bus);
+            schedule.AddBus(theme, bus);
             Assert.IsTrue(schedule.RemoveBus(bus));
             Assert.IsFalse(schedule.ContainsBus(theme));
         }
@@ -51,9 +57,9 @@ namespace PeroTools2.AccessKing.Editor.Tests.EventTests
         {
             var schedule = new EventSchedule<string>();
             var bus = new EventBus<TestNotification>();
-            schedule.AddThemeMapping(theme, bus);
+            schedule.AddBus(theme, bus);
             Assert.IsTrue(schedule.TryGetBus<TestNotification>(theme, out _));
-            schedule.RemoveTheme(theme);
+            schedule.RemoveBus(theme);
             Assert.IsFalse(schedule.TryGetBus<TestNotification>(theme, out _));
         }
 
@@ -62,64 +68,43 @@ namespace PeroTools2.AccessKing.Editor.Tests.EventTests
         {
             var schedule = new EventSchedule<string>();
             var bus = new EventBus<TestNotification>();
-            schedule.AddThemeMapping(theme, bus);
+            schedule.AddBus(theme, bus);
             Assert.IsNotNull(schedule.GetBus<TestNotification>(theme));
-            schedule.RemoveTheme(theme);
+            schedule.RemoveBus(theme);
             Assert.Catch(() => schedule.GetBus<TestNotification>(theme));
         }
 
-        [TestCase(0)]
-        [TestCase(1)]
-        [TestCase(2)]
-        [TestCase(3)]
-        [TestCase(4)]
-        [TestCase(5)]
-        public void EventScheduleRequireByStringThemeTest(int argumentCount)
+        [Test]
+        public void EventScheduleRequireByStringThemeTest()
         {
             var schedule = new EventSchedule<string>();
-            switch (argumentCount)
-            {
-                case 0:
-                    var bus0 = schedule.Require(theme);
-                    Assert.IsTrue(schedule.ContainsBus(theme));
-                    Assert.IsTrue(schedule.GetBus<Empty>(theme) == bus0);
-                    break;
-                case 1:
-                    var bus1 = schedule.Require<object>(theme);
-                    Assert.IsTrue(schedule.ContainsBus(theme));
-                    Assert.IsTrue(schedule.GetBus<ParameterNotification<object>>(theme) == bus1);
-                    break;
-                case 2:
-                    var bus2 = schedule.Require<object, object>(theme);
-                    Assert.IsTrue(schedule.ContainsBus(theme));
-                    Assert.IsTrue(schedule.GetBus<ParameterNotification<object, object>>(theme) == bus2);
-                    break;
-                case 3:
-                    var bus3 = schedule.Require<object, object, object>(theme);
-                    Assert.IsTrue(schedule.ContainsBus(theme));
-                    Assert.IsTrue(schedule.GetBus<ParameterNotification<object, object, object>>(theme) == bus3);
-                    break;
-                case 4:
-                    var bus4 = schedule.Require<object, object, object, object>(theme);
-                    Assert.IsTrue(schedule.ContainsBus(theme));
-                    Assert.IsTrue(schedule.GetBus<ParameterNotification<object, object, object, object>>(theme) == bus4);
-                    break;
-                case 5:
-                    var bus5 = schedule.Require<object, object, object, object, object>(theme);
-                    Assert.IsTrue(schedule.ContainsBus(theme));
-                    Assert.IsTrue(schedule.GetBus<ParameterNotification<object, object, object, object, object>>(theme) == bus5);
-                    break;
-            }
+            var bus = schedule.Require<int>(theme);
+            Assert.IsTrue(schedule.ContainsBus(theme));
+            Assert.IsTrue(schedule.GetBus<ParameterNotification<int>>(theme) == bus);
         }
 
-        protected override IAccessSchedule<TTheme> RequireAccessSchedule<TTheme>()
+        [Test]
+        public void EventScheduleRequireByTypeThemeTest()
         {
-            return new EventSchedule<TTheme>();
+            var schedule = new EventSchedule<Type>();
+            var bus = schedule.Require<TestBus>();
+            Assert.IsTrue(schedule.ContainsBus(typeof(TestBus)));
+            Assert.IsTrue(schedule.GetBus<TestNotification>(typeof(TestBus)) == bus);
         }
 
-        protected override IAccessBus RequireAccessBus<TNotification>()
+        protected override IAccessSchedule<TTheme> RequireAccessSchedule<TTheme>() => new EventSchedule<TTheme>();
+
+        protected override object RequireAccessBus<TNotification>() => new TestBus();
+
+        private class TestBus : IEventBus<TestNotification>
         {
-            return new EventBus<TNotification>();
+            public void Subscribe(IEventHandler<TestNotification> handler) => throw new NotImplementedException();
+
+            public bool Unsubscribe(IEventHandler<TestNotification> handler) => throw new NotImplementedException();
+
+            public void Clear() => throw new NotImplementedException();
+
+            public void Broadcast(in TestNotification notification) => throw new NotImplementedException();
         }
     }
 }

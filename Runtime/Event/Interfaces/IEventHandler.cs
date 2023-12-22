@@ -1,13 +1,15 @@
 ﻿/*
  * Copyright (c) PeroPeroGames Co., Ltd.
- * Author: 关东关
- * Created On: 2023年05月26日
- * Description: The event handler for handling notifications.
+ * Author: Gatongone
+ * Created On: 2023/05/26 15:05:25
  */
 
 namespace PeroTools2.AccessKing
 {
-    
+    /// <summary>
+    /// The event handler for handling notifications.
+    /// </summary>
+    /// <typeparam name="TNotification">Implementation type of <see cref="INotification"/>.</typeparam>
     public interface IEventHandler<TNotification> where TNotification : INotification
     {
         /// <summary>
@@ -16,6 +18,7 @@ namespace PeroTools2.AccessKing
         /// <param name="notification">Notification of messages with data.</param>
         void Handle(in TNotification notification);
     }
-    
+
+    /// <inheritdoc cref="IEventHandler{TNotification}"/>
     public interface IEventHandler : IEventHandler<Empty> { }
 }

@@ -1,12 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using NUnit.Framework;
-using PeroTools2.AccessKing.Editor.Tests.AccessTests;
+﻿/*
+ * Copyright (c) PeroPeroGames Co., Ltd.
+ * Author: Gatongone
+ * Created On: 2023/06/01 16:06:12
+ */
 
-namespace PeroTools2.AccessKing.Editor.Tests.EventTests
+using System;
+using System.Collections.Generic;
+using NUnit.Framework;
+
+namespace PeroTools2.AccessKing.Editor.Tests
 {
-    public class EventBusTest : AccessBusTest
+    public sealed class EventBusTest
     {
         private static int s_HandleCount;
         private IEventHandler<TestNotification> m_Handler;
@@ -16,17 +20,6 @@ namespace PeroTools2.AccessKing.Editor.Tests.EventTests
         {
             s_HandleCount = 0;
             m_Handler = null;
-        }
-        
-        [Test]
-        public override void DispatchTest()
-        {
-            var testNotification = new TestNotification();
-            var bus = new EventBus<TestNotification>();
-            var testHandler = new TestHandler<TestNotification>();
-            bus.Subscribe(testHandler);
-            ((IAccessBus)bus).Dispatch(testNotification);
-            Assert.IsTrue(testNotification.isSucceed);
         }
 
         [TestCase(0)]
@@ -79,7 +72,7 @@ namespace PeroTools2.AccessKing.Editor.Tests.EventTests
         {
             var testNotification = new TestNotification();
             var bus = new EventBus<TestNotification>();
-            for (int i = 0; i < handlerCount; i++)
+            for (var i = 0; i < handlerCount; i++)
             {
                 var handler = new TestHandler<TestNotification>();
                 bus.Subscribe(handler);
@@ -102,7 +95,7 @@ namespace PeroTools2.AccessKing.Editor.Tests.EventTests
             else
                 m_Handler = CreateInstance(bus);
 
-            CreateBigMemory(10);
+            CreateBlob(10);
 
             if (isInvokeGC)
             {
@@ -122,16 +115,15 @@ namespace PeroTools2.AccessKing.Editor.Tests.EventTests
             return handler;
         }
 
-        private static void CreateBigMemory(int count)
+        private static void CreateBlob(int count)
         {
-            var programs = new List<Data>();
+            var trash = new List<Blob>();
             for (var i = 0; i < count; i++)
             {
-                programs.Add(new Data());
+                trash.Add(new Blob());
             }
 
-            programs.Clear();
-            programs = null;
+            trash.Clear();
         }
 
         private class TestHandler<TNotification> : IEventHandler<TNotification> where TNotification : ITestNotification
@@ -148,21 +140,9 @@ namespace PeroTools2.AccessKing.Editor.Tests.EventTests
             bool isSucceed { get; set; }
         }
 
-        private class OtherNotification : ITestNotification
-        {
-            public bool isSucceed { get; set; }
-        }
-
         private class TestNotification : ITestNotification
         {
             public bool isSucceed { get; set; }
         }
-    }
-
-    [StructLayout(LayoutKind.Explicit)]
-    public class Data
-    {
-        [FieldOffset(0)] public long a = 0;
-        [FieldOffset(67789)] long a2 = 0;
     }
 }

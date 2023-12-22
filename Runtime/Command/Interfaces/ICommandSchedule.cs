@@ -1,13 +1,16 @@
 ﻿/*
  * Copyright (c) PeroPeroGames Co., Ltd.
- * Author: 关东关
- * Created On: 2023年05月29日
- * Description: Command bus schedule which allows command buses mapping to custom themes.
+ * Author: Gatongone
+ * Created On: 2023/05/29 17:05:52
  */
 
 namespace PeroTools2.AccessKing
 {
-    public interface ICommandSchedule<in TTheme>
+    /// <summary>
+    /// The command bus locator which allows command buses mapping to custom themes.
+    /// </summary>
+    /// <typeparam name="TTheme">Command bus's only id in the schedule.</typeparam>
+    public interface ICommandSchedule<in TTheme> : IAccessSchedule<TTheme>
     {
         /// <summary>
         /// Get command bus by theme.
@@ -32,6 +35,14 @@ namespace PeroTools2.AccessKing
         /// <param name="theme">Theme.</param>
         /// <param name="bus">Command bus.</param>
         /// <typeparam name="TNotification">Notification type.</typeparam>
-        void AddThemeMapping<TNotification>(TTheme theme, ISchedulableCommandBus<TNotification> bus) where TNotification : INotification;
+        void AddBus<TNotification>(TTheme theme, ICommandBus<TNotification> bus) where TNotification : INotification;
+
+        /// <summary>
+        /// Remove bus from schedule.
+        /// </summary>
+        /// <param name="bus">Command bus for the corresponding theme.</param>
+        /// <typeparam name="TNotification">Notification type.</typeparam>
+        /// <returns>Removed succeed.</returns>
+        bool RemoveBus<TNotification>(ICommandBus<TNotification> bus) where TNotification : INotification;
     }
 }

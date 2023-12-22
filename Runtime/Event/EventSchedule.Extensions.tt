@@ -1,0 +1,46 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ output extension=".cs" #>
+<#@ import namespace="System.Linq" #>
+/*
+ * Copyright (c) PeroPeroGames Co., Ltd.
+ * Author: Gatongone
+ * Created On: 2023/12/05 14:12:26
+ */
+
+namespace PeroTools2.AccessKing
+{
+    public partial class EventSchedule<TTheme>
+    {<#
+    for (var i = 0; i < 17; i++)
+    {
+        var genericArgs = string.Empty;
+        var genericArgsWithAngleBrackets = string.Empty;
+        if (i > 0)
+        {
+            genericArgs = i == 1 ? "T" : string.Join(", ", from index in Enumerable.Range(1, i) select $"T{index}");
+            genericArgsWithAngleBrackets = i == 1 ? "<T>" : $"<{string.Join(", ", from index in Enumerable.Range(1, i) select $"T{index}")}>";
+        }
+        var parameterNotification = i == 0 ? "Empty" : $"ParameterNotification<{genericArgs}>";
+#>
+
+        /// <summary>
+        /// Get or create a event bus with <#=i#> argument<#=i > 1 ? "s" : string.Empty#> type parameter notification from schedule by theme.
+        /// </summary>
+        /// <param name="theme">Theme of event bus.</param>
+        /// <returns>Event bus for the corresponding theme.</returns>
+        public IEventBus<<#=parameterNotification#>> Require<#=genericArgsWithAngleBrackets#>(TTheme theme)
+        {
+            // Get bus from cache.
+            if (TryGetBus<<#=parameterNotification#>>(theme, out var bus)) return bus;
+
+            // Build a new ParameterEventBus.
+            var eventBus = new ParameterEventBus<#=genericArgsWithAngleBrackets#>();
+            AddBus(theme, eventBus);
+            return eventBus;
+        }
+<#
+    }
+#>
+    }
+}

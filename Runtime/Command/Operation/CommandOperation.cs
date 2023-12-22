@@ -1,24 +1,23 @@
 ﻿/*
  * Copyright (c) PeroPeroGames Co., Ltd.
- * Author: 关东关
- * Created On: 2023年06月01日
- * Description: Command handlers executed result collection.
+ * Author: Gatongone
+ * Created On: 2023/06/01 11:06:21
  */
 
 using System.Collections;
 
 namespace PeroTools2.AccessKing
 {
+    /// <summary>
+    /// Command handlers executed result collection.
+    /// </summary>
     public struct CommandOperation
     {
         /// <summary>
         /// Result collection.
         /// </summary>
-        public readonly ArrayList handleResults;
+        internal readonly ArrayList handleResults;
 
-        public CommandOperation(ArrayList handleResults)
-        {
-            this.handleResults = handleResults;
-        }
+        internal CommandOperation(ArrayList handleResults) => this.handleResults = handleResults;
     }
 }

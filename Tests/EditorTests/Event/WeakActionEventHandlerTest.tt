@@ -1,0 +1,222 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ import namespace="System.Linq" #>
+<#@ assembly name="System.Core" #>
+<#@ output extension=".cs" #>
+/*
+ * Copyright (c) PeroPeroGames Co., Ltd.
+ * Author: Gatongone
+ * Created On: 2023/06/01 16:06:12
+ */
+<#
+    var testCase = string.Join("\n", from index in Enumerable.Range(0, 16) select $"\t\t[TestCase({index})]");
+#>
+
+using System;
+using NUnit.Framework;
+using System.Collections.Generic;
+
+namespace PeroTools2.AccessKing.Editor.Tests
+{
+    // ReSharper disable All
+    public sealed class WeakActionEventHandlerTest
+    {
+        private int m_HandleCount;
+        private bool m_IsInvoke;
+
+        [SetUp]
+        public void SetUp()
+        {
+            m_HandleCount = 0;
+            m_IsInvoke = false;
+        }
+
+        private static void CreateBlob(int count)
+        {
+            var trash = new List<Blob>();
+            for (var i = 0; i < count; i++)
+            {
+                trash.Add(new Blob());
+            }
+
+            trash.Clear();
+        }
+
+<#
+    for (var i = 0; i < 16; i++)
+    {
+        var parameters = string.Empty;
+        if (i > 0)
+        {
+            parameters = i == 1 ? "object p" : string.Join(", ", from index in Enumerable.Range(1, i) select $"object p{index}");
+        }
+#>
+
+        private void Test(<#= parameters #>)
+        {
+            m_HandleCount++;
+            m_IsInvoke = true;
+        }
+<#
+    }
+#>
+
+<#=testCase#>
+        public void HandlerInvokeTest(int argumentCount)
+        {
+            switch (argumentCount)
+            {
+<#
+            for (var i = 0; i < 16; i++)
+            {
+                var objectArg = i == 0 ? "<WeakActionEventHandlerTest>" : $"<WeakActionEventHandlerTest, {string.Join(", ", from index in Enumerable.Range(1, i) select "object")}>";
+                var param = i == 0 ? string.Empty : string.Join(", ", from index in Enumerable.Range(1, i) select "default");
+#>
+                case <#= i #>:
+                    var handler<#= i #> = new WeakActionEventHandler<#= objectArg #>(Test, this);
+                    handler<#= i #>.Handle(<#=param#>);
+                    break;
+<#
+            }
+#>
+            }
+            Assert.IsTrue(m_IsInvoke);
+        }
+
+<#=testCase#>
+        public void HandlerInvokeWithNonRefGCTest(int argumentCount)
+        {
+            object RegisterWithGarbage(int argumentCount)
+            {
+                switch (argumentCount)
+                {
+<#
+                for (var i = 0; i < 16; i++)
+                {
+                    var objectArg = i == 0 ? "<WeakActionEventHandlerTest>" : $"<WeakActionEventHandlerTest, {string.Join(", ", from index in Enumerable.Range(1, i) select "object")}>";
+#>
+                    case <#= i #>: return new WeakActionEventHandler<#= objectArg #>(Test, new WeakActionEventHandlerTest());
+<#
+                }
+#>
+                    default: return null;
+                }
+            }
+            var handler = RegisterWithGarbage(argumentCount);
+            CreateBlob(10);
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            switch (argumentCount)
+            {
+<#
+            for (var i = 0; i < 16; i++)
+            {
+                var objectArg = i == 0 ? "<WeakActionEventHandlerTest>" : $"<WeakActionEventHandlerTest, {string.Join(", ", from index in Enumerable.Range(1, i) select "object")}>";
+                var param = i == 0 ? string.Empty : string.Join(", ", from index in Enumerable.Range(1, i) select "default");
+#>
+                case <#= i #>:
+                    (handler as WeakActionEventHandler<#= objectArg #>).Handle(<#=param#>);
+                    break;
+<#
+            }
+#>
+            }
+            Assert.IsFalse(m_IsInvoke);
+        }
+
+<#=testCase#>
+        public void EqualsWithWeakActionEventHandlerTest(int argumentCount)
+        {
+            switch (argumentCount)
+            {
+<#
+            for (var i = 0; i < 16; i++)
+            {
+                var objectArg = i == 0 ? "<WeakActionEventHandlerTest>" : $"<WeakActionEventHandlerTest, {string.Join(", ", from index in Enumerable.Range(1, i) select "object")}>";
+#>
+                case <#= i #>:
+                    var handler<#= i #>_1 = new WeakActionEventHandler<#= objectArg #>(Test, this);
+                    var handler<#= i #>_2 = new WeakActionEventHandler<#= objectArg #>(Test, this);
+                    Assert.IsTrue(handler<#= i #>_1 == handler<#= i #>_2);
+                    Assert.IsTrue(handler<#= i #>_1.Equals(handler<#= i #>_2));
+                    break;
+<#
+            }
+#>
+            }
+        }
+
+<#=testCase#>
+        public void EqualsWithWeakActionDelegateTest(int argumentCount)
+        {
+            switch (argumentCount)
+            {
+<#
+            for (var i = 0; i < 16; i++)
+            {
+                var objectArg1 = i == 0 ? "<WeakActionEventHandlerTest>" : $"<WeakActionEventHandlerTest, {string.Join(", ", from index in Enumerable.Range(1, i) select "object")}>";
+                var objectArg2 = i == 0 ? string.Empty : $"<{string.Join(", ", from index in Enumerable.Range(1, i) select "object")}>";
+#>
+                case <#= i #>:
+                    var handler<#= i #>_1 = new WeakActionEventHandler<#= objectArg1 #>(Test, this);
+                    var handler<#= i #>_2 = new Action<#= objectArg2 #>(Test);
+                    Assert.IsTrue(handler<#= i #>_1 == handler<#= i #>_2);
+                    Assert.IsTrue(handler<#= i #>_1.Equals(handler<#= i #>_2));
+                    break;
+<#
+            }
+#>
+            }
+        }
+
+<#=testCase#>
+        public void EventBusInvokeWithWeakActionHandlerTest(int argumentCount)
+        {
+            switch (argumentCount)
+            {
+<#
+            for (var i = 0; i < 16; i++)
+            {
+                var objectArg = i == 0 ? "Empty" : $"ParameterNotification<{string.Join(", ", from index in Enumerable.Range(1, i) select "object")}>";
+                var param = i == 0 ? string.Empty : string.Join(", ", from index in Enumerable.Range(1, i) select "default");
+
+#>
+                case <#= i #>:
+                    var bus<#= i #> = new EventBus<<#=objectArg#>>();
+                    bus<#= i #>.SubscribeWeakly(Test, this);
+                    bus<#= i #>.Broadcast(<#=param#>);
+                    break;
+<#
+            }
+#>
+            }
+        }
+
+<#=testCase#>
+        public void EventBusUnsubscribeWithWeakActionHandlerTest(int argumentCount)
+        {
+            const int handlerCount = 5;
+            switch (argumentCount)
+            {
+<#
+            for (var i = 0; i < 16; i++)
+            {
+                var objectArg = i == 0 ? "Empty" : $"ParameterNotification<{string.Join(", ", from index in Enumerable.Range(1, i) select "object")}>";
+                var param = i == 0 ? string.Empty : string.Join(", ", from index in Enumerable.Range(1, i) select "default");
+#>
+                case <#= i #>:
+                    var bus<#= i #> = new EventBus<<#=objectArg#>>();
+                    for (var i = 0; i < handlerCount; i++)
+                    {
+                        bus<#= i #>.SubscribeWeakly(Test, this);
+                    }
+                    Assert.IsTrue(bus<#= i #>.Unsubscribe(Test));
+                    bus<#= i #>.Broadcast(<#=param#>);
+                    break;
+<#
+            }
+#>
+            }
+            Assert.IsTrue(m_HandleCount == handlerCount - 1);
+        }
+    }
+}

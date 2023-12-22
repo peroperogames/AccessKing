@@ -1,0 +1,67 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ import namespace="System.Linq" #>
+<#@ assembly name="System.Core" #>
+<#@ output extension=".cs" #>
+/*
+ * Copyright (c) PeroPeroGames Co., Ltd.
+ * Author: Gatongone
+ * Created On: 2023/12/05 11:12:52
+ */
+
+namespace PeroTools2.AccessKing
+{
+    /// <summary>
+    /// Empty parameter.
+    /// </summary>
+    public readonly struct Empty : INotification { }
+            
+    /// <summary>
+    /// Notification from parameters.
+    /// </summary>
+    public static class ParameterNotification
+    {
+        /// <summary>
+        /// Empty parameter.
+        /// </summary>
+        public static readonly Empty Empty = new Empty(); 
+<#
+    for (var i = 1; i <= 17; i++)
+    {
+        var genericTypes = i == 1 ? "T" : string.Join(", ", from index in Enumerable.Range(1, i) select $"T{index}");
+        var parameterDefinitions = i == 1 ? "T param" : string.Join(", ", from index in Enumerable.Range(1, i) select $"T{index} param{index}");
+        var parameters = i == 1 ? "param" : string.Join(", ", from index in Enumerable.Range(1, i) select $"param{index}");
+#>
+
+        /// <summary>
+        /// Create notification form parameters.
+        /// </summary>
+        /// <returns>Notification from parameters.</returns>
+        public static ParameterNotification<<#= genericTypes #>> Create<<#= genericTypes #>>(<#= parameterDefinitions #>) => new (<#= parameters #>);
+<#
+    }
+#>
+    }
+<#
+    for (var i = 1; i <= 17; i++)
+    {
+        var genericTypes = i == 1 ? "T" : string.Join(", ", from index in Enumerable.Range(1, i) select $"T{index}");
+        var fieldDeclarations = i == 1 ? "public readonly T item;" : string.Join("\t\t", from index in Enumerable.Range(1, i) select $"public readonly T{index} item{index};\n");
+        var parameterDefinitions = i == 1 ? "T item" : string.Join(", ", from index in Enumerable.Range(1, i) select $"T{index} item{index}");
+        var fieldsSetting = i == 1 ? "this.item = item;" : string.Join("\n\t\t\t", from index in Enumerable.Range(1, i) select $"this.item{index} = item{index};");
+#>
+
+    /// <summary>
+    /// Notification from parameters.
+    /// </summary>
+    public struct ParameterNotification<<#= genericTypes #>> : INotification
+    {
+        <#= fieldDeclarations #>
+        public ParameterNotification(<#= parameterDefinitions #>)
+        {
+            <#= fieldsSetting #>
+        }
+    }
+<#
+    }
+#>
+}

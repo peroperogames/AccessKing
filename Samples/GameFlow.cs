@@ -4,22 +4,22 @@
  * Created On: 2023/03/30 16:03:11
  */
 
-using NUnit.Framework;
 using PeroTools2.AccessKing.Samples.Game.Access;
 using PeroTools2.AccessKing.Samples.Game.Core;
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.UI;
 
 namespace PeroTools2.AccessKing.Game.Core
 {
     public class GameFlow : MonoBehaviour
     {
+        private const string log_color = "#00CED1";
         public GameObject PnlGameOver;
         public Button btnStartTurn;
         public Button btnRestart;
         public Text txtWinner;
         public Text txtTurnCount;
-        private const string log_color = "#00CED1";
         private bool m_IsBattle;
         private bool m_IsGameOver;
         private int m_Turn;
@@ -27,7 +27,7 @@ namespace PeroTools2.AccessKing.Game.Core
         private void Awake()
         {
             btnStartTurn.onClick.AddListener(StartTurnAsync);
-            btnRestart.onClick.AddListener(()=> GameEvents.global.Require<GameEvents.GameStart>().Broadcast());
+            btnRestart.onClick.AddListener(() => GameEvents.global.Require<GameEvents.GameStart>().Broadcast());
             GameEvents.global.Require<GameEvents.GameOver>().Subscribe(GameOver);
             GameEvents.global.Require<GameEvents.GameStart>().Subscribe(GameStart);
         }

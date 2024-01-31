@@ -11,13 +11,13 @@ namespace PeroTools2.AccessKing
     /// <summary>
     /// Command handlers executed result collection.
     /// </summary>
-    public struct CommandOperation
+    public readonly struct CommandOperation
     {
         /// <summary>
         /// Result collection.
         /// </summary>
-        internal readonly ArrayList handleResults;
+        internal readonly ArrayList resultGetters;
 
-        internal CommandOperation(ArrayList handleResults) => this.handleResults = handleResults;
+        internal CommandOperation(ArrayList resultGetters) => this.resultGetters = resultGetters;
     }
 }

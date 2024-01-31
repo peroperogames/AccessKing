@@ -19,20 +19,21 @@ namespace PeroTools2.AccessKing
         /// <param name="operation">Result operation.</param>
         /// <typeparam name="TResult">Result collection.</typeparam>
         /// <returns>Results of specified type collection.</returns>
-        public static IReadOnlyList<TResult> GetResults<TResult>(this CommandOperation operation)
+        public static List<TResult> GetResults<TResult>(this CommandOperation operation)
         {
             var results = new List<TResult>();
-            var handleResults = operation.handleResults;
-            for (int index = 0; index < handleResults.Count; index++)
+            var getters = operation.resultGetters;
+            for (var index = 0; index < getters.Count; index++)
             {
-                object item = operation.handleResults[index];
+                var item = getters[index];
                 switch (item)
                 {
-                    case TResult result:
-                        results.Add(result);
+                    case IResultAvailable<TResult> resultGetter:
+                        results.Add(resultGetter.GetResult());
                         break;
-                    case Task<TResult> resultTask:
+                    case IResultAvailable<Task<TResult>> resultTaskGetter:
                     {
+                        var resultTask = resultTaskGetter.GetResult();
                         if (!resultTask.IsCompleted)
                         {
                             resultTask.Wait();
@@ -80,20 +81,20 @@ namespace PeroTools2.AccessKing
         /// </summary>
         /// <param name="operation">Result operation.</param>
         /// <returns>Results of task type collection.</returns>
-        public static async Task<IReadOnlyList<TResult>> GetResultsAsync<TResult>(this CommandOperation operation)
+        public static async Task<List<TResult>> GetResultsAsync<TResult>(this CommandOperation operation)
         {
             var results = new List<TResult>();
-            var handleResults = operation.handleResults;
-            for (int index = 0; index < handleResults.Count; index++)
+            var getters = operation.resultGetters;
+            for (var index = 0; index < getters.Count; index++)
             {
-                object item = handleResults[index];
+                var item = getters[index];
                 switch (item)
                 {
-                    case Task<TResult> resultTask:
-                        results.Add(await resultTask);
+                    case IResultAvailable<TResult> resultGetter:
+                        results.Add(resultGetter.GetResult());
                         break;
-                    case TResult tResult:
-                        results.Add(tResult);
+                    case IResultAvailable<Task<TResult>> resultTaskGetter:
+                        results.Add(await resultTaskGetter.GetResult());
                         break;
                 }
             }

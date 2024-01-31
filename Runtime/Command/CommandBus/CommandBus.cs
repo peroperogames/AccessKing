@@ -57,7 +57,7 @@ namespace PeroTools2.AccessKing
                     handler.Handle(ref notification);
                     if (handler is IResultAvailable resultGetter)
                     {
-                        results.Add(resultGetter.GetResult());
+                        results.Add(resultGetter);
                     }
                 }
             }

@@ -19,7 +19,7 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// Empty parameter.
         /// </summary>
-        public static readonly Empty Empty = new();
+        public static readonly Empty Empty = new Empty(); 
 
         /// <summary>
         /// Create notification form parameters.
@@ -130,6 +130,7 @@ namespace PeroTools2.AccessKing
     public struct ParameterNotification<T> : INotification
     {
         public readonly T item;
+
         public ParameterNotification(T item)
         {
             this.item = item;
@@ -142,12 +143,12 @@ namespace PeroTools2.AccessKing
     public struct ParameterNotification<T1, T2> : INotification
     {
         public readonly T1 item1;
-		public readonly T2 item2;
+        public readonly T2 item2;
 
         public ParameterNotification(T1 item1, T2 item2)
         {
             this.item1 = item1;
-			this.item2 = item2;
+            this.item2 = item2;
         }
     }
 
@@ -157,14 +158,14 @@ namespace PeroTools2.AccessKing
     public struct ParameterNotification<T1, T2, T3> : INotification
     {
         public readonly T1 item1;
-		public readonly T2 item2;
-		public readonly T3 item3;
+        public readonly T2 item2;
+        public readonly T3 item3;
 
         public ParameterNotification(T1 item1, T2 item2, T3 item3)
         {
             this.item1 = item1;
-			this.item2 = item2;
-			this.item3 = item3;
+            this.item2 = item2;
+            this.item3 = item3;
         }
     }
 
@@ -174,16 +175,16 @@ namespace PeroTools2.AccessKing
     public struct ParameterNotification<T1, T2, T3, T4> : INotification
     {
         public readonly T1 item1;
-		public readonly T2 item2;
-		public readonly T3 item3;
-		public readonly T4 item4;
+        public readonly T2 item2;
+        public readonly T3 item3;
+        public readonly T4 item4;
 
         public ParameterNotification(T1 item1, T2 item2, T3 item3, T4 item4)
         {
             this.item1 = item1;
-			this.item2 = item2;
-			this.item3 = item3;
-			this.item4 = item4;
+            this.item2 = item2;
+            this.item3 = item3;
+            this.item4 = item4;
         }
     }
 
@@ -193,18 +194,18 @@ namespace PeroTools2.AccessKing
     public struct ParameterNotification<T1, T2, T3, T4, T5> : INotification
     {
         public readonly T1 item1;
-		public readonly T2 item2;
-		public readonly T3 item3;
-		public readonly T4 item4;
-		public readonly T5 item5;
+        public readonly T2 item2;
+        public readonly T3 item3;
+        public readonly T4 item4;
+        public readonly T5 item5;
 
         public ParameterNotification(T1 item1, T2 item2, T3 item3, T4 item4, T5 item5)
         {
             this.item1 = item1;
-			this.item2 = item2;
-			this.item3 = item3;
-			this.item4 = item4;
-			this.item5 = item5;
+            this.item2 = item2;
+            this.item3 = item3;
+            this.item4 = item4;
+            this.item5 = item5;
         }
     }
 
@@ -214,20 +215,20 @@ namespace PeroTools2.AccessKing
     public struct ParameterNotification<T1, T2, T3, T4, T5, T6> : INotification
     {
         public readonly T1 item1;
-		public readonly T2 item2;
-		public readonly T3 item3;
-		public readonly T4 item4;
-		public readonly T5 item5;
-		public readonly T6 item6;
+        public readonly T2 item2;
+        public readonly T3 item3;
+        public readonly T4 item4;
+        public readonly T5 item5;
+        public readonly T6 item6;
 
         public ParameterNotification(T1 item1, T2 item2, T3 item3, T4 item4, T5 item5, T6 item6)
         {
             this.item1 = item1;
-			this.item2 = item2;
-			this.item3 = item3;
-			this.item4 = item4;
-			this.item5 = item5;
-			this.item6 = item6;
+            this.item2 = item2;
+            this.item3 = item3;
+            this.item4 = item4;
+            this.item5 = item5;
+            this.item6 = item6;
         }
     }
 
@@ -237,22 +238,22 @@ namespace PeroTools2.AccessKing
     public struct ParameterNotification<T1, T2, T3, T4, T5, T6, T7> : INotification
     {
         public readonly T1 item1;
-		public readonly T2 item2;
-		public readonly T3 item3;
-		public readonly T4 item4;
-		public readonly T5 item5;
-		public readonly T6 item6;
-		public readonly T7 item7;
+        public readonly T2 item2;
+        public readonly T3 item3;
+        public readonly T4 item4;
+        public readonly T5 item5;
+        public readonly T6 item6;
+        public readonly T7 item7;
 
         public ParameterNotification(T1 item1, T2 item2, T3 item3, T4 item4, T5 item5, T6 item6, T7 item7)
         {
             this.item1 = item1;
-			this.item2 = item2;
-			this.item3 = item3;
-			this.item4 = item4;
-			this.item5 = item5;
-			this.item6 = item6;
-			this.item7 = item7;
+            this.item2 = item2;
+            this.item3 = item3;
+            this.item4 = item4;
+            this.item5 = item5;
+            this.item6 = item6;
+            this.item7 = item7;
         }
     }
 
@@ -262,24 +263,24 @@ namespace PeroTools2.AccessKing
     public struct ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8> : INotification
     {
         public readonly T1 item1;
-		public readonly T2 item2;
-		public readonly T3 item3;
-		public readonly T4 item4;
-		public readonly T5 item5;
-		public readonly T6 item6;
-		public readonly T7 item7;
-		public readonly T8 item8;
+        public readonly T2 item2;
+        public readonly T3 item3;
+        public readonly T4 item4;
+        public readonly T5 item5;
+        public readonly T6 item6;
+        public readonly T7 item7;
+        public readonly T8 item8;
 
         public ParameterNotification(T1 item1, T2 item2, T3 item3, T4 item4, T5 item5, T6 item6, T7 item7, T8 item8)
         {
             this.item1 = item1;
-			this.item2 = item2;
-			this.item3 = item3;
-			this.item4 = item4;
-			this.item5 = item5;
-			this.item6 = item6;
-			this.item7 = item7;
-			this.item8 = item8;
+            this.item2 = item2;
+            this.item3 = item3;
+            this.item4 = item4;
+            this.item5 = item5;
+            this.item6 = item6;
+            this.item7 = item7;
+            this.item8 = item8;
         }
     }
 
@@ -289,26 +290,26 @@ namespace PeroTools2.AccessKing
     public struct ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9> : INotification
     {
         public readonly T1 item1;
-		public readonly T2 item2;
-		public readonly T3 item3;
-		public readonly T4 item4;
-		public readonly T5 item5;
-		public readonly T6 item6;
-		public readonly T7 item7;
-		public readonly T8 item8;
-		public readonly T9 item9;
+        public readonly T2 item2;
+        public readonly T3 item3;
+        public readonly T4 item4;
+        public readonly T5 item5;
+        public readonly T6 item6;
+        public readonly T7 item7;
+        public readonly T8 item8;
+        public readonly T9 item9;
 
         public ParameterNotification(T1 item1, T2 item2, T3 item3, T4 item4, T5 item5, T6 item6, T7 item7, T8 item8, T9 item9)
         {
             this.item1 = item1;
-			this.item2 = item2;
-			this.item3 = item3;
-			this.item4 = item4;
-			this.item5 = item5;
-			this.item6 = item6;
-			this.item7 = item7;
-			this.item8 = item8;
-			this.item9 = item9;
+            this.item2 = item2;
+            this.item3 = item3;
+            this.item4 = item4;
+            this.item5 = item5;
+            this.item6 = item6;
+            this.item7 = item7;
+            this.item8 = item8;
+            this.item9 = item9;
         }
     }
 
@@ -318,28 +319,28 @@ namespace PeroTools2.AccessKing
     public struct ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> : INotification
     {
         public readonly T1 item1;
-		public readonly T2 item2;
-		public readonly T3 item3;
-		public readonly T4 item4;
-		public readonly T5 item5;
-		public readonly T6 item6;
-		public readonly T7 item7;
-		public readonly T8 item8;
-		public readonly T9 item9;
-		public readonly T10 item10;
+        public readonly T2 item2;
+        public readonly T3 item3;
+        public readonly T4 item4;
+        public readonly T5 item5;
+        public readonly T6 item6;
+        public readonly T7 item7;
+        public readonly T8 item8;
+        public readonly T9 item9;
+        public readonly T10 item10;
 
         public ParameterNotification(T1 item1, T2 item2, T3 item3, T4 item4, T5 item5, T6 item6, T7 item7, T8 item8, T9 item9, T10 item10)
         {
             this.item1 = item1;
-			this.item2 = item2;
-			this.item3 = item3;
-			this.item4 = item4;
-			this.item5 = item5;
-			this.item6 = item6;
-			this.item7 = item7;
-			this.item8 = item8;
-			this.item9 = item9;
-			this.item10 = item10;
+            this.item2 = item2;
+            this.item3 = item3;
+            this.item4 = item4;
+            this.item5 = item5;
+            this.item6 = item6;
+            this.item7 = item7;
+            this.item8 = item8;
+            this.item9 = item9;
+            this.item10 = item10;
         }
     }
 
@@ -349,30 +350,30 @@ namespace PeroTools2.AccessKing
     public struct ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> : INotification
     {
         public readonly T1 item1;
-		public readonly T2 item2;
-		public readonly T3 item3;
-		public readonly T4 item4;
-		public readonly T5 item5;
-		public readonly T6 item6;
-		public readonly T7 item7;
-		public readonly T8 item8;
-		public readonly T9 item9;
-		public readonly T10 item10;
-		public readonly T11 item11;
+        public readonly T2 item2;
+        public readonly T3 item3;
+        public readonly T4 item4;
+        public readonly T5 item5;
+        public readonly T6 item6;
+        public readonly T7 item7;
+        public readonly T8 item8;
+        public readonly T9 item9;
+        public readonly T10 item10;
+        public readonly T11 item11;
 
         public ParameterNotification(T1 item1, T2 item2, T3 item3, T4 item4, T5 item5, T6 item6, T7 item7, T8 item8, T9 item9, T10 item10, T11 item11)
         {
             this.item1 = item1;
-			this.item2 = item2;
-			this.item3 = item3;
-			this.item4 = item4;
-			this.item5 = item5;
-			this.item6 = item6;
-			this.item7 = item7;
-			this.item8 = item8;
-			this.item9 = item9;
-			this.item10 = item10;
-			this.item11 = item11;
+            this.item2 = item2;
+            this.item3 = item3;
+            this.item4 = item4;
+            this.item5 = item5;
+            this.item6 = item6;
+            this.item7 = item7;
+            this.item8 = item8;
+            this.item9 = item9;
+            this.item10 = item10;
+            this.item11 = item11;
         }
     }
 
@@ -382,32 +383,32 @@ namespace PeroTools2.AccessKing
     public struct ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> : INotification
     {
         public readonly T1 item1;
-		public readonly T2 item2;
-		public readonly T3 item3;
-		public readonly T4 item4;
-		public readonly T5 item5;
-		public readonly T6 item6;
-		public readonly T7 item7;
-		public readonly T8 item8;
-		public readonly T9 item9;
-		public readonly T10 item10;
-		public readonly T11 item11;
-		public readonly T12 item12;
+        public readonly T2 item2;
+        public readonly T3 item3;
+        public readonly T4 item4;
+        public readonly T5 item5;
+        public readonly T6 item6;
+        public readonly T7 item7;
+        public readonly T8 item8;
+        public readonly T9 item9;
+        public readonly T10 item10;
+        public readonly T11 item11;
+        public readonly T12 item12;
 
         public ParameterNotification(T1 item1, T2 item2, T3 item3, T4 item4, T5 item5, T6 item6, T7 item7, T8 item8, T9 item9, T10 item10, T11 item11, T12 item12)
         {
             this.item1 = item1;
-			this.item2 = item2;
-			this.item3 = item3;
-			this.item4 = item4;
-			this.item5 = item5;
-			this.item6 = item6;
-			this.item7 = item7;
-			this.item8 = item8;
-			this.item9 = item9;
-			this.item10 = item10;
-			this.item11 = item11;
-			this.item12 = item12;
+            this.item2 = item2;
+            this.item3 = item3;
+            this.item4 = item4;
+            this.item5 = item5;
+            this.item6 = item6;
+            this.item7 = item7;
+            this.item8 = item8;
+            this.item9 = item9;
+            this.item10 = item10;
+            this.item11 = item11;
+            this.item12 = item12;
         }
     }
 
@@ -417,34 +418,34 @@ namespace PeroTools2.AccessKing
     public struct ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> : INotification
     {
         public readonly T1 item1;
-		public readonly T2 item2;
-		public readonly T3 item3;
-		public readonly T4 item4;
-		public readonly T5 item5;
-		public readonly T6 item6;
-		public readonly T7 item7;
-		public readonly T8 item8;
-		public readonly T9 item9;
-		public readonly T10 item10;
-		public readonly T11 item11;
-		public readonly T12 item12;
-		public readonly T13 item13;
+        public readonly T2 item2;
+        public readonly T3 item3;
+        public readonly T4 item4;
+        public readonly T5 item5;
+        public readonly T6 item6;
+        public readonly T7 item7;
+        public readonly T8 item8;
+        public readonly T9 item9;
+        public readonly T10 item10;
+        public readonly T11 item11;
+        public readonly T12 item12;
+        public readonly T13 item13;
 
         public ParameterNotification(T1 item1, T2 item2, T3 item3, T4 item4, T5 item5, T6 item6, T7 item7, T8 item8, T9 item9, T10 item10, T11 item11, T12 item12, T13 item13)
         {
             this.item1 = item1;
-			this.item2 = item2;
-			this.item3 = item3;
-			this.item4 = item4;
-			this.item5 = item5;
-			this.item6 = item6;
-			this.item7 = item7;
-			this.item8 = item8;
-			this.item9 = item9;
-			this.item10 = item10;
-			this.item11 = item11;
-			this.item12 = item12;
-			this.item13 = item13;
+            this.item2 = item2;
+            this.item3 = item3;
+            this.item4 = item4;
+            this.item5 = item5;
+            this.item6 = item6;
+            this.item7 = item7;
+            this.item8 = item8;
+            this.item9 = item9;
+            this.item10 = item10;
+            this.item11 = item11;
+            this.item12 = item12;
+            this.item13 = item13;
         }
     }
 
@@ -454,36 +455,36 @@ namespace PeroTools2.AccessKing
     public struct ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> : INotification
     {
         public readonly T1 item1;
-		public readonly T2 item2;
-		public readonly T3 item3;
-		public readonly T4 item4;
-		public readonly T5 item5;
-		public readonly T6 item6;
-		public readonly T7 item7;
-		public readonly T8 item8;
-		public readonly T9 item9;
-		public readonly T10 item10;
-		public readonly T11 item11;
-		public readonly T12 item12;
-		public readonly T13 item13;
-		public readonly T14 item14;
+        public readonly T2 item2;
+        public readonly T3 item3;
+        public readonly T4 item4;
+        public readonly T5 item5;
+        public readonly T6 item6;
+        public readonly T7 item7;
+        public readonly T8 item8;
+        public readonly T9 item9;
+        public readonly T10 item10;
+        public readonly T11 item11;
+        public readonly T12 item12;
+        public readonly T13 item13;
+        public readonly T14 item14;
 
         public ParameterNotification(T1 item1, T2 item2, T3 item3, T4 item4, T5 item5, T6 item6, T7 item7, T8 item8, T9 item9, T10 item10, T11 item11, T12 item12, T13 item13, T14 item14)
         {
             this.item1 = item1;
-			this.item2 = item2;
-			this.item3 = item3;
-			this.item4 = item4;
-			this.item5 = item5;
-			this.item6 = item6;
-			this.item7 = item7;
-			this.item8 = item8;
-			this.item9 = item9;
-			this.item10 = item10;
-			this.item11 = item11;
-			this.item12 = item12;
-			this.item13 = item13;
-			this.item14 = item14;
+            this.item2 = item2;
+            this.item3 = item3;
+            this.item4 = item4;
+            this.item5 = item5;
+            this.item6 = item6;
+            this.item7 = item7;
+            this.item8 = item8;
+            this.item9 = item9;
+            this.item10 = item10;
+            this.item11 = item11;
+            this.item12 = item12;
+            this.item13 = item13;
+            this.item14 = item14;
         }
     }
 
@@ -493,38 +494,38 @@ namespace PeroTools2.AccessKing
     public struct ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> : INotification
     {
         public readonly T1 item1;
-		public readonly T2 item2;
-		public readonly T3 item3;
-		public readonly T4 item4;
-		public readonly T5 item5;
-		public readonly T6 item6;
-		public readonly T7 item7;
-		public readonly T8 item8;
-		public readonly T9 item9;
-		public readonly T10 item10;
-		public readonly T11 item11;
-		public readonly T12 item12;
-		public readonly T13 item13;
-		public readonly T14 item14;
-		public readonly T15 item15;
+        public readonly T2 item2;
+        public readonly T3 item3;
+        public readonly T4 item4;
+        public readonly T5 item5;
+        public readonly T6 item6;
+        public readonly T7 item7;
+        public readonly T8 item8;
+        public readonly T9 item9;
+        public readonly T10 item10;
+        public readonly T11 item11;
+        public readonly T12 item12;
+        public readonly T13 item13;
+        public readonly T14 item14;
+        public readonly T15 item15;
 
         public ParameterNotification(T1 item1, T2 item2, T3 item3, T4 item4, T5 item5, T6 item6, T7 item7, T8 item8, T9 item9, T10 item10, T11 item11, T12 item12, T13 item13, T14 item14, T15 item15)
         {
             this.item1 = item1;
-			this.item2 = item2;
-			this.item3 = item3;
-			this.item4 = item4;
-			this.item5 = item5;
-			this.item6 = item6;
-			this.item7 = item7;
-			this.item8 = item8;
-			this.item9 = item9;
-			this.item10 = item10;
-			this.item11 = item11;
-			this.item12 = item12;
-			this.item13 = item13;
-			this.item14 = item14;
-			this.item15 = item15;
+            this.item2 = item2;
+            this.item3 = item3;
+            this.item4 = item4;
+            this.item5 = item5;
+            this.item6 = item6;
+            this.item7 = item7;
+            this.item8 = item8;
+            this.item9 = item9;
+            this.item10 = item10;
+            this.item11 = item11;
+            this.item12 = item12;
+            this.item13 = item13;
+            this.item14 = item14;
+            this.item15 = item15;
         }
     }
 
@@ -534,40 +535,40 @@ namespace PeroTools2.AccessKing
     public struct ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> : INotification
     {
         public readonly T1 item1;
-		public readonly T2 item2;
-		public readonly T3 item3;
-		public readonly T4 item4;
-		public readonly T5 item5;
-		public readonly T6 item6;
-		public readonly T7 item7;
-		public readonly T8 item8;
-		public readonly T9 item9;
-		public readonly T10 item10;
-		public readonly T11 item11;
-		public readonly T12 item12;
-		public readonly T13 item13;
-		public readonly T14 item14;
-		public readonly T15 item15;
-		public readonly T16 item16;
+        public readonly T2 item2;
+        public readonly T3 item3;
+        public readonly T4 item4;
+        public readonly T5 item5;
+        public readonly T6 item6;
+        public readonly T7 item7;
+        public readonly T8 item8;
+        public readonly T9 item9;
+        public readonly T10 item10;
+        public readonly T11 item11;
+        public readonly T12 item12;
+        public readonly T13 item13;
+        public readonly T14 item14;
+        public readonly T15 item15;
+        public readonly T16 item16;
 
         public ParameterNotification(T1 item1, T2 item2, T3 item3, T4 item4, T5 item5, T6 item6, T7 item7, T8 item8, T9 item9, T10 item10, T11 item11, T12 item12, T13 item13, T14 item14, T15 item15, T16 item16)
         {
             this.item1 = item1;
-			this.item2 = item2;
-			this.item3 = item3;
-			this.item4 = item4;
-			this.item5 = item5;
-			this.item6 = item6;
-			this.item7 = item7;
-			this.item8 = item8;
-			this.item9 = item9;
-			this.item10 = item10;
-			this.item11 = item11;
-			this.item12 = item12;
-			this.item13 = item13;
-			this.item14 = item14;
-			this.item15 = item15;
-			this.item16 = item16;
+            this.item2 = item2;
+            this.item3 = item3;
+            this.item4 = item4;
+            this.item5 = item5;
+            this.item6 = item6;
+            this.item7 = item7;
+            this.item8 = item8;
+            this.item9 = item9;
+            this.item10 = item10;
+            this.item11 = item11;
+            this.item12 = item12;
+            this.item13 = item13;
+            this.item14 = item14;
+            this.item15 = item15;
+            this.item16 = item16;
         }
     }
 
@@ -577,42 +578,42 @@ namespace PeroTools2.AccessKing
     public struct ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, T17> : INotification
     {
         public readonly T1 item1;
-		public readonly T2 item2;
-		public readonly T3 item3;
-		public readonly T4 item4;
-		public readonly T5 item5;
-		public readonly T6 item6;
-		public readonly T7 item7;
-		public readonly T8 item8;
-		public readonly T9 item9;
-		public readonly T10 item10;
-		public readonly T11 item11;
-		public readonly T12 item12;
-		public readonly T13 item13;
-		public readonly T14 item14;
-		public readonly T15 item15;
-		public readonly T16 item16;
-		public readonly T17 item17;
+        public readonly T2 item2;
+        public readonly T3 item3;
+        public readonly T4 item4;
+        public readonly T5 item5;
+        public readonly T6 item6;
+        public readonly T7 item7;
+        public readonly T8 item8;
+        public readonly T9 item9;
+        public readonly T10 item10;
+        public readonly T11 item11;
+        public readonly T12 item12;
+        public readonly T13 item13;
+        public readonly T14 item14;
+        public readonly T15 item15;
+        public readonly T16 item16;
+        public readonly T17 item17;
 
         public ParameterNotification(T1 item1, T2 item2, T3 item3, T4 item4, T5 item5, T6 item6, T7 item7, T8 item8, T9 item9, T10 item10, T11 item11, T12 item12, T13 item13, T14 item14, T15 item15, T16 item16, T17 item17)
         {
             this.item1 = item1;
-			this.item2 = item2;
-			this.item3 = item3;
-			this.item4 = item4;
-			this.item5 = item5;
-			this.item6 = item6;
-			this.item7 = item7;
-			this.item8 = item8;
-			this.item9 = item9;
-			this.item10 = item10;
-			this.item11 = item11;
-			this.item12 = item12;
-			this.item13 = item13;
-			this.item14 = item14;
-			this.item15 = item15;
-			this.item16 = item16;
-			this.item17 = item17;
+            this.item2 = item2;
+            this.item3 = item3;
+            this.item4 = item4;
+            this.item5 = item5;
+            this.item6 = item6;
+            this.item7 = item7;
+            this.item8 = item8;
+            this.item9 = item9;
+            this.item10 = item10;
+            this.item11 = item11;
+            this.item12 = item12;
+            this.item13 = item13;
+            this.item14 = item14;
+            this.item15 = item15;
+            this.item16 = item16;
+            this.item17 = item17;
         }
     }
 }

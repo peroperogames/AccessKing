@@ -14,7 +14,7 @@ namespace PeroTools2.AccessKing
     /// Empty parameter.
     /// </summary>
     public readonly struct Empty : INotification { }
-            
+
     /// <summary>
     /// Notification from parameters.
     /// </summary>
@@ -45,9 +45,9 @@ namespace PeroTools2.AccessKing
     for (var i = 1; i <= 17; i++)
     {
         var genericTypes = i == 1 ? "T" : string.Join(", ", from index in Enumerable.Range(1, i) select $"T{index}");
-        var fieldDeclarations = i == 1 ? "public readonly T item;" : string.Join("\t\t", from index in Enumerable.Range(1, i) select $"public readonly T{index} item{index};\n");
+        var fieldDeclarations = i == 1 ? "public readonly T item;" : string.Join("\n        ", from index in Enumerable.Range(1, i) select $"public readonly T{index} item{index};");
         var parameterDefinitions = i == 1 ? "T item" : string.Join(", ", from index in Enumerable.Range(1, i) select $"T{index} item{index}");
-        var fieldsSetting = i == 1 ? "this.item = item;" : string.Join("\n\t\t\t", from index in Enumerable.Range(1, i) select $"this.item{index} = item{index};");
+        var fieldsSetting = i == 1 ? "this.item = item;" : string.Join("\n            ", from index in Enumerable.Range(1, i) select $"this.item{index} = item{index};");
 #>
 
     /// <summary>
@@ -56,6 +56,7 @@ namespace PeroTools2.AccessKing
     public struct ParameterNotification<<#= genericTypes #>> : INotification
     {
         <#= fieldDeclarations #>
+
         public ParameterNotification(<#= parameterDefinitions #>)
         {
             <#= fieldsSetting #>

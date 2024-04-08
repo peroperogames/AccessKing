@@ -59,7 +59,7 @@ namespace PeroTools2.AccessKing
         private readonly MethodInfo m_Method;
 
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
-        public bool isAlive => m_WeakEventProvider.TryGetTarget(out _);
+        public bool isAlive => m_WeakEventProvider.TryGetReference(out _);
 
         /// <summary>
         /// Create a weak event handler from a System.Action.
@@ -77,7 +77,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
         public bool TryHandle(in <#=parameterNotification#> notification)
         {
-            if (!m_WeakEventProvider.TryGetTarget(out var provider))
+            if (!m_WeakEventProvider.TryGetReference(out var provider))
             {
                 return false;
             }
@@ -88,7 +88,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
         public bool TryHandle(<#=parameterDefinitions#>)
         {
-            if (!m_WeakEventProvider.TryGetTarget(out var provider))
+            if (!m_WeakEventProvider.TryGetReference(out var provider))
             {
                 return false;
             }
@@ -99,7 +99,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
         public void Handle(in <#=parameterNotification#> notification)
         {
-            if (m_WeakEventProvider.TryGetTarget(out var provider))
+            if (m_WeakEventProvider.TryGetReference(out var provider))
             {
                 m_Invocation.Invoke(provider<#=notificationItems#>);
             }
@@ -108,7 +108,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
         public void Handle(<#=parameterDefinitions#>)
         {
-            if (m_WeakEventProvider.TryGetTarget(out var provider))
+            if (m_WeakEventProvider.TryGetReference(out var provider))
             {
                 m_Invocation.Invoke(provider<#=parameters#>);
             }

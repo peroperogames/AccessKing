@@ -34,7 +34,7 @@ namespace PeroTools2.AccessKing
         private readonly MethodInfo m_Method;
 
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
-        public bool isAlive => m_WeakEventProvider.TryGetTarget(out _);
+        public bool isAlive => m_WeakEventProvider.TryGetReference(out _);
 
         /// <summary>
         /// Create a weak event handler from a System.Action.
@@ -52,7 +52,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
         public bool TryHandle(in Empty notification)
         {
-            if (!m_WeakEventProvider.TryGetTarget(out var provider))
+            if (!m_WeakEventProvider.TryGetReference(out var provider))
             {
                 return false;
             }
@@ -63,7 +63,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
         public bool TryHandle()
         {
-            if (!m_WeakEventProvider.TryGetTarget(out var provider))
+            if (!m_WeakEventProvider.TryGetReference(out var provider))
             {
                 return false;
             }
@@ -74,7 +74,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
         public void Handle(in Empty notification)
         {
-            if (m_WeakEventProvider.TryGetTarget(out var provider))
+            if (m_WeakEventProvider.TryGetReference(out var provider))
             {
                 m_Invocation.Invoke(provider);
             }
@@ -83,7 +83,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
         public void Handle()
         {
-            if (m_WeakEventProvider.TryGetTarget(out var provider))
+            if (m_WeakEventProvider.TryGetReference(out var provider))
             {
                 m_Invocation.Invoke(provider);
             }
@@ -140,7 +140,7 @@ namespace PeroTools2.AccessKing
         private readonly MethodInfo m_Method;
 
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
-        public bool isAlive => m_WeakEventProvider.TryGetTarget(out _);
+        public bool isAlive => m_WeakEventProvider.TryGetReference(out _);
 
         /// <summary>
         /// Create a weak event handler from a System.Action.
@@ -158,7 +158,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
         public bool TryHandle(in ParameterNotification<T> notification)
         {
-            if (!m_WeakEventProvider.TryGetTarget(out var provider))
+            if (!m_WeakEventProvider.TryGetReference(out var provider))
             {
                 return false;
             }
@@ -169,7 +169,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
         public bool TryHandle(T param)
         {
-            if (!m_WeakEventProvider.TryGetTarget(out var provider))
+            if (!m_WeakEventProvider.TryGetReference(out var provider))
             {
                 return false;
             }
@@ -180,7 +180,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
         public void Handle(in ParameterNotification<T> notification)
         {
-            if (m_WeakEventProvider.TryGetTarget(out var provider))
+            if (m_WeakEventProvider.TryGetReference(out var provider))
             {
                 m_Invocation.Invoke(provider, notification.item);
             }
@@ -189,7 +189,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
         public void Handle(T param)
         {
-            if (m_WeakEventProvider.TryGetTarget(out var provider))
+            if (m_WeakEventProvider.TryGetReference(out var provider))
             {
                 m_Invocation.Invoke(provider, param);
             }
@@ -246,7 +246,7 @@ namespace PeroTools2.AccessKing
         private readonly MethodInfo m_Method;
 
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
-        public bool isAlive => m_WeakEventProvider.TryGetTarget(out _);
+        public bool isAlive => m_WeakEventProvider.TryGetReference(out _);
 
         /// <summary>
         /// Create a weak event handler from a System.Action.
@@ -264,7 +264,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
         public bool TryHandle(in ParameterNotification<T1, T2> notification)
         {
-            if (!m_WeakEventProvider.TryGetTarget(out var provider))
+            if (!m_WeakEventProvider.TryGetReference(out var provider))
             {
                 return false;
             }
@@ -275,7 +275,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
         public bool TryHandle(T1 param1, T2 param2)
         {
-            if (!m_WeakEventProvider.TryGetTarget(out var provider))
+            if (!m_WeakEventProvider.TryGetReference(out var provider))
             {
                 return false;
             }
@@ -286,7 +286,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
         public void Handle(in ParameterNotification<T1, T2> notification)
         {
-            if (m_WeakEventProvider.TryGetTarget(out var provider))
+            if (m_WeakEventProvider.TryGetReference(out var provider))
             {
                 m_Invocation.Invoke(provider, notification.item1, notification.item2);
             }
@@ -295,7 +295,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
         public void Handle(T1 param1, T2 param2)
         {
-            if (m_WeakEventProvider.TryGetTarget(out var provider))
+            if (m_WeakEventProvider.TryGetReference(out var provider))
             {
                 m_Invocation.Invoke(provider, param1, param2);
             }
@@ -352,7 +352,7 @@ namespace PeroTools2.AccessKing
         private readonly MethodInfo m_Method;
 
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
-        public bool isAlive => m_WeakEventProvider.TryGetTarget(out _);
+        public bool isAlive => m_WeakEventProvider.TryGetReference(out _);
 
         /// <summary>
         /// Create a weak event handler from a System.Action.
@@ -370,7 +370,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
         public bool TryHandle(in ParameterNotification<T1, T2, T3> notification)
         {
-            if (!m_WeakEventProvider.TryGetTarget(out var provider))
+            if (!m_WeakEventProvider.TryGetReference(out var provider))
             {
                 return false;
             }
@@ -381,7 +381,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
         public bool TryHandle(T1 param1, T2 param2, T3 param3)
         {
-            if (!m_WeakEventProvider.TryGetTarget(out var provider))
+            if (!m_WeakEventProvider.TryGetReference(out var provider))
             {
                 return false;
             }
@@ -392,7 +392,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
         public void Handle(in ParameterNotification<T1, T2, T3> notification)
         {
-            if (m_WeakEventProvider.TryGetTarget(out var provider))
+            if (m_WeakEventProvider.TryGetReference(out var provider))
             {
                 m_Invocation.Invoke(provider, notification.item1, notification.item2, notification.item3);
             }
@@ -401,7 +401,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
         public void Handle(T1 param1, T2 param2, T3 param3)
         {
-            if (m_WeakEventProvider.TryGetTarget(out var provider))
+            if (m_WeakEventProvider.TryGetReference(out var provider))
             {
                 m_Invocation.Invoke(provider, param1, param2, param3);
             }
@@ -458,7 +458,7 @@ namespace PeroTools2.AccessKing
         private readonly MethodInfo m_Method;
 
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
-        public bool isAlive => m_WeakEventProvider.TryGetTarget(out _);
+        public bool isAlive => m_WeakEventProvider.TryGetReference(out _);
 
         /// <summary>
         /// Create a weak event handler from a System.Action.
@@ -476,7 +476,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
         public bool TryHandle(in ParameterNotification<T1, T2, T3, T4> notification)
         {
-            if (!m_WeakEventProvider.TryGetTarget(out var provider))
+            if (!m_WeakEventProvider.TryGetReference(out var provider))
             {
                 return false;
             }
@@ -487,7 +487,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
         public bool TryHandle(T1 param1, T2 param2, T3 param3, T4 param4)
         {
-            if (!m_WeakEventProvider.TryGetTarget(out var provider))
+            if (!m_WeakEventProvider.TryGetReference(out var provider))
             {
                 return false;
             }
@@ -498,7 +498,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
         public void Handle(in ParameterNotification<T1, T2, T3, T4> notification)
         {
-            if (m_WeakEventProvider.TryGetTarget(out var provider))
+            if (m_WeakEventProvider.TryGetReference(out var provider))
             {
                 m_Invocation.Invoke(provider, notification.item1, notification.item2, notification.item3, notification.item4);
             }
@@ -507,7 +507,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4)
         {
-            if (m_WeakEventProvider.TryGetTarget(out var provider))
+            if (m_WeakEventProvider.TryGetReference(out var provider))
             {
                 m_Invocation.Invoke(provider, param1, param2, param3, param4);
             }
@@ -564,7 +564,7 @@ namespace PeroTools2.AccessKing
         private readonly MethodInfo m_Method;
 
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
-        public bool isAlive => m_WeakEventProvider.TryGetTarget(out _);
+        public bool isAlive => m_WeakEventProvider.TryGetReference(out _);
 
         /// <summary>
         /// Create a weak event handler from a System.Action.
@@ -582,7 +582,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
         public bool TryHandle(in ParameterNotification<T1, T2, T3, T4, T5> notification)
         {
-            if (!m_WeakEventProvider.TryGetTarget(out var provider))
+            if (!m_WeakEventProvider.TryGetReference(out var provider))
             {
                 return false;
             }
@@ -593,7 +593,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
         public bool TryHandle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5)
         {
-            if (!m_WeakEventProvider.TryGetTarget(out var provider))
+            if (!m_WeakEventProvider.TryGetReference(out var provider))
             {
                 return false;
             }
@@ -604,7 +604,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
         public void Handle(in ParameterNotification<T1, T2, T3, T4, T5> notification)
         {
-            if (m_WeakEventProvider.TryGetTarget(out var provider))
+            if (m_WeakEventProvider.TryGetReference(out var provider))
             {
                 m_Invocation.Invoke(provider, notification.item1, notification.item2, notification.item3, notification.item4, notification.item5);
             }
@@ -613,7 +613,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5)
         {
-            if (m_WeakEventProvider.TryGetTarget(out var provider))
+            if (m_WeakEventProvider.TryGetReference(out var provider))
             {
                 m_Invocation.Invoke(provider, param1, param2, param3, param4, param5);
             }
@@ -670,7 +670,7 @@ namespace PeroTools2.AccessKing
         private readonly MethodInfo m_Method;
 
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
-        public bool isAlive => m_WeakEventProvider.TryGetTarget(out _);
+        public bool isAlive => m_WeakEventProvider.TryGetReference(out _);
 
         /// <summary>
         /// Create a weak event handler from a System.Action.
@@ -688,7 +688,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
         public bool TryHandle(in ParameterNotification<T1, T2, T3, T4, T5, T6> notification)
         {
-            if (!m_WeakEventProvider.TryGetTarget(out var provider))
+            if (!m_WeakEventProvider.TryGetReference(out var provider))
             {
                 return false;
             }
@@ -699,7 +699,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
         public bool TryHandle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6)
         {
-            if (!m_WeakEventProvider.TryGetTarget(out var provider))
+            if (!m_WeakEventProvider.TryGetReference(out var provider))
             {
                 return false;
             }
@@ -710,7 +710,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
         public void Handle(in ParameterNotification<T1, T2, T3, T4, T5, T6> notification)
         {
-            if (m_WeakEventProvider.TryGetTarget(out var provider))
+            if (m_WeakEventProvider.TryGetReference(out var provider))
             {
                 m_Invocation.Invoke(provider, notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6);
             }
@@ -719,7 +719,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6)
         {
-            if (m_WeakEventProvider.TryGetTarget(out var provider))
+            if (m_WeakEventProvider.TryGetReference(out var provider))
             {
                 m_Invocation.Invoke(provider, param1, param2, param3, param4, param5, param6);
             }
@@ -776,7 +776,7 @@ namespace PeroTools2.AccessKing
         private readonly MethodInfo m_Method;
 
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
-        public bool isAlive => m_WeakEventProvider.TryGetTarget(out _);
+        public bool isAlive => m_WeakEventProvider.TryGetReference(out _);
 
         /// <summary>
         /// Create a weak event handler from a System.Action.
@@ -794,7 +794,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
         public bool TryHandle(in ParameterNotification<T1, T2, T3, T4, T5, T6, T7> notification)
         {
-            if (!m_WeakEventProvider.TryGetTarget(out var provider))
+            if (!m_WeakEventProvider.TryGetReference(out var provider))
             {
                 return false;
             }
@@ -805,7 +805,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
         public bool TryHandle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7)
         {
-            if (!m_WeakEventProvider.TryGetTarget(out var provider))
+            if (!m_WeakEventProvider.TryGetReference(out var provider))
             {
                 return false;
             }
@@ -816,7 +816,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
         public void Handle(in ParameterNotification<T1, T2, T3, T4, T5, T6, T7> notification)
         {
-            if (m_WeakEventProvider.TryGetTarget(out var provider))
+            if (m_WeakEventProvider.TryGetReference(out var provider))
             {
                 m_Invocation.Invoke(provider, notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7);
             }
@@ -825,7 +825,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7)
         {
-            if (m_WeakEventProvider.TryGetTarget(out var provider))
+            if (m_WeakEventProvider.TryGetReference(out var provider))
             {
                 m_Invocation.Invoke(provider, param1, param2, param3, param4, param5, param6, param7);
             }
@@ -882,7 +882,7 @@ namespace PeroTools2.AccessKing
         private readonly MethodInfo m_Method;
 
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
-        public bool isAlive => m_WeakEventProvider.TryGetTarget(out _);
+        public bool isAlive => m_WeakEventProvider.TryGetReference(out _);
 
         /// <summary>
         /// Create a weak event handler from a System.Action.
@@ -900,7 +900,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
         public bool TryHandle(in ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8> notification)
         {
-            if (!m_WeakEventProvider.TryGetTarget(out var provider))
+            if (!m_WeakEventProvider.TryGetReference(out var provider))
             {
                 return false;
             }
@@ -911,7 +911,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
         public bool TryHandle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8)
         {
-            if (!m_WeakEventProvider.TryGetTarget(out var provider))
+            if (!m_WeakEventProvider.TryGetReference(out var provider))
             {
                 return false;
             }
@@ -922,7 +922,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
         public void Handle(in ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8> notification)
         {
-            if (m_WeakEventProvider.TryGetTarget(out var provider))
+            if (m_WeakEventProvider.TryGetReference(out var provider))
             {
                 m_Invocation.Invoke(provider, notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7, notification.item8);
             }
@@ -931,7 +931,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8)
         {
-            if (m_WeakEventProvider.TryGetTarget(out var provider))
+            if (m_WeakEventProvider.TryGetReference(out var provider))
             {
                 m_Invocation.Invoke(provider, param1, param2, param3, param4, param5, param6, param7, param8);
             }
@@ -988,7 +988,7 @@ namespace PeroTools2.AccessKing
         private readonly MethodInfo m_Method;
 
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
-        public bool isAlive => m_WeakEventProvider.TryGetTarget(out _);
+        public bool isAlive => m_WeakEventProvider.TryGetReference(out _);
 
         /// <summary>
         /// Create a weak event handler from a System.Action.
@@ -1006,7 +1006,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
         public bool TryHandle(in ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9> notification)
         {
-            if (!m_WeakEventProvider.TryGetTarget(out var provider))
+            if (!m_WeakEventProvider.TryGetReference(out var provider))
             {
                 return false;
             }
@@ -1017,7 +1017,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
         public bool TryHandle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9)
         {
-            if (!m_WeakEventProvider.TryGetTarget(out var provider))
+            if (!m_WeakEventProvider.TryGetReference(out var provider))
             {
                 return false;
             }
@@ -1028,7 +1028,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
         public void Handle(in ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9> notification)
         {
-            if (m_WeakEventProvider.TryGetTarget(out var provider))
+            if (m_WeakEventProvider.TryGetReference(out var provider))
             {
                 m_Invocation.Invoke(provider, notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7, notification.item8, notification.item9);
             }
@@ -1037,7 +1037,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9)
         {
-            if (m_WeakEventProvider.TryGetTarget(out var provider))
+            if (m_WeakEventProvider.TryGetReference(out var provider))
             {
                 m_Invocation.Invoke(provider, param1, param2, param3, param4, param5, param6, param7, param8, param9);
             }
@@ -1094,7 +1094,7 @@ namespace PeroTools2.AccessKing
         private readonly MethodInfo m_Method;
 
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
-        public bool isAlive => m_WeakEventProvider.TryGetTarget(out _);
+        public bool isAlive => m_WeakEventProvider.TryGetReference(out _);
 
         /// <summary>
         /// Create a weak event handler from a System.Action.
@@ -1112,7 +1112,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
         public bool TryHandle(in ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> notification)
         {
-            if (!m_WeakEventProvider.TryGetTarget(out var provider))
+            if (!m_WeakEventProvider.TryGetReference(out var provider))
             {
                 return false;
             }
@@ -1123,7 +1123,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
         public bool TryHandle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10)
         {
-            if (!m_WeakEventProvider.TryGetTarget(out var provider))
+            if (!m_WeakEventProvider.TryGetReference(out var provider))
             {
                 return false;
             }
@@ -1134,7 +1134,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
         public void Handle(in ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> notification)
         {
-            if (m_WeakEventProvider.TryGetTarget(out var provider))
+            if (m_WeakEventProvider.TryGetReference(out var provider))
             {
                 m_Invocation.Invoke(provider, notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7, notification.item8, notification.item9, notification.item10);
             }
@@ -1143,7 +1143,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10)
         {
-            if (m_WeakEventProvider.TryGetTarget(out var provider))
+            if (m_WeakEventProvider.TryGetReference(out var provider))
             {
                 m_Invocation.Invoke(provider, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10);
             }
@@ -1200,7 +1200,7 @@ namespace PeroTools2.AccessKing
         private readonly MethodInfo m_Method;
 
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
-        public bool isAlive => m_WeakEventProvider.TryGetTarget(out _);
+        public bool isAlive => m_WeakEventProvider.TryGetReference(out _);
 
         /// <summary>
         /// Create a weak event handler from a System.Action.
@@ -1218,7 +1218,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
         public bool TryHandle(in ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> notification)
         {
-            if (!m_WeakEventProvider.TryGetTarget(out var provider))
+            if (!m_WeakEventProvider.TryGetReference(out var provider))
             {
                 return false;
             }
@@ -1229,7 +1229,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
         public bool TryHandle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11)
         {
-            if (!m_WeakEventProvider.TryGetTarget(out var provider))
+            if (!m_WeakEventProvider.TryGetReference(out var provider))
             {
                 return false;
             }
@@ -1240,7 +1240,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
         public void Handle(in ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> notification)
         {
-            if (m_WeakEventProvider.TryGetTarget(out var provider))
+            if (m_WeakEventProvider.TryGetReference(out var provider))
             {
                 m_Invocation.Invoke(provider, notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7, notification.item8, notification.item9, notification.item10, notification.item11);
             }
@@ -1249,7 +1249,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11)
         {
-            if (m_WeakEventProvider.TryGetTarget(out var provider))
+            if (m_WeakEventProvider.TryGetReference(out var provider))
             {
                 m_Invocation.Invoke(provider, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11);
             }
@@ -1306,7 +1306,7 @@ namespace PeroTools2.AccessKing
         private readonly MethodInfo m_Method;
 
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
-        public bool isAlive => m_WeakEventProvider.TryGetTarget(out _);
+        public bool isAlive => m_WeakEventProvider.TryGetReference(out _);
 
         /// <summary>
         /// Create a weak event handler from a System.Action.
@@ -1324,7 +1324,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
         public bool TryHandle(in ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> notification)
         {
-            if (!m_WeakEventProvider.TryGetTarget(out var provider))
+            if (!m_WeakEventProvider.TryGetReference(out var provider))
             {
                 return false;
             }
@@ -1335,7 +1335,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
         public bool TryHandle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11, T12 param12)
         {
-            if (!m_WeakEventProvider.TryGetTarget(out var provider))
+            if (!m_WeakEventProvider.TryGetReference(out var provider))
             {
                 return false;
             }
@@ -1346,7 +1346,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
         public void Handle(in ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> notification)
         {
-            if (m_WeakEventProvider.TryGetTarget(out var provider))
+            if (m_WeakEventProvider.TryGetReference(out var provider))
             {
                 m_Invocation.Invoke(provider, notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7, notification.item8, notification.item9, notification.item10, notification.item11, notification.item12);
             }
@@ -1355,7 +1355,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11, T12 param12)
         {
-            if (m_WeakEventProvider.TryGetTarget(out var provider))
+            if (m_WeakEventProvider.TryGetReference(out var provider))
             {
                 m_Invocation.Invoke(provider, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12);
             }
@@ -1412,7 +1412,7 @@ namespace PeroTools2.AccessKing
         private readonly MethodInfo m_Method;
 
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
-        public bool isAlive => m_WeakEventProvider.TryGetTarget(out _);
+        public bool isAlive => m_WeakEventProvider.TryGetReference(out _);
 
         /// <summary>
         /// Create a weak event handler from a System.Action.
@@ -1430,7 +1430,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
         public bool TryHandle(in ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> notification)
         {
-            if (!m_WeakEventProvider.TryGetTarget(out var provider))
+            if (!m_WeakEventProvider.TryGetReference(out var provider))
             {
                 return false;
             }
@@ -1441,7 +1441,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
         public bool TryHandle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11, T12 param12, T13 param13)
         {
-            if (!m_WeakEventProvider.TryGetTarget(out var provider))
+            if (!m_WeakEventProvider.TryGetReference(out var provider))
             {
                 return false;
             }
@@ -1452,7 +1452,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
         public void Handle(in ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> notification)
         {
-            if (m_WeakEventProvider.TryGetTarget(out var provider))
+            if (m_WeakEventProvider.TryGetReference(out var provider))
             {
                 m_Invocation.Invoke(provider, notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7, notification.item8, notification.item9, notification.item10, notification.item11, notification.item12, notification.item13);
             }
@@ -1461,7 +1461,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11, T12 param12, T13 param13)
         {
-            if (m_WeakEventProvider.TryGetTarget(out var provider))
+            if (m_WeakEventProvider.TryGetReference(out var provider))
             {
                 m_Invocation.Invoke(provider, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12, param13);
             }
@@ -1518,7 +1518,7 @@ namespace PeroTools2.AccessKing
         private readonly MethodInfo m_Method;
 
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
-        public bool isAlive => m_WeakEventProvider.TryGetTarget(out _);
+        public bool isAlive => m_WeakEventProvider.TryGetReference(out _);
 
         /// <summary>
         /// Create a weak event handler from a System.Action.
@@ -1536,7 +1536,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
         public bool TryHandle(in ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> notification)
         {
-            if (!m_WeakEventProvider.TryGetTarget(out var provider))
+            if (!m_WeakEventProvider.TryGetReference(out var provider))
             {
                 return false;
             }
@@ -1547,7 +1547,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
         public bool TryHandle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11, T12 param12, T13 param13, T14 param14)
         {
-            if (!m_WeakEventProvider.TryGetTarget(out var provider))
+            if (!m_WeakEventProvider.TryGetReference(out var provider))
             {
                 return false;
             }
@@ -1558,7 +1558,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
         public void Handle(in ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> notification)
         {
-            if (m_WeakEventProvider.TryGetTarget(out var provider))
+            if (m_WeakEventProvider.TryGetReference(out var provider))
             {
                 m_Invocation.Invoke(provider, notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7, notification.item8, notification.item9, notification.item10, notification.item11, notification.item12, notification.item13, notification.item14);
             }
@@ -1567,7 +1567,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11, T12 param12, T13 param13, T14 param14)
         {
-            if (m_WeakEventProvider.TryGetTarget(out var provider))
+            if (m_WeakEventProvider.TryGetReference(out var provider))
             {
                 m_Invocation.Invoke(provider, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12, param13, param14);
             }
@@ -1624,7 +1624,7 @@ namespace PeroTools2.AccessKing
         private readonly MethodInfo m_Method;
 
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
-        public bool isAlive => m_WeakEventProvider.TryGetTarget(out _);
+        public bool isAlive => m_WeakEventProvider.TryGetReference(out _);
 
         /// <summary>
         /// Create a weak event handler from a System.Action.
@@ -1642,7 +1642,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
         public bool TryHandle(in ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> notification)
         {
-            if (!m_WeakEventProvider.TryGetTarget(out var provider))
+            if (!m_WeakEventProvider.TryGetReference(out var provider))
             {
                 return false;
             }
@@ -1653,7 +1653,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
         public bool TryHandle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11, T12 param12, T13 param13, T14 param14, T15 param15)
         {
-            if (!m_WeakEventProvider.TryGetTarget(out var provider))
+            if (!m_WeakEventProvider.TryGetReference(out var provider))
             {
                 return false;
             }
@@ -1664,7 +1664,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
         public void Handle(in ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> notification)
         {
-            if (m_WeakEventProvider.TryGetTarget(out var provider))
+            if (m_WeakEventProvider.TryGetReference(out var provider))
             {
                 m_Invocation.Invoke(provider, notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7, notification.item8, notification.item9, notification.item10, notification.item11, notification.item12, notification.item13, notification.item14, notification.item15);
             }
@@ -1673,7 +1673,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11, T12 param12, T13 param13, T14 param14, T15 param15)
         {
-            if (m_WeakEventProvider.TryGetTarget(out var provider))
+            if (m_WeakEventProvider.TryGetReference(out var provider))
             {
                 m_Invocation.Invoke(provider, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12, param13, param14, param15);
             }

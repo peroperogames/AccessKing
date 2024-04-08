@@ -22,19 +22,22 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// Is the handler still alive.
         /// </summary>
-        public bool isAlive => m_WeakHandler.TryGetTarget(out _);
+        public bool isAlive => m_WeakHandler.TryGetReference(out _);
 
         /// <summary>
         /// <inheritdoc cref="WeakEventHandler{TNotification}"/>
         /// </summary>
         /// <param name="handler">The handler that would be created a weak reference.</param>
-        internal WeakEventHandler(IEventHandler<TNotification> handler) => m_WeakHandler = new WeakReference<IEventHandler<TNotification>>(handler);
+        internal WeakEventHandler(IEventHandler<TNotification> handler)
+        {
+            m_WeakHandler = new WeakReference<IEventHandler<TNotification>>(handler);
+        }
 
         /// <inheritdoc cref="IWeakEventHandler{TNotification}"/>
         public bool TryHandle(in TNotification notification)
         {
             // Check alive.
-            if (!m_WeakHandler.TryGetTarget(out var handler)) return false;
+            if (!m_WeakHandler.TryGetReference(out var handler)) return false;
             // Alive, then handle it.
             handler.Handle(in notification);
             return true;

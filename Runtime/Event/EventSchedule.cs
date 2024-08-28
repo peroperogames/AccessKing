@@ -35,7 +35,7 @@ namespace PeroTools2.AccessKing
         }
 
         /// <inheritdoc cref="IEventSchedule{TTheme}.RemoveBus{TNotification}(IEventBus{TNotification})"/>
-        public bool RemoveBus<TNotification>(IEventBus<TNotification> bus) where TNotification : INotification => ((IAccessSchedule<TTheme>)this).RemoveBus(bus);
+        public bool RemoveBus<TNotification>(IEventBus<TNotification> bus) where TNotification : INotification => ((IAccessSchedule<TTheme>) this).RemoveBus(bus);
 
         /// <inheritdoc cref="IAccessSchedule{TTheme}.ContainsBus(TTheme)"/>
         public bool ContainsBus(TTheme theme) => m_EventBusMaps.ContainsKey(theme);
@@ -44,10 +44,24 @@ namespace PeroTools2.AccessKing
         public void Clear() => m_EventBusMaps.Clear();
 
         /// <inheritdoc cref="IEventSchedule{TTheme}.GetBus{TNotification}(TTheme)"/>
-        public IEventBus<TNotification> GetBus<TNotification>(TTheme theme) where TNotification : INotification => m_EventBusMaps[theme] as IEventBus<TNotification>;
+        public IEventBus<TNotification> GetBus<TNotification>(TTheme theme) where TNotification : INotification
+        {
+            if (TryGetBus<TNotification>(theme, out var bus))
+            {
+                return bus;
+            }
+            throw new ArgumentException("Non existing theme: " + theme);
+        }
 
         /// <inheritdoc cref="IAccessSchedule{TTheme}.GetBus(TTheme)"/>
-        object IAccessSchedule<TTheme>.GetBus(TTheme theme) => m_EventBusMaps[theme];
+        object IAccessSchedule<TTheme>.GetBus(TTheme theme)
+        {
+            if (m_EventBusMaps.TryGetValue(theme, out var bus))
+            {
+                return bus;
+            }
+            throw new ArgumentException("Non existing theme: " + theme);
+        }
 
         /// <inheritdoc cref="IEventSchedule{TTheme}.TryGetBus{TNotification}(TTheme, out IEventBus{TNotification})"/>
         public bool TryGetBus<TNotification>(TTheme theme, out IEventBus<TNotification> bus) where TNotification : INotification
@@ -79,10 +93,19 @@ namespace PeroTools2.AccessKing
             {
                 throw new ArgumentException($"The bus must be an instance of {typeof(IEventBus<>)} type. Bus type: {bus.GetType()}.");
             }
-            m_EventBusMaps.Add(theme, bus);
+            if (!m_EventBusMaps.TryAdd(theme, bus))
+            {
+                throw new ArgumentException("Duplicate theme: " + theme);
+            }
         }
 
         /// <inheritdoc cref="IEventSchedule{TTheme}.AddBus{TNotification}(TTheme, IEventBus{TNotification})"/>
-        public void AddBus<TNotification>(TTheme theme, IEventBus<TNotification> bus) where TNotification : INotification => m_EventBusMaps.Add(theme, bus);
+        public void AddBus<TNotification>(TTheme theme, IEventBus<TNotification> bus) where TNotification : INotification
+        {
+            if (!m_EventBusMaps.TryAdd(theme, bus))
+            {
+                throw new ArgumentException("Duplicate theme: " + theme);
+            }
+        }
     }
 }

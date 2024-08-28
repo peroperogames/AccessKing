@@ -1,6 +1,7 @@
-# IDE configs
-/.idea
-/.vs
+#IDE configs
+.idea
+.vs
+.vscode
 
 # Build results
 [Dd]ebug

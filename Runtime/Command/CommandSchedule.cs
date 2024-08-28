@@ -58,12 +58,20 @@ namespace PeroTools2.AccessKing
             {
                 throw new ArgumentException($"The bus must be an instance of {typeof(ICommandBus<>)} type. Buse type : {bus.GetType()}.");
             }
-
-            m_CommandBusMaps.Add(theme, bus);
+            if (!m_CommandBusMaps.TryAdd(theme, bus))
+            {
+                throw new ArgumentException("Duplicate theme: " + theme);
+            }
         }
 
         /// <inheritdoc cref="ICommandSchedule{TTheme}.AddBus{TNotification}(TTheme, ICommandBus{TNotification})"/>
-        public void AddBus<TNotification>(TTheme theme, ICommandBus<TNotification> bus) where TNotification : INotification => m_CommandBusMaps.Add(theme, bus);
+        public void AddBus<TNotification>(TTheme theme, ICommandBus<TNotification> bus) where TNotification : INotification
+        {
+            if (!m_CommandBusMaps.TryAdd(theme, bus))
+            {
+                throw new ArgumentException("Duplicate theme: " + theme);
+            }
+        }
 
         /// <inheritdoc cref="IEventSchedule{TTheme}.TryGetBus(TTheme, out object)"/>
         bool IAccessSchedule<TTheme>.TryGetBus(TTheme theme, out object bus) => m_CommandBusMaps.TryGetValue(theme, out bus);
@@ -85,9 +93,23 @@ namespace PeroTools2.AccessKing
         }
 
         /// <inheritdoc cref="IAccessSchedule{TTheme}.GetBus(TTheme)"/>
-        object IAccessSchedule<TTheme>.GetBus(TTheme theme) => m_CommandBusMaps[theme];
+        object IAccessSchedule<TTheme>.GetBus(TTheme theme)
+        {
+            if (m_CommandBusMaps.TryGetValue(theme, out var bus))
+            {
+                return bus;
+            }
+            throw new ArgumentException("Non existing theme: " + theme);
+        }
 
         /// <inheritdoc cref="ICommandSchedule{TTheme}.GetBus{TNotification}(TTheme)"/>
-        public ICommandBus<TNotification> GetBus<TNotification>(TTheme theme) where TNotification : INotification => m_CommandBusMaps[theme] as ICommandBus<TNotification>;
+        public ICommandBus<TNotification> GetBus<TNotification>(TTheme theme) where TNotification : INotification
+        {
+            if (m_CommandBusMaps.TryGetValue(theme, out var bus))
+            {
+                return (ICommandBus<TNotification>) bus;
+            }
+            throw new ArgumentException("Non existing theme: " + theme);
+        }
     }
 }

@@ -6,6 +6,7 @@
 
 using System;
 using System.Reflection;
+using UnityEngine.Assertions;
 
 #pragma warning disable CS1712 // Type parameter has no matching typeparam tag in the XML comment (but other type parameters do)
 
@@ -45,6 +46,8 @@ namespace PeroTools2.AccessKing
         {
             m_WeakEventProvider = new WeakReference<TEventSource>(provider);
             var method = delegation.Method;
+            Assert.IsFalse(method.IsStatic, "The weak delegate can't be static.");
+            Assert.AreEqual(provider.GetType(), delegation.Target.GetType(), "Invalid provider. The delegate target should have the same type as the provider.");
             m_Invocation = method.CreateDelegate(typeof(Action<TEventSource>)) as Action<TEventSource>;
             m_Method = method;
         }
@@ -151,6 +154,8 @@ namespace PeroTools2.AccessKing
         {
             m_WeakEventProvider = new WeakReference<TEventSource>(provider);
             var method = delegation.Method;
+            Assert.IsFalse(method.IsStatic, "The weak delegate can't be static.");
+            Assert.AreEqual(provider.GetType(), delegation.Target.GetType(), "Invalid provider. The delegate target should have the same type as the provider.");
             m_Invocation = method.CreateDelegate(typeof(Action<TEventSource, T>)) as Action<TEventSource, T>;
             m_Method = method;
         }
@@ -257,6 +262,8 @@ namespace PeroTools2.AccessKing
         {
             m_WeakEventProvider = new WeakReference<TEventSource>(provider);
             var method = delegation.Method;
+            Assert.IsFalse(method.IsStatic, "The weak delegate can't be static.");
+            Assert.AreEqual(provider.GetType(), delegation.Target.GetType(), "Invalid provider. The delegate target should have the same type as the provider.");
             m_Invocation = method.CreateDelegate(typeof(Action<TEventSource, T1, T2>)) as Action<TEventSource, T1, T2>;
             m_Method = method;
         }
@@ -363,6 +370,8 @@ namespace PeroTools2.AccessKing
         {
             m_WeakEventProvider = new WeakReference<TEventSource>(provider);
             var method = delegation.Method;
+            Assert.IsFalse(method.IsStatic, "The weak delegate can't be static.");
+            Assert.AreEqual(provider.GetType(), delegation.Target.GetType(), "Invalid provider. The delegate target should have the same type as the provider.");
             m_Invocation = method.CreateDelegate(typeof(Action<TEventSource, T1, T2, T3>)) as Action<TEventSource, T1, T2, T3>;
             m_Method = method;
         }
@@ -469,6 +478,8 @@ namespace PeroTools2.AccessKing
         {
             m_WeakEventProvider = new WeakReference<TEventSource>(provider);
             var method = delegation.Method;
+            Assert.IsFalse(method.IsStatic, "The weak delegate can't be static.");
+            Assert.AreEqual(provider.GetType(), delegation.Target.GetType(), "Invalid provider. The delegate target should have the same type as the provider.");
             m_Invocation = method.CreateDelegate(typeof(Action<TEventSource, T1, T2, T3, T4>)) as Action<TEventSource, T1, T2, T3, T4>;
             m_Method = method;
         }
@@ -575,6 +586,8 @@ namespace PeroTools2.AccessKing
         {
             m_WeakEventProvider = new WeakReference<TEventSource>(provider);
             var method = delegation.Method;
+            Assert.IsFalse(method.IsStatic, "The weak delegate can't be static.");
+            Assert.AreEqual(provider.GetType(), delegation.Target.GetType(), "Invalid provider. The delegate target should have the same type as the provider.");
             m_Invocation = method.CreateDelegate(typeof(Action<TEventSource, T1, T2, T3, T4, T5>)) as Action<TEventSource, T1, T2, T3, T4, T5>;
             m_Method = method;
         }
@@ -681,6 +694,8 @@ namespace PeroTools2.AccessKing
         {
             m_WeakEventProvider = new WeakReference<TEventSource>(provider);
             var method = delegation.Method;
+            Assert.IsFalse(method.IsStatic, "The weak delegate can't be static.");
+            Assert.AreEqual(provider.GetType(), delegation.Target.GetType(), "Invalid provider. The delegate target should have the same type as the provider.");
             m_Invocation = method.CreateDelegate(typeof(Action<TEventSource, T1, T2, T3, T4, T5, T6>)) as Action<TEventSource, T1, T2, T3, T4, T5, T6>;
             m_Method = method;
         }
@@ -787,6 +802,8 @@ namespace PeroTools2.AccessKing
         {
             m_WeakEventProvider = new WeakReference<TEventSource>(provider);
             var method = delegation.Method;
+            Assert.IsFalse(method.IsStatic, "The weak delegate can't be static.");
+            Assert.AreEqual(provider.GetType(), delegation.Target.GetType(), "Invalid provider. The delegate target should have the same type as the provider.");
             m_Invocation = method.CreateDelegate(typeof(Action<TEventSource, T1, T2, T3, T4, T5, T6, T7>)) as Action<TEventSource, T1, T2, T3, T4, T5, T6, T7>;
             m_Method = method;
         }
@@ -893,6 +910,8 @@ namespace PeroTools2.AccessKing
         {
             m_WeakEventProvider = new WeakReference<TEventSource>(provider);
             var method = delegation.Method;
+            Assert.IsFalse(method.IsStatic, "The weak delegate can't be static.");
+            Assert.AreEqual(provider.GetType(), delegation.Target.GetType(), "Invalid provider. The delegate target should have the same type as the provider.");
             m_Invocation = method.CreateDelegate(typeof(Action<TEventSource, T1, T2, T3, T4, T5, T6, T7, T8>)) as Action<TEventSource, T1, T2, T3, T4, T5, T6, T7, T8>;
             m_Method = method;
         }
@@ -999,6 +1018,8 @@ namespace PeroTools2.AccessKing
         {
             m_WeakEventProvider = new WeakReference<TEventSource>(provider);
             var method = delegation.Method;
+            Assert.IsFalse(method.IsStatic, "The weak delegate can't be static.");
+            Assert.AreEqual(provider.GetType(), delegation.Target.GetType(), "Invalid provider. The delegate target should have the same type as the provider.");
             m_Invocation = method.CreateDelegate(typeof(Action<TEventSource, T1, T2, T3, T4, T5, T6, T7, T8, T9>)) as Action<TEventSource, T1, T2, T3, T4, T5, T6, T7, T8, T9>;
             m_Method = method;
         }
@@ -1105,6 +1126,8 @@ namespace PeroTools2.AccessKing
         {
             m_WeakEventProvider = new WeakReference<TEventSource>(provider);
             var method = delegation.Method;
+            Assert.IsFalse(method.IsStatic, "The weak delegate can't be static.");
+            Assert.AreEqual(provider.GetType(), delegation.Target.GetType(), "Invalid provider. The delegate target should have the same type as the provider.");
             m_Invocation = method.CreateDelegate(typeof(Action<TEventSource, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>)) as Action<TEventSource, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>;
             m_Method = method;
         }
@@ -1211,6 +1234,8 @@ namespace PeroTools2.AccessKing
         {
             m_WeakEventProvider = new WeakReference<TEventSource>(provider);
             var method = delegation.Method;
+            Assert.IsFalse(method.IsStatic, "The weak delegate can't be static.");
+            Assert.AreEqual(provider.GetType(), delegation.Target.GetType(), "Invalid provider. The delegate target should have the same type as the provider.");
             m_Invocation = method.CreateDelegate(typeof(Action<TEventSource, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>)) as Action<TEventSource, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>;
             m_Method = method;
         }
@@ -1317,6 +1342,8 @@ namespace PeroTools2.AccessKing
         {
             m_WeakEventProvider = new WeakReference<TEventSource>(provider);
             var method = delegation.Method;
+            Assert.IsFalse(method.IsStatic, "The weak delegate can't be static.");
+            Assert.AreEqual(provider.GetType(), delegation.Target.GetType(), "Invalid provider. The delegate target should have the same type as the provider.");
             m_Invocation = method.CreateDelegate(typeof(Action<TEventSource, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>)) as Action<TEventSource, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>;
             m_Method = method;
         }
@@ -1423,6 +1450,8 @@ namespace PeroTools2.AccessKing
         {
             m_WeakEventProvider = new WeakReference<TEventSource>(provider);
             var method = delegation.Method;
+            Assert.IsFalse(method.IsStatic, "The weak delegate can't be static.");
+            Assert.AreEqual(provider.GetType(), delegation.Target.GetType(), "Invalid provider. The delegate target should have the same type as the provider.");
             m_Invocation = method.CreateDelegate(typeof(Action<TEventSource, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>)) as Action<TEventSource, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>;
             m_Method = method;
         }
@@ -1529,6 +1558,8 @@ namespace PeroTools2.AccessKing
         {
             m_WeakEventProvider = new WeakReference<TEventSource>(provider);
             var method = delegation.Method;
+            Assert.IsFalse(method.IsStatic, "The weak delegate can't be static.");
+            Assert.AreEqual(provider.GetType(), delegation.Target.GetType(), "Invalid provider. The delegate target should have the same type as the provider.");
             m_Invocation = method.CreateDelegate(typeof(Action<TEventSource, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>)) as Action<TEventSource, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>;
             m_Method = method;
         }
@@ -1635,6 +1666,8 @@ namespace PeroTools2.AccessKing
         {
             m_WeakEventProvider = new WeakReference<TEventSource>(provider);
             var method = delegation.Method;
+            Assert.IsFalse(method.IsStatic, "The weak delegate can't be static.");
+            Assert.AreEqual(provider.GetType(), delegation.Target.GetType(), "Invalid provider. The delegate target should have the same type as the provider.");
             m_Invocation = method.CreateDelegate(typeof(Action<TEventSource, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>)) as Action<TEventSource, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>;
             m_Method = method;
         }

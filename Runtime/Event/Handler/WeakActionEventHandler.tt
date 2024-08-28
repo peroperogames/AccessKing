@@ -10,6 +10,7 @@
 
 using System;
 using System.Reflection;
+using UnityEngine.Assertions;
 
 #pragma warning disable CS1712 // Type parameter has no matching typeparam tag in the XML comment (but other type parameters do)
 
@@ -70,6 +71,8 @@ namespace PeroTools2.AccessKing
         {
             m_WeakEventProvider = new WeakReference<TEventSource>(provider);
             var method = delegation.Method;
+            Assert.IsFalse(method.IsStatic, "The weak delegate can't be static.");
+            Assert.AreEqual(provider.GetType(), delegation.Target.GetType(), "Invalid provider. The delegate target should have the same type as the provider.");
             m_Invocation = method.CreateDelegate(typeof(<#=sourceAction#>)) as <#=sourceAction#>;
             m_Method = method;
         }

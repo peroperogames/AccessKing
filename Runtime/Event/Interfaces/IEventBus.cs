@@ -10,5 +10,5 @@ namespace PeroTools2.AccessKing
     ///  A mediator that transfers a message from a sender to a receiver.
     /// </summary>
     /// <typeparam name="TNotification">Implementation type of <see cref="INotification"/>.</typeparam>
-    public interface IEventBus<TNotification> : IEventSubscriable<TNotification>, IEventBroadcastable<TNotification> where TNotification : INotification { }
+    public interface IEventBus<TNotification> : IEventSubscriable<TNotification>, IEventBroadcastable<TNotification>, IWeakEventSubscriable<TNotification> where TNotification : INotification { }
 }

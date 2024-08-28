@@ -105,6 +105,8 @@ namespace PeroTools2.AccessKing.Editor.Tests
             public void Clear() => throw new NotImplementedException();
 
             public void Broadcast(in TestNotification notification) => throw new NotImplementedException();
+
+            public void SubscribeWeakly(IWeakEventHandler<TestNotification> handler) => throw new NotImplementedException();
         }
     }
 }

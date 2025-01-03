@@ -1,7 +1,9 @@
 {
     "name": "PeroTools2.AccessKing.Samples",
+    "rootNamespace": "",
     "references": [
-        "GUID:f55989aa114b25240999f405ea15627b"
+        "GUID:f55989aa114b25240999f405ea15627b",
+        "GUID:f51ebe6a0ceec4240a699833d6309b23"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

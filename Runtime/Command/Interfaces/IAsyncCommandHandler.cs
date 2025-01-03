@@ -5,6 +5,7 @@
  */
 
 using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 
 namespace PeroTools2.AccessKing
 {
@@ -21,7 +22,7 @@ namespace PeroTools2.AccessKing
     /// Command handler with async task.
     /// </summary>
     /// <typeparam name="TNotification">Implementation type of <see cref="INotification"/>.</typeparam>
-    public interface IAsyncCommandHandler<TNotification> : ITaskCommandHandler<TNotification, Task>
+    public interface IAsyncCommandHandler<TNotification> : ICommandHandler<TNotification, UniTask>
         where TNotification : INotification { }
 
     /// <summary>
@@ -29,6 +30,6 @@ namespace PeroTools2.AccessKing
     /// </summary>
     /// <typeparam name="TNotification">Implementation type of <see cref="INotification"/>.</typeparam>
     /// <typeparam name="TResult">Result of handling.</typeparam>
-    public interface IAsyncCommandHandler<TNotification, TResult> : ITaskCommandHandler<TNotification, Task<TResult>>
+    public interface IAsyncCommandHandler<TNotification, TResult> : ICommandHandler<TNotification, UniTask<TResult>>
         where TNotification : INotification { }
 }

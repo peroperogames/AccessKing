@@ -1,7 +1,9 @@
 {
     "name": "PeroTools2.AccessKing",
+    "rootNamespace": "",
     "references": [
-        "GUID:2dc885a36fd52d54fa53c027feea4fd2"
+        "GUID:2dc885a36fd52d54fa53c027feea4fd2",
+        "GUID:f51ebe6a0ceec4240a699833d6309b23"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -17,5 +17,8 @@
       "path": "Samples~"
     }
   ],
-  "type": "tool"
+  "type": "tool",
+  "dependencies": {
+    "com.prpr.cysharp.unitask": "2.5.5"
+  }
 }

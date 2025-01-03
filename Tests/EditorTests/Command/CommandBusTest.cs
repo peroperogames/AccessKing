@@ -4,6 +4,7 @@
  * Created On: 2023/06/01 17:06:57
  */
 
+using System.Threading.Tasks;
 using NUnit.Framework;
 
 namespace PeroTools2.AccessKing.Editor.Tests
@@ -34,6 +35,30 @@ namespace PeroTools2.AccessKing.Editor.Tests
 
             bus.Execute(ref testNotification);
             Assert.IsTrue(s_HandleCount == handlerCount);
+        }
+
+        [TestCase(0)]
+        [TestCase(1)]
+        [TestCase(2)]
+        [TestCase(10)]
+        public async Task CommandBusExecuteAsyncTest(int handlerCount)
+        {
+            var count = 0;
+            var factory = new RegistryCommandHandlerFactory();
+            var bus = new CommandBus<Empty>(factory);
+            for (var i = 0; i < handlerCount; i++)
+            {
+                factory.RegisterFuncHandler(WaitForSecondes);
+            }
+
+            await bus.Execute().WhenAllDone();
+            Assert.IsTrue(handlerCount == count);
+
+            async Task WaitForSecondes()
+            {
+                await Task.Delay(1);
+                count++;
+            }
         }
 
         [TestCase(1, ExpectedResult = 0)]

@@ -6,6 +6,7 @@
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 
 namespace PeroTools2.AccessKing
 {
@@ -56,13 +57,31 @@ namespace PeroTools2.AccessKing
         /// </summary>
         /// <param name="operation">Result operation.</param>
         /// <returns>Results of task type collection.</returns>
-        public static IReadOnlyList<Task> GetAllAsyncTask(this CommandOperation operation) => operation.GetResults<Task>();
+        public static IReadOnlyList<UniTask> GetAllAsyncTasks(this CommandOperation operation)
+        {
+            var results = new List<UniTask>();
+            var getters = operation.resultGetters;
+            for (var index = 0; index < getters.Count; index++)
+            {
+                var item = getters[index];
+                switch (item)
+                {
+                    case IResultAvailable<Task> taskResult:
+                        results.Add(taskResult.GetResult().AsUniTask());
+                        break;
+                    case IResultAvailable<UniTask> taskResult:
+                        results.Add(taskResult.GetResult());
+                        break;
+                }
+            }
+            return results;
+        }
 
         /// <summary>
         /// Wait for all async tasks done.
         /// </summary>
         /// <param name="tasks">Task results.</param>
-        public static async Task WhenAllDone(this IEnumerable<Task> tasks)
+        public static async UniTask WhenAllDone(this IEnumerable<Task> tasks)
         {
             await Task.WhenAll(tasks);
         }
@@ -71,9 +90,27 @@ namespace PeroTools2.AccessKing
         /// Wait for any async task done.
         /// </summary>
         /// <param name="tasks">Task results.</param>
-        public static async Task WhenAnyDone(this IEnumerable<Task> tasks)
+        public static async UniTask WhenAnyDone(this IEnumerable<Task> tasks)
         {
             await Task.WhenAny(tasks);
+        }
+
+        /// <summary>
+        /// Wait for all async tasks done.
+        /// </summary>
+        /// <param name="tasks">Task results.</param>
+        public static async UniTask WhenAllDone(this IEnumerable<UniTask> tasks)
+        {
+            await UniTask.WhenAll(tasks);
+        }
+
+        /// <summary>
+        /// Wait for any async task done.
+        /// </summary>
+        /// <param name="tasks">Task results.</param>
+        public static async UniTask WhenAnyDone(this IEnumerable<UniTask> tasks)
+        {
+            await UniTask.WhenAny(tasks);
         }
 
         /// <summary>
@@ -81,7 +118,7 @@ namespace PeroTools2.AccessKing
         /// </summary>
         /// <param name="operation">Result operation.</param>
         /// <returns>Results of task type collection.</returns>
-        public static async Task<List<TResult>> GetResultsAsync<TResult>(this CommandOperation operation)
+        public static async UniTask<List<TResult>> GetResultsAsync<TResult>(this CommandOperation operation)
         {
             var results = new List<TResult>();
             var getters = operation.resultGetters;
@@ -96,10 +133,30 @@ namespace PeroTools2.AccessKing
                     case IResultAvailable<Task<TResult>> resultTaskGetter:
                         results.Add(await resultTaskGetter.GetResult());
                         break;
+                    case IResultAvailable<UniTask<TResult>> resultUniTaskGetter:
+                        results.Add(await resultUniTaskGetter.GetResult());
+                        break;
                 }
             }
 
             return results;
+        }
+
+        public static async UniTask WhenAllDone(this CommandOperation operation)
+        {
+            var getters = operation.resultGetters;
+            for (var index = 0; index < getters.Count; index++)
+            {
+                var item = getters[index];
+                if (item is IResultAvailable<Task> resultTaskGetter)
+                {
+                    await resultTaskGetter.GetResult();
+                }
+                else if (item is IResultAvailable<UniTask> resultUnitaskGetter)
+                {
+                    await resultUnitaskGetter.GetResult();
+                }
+            }
         }
 
         #endregion

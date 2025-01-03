@@ -1,9 +1,11 @@
 {
     "name": "PeroTools2.AccessKing.Editor.Tests",
+    "rootNamespace": "",
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
-        "PeroTools2.AccessKing"
+        "PeroTools2.AccessKing",
+        "UniTask"
     ],
     "includePlatforms": [
         "Editor"

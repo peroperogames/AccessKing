@@ -7,7 +7,7 @@
 using System;
 using NUnit.Framework;
 
-namespace PeroTools2.AccessKing.Editor.Tests.CommandTests
+namespace PeroTools2.AccessKing.Editor.Tests
 {
     public sealed class CommandScheduleTest : AccessScheduleTest
     {

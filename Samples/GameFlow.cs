@@ -70,14 +70,12 @@ namespace PeroTools2.AccessKing.Game.Core
             await GameCommands.global
                 .Require<GameCommands.InitStage>()
                 .Execute()
-                .GetAllAsyncTask()
                 .WhenAllDone();
 
             // 玩家回合
             await GameCommands.global
                 .Require<GameCommands.StartPlayerStage>()
                 .Execute()
-                .GetAllAsyncTask()
                 .WhenAllDone();
 
             if (m_IsGameOver)
@@ -87,10 +85,9 @@ namespace PeroTools2.AccessKing.Game.Core
             }
 
             // 敌方回合
-            var tasks = GameCommands.global
+            await GameCommands.global
                 .Require<GameCommands.StartEnemyStage>()
                 .Execute()
-                .GetAllAsyncTask()
                 .WhenAllDone();
 
             if (m_IsGameOver)

@@ -4,7 +4,8 @@
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
-        "PeroTools2.AccessKing"
+        "PeroTools2.AccessKing",
+        "UniTask"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

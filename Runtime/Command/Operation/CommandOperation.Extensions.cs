@@ -4,6 +4,7 @@
  * Created On: 2023/12/11 09:12:36
  */
 
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
@@ -12,6 +13,22 @@ namespace PeroTools2.AccessKing
 {
     public static class CommandOperationExtensions
     {
+        /// <summary>
+        /// Pool for UniTask collection.
+        /// </summary>
+        private static class UniTaskCollection
+        {
+            private static readonly ConcurrentStack<List<UniTask>> s_Cache = new();
+
+            public static List<UniTask> Rent() => !s_Cache.TryPop(out var tasks) ? tasks : new List<UniTask>();
+
+            public static void Return(List<UniTask> tasks)
+            {
+                tasks.Clear();
+                s_Cache.Push(tasks);
+            }
+        }
+
         #region SyncOperation
 
         /// <summary>
@@ -142,6 +159,9 @@ namespace PeroTools2.AccessKing
             return results;
         }
 
+        /// <summary>
+        /// Wait for all async tasks done.
+        /// </summary>
         public static async UniTask WhenAllDone(this CommandOperation operation)
         {
             var getters = operation.resultGetters;
@@ -157,6 +177,29 @@ namespace PeroTools2.AccessKing
                     await resultUnitaskGetter.GetResult();
                 }
             }
+        }
+
+        /// <summary>
+        /// Wait for any async task done.
+        /// </summary>
+        public static async UniTask WhenAnyDone(this CommandOperation operation)
+        {
+            var getters = operation.resultGetters;
+            var tasks = UniTaskCollection.Rent();
+            for (var index = 0; index < getters.Count; index++)
+            {
+                var item = getters[index];
+                if (item is IResultAvailable<Task> resultTaskGetter)
+                {
+                    tasks.Add(resultTaskGetter.GetResult().AsUniTask());
+                }
+                else if (item is IResultAvailable<UniTask> resultUnitaskGetter)
+                {
+                    tasks.Add(resultUnitaskGetter.GetResult());
+                }
+            }
+            await UniTask.WhenAny(tasks);
+            UniTaskCollection.Return(tasks);
         }
 
         #endregion

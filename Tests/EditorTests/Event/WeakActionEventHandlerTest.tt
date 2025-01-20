@@ -14,6 +14,7 @@
 using System;
 using NUnit.Framework;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace PeroTools2.AccessKing.Editor.Tests
 {
@@ -22,43 +23,39 @@ namespace PeroTools2.AccessKing.Editor.Tests
     {
         private int m_HandleCount;
         private bool m_IsInvoke;
+        private TempScritableObject unityObj;
 
         [SetUp]
         public void SetUp()
         {
+            unityObj = ScriptableObject.CreateInstance<TempScritableObject>();
+            unityObj.test = this;
             m_HandleCount = 0;
             m_IsInvoke = false;
         }
 
-        private static void CreateBlob(int count)
+        private class TempScritableObject : ScriptableObject
         {
-            var trash = new List<Blob>();
-            for (var i = 0; i < count; i++)
-            {
-                trash.Add(new Blob());
-            }
-
-            trash.Clear();
-        }
-
+            public WeakActionEventHandlerTest test;
 <#
-    for (var i = 0; i < 16; i++)
-    {
-        var parameters = string.Empty;
-        if (i > 0)
-        {
-            parameters = i == 1 ? "object p" : string.Join(", ", from index in Enumerable.Range(1, i) select $"object p{index}");
-        }
+            for (var i = 0; i < 16; i++)
+            {
+                var parameters = string.Empty;
+                if (i > 0)
+                {
+                    parameters = i == 1 ? "object p" : string.Join(", ", from index in Enumerable.Range(1, i) select $"object p{index}");
+                }
 #>
 
-        private void Test(<#= parameters #>)
-        {
-            m_HandleCount++;
-            m_IsInvoke = true;
-        }
+            public void Test(<#= parameters #>)
+            {
+                test.m_HandleCount++;
+                test.m_IsInvoke = true;
+            }
 <#
     }
 #>
+        }
 
 <#=testCase#>
         public void HandlerInvokeTest(int argumentCount)
@@ -68,11 +65,11 @@ namespace PeroTools2.AccessKing.Editor.Tests
 <#
             for (var i = 0; i < 16; i++)
             {
-                var objectArg = i == 0 ? "<WeakActionEventHandlerTest>" : $"<WeakActionEventHandlerTest, {string.Join(", ", from index in Enumerable.Range(1, i) select "object")}>";
+                var objectArg = i == 0 ? "<TempScritableObject>" : $"<TempScritableObject, {string.Join(", ", from index in Enumerable.Range(1, i) select "object")}>";
                 var param = i == 0 ? string.Empty : string.Join(", ", from index in Enumerable.Range(1, i) select "default");
 #>
                 case <#= i #>:
-                    var handler<#= i #> = new WeakActionEventHandler<#= objectArg #>(Test, this);
+                    var handler<#= i #> = new WeakActionEventHandler<#= objectArg #>(unityObj.Test, this.unityObj);
                     handler<#= i #>.Handle(<#=param#>);
                     break;
 <#
@@ -85,37 +82,21 @@ namespace PeroTools2.AccessKing.Editor.Tests
 <#=testCase#>
         public void HandlerInvokeWithNonRefGCTest(int argumentCount)
         {
-            object RegisterWithGarbage(int argumentCount)
-            {
-                switch (argumentCount)
-                {
-<#
-                for (var i = 0; i < 16; i++)
-                {
-                    var objectArg = i == 0 ? "<WeakActionEventHandlerTest>" : $"<WeakActionEventHandlerTest, {string.Join(", ", from index in Enumerable.Range(1, i) select "object")}>";
-#>
-                    case <#= i #>: return new WeakActionEventHandler<#= objectArg #>(Test, new WeakActionEventHandlerTest());
-<#
-                }
-#>
-                    default: return null;
-                }
-            }
-            var handler = RegisterWithGarbage(argumentCount);
-            CreateBlob(10);
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
             switch (argumentCount)
             {
 <#
             for (var i = 0; i < 16; i++)
             {
-                var objectArg = i == 0 ? "<WeakActionEventHandlerTest>" : $"<WeakActionEventHandlerTest, {string.Join(", ", from index in Enumerable.Range(1, i) select "object")}>";
+                var objectArg = i == 0 ? "<TempScritableObject>" : $"<TempScritableObject, {string.Join(", ", from index in Enumerable.Range(1, i) select "object")}>";
                 var param = i == 0 ? string.Empty : string.Join(", ", from index in Enumerable.Range(1, i) select "default");
 #>
                 case <#= i #>:
+                {
+                    var handler = new WeakActionEventHandler<#= objectArg #>(unityObj.Test, unityObj);
+                    UnityEngine.Object.DestroyImmediate(unityObj);
                     (handler as WeakActionEventHandler<#= objectArg #>).Handle(<#=param#>);
                     break;
+                }
 <#
             }
 #>
@@ -131,11 +112,11 @@ namespace PeroTools2.AccessKing.Editor.Tests
 <#
             for (var i = 0; i < 16; i++)
             {
-                var objectArg = i == 0 ? "<WeakActionEventHandlerTest>" : $"<WeakActionEventHandlerTest, {string.Join(", ", from index in Enumerable.Range(1, i) select "object")}>";
+                var objectArg = i == 0 ? "<TempScritableObject>" : $"<TempScritableObject, {string.Join(", ", from index in Enumerable.Range(1, i) select "object")}>";
 #>
                 case <#= i #>:
-                    var handler<#= i #>_1 = new WeakActionEventHandler<#= objectArg #>(Test, this);
-                    var handler<#= i #>_2 = new WeakActionEventHandler<#= objectArg #>(Test, this);
+                    var handler<#= i #>_1 = new WeakActionEventHandler<#= objectArg #>(unityObj.Test, this.unityObj);
+                    var handler<#= i #>_2 = new WeakActionEventHandler<#= objectArg #>(unityObj.Test, this.unityObj);
                     Assert.IsTrue(handler<#= i #>_1 == handler<#= i #>_2);
                     Assert.IsTrue(handler<#= i #>_1.Equals(handler<#= i #>_2));
                     break;
@@ -153,12 +134,12 @@ namespace PeroTools2.AccessKing.Editor.Tests
 <#
             for (var i = 0; i < 16; i++)
             {
-                var objectArg1 = i == 0 ? "<WeakActionEventHandlerTest>" : $"<WeakActionEventHandlerTest, {string.Join(", ", from index in Enumerable.Range(1, i) select "object")}>";
+                var objectArg1 = i == 0 ? "<TempScritableObject>" : $"<TempScritableObject, {string.Join(", ", from index in Enumerable.Range(1, i) select "object")}>";
                 var objectArg2 = i == 0 ? string.Empty : $"<{string.Join(", ", from index in Enumerable.Range(1, i) select "object")}>";
 #>
                 case <#= i #>:
-                    var handler<#= i #>_1 = new WeakActionEventHandler<#= objectArg1 #>(Test, this);
-                    var handler<#= i #>_2 = new Action<#= objectArg2 #>(Test);
+                    var handler<#= i #>_1 = new WeakActionEventHandler<#= objectArg1 #>(unityObj.Test, this.unityObj);
+                    var handler<#= i #>_2 = new Action<#= objectArg2 #>(unityObj.Test);
                     Assert.IsTrue(handler<#= i #>_1 == handler<#= i #>_2);
                     Assert.IsTrue(handler<#= i #>_1.Equals(handler<#= i #>_2));
                     break;
@@ -182,7 +163,7 @@ namespace PeroTools2.AccessKing.Editor.Tests
 #>
                 case <#= i #>:
                     var bus<#= i #> = new EventBus<<#=objectArg#>>();
-                    bus<#= i #>.SubscribeWeakly(Test, this);
+                    bus<#= i #>.SubscribeWeakly(this.unityObj, unityObj.Test);
                     bus<#= i #>.Broadcast(<#=param#>);
                     break;
 <#
@@ -207,9 +188,9 @@ namespace PeroTools2.AccessKing.Editor.Tests
                     var bus<#= i #> = new EventBus<<#=objectArg#>>();
                     for (var i = 0; i < handlerCount; i++)
                     {
-                        bus<#= i #>.SubscribeWeakly(Test, this);
+                        bus<#= i #>.SubscribeWeakly(this.unityObj, unityObj.Test);
                     }
-                    Assert.IsTrue(bus<#= i #>.Unsubscribe(Test));
+                    Assert.IsTrue(bus<#= i #>.Unsubscribe(unityObj.Test));
                     bus<#= i #>.Broadcast(<#=param#>);
                     break;
 <#

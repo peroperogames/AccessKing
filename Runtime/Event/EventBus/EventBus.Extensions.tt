@@ -83,7 +83,7 @@ namespace PeroTools2.AccessKing
         /// <param name="action">The delegate which convert to ActionEventHandler.</param>
         /// <param name="provider">The event provider which should contains the delegation that from instance method.</param>
         [Obsolete("Usee SubscribeWeakly<#=genericArgsWithAngleBrackets#>(TEventSource provider, <#=action#> action) instead.")]
-        public static void SubscribeWeakly<#=genericArgsWithAngleBrackets#>(this <#=eventBus#> eventBus, <#=action#> action, TEventSource provider) where TEventSource : class
+        public static void SubscribeWeakly<#=genericArgsWithAngleBrackets#>(this <#=eventBus#> eventBus, <#=action#> action, TEventSource provider) where TEventSource : UnityEngine.Object
             => eventBus.SubscribeWeakly(new <#=evenHandler#>(action, provider));
 <#
     }
@@ -110,7 +110,7 @@ namespace PeroTools2.AccessKing
         /// <param name="eventBus">Event bus.</param>
         /// <param name="provider">The event provider which should contains the delegation that from instance method.</param>
         /// <param name="action">The delegate which convert to ActionEventHandler.</param>
-        public static void SubscribeWeakly<#=genericArgsWithAngleBrackets#>(this <#=eventBus#> eventBus, TEventSource provider, <#=action#> action) where TEventSource : class
+        public static void SubscribeWeakly<#=genericArgsWithAngleBrackets#>(this <#=eventBus#> eventBus, TEventSource provider, <#=action#> action) where TEventSource : UnityEngine.Object
             => eventBus.SubscribeWeakly(new <#=evenHandler#>(action, provider));
 <#
     }

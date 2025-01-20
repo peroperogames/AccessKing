@@ -17,7 +17,7 @@ namespace PeroTools2.AccessKing
     /// Event handler with System.Action which would reference the event provider by weak.
     /// </summary>
     /// <typeparam name="TEventSource">Event provider which would be referenced by handler.</typeparam>
-    public sealed class WeakActionEventHandler<TEventSource> : IEventHandler, IWeakEventHandler, IEquatable<WeakActionEventHandler<TEventSource>> where TEventSource : class
+    public sealed class WeakActionEventHandler<TEventSource> : IEventHandler, IWeakEventHandler, IEquatable<WeakActionEventHandler<TEventSource>> where TEventSource : UnityEngine.Object
     {
         /// <summary>
         /// Delegate with instance method provider.
@@ -125,7 +125,7 @@ namespace PeroTools2.AccessKing
     /// Event handler with System.Action which would reference the event provider by weak.
     /// </summary>
     /// <typeparam name="TEventSource">Event provider which would be referenced by handler.</typeparam>
-    public sealed class WeakActionEventHandler<TEventSource, T> : IEventHandler<ParameterNotification<T>>, IWeakEventHandler<ParameterNotification<T>>, IEquatable<WeakActionEventHandler<TEventSource, T>> where TEventSource : class
+    public sealed class WeakActionEventHandler<TEventSource, T> : IEventHandler<ParameterNotification<T>>, IWeakEventHandler<ParameterNotification<T>>, IEquatable<WeakActionEventHandler<TEventSource, T>> where TEventSource : UnityEngine.Object
     {
         /// <summary>
         /// Delegate with instance method provider.
@@ -233,7 +233,7 @@ namespace PeroTools2.AccessKing
     /// Event handler with System.Action which would reference the event provider by weak.
     /// </summary>
     /// <typeparam name="TEventSource">Event provider which would be referenced by handler.</typeparam>
-    public sealed class WeakActionEventHandler<TEventSource, T1, T2> : IEventHandler<ParameterNotification<T1, T2>>, IWeakEventHandler<ParameterNotification<T1, T2>>, IEquatable<WeakActionEventHandler<TEventSource, T1, T2>> where TEventSource : class
+    public sealed class WeakActionEventHandler<TEventSource, T1, T2> : IEventHandler<ParameterNotification<T1, T2>>, IWeakEventHandler<ParameterNotification<T1, T2>>, IEquatable<WeakActionEventHandler<TEventSource, T1, T2>> where TEventSource : UnityEngine.Object
     {
         /// <summary>
         /// Delegate with instance method provider.
@@ -341,7 +341,7 @@ namespace PeroTools2.AccessKing
     /// Event handler with System.Action which would reference the event provider by weak.
     /// </summary>
     /// <typeparam name="TEventSource">Event provider which would be referenced by handler.</typeparam>
-    public sealed class WeakActionEventHandler<TEventSource, T1, T2, T3> : IEventHandler<ParameterNotification<T1, T2, T3>>, IWeakEventHandler<ParameterNotification<T1, T2, T3>>, IEquatable<WeakActionEventHandler<TEventSource, T1, T2, T3>> where TEventSource : class
+    public sealed class WeakActionEventHandler<TEventSource, T1, T2, T3> : IEventHandler<ParameterNotification<T1, T2, T3>>, IWeakEventHandler<ParameterNotification<T1, T2, T3>>, IEquatable<WeakActionEventHandler<TEventSource, T1, T2, T3>> where TEventSource : UnityEngine.Object
     {
         /// <summary>
         /// Delegate with instance method provider.
@@ -449,7 +449,7 @@ namespace PeroTools2.AccessKing
     /// Event handler with System.Action which would reference the event provider by weak.
     /// </summary>
     /// <typeparam name="TEventSource">Event provider which would be referenced by handler.</typeparam>
-    public sealed class WeakActionEventHandler<TEventSource, T1, T2, T3, T4> : IEventHandler<ParameterNotification<T1, T2, T3, T4>>, IWeakEventHandler<ParameterNotification<T1, T2, T3, T4>>, IEquatable<WeakActionEventHandler<TEventSource, T1, T2, T3, T4>> where TEventSource : class
+    public sealed class WeakActionEventHandler<TEventSource, T1, T2, T3, T4> : IEventHandler<ParameterNotification<T1, T2, T3, T4>>, IWeakEventHandler<ParameterNotification<T1, T2, T3, T4>>, IEquatable<WeakActionEventHandler<TEventSource, T1, T2, T3, T4>> where TEventSource : UnityEngine.Object
     {
         /// <summary>
         /// Delegate with instance method provider.
@@ -557,7 +557,7 @@ namespace PeroTools2.AccessKing
     /// Event handler with System.Action which would reference the event provider by weak.
     /// </summary>
     /// <typeparam name="TEventSource">Event provider which would be referenced by handler.</typeparam>
-    public sealed class WeakActionEventHandler<TEventSource, T1, T2, T3, T4, T5> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5>>, IWeakEventHandler<ParameterNotification<T1, T2, T3, T4, T5>>, IEquatable<WeakActionEventHandler<TEventSource, T1, T2, T3, T4, T5>> where TEventSource : class
+    public sealed class WeakActionEventHandler<TEventSource, T1, T2, T3, T4, T5> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5>>, IWeakEventHandler<ParameterNotification<T1, T2, T3, T4, T5>>, IEquatable<WeakActionEventHandler<TEventSource, T1, T2, T3, T4, T5>> where TEventSource : UnityEngine.Object
     {
         /// <summary>
         /// Delegate with instance method provider.
@@ -665,7 +665,7 @@ namespace PeroTools2.AccessKing
     /// Event handler with System.Action which would reference the event provider by weak.
     /// </summary>
     /// <typeparam name="TEventSource">Event provider which would be referenced by handler.</typeparam>
-    public sealed class WeakActionEventHandler<TEventSource, T1, T2, T3, T4, T5, T6> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6>>, IWeakEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6>>, IEquatable<WeakActionEventHandler<TEventSource, T1, T2, T3, T4, T5, T6>> where TEventSource : class
+    public sealed class WeakActionEventHandler<TEventSource, T1, T2, T3, T4, T5, T6> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6>>, IWeakEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6>>, IEquatable<WeakActionEventHandler<TEventSource, T1, T2, T3, T4, T5, T6>> where TEventSource : UnityEngine.Object
     {
         /// <summary>
         /// Delegate with instance method provider.
@@ -773,7 +773,7 @@ namespace PeroTools2.AccessKing
     /// Event handler with System.Action which would reference the event provider by weak.
     /// </summary>
     /// <typeparam name="TEventSource">Event provider which would be referenced by handler.</typeparam>
-    public sealed class WeakActionEventHandler<TEventSource, T1, T2, T3, T4, T5, T6, T7> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7>>, IWeakEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7>>, IEquatable<WeakActionEventHandler<TEventSource, T1, T2, T3, T4, T5, T6, T7>> where TEventSource : class
+    public sealed class WeakActionEventHandler<TEventSource, T1, T2, T3, T4, T5, T6, T7> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7>>, IWeakEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7>>, IEquatable<WeakActionEventHandler<TEventSource, T1, T2, T3, T4, T5, T6, T7>> where TEventSource : UnityEngine.Object
     {
         /// <summary>
         /// Delegate with instance method provider.
@@ -881,7 +881,7 @@ namespace PeroTools2.AccessKing
     /// Event handler with System.Action which would reference the event provider by weak.
     /// </summary>
     /// <typeparam name="TEventSource">Event provider which would be referenced by handler.</typeparam>
-    public sealed class WeakActionEventHandler<TEventSource, T1, T2, T3, T4, T5, T6, T7, T8> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8>>, IWeakEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8>>, IEquatable<WeakActionEventHandler<TEventSource, T1, T2, T3, T4, T5, T6, T7, T8>> where TEventSource : class
+    public sealed class WeakActionEventHandler<TEventSource, T1, T2, T3, T4, T5, T6, T7, T8> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8>>, IWeakEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8>>, IEquatable<WeakActionEventHandler<TEventSource, T1, T2, T3, T4, T5, T6, T7, T8>> where TEventSource : UnityEngine.Object
     {
         /// <summary>
         /// Delegate with instance method provider.
@@ -989,7 +989,7 @@ namespace PeroTools2.AccessKing
     /// Event handler with System.Action which would reference the event provider by weak.
     /// </summary>
     /// <typeparam name="TEventSource">Event provider which would be referenced by handler.</typeparam>
-    public sealed class WeakActionEventHandler<TEventSource, T1, T2, T3, T4, T5, T6, T7, T8, T9> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9>>, IWeakEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9>>, IEquatable<WeakActionEventHandler<TEventSource, T1, T2, T3, T4, T5, T6, T7, T8, T9>> where TEventSource : class
+    public sealed class WeakActionEventHandler<TEventSource, T1, T2, T3, T4, T5, T6, T7, T8, T9> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9>>, IWeakEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9>>, IEquatable<WeakActionEventHandler<TEventSource, T1, T2, T3, T4, T5, T6, T7, T8, T9>> where TEventSource : UnityEngine.Object
     {
         /// <summary>
         /// Delegate with instance method provider.
@@ -1097,7 +1097,7 @@ namespace PeroTools2.AccessKing
     /// Event handler with System.Action which would reference the event provider by weak.
     /// </summary>
     /// <typeparam name="TEventSource">Event provider which would be referenced by handler.</typeparam>
-    public sealed class WeakActionEventHandler<TEventSource, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>>, IWeakEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>>, IEquatable<WeakActionEventHandler<TEventSource, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>> where TEventSource : class
+    public sealed class WeakActionEventHandler<TEventSource, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>>, IWeakEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>>, IEquatable<WeakActionEventHandler<TEventSource, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>> where TEventSource : UnityEngine.Object
     {
         /// <summary>
         /// Delegate with instance method provider.
@@ -1205,7 +1205,7 @@ namespace PeroTools2.AccessKing
     /// Event handler with System.Action which would reference the event provider by weak.
     /// </summary>
     /// <typeparam name="TEventSource">Event provider which would be referenced by handler.</typeparam>
-    public sealed class WeakActionEventHandler<TEventSource, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>>, IWeakEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>>, IEquatable<WeakActionEventHandler<TEventSource, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>> where TEventSource : class
+    public sealed class WeakActionEventHandler<TEventSource, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>>, IWeakEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>>, IEquatable<WeakActionEventHandler<TEventSource, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>> where TEventSource : UnityEngine.Object
     {
         /// <summary>
         /// Delegate with instance method provider.
@@ -1313,7 +1313,7 @@ namespace PeroTools2.AccessKing
     /// Event handler with System.Action which would reference the event provider by weak.
     /// </summary>
     /// <typeparam name="TEventSource">Event provider which would be referenced by handler.</typeparam>
-    public sealed class WeakActionEventHandler<TEventSource, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>>, IWeakEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>>, IEquatable<WeakActionEventHandler<TEventSource, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>> where TEventSource : class
+    public sealed class WeakActionEventHandler<TEventSource, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>>, IWeakEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>>, IEquatable<WeakActionEventHandler<TEventSource, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>> where TEventSource : UnityEngine.Object
     {
         /// <summary>
         /// Delegate with instance method provider.
@@ -1421,7 +1421,7 @@ namespace PeroTools2.AccessKing
     /// Event handler with System.Action which would reference the event provider by weak.
     /// </summary>
     /// <typeparam name="TEventSource">Event provider which would be referenced by handler.</typeparam>
-    public sealed class WeakActionEventHandler<TEventSource, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>>, IWeakEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>>, IEquatable<WeakActionEventHandler<TEventSource, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>> where TEventSource : class
+    public sealed class WeakActionEventHandler<TEventSource, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>>, IWeakEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>>, IEquatable<WeakActionEventHandler<TEventSource, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>> where TEventSource : UnityEngine.Object
     {
         /// <summary>
         /// Delegate with instance method provider.
@@ -1529,7 +1529,7 @@ namespace PeroTools2.AccessKing
     /// Event handler with System.Action which would reference the event provider by weak.
     /// </summary>
     /// <typeparam name="TEventSource">Event provider which would be referenced by handler.</typeparam>
-    public sealed class WeakActionEventHandler<TEventSource, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>>, IWeakEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>>, IEquatable<WeakActionEventHandler<TEventSource, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>> where TEventSource : class
+    public sealed class WeakActionEventHandler<TEventSource, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>>, IWeakEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>>, IEquatable<WeakActionEventHandler<TEventSource, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>> where TEventSource : UnityEngine.Object
     {
         /// <summary>
         /// Delegate with instance method provider.
@@ -1637,7 +1637,7 @@ namespace PeroTools2.AccessKing
     /// Event handler with System.Action which would reference the event provider by weak.
     /// </summary>
     /// <typeparam name="TEventSource">Event provider which would be referenced by handler.</typeparam>
-    public sealed class WeakActionEventHandler<TEventSource, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>>, IWeakEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>>, IEquatable<WeakActionEventHandler<TEventSource, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>> where TEventSource : class
+    public sealed class WeakActionEventHandler<TEventSource, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>>, IWeakEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>>, IEquatable<WeakActionEventHandler<TEventSource, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>> where TEventSource : UnityEngine.Object
     {
         /// <summary>
         /// Delegate with instance method provider.

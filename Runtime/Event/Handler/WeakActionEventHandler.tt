@@ -42,7 +42,7 @@ namespace PeroTools2.AccessKing
     /// Event handler with System.Action which would reference the event provider by weak.
     /// </summary>
     /// <typeparam name="TEventSource">Event provider which would be referenced by handler.</typeparam>
-    public sealed class <#=weakEvenHandler#> : <#=ievenHandler#>, <#=iweakEvenHandler#>, IEquatable<<#=weakEvenHandler#>> where TEventSource : class
+    public sealed class <#=weakEvenHandler#> : <#=ievenHandler#>, <#=iweakEvenHandler#>, IEquatable<<#=weakEvenHandler#>> where TEventSource : UnityEngine.Object
     {
         /// <summary>
         /// Delegate with instance method provider.

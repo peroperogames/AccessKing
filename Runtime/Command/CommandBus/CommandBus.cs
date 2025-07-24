@@ -5,9 +5,9 @@
  */
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.Pool;
 
 namespace PeroTools2.AccessKing
 {
@@ -23,7 +23,7 @@ namespace PeroTools2.AccessKing
         /// Factories that locate the handlers about specific notification.
         /// The factory type must be different.
         /// </param>
-        public CommandBus(params ICommandHandlerFactory[] handlerFactories) => m_HandlerFactories = handlerFactories.ToDictionary(item => item.GetType());
+        public CommandBus(params ICommandHandlerFactory[] handlerFactories) => m_HandlerFactories = handlerFactories.ToDictionary(static item => item.GetType());
 
         public CommandBus() => m_HandlerFactories = new Dictionary<Type, ICommandHandlerFactory>();
 
@@ -48,7 +48,7 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="ICommandBus{TNotification}.Execute(ref TNotification)"/>.
         public CommandOperation Execute(ref TNotification notification)
         {
-            var results = new ArrayList();
+            var results = CollectionPool<List<IResultAvailable>, IResultAvailable>.Get();
             foreach (var factory in m_HandlerFactories.Values)
             {
                 var handlers = factory.GetHandlers<TNotification>();

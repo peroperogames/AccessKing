@@ -149,67 +149,67 @@ namespace PeroTools2.AccessKing.Editor.Tests
             switch (argumentCount)
             {
                 case 0:
-                    var handler0 = new WeakActionEventHandler<TempScritableObject>(unityObj.Test, this.unityObj);
+                    var handler0 = new WeakActionEventHandler(unityObj.Test, this.unityObj);
                     handler0.Handle();
                     break;
                 case 1:
-                    var handler1 = new WeakActionEventHandler<TempScritableObject, object>(unityObj.Test, this.unityObj);
+                    var handler1 = new WeakActionEventHandler<object>(unityObj.Test, this.unityObj);
                     handler1.Handle(default);
                     break;
                 case 2:
-                    var handler2 = new WeakActionEventHandler<TempScritableObject, object, object>(unityObj.Test, this.unityObj);
+                    var handler2 = new WeakActionEventHandler<object, object>(unityObj.Test, this.unityObj);
                     handler2.Handle(default, default);
                     break;
                 case 3:
-                    var handler3 = new WeakActionEventHandler<TempScritableObject, object, object, object>(unityObj.Test, this.unityObj);
+                    var handler3 = new WeakActionEventHandler<object, object, object>(unityObj.Test, this.unityObj);
                     handler3.Handle(default, default, default);
                     break;
                 case 4:
-                    var handler4 = new WeakActionEventHandler<TempScritableObject, object, object, object, object>(unityObj.Test, this.unityObj);
+                    var handler4 = new WeakActionEventHandler<object, object, object, object>(unityObj.Test, this.unityObj);
                     handler4.Handle(default, default, default, default);
                     break;
                 case 5:
-                    var handler5 = new WeakActionEventHandler<TempScritableObject, object, object, object, object, object>(unityObj.Test, this.unityObj);
+                    var handler5 = new WeakActionEventHandler<object, object, object, object, object>(unityObj.Test, this.unityObj);
                     handler5.Handle(default, default, default, default, default);
                     break;
                 case 6:
-                    var handler6 = new WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
+                    var handler6 = new WeakActionEventHandler<object, object, object, object, object, object>(unityObj.Test, this.unityObj);
                     handler6.Handle(default, default, default, default, default, default);
                     break;
                 case 7:
-                    var handler7 = new WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
+                    var handler7 = new WeakActionEventHandler<object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
                     handler7.Handle(default, default, default, default, default, default, default);
                     break;
                 case 8:
-                    var handler8 = new WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
+                    var handler8 = new WeakActionEventHandler<object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
                     handler8.Handle(default, default, default, default, default, default, default, default);
                     break;
                 case 9:
-                    var handler9 = new WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
+                    var handler9 = new WeakActionEventHandler<object, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
                     handler9.Handle(default, default, default, default, default, default, default, default, default);
                     break;
                 case 10:
-                    var handler10 = new WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
+                    var handler10 = new WeakActionEventHandler<object, object, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
                     handler10.Handle(default, default, default, default, default, default, default, default, default, default);
                     break;
                 case 11:
-                    var handler11 = new WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
+                    var handler11 = new WeakActionEventHandler<object, object, object, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
                     handler11.Handle(default, default, default, default, default, default, default, default, default, default, default);
                     break;
                 case 12:
-                    var handler12 = new WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
+                    var handler12 = new WeakActionEventHandler<object, object, object, object, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
                     handler12.Handle(default, default, default, default, default, default, default, default, default, default, default, default);
                     break;
                 case 13:
-                    var handler13 = new WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
+                    var handler13 = new WeakActionEventHandler<object, object, object, object, object, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
                     handler13.Handle(default, default, default, default, default, default, default, default, default, default, default, default, default);
                     break;
                 case 14:
-                    var handler14 = new WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
+                    var handler14 = new WeakActionEventHandler<object, object, object, object, object, object, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
                     handler14.Handle(default, default, default, default, default, default, default, default, default, default, default, default, default, default);
                     break;
                 case 15:
-                    var handler15 = new WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
+                    var handler15 = new WeakActionEventHandler<object, object, object, object, object, object, object, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
                     handler15.Handle(default, default, default, default, default, default, default, default, default, default, default, default, default, default, default);
                     break;
             }
@@ -238,114 +238,114 @@ namespace PeroTools2.AccessKing.Editor.Tests
             {
                 case 0:
                 {
-                    var handler = new WeakActionEventHandler<TempScritableObject>(unityObj.Test, unityObj);
+                    var handler = new WeakActionEventHandler(unityObj.Test, unityObj);
                     UnityEngine.Object.DestroyImmediate(unityObj);
-                    (handler as WeakActionEventHandler<TempScritableObject>).Handle();
+                    (handler as WeakActionEventHandler).Handle();
                     break;
                 }
                 case 1:
                 {
-                    var handler = new WeakActionEventHandler<TempScritableObject, object>(unityObj.Test, unityObj);
+                    var handler = new WeakActionEventHandler<object>(unityObj.Test, unityObj);
                     UnityEngine.Object.DestroyImmediate(unityObj);
-                    (handler as WeakActionEventHandler<TempScritableObject, object>).Handle(default);
+                    (handler as WeakActionEventHandler<object>).Handle(default);
                     break;
                 }
                 case 2:
                 {
-                    var handler = new WeakActionEventHandler<TempScritableObject, object, object>(unityObj.Test, unityObj);
+                    var handler = new WeakActionEventHandler<object, object>(unityObj.Test, unityObj);
                     UnityEngine.Object.DestroyImmediate(unityObj);
-                    (handler as WeakActionEventHandler<TempScritableObject, object, object>).Handle(default, default);
+                    (handler as WeakActionEventHandler<object, object>).Handle(default, default);
                     break;
                 }
                 case 3:
                 {
-                    var handler = new WeakActionEventHandler<TempScritableObject, object, object, object>(unityObj.Test, unityObj);
+                    var handler = new WeakActionEventHandler<object, object, object>(unityObj.Test, unityObj);
                     UnityEngine.Object.DestroyImmediate(unityObj);
-                    (handler as WeakActionEventHandler<TempScritableObject, object, object, object>).Handle(default, default, default);
+                    (handler as WeakActionEventHandler<object, object, object>).Handle(default, default, default);
                     break;
                 }
                 case 4:
                 {
-                    var handler = new WeakActionEventHandler<TempScritableObject, object, object, object, object>(unityObj.Test, unityObj);
+                    var handler = new WeakActionEventHandler<object, object, object, object>(unityObj.Test, unityObj);
                     UnityEngine.Object.DestroyImmediate(unityObj);
-                    (handler as WeakActionEventHandler<TempScritableObject, object, object, object, object>).Handle(default, default, default, default);
+                    (handler as WeakActionEventHandler<object, object, object, object>).Handle(default, default, default, default);
                     break;
                 }
                 case 5:
                 {
-                    var handler = new WeakActionEventHandler<TempScritableObject, object, object, object, object, object>(unityObj.Test, unityObj);
+                    var handler = new WeakActionEventHandler<object, object, object, object, object>(unityObj.Test, unityObj);
                     UnityEngine.Object.DestroyImmediate(unityObj);
-                    (handler as WeakActionEventHandler<TempScritableObject, object, object, object, object, object>).Handle(default, default, default, default, default);
+                    (handler as WeakActionEventHandler<object, object, object, object, object>).Handle(default, default, default, default, default);
                     break;
                 }
                 case 6:
                 {
-                    var handler = new WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object>(unityObj.Test, unityObj);
+                    var handler = new WeakActionEventHandler<object, object, object, object, object, object>(unityObj.Test, unityObj);
                     UnityEngine.Object.DestroyImmediate(unityObj);
-                    (handler as WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object>).Handle(default, default, default, default, default, default);
+                    (handler as WeakActionEventHandler<object, object, object, object, object, object>).Handle(default, default, default, default, default, default);
                     break;
                 }
                 case 7:
                 {
-                    var handler = new WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object, object>(unityObj.Test, unityObj);
+                    var handler = new WeakActionEventHandler<object, object, object, object, object, object, object>(unityObj.Test, unityObj);
                     UnityEngine.Object.DestroyImmediate(unityObj);
-                    (handler as WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object, object>).Handle(default, default, default, default, default, default, default);
+                    (handler as WeakActionEventHandler<object, object, object, object, object, object, object>).Handle(default, default, default, default, default, default, default);
                     break;
                 }
                 case 8:
                 {
-                    var handler = new WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object, object, object>(unityObj.Test, unityObj);
+                    var handler = new WeakActionEventHandler<object, object, object, object, object, object, object, object>(unityObj.Test, unityObj);
                     UnityEngine.Object.DestroyImmediate(unityObj);
-                    (handler as WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object, object, object>).Handle(default, default, default, default, default, default, default, default);
+                    (handler as WeakActionEventHandler<object, object, object, object, object, object, object, object>).Handle(default, default, default, default, default, default, default, default);
                     break;
                 }
                 case 9:
                 {
-                    var handler = new WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object, object, object, object>(unityObj.Test, unityObj);
+                    var handler = new WeakActionEventHandler<object, object, object, object, object, object, object, object, object>(unityObj.Test, unityObj);
                     UnityEngine.Object.DestroyImmediate(unityObj);
-                    (handler as WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object, object, object, object>).Handle(default, default, default, default, default, default, default, default, default);
+                    (handler as WeakActionEventHandler<object, object, object, object, object, object, object, object, object>).Handle(default, default, default, default, default, default, default, default, default);
                     break;
                 }
                 case 10:
                 {
-                    var handler = new WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object, object, object, object, object>(unityObj.Test, unityObj);
+                    var handler = new WeakActionEventHandler<object, object, object, object, object, object, object, object, object, object>(unityObj.Test, unityObj);
                     UnityEngine.Object.DestroyImmediate(unityObj);
-                    (handler as WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object, object, object, object, object>).Handle(default, default, default, default, default, default, default, default, default, default);
+                    (handler as WeakActionEventHandler<object, object, object, object, object, object, object, object, object, object>).Handle(default, default, default, default, default, default, default, default, default, default);
                     break;
                 }
                 case 11:
                 {
-                    var handler = new WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object, object, object, object, object, object>(unityObj.Test, unityObj);
+                    var handler = new WeakActionEventHandler<object, object, object, object, object, object, object, object, object, object, object>(unityObj.Test, unityObj);
                     UnityEngine.Object.DestroyImmediate(unityObj);
-                    (handler as WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object, object, object, object, object, object>).Handle(default, default, default, default, default, default, default, default, default, default, default);
+                    (handler as WeakActionEventHandler<object, object, object, object, object, object, object, object, object, object, object>).Handle(default, default, default, default, default, default, default, default, default, default, default);
                     break;
                 }
                 case 12:
                 {
-                    var handler = new WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object, object, object, object, object, object, object>(unityObj.Test, unityObj);
+                    var handler = new WeakActionEventHandler<object, object, object, object, object, object, object, object, object, object, object, object>(unityObj.Test, unityObj);
                     UnityEngine.Object.DestroyImmediate(unityObj);
-                    (handler as WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object, object, object, object, object, object, object>).Handle(default, default, default, default, default, default, default, default, default, default, default, default);
+                    (handler as WeakActionEventHandler<object, object, object, object, object, object, object, object, object, object, object, object>).Handle(default, default, default, default, default, default, default, default, default, default, default, default);
                     break;
                 }
                 case 13:
                 {
-                    var handler = new WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object, object, object, object, object, object, object, object>(unityObj.Test, unityObj);
+                    var handler = new WeakActionEventHandler<object, object, object, object, object, object, object, object, object, object, object, object, object>(unityObj.Test, unityObj);
                     UnityEngine.Object.DestroyImmediate(unityObj);
-                    (handler as WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object, object, object, object, object, object, object, object>).Handle(default, default, default, default, default, default, default, default, default, default, default, default, default);
+                    (handler as WeakActionEventHandler<object, object, object, object, object, object, object, object, object, object, object, object, object>).Handle(default, default, default, default, default, default, default, default, default, default, default, default, default);
                     break;
                 }
                 case 14:
                 {
-                    var handler = new WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object, object, object, object, object, object, object, object, object>(unityObj.Test, unityObj);
+                    var handler = new WeakActionEventHandler<object, object, object, object, object, object, object, object, object, object, object, object, object, object>(unityObj.Test, unityObj);
                     UnityEngine.Object.DestroyImmediate(unityObj);
-                    (handler as WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object, object, object, object, object, object, object, object, object>).Handle(default, default, default, default, default, default, default, default, default, default, default, default, default, default);
+                    (handler as WeakActionEventHandler<object, object, object, object, object, object, object, object, object, object, object, object, object, object>).Handle(default, default, default, default, default, default, default, default, default, default, default, default, default, default);
                     break;
                 }
                 case 15:
                 {
-                    var handler = new WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object>(unityObj.Test, unityObj);
+                    var handler = new WeakActionEventHandler<object, object, object, object, object, object, object, object, object, object, object, object, object, object, object>(unityObj.Test, unityObj);
                     UnityEngine.Object.DestroyImmediate(unityObj);
-                    (handler as WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object>).Handle(default, default, default, default, default, default, default, default, default, default, default, default, default, default, default);
+                    (handler as WeakActionEventHandler<object, object, object, object, object, object, object, object, object, object, object, object, object, object, object>).Handle(default, default, default, default, default, default, default, default, default, default, default, default, default, default, default);
                     break;
                 }
             }
@@ -373,98 +373,98 @@ namespace PeroTools2.AccessKing.Editor.Tests
             switch (argumentCount)
             {
                 case 0:
-                    var handler0_1 = new WeakActionEventHandler<TempScritableObject>(unityObj.Test, this.unityObj);
-                    var handler0_2 = new WeakActionEventHandler<TempScritableObject>(unityObj.Test, this.unityObj);
+                    var handler0_1 = new WeakActionEventHandler(unityObj.Test, this.unityObj);
+                    var handler0_2 = new WeakActionEventHandler(unityObj.Test, this.unityObj);
                     Assert.IsTrue(handler0_1 == handler0_2);
                     Assert.IsTrue(handler0_1.Equals(handler0_2));
                     break;
                 case 1:
-                    var handler1_1 = new WeakActionEventHandler<TempScritableObject, object>(unityObj.Test, this.unityObj);
-                    var handler1_2 = new WeakActionEventHandler<TempScritableObject, object>(unityObj.Test, this.unityObj);
+                    var handler1_1 = new WeakActionEventHandler<object>(unityObj.Test, this.unityObj);
+                    var handler1_2 = new WeakActionEventHandler<object>(unityObj.Test, this.unityObj);
                     Assert.IsTrue(handler1_1 == handler1_2);
                     Assert.IsTrue(handler1_1.Equals(handler1_2));
                     break;
                 case 2:
-                    var handler2_1 = new WeakActionEventHandler<TempScritableObject, object, object>(unityObj.Test, this.unityObj);
-                    var handler2_2 = new WeakActionEventHandler<TempScritableObject, object, object>(unityObj.Test, this.unityObj);
+                    var handler2_1 = new WeakActionEventHandler<object, object>(unityObj.Test, this.unityObj);
+                    var handler2_2 = new WeakActionEventHandler<object, object>(unityObj.Test, this.unityObj);
                     Assert.IsTrue(handler2_1 == handler2_2);
                     Assert.IsTrue(handler2_1.Equals(handler2_2));
                     break;
                 case 3:
-                    var handler3_1 = new WeakActionEventHandler<TempScritableObject, object, object, object>(unityObj.Test, this.unityObj);
-                    var handler3_2 = new WeakActionEventHandler<TempScritableObject, object, object, object>(unityObj.Test, this.unityObj);
+                    var handler3_1 = new WeakActionEventHandler<object, object, object>(unityObj.Test, this.unityObj);
+                    var handler3_2 = new WeakActionEventHandler<object, object, object>(unityObj.Test, this.unityObj);
                     Assert.IsTrue(handler3_1 == handler3_2);
                     Assert.IsTrue(handler3_1.Equals(handler3_2));
                     break;
                 case 4:
-                    var handler4_1 = new WeakActionEventHandler<TempScritableObject, object, object, object, object>(unityObj.Test, this.unityObj);
-                    var handler4_2 = new WeakActionEventHandler<TempScritableObject, object, object, object, object>(unityObj.Test, this.unityObj);
+                    var handler4_1 = new WeakActionEventHandler<object, object, object, object>(unityObj.Test, this.unityObj);
+                    var handler4_2 = new WeakActionEventHandler<object, object, object, object>(unityObj.Test, this.unityObj);
                     Assert.IsTrue(handler4_1 == handler4_2);
                     Assert.IsTrue(handler4_1.Equals(handler4_2));
                     break;
                 case 5:
-                    var handler5_1 = new WeakActionEventHandler<TempScritableObject, object, object, object, object, object>(unityObj.Test, this.unityObj);
-                    var handler5_2 = new WeakActionEventHandler<TempScritableObject, object, object, object, object, object>(unityObj.Test, this.unityObj);
+                    var handler5_1 = new WeakActionEventHandler<object, object, object, object, object>(unityObj.Test, this.unityObj);
+                    var handler5_2 = new WeakActionEventHandler<object, object, object, object, object>(unityObj.Test, this.unityObj);
                     Assert.IsTrue(handler5_1 == handler5_2);
                     Assert.IsTrue(handler5_1.Equals(handler5_2));
                     break;
                 case 6:
-                    var handler6_1 = new WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
-                    var handler6_2 = new WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
+                    var handler6_1 = new WeakActionEventHandler<object, object, object, object, object, object>(unityObj.Test, this.unityObj);
+                    var handler6_2 = new WeakActionEventHandler<object, object, object, object, object, object>(unityObj.Test, this.unityObj);
                     Assert.IsTrue(handler6_1 == handler6_2);
                     Assert.IsTrue(handler6_1.Equals(handler6_2));
                     break;
                 case 7:
-                    var handler7_1 = new WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
-                    var handler7_2 = new WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
+                    var handler7_1 = new WeakActionEventHandler<object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
+                    var handler7_2 = new WeakActionEventHandler<object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
                     Assert.IsTrue(handler7_1 == handler7_2);
                     Assert.IsTrue(handler7_1.Equals(handler7_2));
                     break;
                 case 8:
-                    var handler8_1 = new WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
-                    var handler8_2 = new WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
+                    var handler8_1 = new WeakActionEventHandler<object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
+                    var handler8_2 = new WeakActionEventHandler<object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
                     Assert.IsTrue(handler8_1 == handler8_2);
                     Assert.IsTrue(handler8_1.Equals(handler8_2));
                     break;
                 case 9:
-                    var handler9_1 = new WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
-                    var handler9_2 = new WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
+                    var handler9_1 = new WeakActionEventHandler<object, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
+                    var handler9_2 = new WeakActionEventHandler<object, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
                     Assert.IsTrue(handler9_1 == handler9_2);
                     Assert.IsTrue(handler9_1.Equals(handler9_2));
                     break;
                 case 10:
-                    var handler10_1 = new WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
-                    var handler10_2 = new WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
+                    var handler10_1 = new WeakActionEventHandler<object, object, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
+                    var handler10_2 = new WeakActionEventHandler<object, object, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
                     Assert.IsTrue(handler10_1 == handler10_2);
                     Assert.IsTrue(handler10_1.Equals(handler10_2));
                     break;
                 case 11:
-                    var handler11_1 = new WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
-                    var handler11_2 = new WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
+                    var handler11_1 = new WeakActionEventHandler<object, object, object, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
+                    var handler11_2 = new WeakActionEventHandler<object, object, object, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
                     Assert.IsTrue(handler11_1 == handler11_2);
                     Assert.IsTrue(handler11_1.Equals(handler11_2));
                     break;
                 case 12:
-                    var handler12_1 = new WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
-                    var handler12_2 = new WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
+                    var handler12_1 = new WeakActionEventHandler<object, object, object, object, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
+                    var handler12_2 = new WeakActionEventHandler<object, object, object, object, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
                     Assert.IsTrue(handler12_1 == handler12_2);
                     Assert.IsTrue(handler12_1.Equals(handler12_2));
                     break;
                 case 13:
-                    var handler13_1 = new WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
-                    var handler13_2 = new WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
+                    var handler13_1 = new WeakActionEventHandler<object, object, object, object, object, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
+                    var handler13_2 = new WeakActionEventHandler<object, object, object, object, object, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
                     Assert.IsTrue(handler13_1 == handler13_2);
                     Assert.IsTrue(handler13_1.Equals(handler13_2));
                     break;
                 case 14:
-                    var handler14_1 = new WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
-                    var handler14_2 = new WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
+                    var handler14_1 = new WeakActionEventHandler<object, object, object, object, object, object, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
+                    var handler14_2 = new WeakActionEventHandler<object, object, object, object, object, object, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
                     Assert.IsTrue(handler14_1 == handler14_2);
                     Assert.IsTrue(handler14_1.Equals(handler14_2));
                     break;
                 case 15:
-                    var handler15_1 = new WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
-                    var handler15_2 = new WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
+                    var handler15_1 = new WeakActionEventHandler<object, object, object, object, object, object, object, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
+                    var handler15_2 = new WeakActionEventHandler<object, object, object, object, object, object, object, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
                     Assert.IsTrue(handler15_1 == handler15_2);
                     Assert.IsTrue(handler15_1.Equals(handler15_2));
                     break;
@@ -492,97 +492,97 @@ namespace PeroTools2.AccessKing.Editor.Tests
             switch (argumentCount)
             {
                 case 0:
-                    var handler0_1 = new WeakActionEventHandler<TempScritableObject>(unityObj.Test, this.unityObj);
+                    var handler0_1 = new WeakActionEventHandler(unityObj.Test, this.unityObj);
                     var handler0_2 = new Action(unityObj.Test);
                     Assert.IsTrue(handler0_1 == handler0_2);
                     Assert.IsTrue(handler0_1.Equals(handler0_2));
                     break;
                 case 1:
-                    var handler1_1 = new WeakActionEventHandler<TempScritableObject, object>(unityObj.Test, this.unityObj);
+                    var handler1_1 = new WeakActionEventHandler<object>(unityObj.Test, this.unityObj);
                     var handler1_2 = new Action<object>(unityObj.Test);
                     Assert.IsTrue(handler1_1 == handler1_2);
                     Assert.IsTrue(handler1_1.Equals(handler1_2));
                     break;
                 case 2:
-                    var handler2_1 = new WeakActionEventHandler<TempScritableObject, object, object>(unityObj.Test, this.unityObj);
+                    var handler2_1 = new WeakActionEventHandler<object, object>(unityObj.Test, this.unityObj);
                     var handler2_2 = new Action<object, object>(unityObj.Test);
                     Assert.IsTrue(handler2_1 == handler2_2);
                     Assert.IsTrue(handler2_1.Equals(handler2_2));
                     break;
                 case 3:
-                    var handler3_1 = new WeakActionEventHandler<TempScritableObject, object, object, object>(unityObj.Test, this.unityObj);
+                    var handler3_1 = new WeakActionEventHandler<object, object, object>(unityObj.Test, this.unityObj);
                     var handler3_2 = new Action<object, object, object>(unityObj.Test);
                     Assert.IsTrue(handler3_1 == handler3_2);
                     Assert.IsTrue(handler3_1.Equals(handler3_2));
                     break;
                 case 4:
-                    var handler4_1 = new WeakActionEventHandler<TempScritableObject, object, object, object, object>(unityObj.Test, this.unityObj);
+                    var handler4_1 = new WeakActionEventHandler<object, object, object, object>(unityObj.Test, this.unityObj);
                     var handler4_2 = new Action<object, object, object, object>(unityObj.Test);
                     Assert.IsTrue(handler4_1 == handler4_2);
                     Assert.IsTrue(handler4_1.Equals(handler4_2));
                     break;
                 case 5:
-                    var handler5_1 = new WeakActionEventHandler<TempScritableObject, object, object, object, object, object>(unityObj.Test, this.unityObj);
+                    var handler5_1 = new WeakActionEventHandler<object, object, object, object, object>(unityObj.Test, this.unityObj);
                     var handler5_2 = new Action<object, object, object, object, object>(unityObj.Test);
                     Assert.IsTrue(handler5_1 == handler5_2);
                     Assert.IsTrue(handler5_1.Equals(handler5_2));
                     break;
                 case 6:
-                    var handler6_1 = new WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
+                    var handler6_1 = new WeakActionEventHandler<object, object, object, object, object, object>(unityObj.Test, this.unityObj);
                     var handler6_2 = new Action<object, object, object, object, object, object>(unityObj.Test);
                     Assert.IsTrue(handler6_1 == handler6_2);
                     Assert.IsTrue(handler6_1.Equals(handler6_2));
                     break;
                 case 7:
-                    var handler7_1 = new WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
+                    var handler7_1 = new WeakActionEventHandler<object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
                     var handler7_2 = new Action<object, object, object, object, object, object, object>(unityObj.Test);
                     Assert.IsTrue(handler7_1 == handler7_2);
                     Assert.IsTrue(handler7_1.Equals(handler7_2));
                     break;
                 case 8:
-                    var handler8_1 = new WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
+                    var handler8_1 = new WeakActionEventHandler<object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
                     var handler8_2 = new Action<object, object, object, object, object, object, object, object>(unityObj.Test);
                     Assert.IsTrue(handler8_1 == handler8_2);
                     Assert.IsTrue(handler8_1.Equals(handler8_2));
                     break;
                 case 9:
-                    var handler9_1 = new WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
+                    var handler9_1 = new WeakActionEventHandler<object, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
                     var handler9_2 = new Action<object, object, object, object, object, object, object, object, object>(unityObj.Test);
                     Assert.IsTrue(handler9_1 == handler9_2);
                     Assert.IsTrue(handler9_1.Equals(handler9_2));
                     break;
                 case 10:
-                    var handler10_1 = new WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
+                    var handler10_1 = new WeakActionEventHandler<object, object, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
                     var handler10_2 = new Action<object, object, object, object, object, object, object, object, object, object>(unityObj.Test);
                     Assert.IsTrue(handler10_1 == handler10_2);
                     Assert.IsTrue(handler10_1.Equals(handler10_2));
                     break;
                 case 11:
-                    var handler11_1 = new WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
+                    var handler11_1 = new WeakActionEventHandler<object, object, object, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
                     var handler11_2 = new Action<object, object, object, object, object, object, object, object, object, object, object>(unityObj.Test);
                     Assert.IsTrue(handler11_1 == handler11_2);
                     Assert.IsTrue(handler11_1.Equals(handler11_2));
                     break;
                 case 12:
-                    var handler12_1 = new WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
+                    var handler12_1 = new WeakActionEventHandler<object, object, object, object, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
                     var handler12_2 = new Action<object, object, object, object, object, object, object, object, object, object, object, object>(unityObj.Test);
                     Assert.IsTrue(handler12_1 == handler12_2);
                     Assert.IsTrue(handler12_1.Equals(handler12_2));
                     break;
                 case 13:
-                    var handler13_1 = new WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
+                    var handler13_1 = new WeakActionEventHandler<object, object, object, object, object, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
                     var handler13_2 = new Action<object, object, object, object, object, object, object, object, object, object, object, object, object>(unityObj.Test);
                     Assert.IsTrue(handler13_1 == handler13_2);
                     Assert.IsTrue(handler13_1.Equals(handler13_2));
                     break;
                 case 14:
-                    var handler14_1 = new WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
+                    var handler14_1 = new WeakActionEventHandler<object, object, object, object, object, object, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
                     var handler14_2 = new Action<object, object, object, object, object, object, object, object, object, object, object, object, object, object>(unityObj.Test);
                     Assert.IsTrue(handler14_1 == handler14_2);
                     Assert.IsTrue(handler14_1.Equals(handler14_2));
                     break;
                 case 15:
-                    var handler15_1 = new WeakActionEventHandler<TempScritableObject, object, object, object, object, object, object, object, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
+                    var handler15_1 = new WeakActionEventHandler<object, object, object, object, object, object, object, object, object, object, object, object, object, object, object>(unityObj.Test, this.unityObj);
                     var handler15_2 = new Action<object, object, object, object, object, object, object, object, object, object, object, object, object, object, object>(unityObj.Test);
                     Assert.IsTrue(handler15_1 == handler15_2);
                     Assert.IsTrue(handler15_1.Equals(handler15_2));

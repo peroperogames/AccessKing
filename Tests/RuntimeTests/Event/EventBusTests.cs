@@ -31,6 +31,30 @@ namespace PeroTools2.AccessKing.Tests
             Assert.IsTrue(notification.isSucceed == false);
         }
 
+        [UnityTest]
+        public IEnumerator EventBusSubscribeActionWeaklyTest()
+        {
+            var obj = new SubordinateType();
+            var owner = new GameObject();
+            var eventBus = new ParameterEventBus<bool>();
+            eventBus.SubscribeWeakly(obj.Test, owner);
+            Object.Destroy(owner);
+            yield return null;
+            Assert.IsTrue(owner == null);
+            eventBus.Broadcast(true);
+            Assert.IsFalse(obj.isSucceed);
+        }
+
+        private class SubordinateType
+        {
+            public bool isSucceed;
+
+            public void Test(bool notification)
+            {
+                isSucceed = notification;
+            }
+        }
+
         private static TObject CreateHandler()
         {
             if (typeof(TObject).IsSubclassOf(typeof(MonoBehaviour)))

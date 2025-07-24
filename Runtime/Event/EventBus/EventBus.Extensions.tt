@@ -64,15 +64,15 @@ namespace PeroTools2.AccessKing
     for (var i = 0; i < 16; i++)
     {
         var genericArgs = string.Empty;
-        var genericArgsWithAngleBrackets = "<TEventSource>";
+        var genericArgsWithAngleBrackets = string.Empty;
         if (i > 0)
         {
             genericArgs = i == 1 ? "T" : string.Join(", ", from index in Enumerable.Range(1, i) select $"T{index}");
-            genericArgsWithAngleBrackets = i == 1 ? "<TEventSource, T>" : $"<TEventSource, {string.Join(", ", from index in Enumerable.Range(1, i) select $"T{index}")}>";
+            genericArgsWithAngleBrackets = i == 1 ? "<T>" : $"<{string.Join(", ", from index in Enumerable.Range(1, i) select $"T{index}")}>";
         }
         var parameterNotification = i == 0 ? "Empty" : $"ParameterNotification<{genericArgs}>";
         var action = i == 0 ? "Action" : $"Action<{genericArgs}>";
-        var evenHandler = $"WeakActionEventHandler{(i == 0 ? "<TEventSource>" : $"<TEventSource, {genericArgs}>")}";
+        var evenHandler = $"WeakActionEventHandler{(i == 0 ? string.Empty : $"<{genericArgs}>")}";
         var eventBus = $"IWeakEventSubscriable{(i == 0 ? "<Empty>" : $"<{parameterNotification}>")}";
 #>
 
@@ -82,8 +82,8 @@ namespace PeroTools2.AccessKing
         /// <param name="eventBus">Event bus.</param>
         /// <param name="action">The delegate which convert to ActionEventHandler.</param>
         /// <param name="provider">The event provider which should contains the delegation that from instance method.</param>
-        [Obsolete("Usee SubscribeWeakly<#=genericArgsWithAngleBrackets#>(TEventSource provider, <#=action#> action) instead.")]
-        public static void SubscribeWeakly<#=genericArgsWithAngleBrackets#>(this <#=eventBus#> eventBus, <#=action#> action, TEventSource provider) where TEventSource : UnityEngine.Object
+        [Obsolete("Usee SubscribeWeakly<#=genericArgsWithAngleBrackets#>(UnityEngine.Object provider, <#=action#> action) instead.")]
+        public static void SubscribeWeakly<#=genericArgsWithAngleBrackets#>(this <#=eventBus#> eventBus, <#=action#> action, UnityEngine.Object provider)
             => eventBus.SubscribeWeakly(new <#=evenHandler#>(action, provider));
 <#
     }
@@ -92,15 +92,15 @@ namespace PeroTools2.AccessKing
     for (var i = 0; i < 16; i++)
     {
         var genericArgs = string.Empty;
-        var genericArgsWithAngleBrackets = "<TEventSource>";
+        var genericArgsWithAngleBrackets = string.Empty;
         if (i > 0)
         {
             genericArgs = i == 1 ? "T" : string.Join(", ", from index in Enumerable.Range(1, i) select $"T{index}");
-            genericArgsWithAngleBrackets = i == 1 ? "<TEventSource, T>" : $"<TEventSource, {string.Join(", ", from index in Enumerable.Range(1, i) select $"T{index}")}>";
+            genericArgsWithAngleBrackets = i == 1 ? "<T>" : $"<{string.Join(", ", from index in Enumerable.Range(1, i) select $"T{index}")}>";
         }
         var parameterNotification = i == 0 ? "Empty" : $"ParameterNotification<{genericArgs}>";
         var action = i == 0 ? "Action" : $"Action<{genericArgs}>";
-        var evenHandler = $"WeakActionEventHandler{(i == 0 ? "<TEventSource>" : $"<TEventSource, {genericArgs}>")}";
+        var evenHandler = $"WeakActionEventHandler{(i == 0 ? string.Empty : $"<{genericArgs}>")}";
         var eventBus = $"IWeakEventSubscriable{(i == 0 ? "<Empty>" : $"<{parameterNotification}>")}";
 #>
 
@@ -110,7 +110,7 @@ namespace PeroTools2.AccessKing
         /// <param name="eventBus">Event bus.</param>
         /// <param name="provider">The event provider which should contains the delegation that from instance method.</param>
         /// <param name="action">The delegate which convert to ActionEventHandler.</param>
-        public static void SubscribeWeakly<#=genericArgsWithAngleBrackets#>(this <#=eventBus#> eventBus, TEventSource provider, <#=action#> action) where TEventSource : UnityEngine.Object
+        public static void SubscribeWeakly<#=genericArgsWithAngleBrackets#>(this <#=eventBus#> eventBus, UnityEngine.Object provider, <#=action#> action)
             => eventBus.SubscribeWeakly(new <#=evenHandler#>(action, provider));
 <#
     }

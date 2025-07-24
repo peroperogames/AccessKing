@@ -65,7 +65,7 @@ namespace PeroTools2.AccessKing.Editor.Tests
 <#
             for (var i = 0; i < 16; i++)
             {
-                var objectArg = i == 0 ? "<TempScritableObject>" : $"<TempScritableObject, {string.Join(", ", from index in Enumerable.Range(1, i) select "object")}>";
+                var objectArg = i == 0 ? string.Empty : $"<{string.Join(", ", from index in Enumerable.Range(1, i) select "object")}>";
                 var param = i == 0 ? string.Empty : string.Join(", ", from index in Enumerable.Range(1, i) select "default");
 #>
                 case <#= i #>:
@@ -87,7 +87,7 @@ namespace PeroTools2.AccessKing.Editor.Tests
 <#
             for (var i = 0; i < 16; i++)
             {
-                var objectArg = i == 0 ? "<TempScritableObject>" : $"<TempScritableObject, {string.Join(", ", from index in Enumerable.Range(1, i) select "object")}>";
+                var objectArg = i == 0 ? string.Empty : $"<{string.Join(", ", from index in Enumerable.Range(1, i) select "object")}>";
                 var param = i == 0 ? string.Empty : string.Join(", ", from index in Enumerable.Range(1, i) select "default");
 #>
                 case <#= i #>:
@@ -112,7 +112,7 @@ namespace PeroTools2.AccessKing.Editor.Tests
 <#
             for (var i = 0; i < 16; i++)
             {
-                var objectArg = i == 0 ? "<TempScritableObject>" : $"<TempScritableObject, {string.Join(", ", from index in Enumerable.Range(1, i) select "object")}>";
+                var objectArg = i == 0 ? string.Empty : $"<{string.Join(", ", from index in Enumerable.Range(1, i) select "object")}>";
 #>
                 case <#= i #>:
                     var handler<#= i #>_1 = new WeakActionEventHandler<#= objectArg #>(unityObj.Test, this.unityObj);
@@ -134,7 +134,7 @@ namespace PeroTools2.AccessKing.Editor.Tests
 <#
             for (var i = 0; i < 16; i++)
             {
-                var objectArg1 = i == 0 ? "<TempScritableObject>" : $"<TempScritableObject, {string.Join(", ", from index in Enumerable.Range(1, i) select "object")}>";
+                var objectArg1 = i == 0 ? string.Empty : $"<{string.Join(", ", from index in Enumerable.Range(1, i) select "object")}>";
                 var objectArg2 = i == 0 ? string.Empty : $"<{string.Join(", ", from index in Enumerable.Range(1, i) select "object")}>";
 #>
                 case <#= i #>:

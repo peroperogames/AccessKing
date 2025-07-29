@@ -87,7 +87,7 @@ namespace PeroTools2.AccessKing
 
             // ReSharper disable once UseIsOperator.2
             // Check whether implements IEventBus<>
-            if (!bus.GetType().GetInterfaces().Any(@interface =>
+            if (!bus.GetType().GetInterfaces().Any(static @interface =>
                     @interface.IsGenericType &&
                     @interface.GetGenericTypeDefinition() == typeof(IEventBus<>)))
             {

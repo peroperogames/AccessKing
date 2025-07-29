@@ -19,5 +19,12 @@ namespace PeroTools2.AccessKing
         /// <typeparam name="TNotification">Implementation type of <see cref="INotification"/>.</typeparam>
         /// <returns>Command handler about the <c>TNotification</c> collections.</returns>
         IEnumerable<ICommandHandler<TNotification>> GetHandlers<TNotification>() where TNotification : INotification;
+
+        /// <summary>
+        /// Get all command handlers which could handle the <c>TNotification</c> from factory.
+        /// </summary>
+        /// <typeparam name="TNotification">Implementation type of <see cref="INotification"/>.</typeparam>
+        /// <returns>Command handler about the <c>TNotification</c> collections.</returns>
+        void GetHandlers<TNotification>(IList<ICommandHandler<TNotification>> collection) where TNotification : INotification;
     }
 }

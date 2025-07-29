@@ -49,9 +49,10 @@ namespace PeroTools2.AccessKing
         public CommandOperation Execute(ref TNotification notification)
         {
             var results = CollectionPool<List<IResultAvailable>, IResultAvailable>.Get();
+            var handlers = CollectionPool<List<ICommandHandler<TNotification>>, ICommandHandler<TNotification>>.Get();
             foreach (var factory in m_HandlerFactories.Values)
             {
-                var handlers = factory.GetHandlers<TNotification>();
+                factory.GetHandlers(handlers);
                 foreach (var handler in handlers)
                 {
                     handler.Handle(ref notification);

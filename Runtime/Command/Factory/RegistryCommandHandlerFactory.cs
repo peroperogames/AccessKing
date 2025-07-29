@@ -66,6 +66,20 @@ namespace PeroTools2.AccessKing
                 ? handlers.Cast<ICommandHandler<TNotification>>()
                 : Array.Empty<ICommandHandler<TNotification>>();
 
+        /// <inheritdoc />
+        public void GetHandlers<TNotification>(IList<ICommandHandler<TNotification>> collection) where TNotification : INotification
+        {
+            if (!m_HandlerMaps.TryGetValue(typeof(TNotification), out var handlers))
+            {
+                return;
+            }
+            foreach (var handler in handlers)
+            {
+                if(handler is ICommandHandler<TNotification> castedHandler)
+                    collection.Add(castedHandler);
+            }
+        }
+
         /// <summary>
         /// Whether contains the CommandHandler with specified notification type.
         /// </summary>

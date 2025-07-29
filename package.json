@@ -2,7 +2,7 @@
   "name": "com.prpr.accessking",
   "displayName": "AccessKing",
   "description": "PeroTools2's access bus with  cross-domain service access, includes: \n- Event bus\n- Command bus\n- Query bus",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "unity": "2021.3",
   "author": {
     "name": "Peropero",

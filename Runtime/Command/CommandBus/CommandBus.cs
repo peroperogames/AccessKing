@@ -62,6 +62,7 @@ namespace PeroTools2.AccessKing
                     }
                 }
             }
+            CollectionPool<List<ICommandHandler<TNotification>>, ICommandHandler<TNotification>>.Release(handlers);
 
             return new CommandOperation(results);
         }

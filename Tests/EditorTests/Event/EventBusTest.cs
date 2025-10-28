@@ -108,6 +108,45 @@ namespace PeroTools2.AccessKing.Editor.Tests
             return notification.isSucceed;
         }
 
+        [Test]
+        public void ConsecutiveWeakEventCalls()
+        {
+            IEventBus<Empty> bus = new EventBus<Empty>();
+            {
+                var handler1 = new TestWeakEventHandler(null);
+                var handler2 = new TestWeakEventHandler(null);
+                var handler3 = new TestWeakEventHandler(() => handler2.isAlive = false);
+                var handler4 = new TestWeakEventHandler(() => handler1.isAlive = false);
+                bus.SubscribeWeakly(handler4);
+                bus.SubscribeWeakly(handler3);
+                bus.SubscribeWeakly(handler2);
+                bus.SubscribeWeakly(handler1);
+                bus.Broadcast();
+                Assert.IsFalse(handler1.isAlive);
+                Assert.IsFalse(handler2.isAlive);
+                Assert.IsTrue(handler3.isAlive);
+                Assert.IsTrue(handler4.isAlive);
+                Assert.AreEqual(0, handler1.invokedCount);
+                Assert.AreEqual(0, handler2.invokedCount);
+                Assert.AreEqual(1, handler3.invokedCount);
+                Assert.AreEqual(1, handler4.invokedCount);
+            }
+            {
+                ((IWeakEventSubscriable<Empty>) bus).Clear();
+                var handler = new TestWeakEventHandler(null);
+                handler.onHandle = () =>
+                {
+                    handler.isAlive = false;
+                    bus.Broadcast();
+                };
+                bus.SubscribeWeakly(handler);
+                Assert.Catch<InvalidOperationException>(() =>
+                {
+                    bus.Broadcast();
+                });
+            }
+        }
+
         private TestHandler<TestNotification> CreateInstance(EventBus<TestNotification> eventBus)
         {
             var handler = new TestHandler<TestNotification>();
@@ -143,6 +182,38 @@ namespace PeroTools2.AccessKing.Editor.Tests
         private class TestNotification : ITestNotification
         {
             public bool isSucceed { get; set; }
+        }
+
+        private class TestWeakEventHandler : IWeakEventHandler
+        {
+            /// <inheritdoc />
+            public bool isAlive { get; set; } = true;
+
+            public int invokedCount;
+            public Action onHandle;
+
+            public TestWeakEventHandler(Action onHandle) => this.onHandle = onHandle;
+
+            /// <inheritdoc />
+            public bool TryHandle(in Empty notification)
+            {
+                if (isAlive)
+                {
+                    onHandle?.Invoke();
+                    invokedCount++;
+                }
+                return isAlive;
+            }
+
+            /// <inheritdoc />
+            public void Handle(in Empty notification)
+            {
+                if (isAlive)
+                {
+                    onHandle?.Invoke();
+                    invokedCount++;
+                }
+            }
         }
     }
 }

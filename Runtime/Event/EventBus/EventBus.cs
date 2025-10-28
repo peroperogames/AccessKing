@@ -92,14 +92,12 @@ namespace PeroTools2.AccessKing
             }
 
             // Dispatch all weak handlers.
-            for (var index = m_WeakHandlers.Count - 1; index >= 0; index--)
+            foreach (var handler in m_WeakHandlers)
             {
-                if (!m_WeakHandlers[index].TryHandle(notification))
-                {
-                    // The handler is dead. Then remove it.
-                    m_WeakHandlers.RemoveAt(index);
-                }
+                handler.TryHandle(notification);
             }
+            // Clear all dead weak handlers.
+            m_WeakHandlers.RemoveAll(static handler => !handler.isAlive);
         }
     }
 }

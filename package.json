@@ -8,8 +8,8 @@
     "name": "Peropero",
     "email": "unity@peropero.net"
   },
-  "documentationUrl": "https://git.peropero.net/unity-packages/access-king/-/blob/master/README.md",
-  "changelogUrl": "https://git.peropero.net/unity-packages/access-king/-/releases",
+  "documentationUrl": "https://github.com/peroperogames/AccessKing/blob/master/README.md",
+  "changelogUrl": "https://github.com/peroperogames/AccessKing/releases",
   "samples": [
     {
       "displayName": "Sample",

@@ -19,6 +19,6 @@
   ],
   "type": "tool",
   "dependencies": {
-    "com.prpr.cysharp.unitask": "2.5.5"
+    "com.cysharp.unitask": "2.5.5"
   }
 }

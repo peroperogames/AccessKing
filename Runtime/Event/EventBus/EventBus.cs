@@ -32,7 +32,7 @@ namespace PeroTools2.AccessKing
             }
             else
             {
-                throw new InvalidCastException($"{notification.GetType()} is not a ${typeof(TNotification)} type. ");
+                throw new InvalidCastException($"{notification.GetType()} is not a {typeof(TNotification)} type. ");
             }
             return null;
         }

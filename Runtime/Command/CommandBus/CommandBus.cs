@@ -35,7 +35,7 @@ namespace PeroTools2.AccessKing
             {
                 return Execute(ref tNotification);
             }
-            throw new InvalidCastException($"{notification.GetType()} is not a ${typeof(TNotification)} type. ");
+            throw new InvalidCastException($"{notification.GetType()} is not a {typeof(TNotification)} type. ");
         }
 
         /// <inheritdoc cref="ICommandBus{TNotification}.Execute(ref TNotification)"/>.

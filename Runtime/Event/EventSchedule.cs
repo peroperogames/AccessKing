@@ -46,9 +46,9 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IEventSchedule{TTheme}.GetBus{TNotification}(TTheme)"/>
         public IEventBus<TNotification> GetBus<TNotification>(TTheme theme) where TNotification : INotification
         {
-            if (TryGetBus<TNotification>(theme, out var bus))
+            if (m_EventBusMaps.TryGetValue(theme, out var bus))
             {
-                return bus;
+                return (IEventBus<TNotification>) bus;
             }
             throw new ArgumentException("Non existing theme: " + theme);
         }

@@ -135,6 +135,7 @@ namespace PeroTools2.AccessKing.Editor.Tests
             }
 #>
             }
+            Assert.IsTrue(m_HandleCount == 1);
         }
 
 <#=testCase#>

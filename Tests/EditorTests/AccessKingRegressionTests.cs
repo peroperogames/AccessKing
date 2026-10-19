@@ -109,6 +109,18 @@ namespace PeroTools2.AccessKing.Editor.Tests
         }
 
         /// <summary>
+        /// Subscribing a null handler is a programming error and has to fail at the call site.
+        /// </summary>
+        [Test]
+        public void SubscribingNullThrowsTest()
+        {
+            var bus = new EventBus<Empty>();
+
+            Assert.Throws<ArgumentNullException>(() => bus.Subscribe((IEventHandler<Empty>) null));
+            Assert.Throws<ArgumentNullException>(() => ((IWeakEventSubscriable<Empty>) bus).SubscribeWeakly(null));
+        }
+
+        /// <summary>
         /// Two owners that subscribe the same method must be unsubscribed independently.
         /// </summary>
         [Test]

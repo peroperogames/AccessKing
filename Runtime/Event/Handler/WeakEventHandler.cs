@@ -56,5 +56,8 @@ namespace PeroTools2.AccessKing
         /// </summary>
         System.Reflection.MethodInfo IWeakEventInvocation.invocationMethod
             => m_WeakHandler.TryGetReference(out var handler) && handler is IWeakEventInvocation weak ? weak.invocationMethod : null;
+
+        object IWeakEventInvocation.invocationOwner
+            => m_WeakHandler.TryGetReference(out var handler) && handler is IWeakEventInvocation weak ? weak.invocationOwner : null;
     }
 }

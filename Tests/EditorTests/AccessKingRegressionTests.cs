@@ -61,6 +61,100 @@ namespace PeroTools2.AccessKing.Editor.Tests
         }
 
         /// <summary>
+        /// The equality of a weak handler identifies the owner as well, so two providers that invoke the
+        /// same method are not equal.
+        /// </summary>
+        [Test]
+        public void WeakHandlerEqualityIncludesTheOwnerTest()
+        {
+            var first = ScriptableObject.CreateInstance<TestOwner>();
+            var second = ScriptableObject.CreateInstance<TestOwner>();
+            var fromFirst = new WeakActionEventHandler(first.Target, first);
+            var sameFirst = new WeakActionEventHandler(first.Target, first);
+            var fromSecond = new WeakActionEventHandler(second.Target, second);
+
+            Assert.IsTrue(fromFirst.Equals(sameFirst));
+            Assert.IsTrue(fromFirst == sameFirst);
+            Assert.IsFalse(fromFirst.Equals(fromSecond));
+            Assert.IsFalse(fromFirst == fromSecond);
+
+            // A weakly referenced handler and a strongly typed handler that wraps the same invocation are
+            // equal in both directions, so either one can be used to unsubscribe.
+            var strongFirst = new ActionEventHandler(first.Target);
+            Assert.IsTrue(fromFirst.Equals(strongFirst));
+            Assert.IsTrue(strongFirst.Equals(fromFirst));
+
+            UnityEngine.Object.DestroyImmediate(first);
+            UnityEngine.Object.DestroyImmediate(second);
+        }
+
+        /// <summary>
+        /// The hash code must agree with the equality, otherwise sets and dictionaries misbehave.
+        /// </summary>
+        [Test]
+        public void WeakHandlerHashAgreesWithEqualityTest()
+        {
+            var first = ScriptableObject.CreateInstance<TestOwner>();
+            var second = ScriptableObject.CreateInstance<TestOwner>();
+            var fromFirst = new WeakActionEventHandler(first.Target, first);
+            var sameFirst = new WeakActionEventHandler(first.Target, first);
+            var fromSecond = new WeakActionEventHandler(second.Target, second);
+
+            Assert.AreEqual(fromFirst.GetHashCode(), sameFirst.GetHashCode());
+            Assert.AreEqual(1, new HashSet<WeakActionEventHandler> { fromFirst, sameFirst }.Count);
+            Assert.AreEqual(2, new HashSet<WeakActionEventHandler> { fromFirst, fromSecond }.Count);
+
+            UnityEngine.Object.DestroyImmediate(first);
+            UnityEngine.Object.DestroyImmediate(second);
+        }
+
+        /// <summary>
+        /// Two owners that subscribe the same method must be unsubscribed independently.
+        /// </summary>
+        [Test]
+        public void WeakUnsubscribeTargetsTheOwnerTest()
+        {
+            var bus = new EventBus<Empty>();
+            var first = ScriptableObject.CreateInstance<TestOwner>();
+            var second = ScriptableObject.CreateInstance<TestOwner>();
+            bus.SubscribeWeakly(first, first.Target);
+            bus.SubscribeWeakly(second, second.Target);
+
+            Assert.IsTrue(bus.Unsubscribe(first.Target));
+
+            bus.Broadcast();
+            Assert.AreEqual(0, first.targetCount);
+            Assert.AreEqual(1, second.targetCount);
+
+            UnityEngine.Object.DestroyImmediate(first);
+            UnityEngine.Object.DestroyImmediate(second);
+        }
+
+        /// <summary>
+        /// The handler instance overload must also match the owner, not only the invoked method.
+        /// </summary>
+        [Test]
+        public void WeakUnsubscribeByHandlerTargetsTheOwnerTest()
+        {
+            var bus = new EventBus<Empty>();
+            var first = ScriptableObject.CreateInstance<TestOwner>();
+            var second = ScriptableObject.CreateInstance<TestOwner>();
+            var firstHandler = new WeakActionEventHandler(first.Target, first);
+            var secondHandler = new WeakActionEventHandler(second.Target, second);
+            ((IWeakEventSubscriable<Empty>) bus).SubscribeWeakly(firstHandler);
+            ((IWeakEventSubscriable<Empty>) bus).SubscribeWeakly(secondHandler);
+
+            Assert.IsTrue(bus.Unsubscribe(firstHandler));
+
+            bus.Broadcast();
+            Assert.AreEqual(0, first.targetCount);
+            Assert.AreEqual(1, second.targetCount);
+
+            UnityEngine.Object.DestroyImmediate(first);
+            UnityEngine.Object.DestroyImmediate(second);
+        }
+
+        /// <summary>
         /// Subscribing an equal delegate twice keeps both subscriptions, the same way a C# event does,
         /// and a single unsubscribe only removes one of them.
         /// </summary>

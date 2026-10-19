@@ -64,7 +64,7 @@ namespace PeroTools2.AccessKing
                 // Check the target is alive.
                 if (weakTarget.isAlive)
                 {
-                    if (!weakTarget.Equals(handler) && !IsSameInvocation(weakTarget, handler)) continue;
+                    if (!weakTarget.Equals(handler)) continue;
                     m_WeakHandlers.RemoveAt(index);
                     return true;
                 }
@@ -76,15 +76,6 @@ namespace PeroTools2.AccessKing
             return false;
         }
 
-        /// <summary>
-        /// Whether the weak handler refers to the same method as the given handler. A weak subscription is
-        /// created from a delegate, so unsubscribing by that delegate has to locate it by its method.
-        /// </summary>
-        private static bool IsSameInvocation(IWeakEventHandler<TNotification> weakTarget, IEventHandler<TNotification> handler)
-            => weakTarget is IWeakEventInvocation weak
-               && handler is IEventInvocation strong
-               && weak.invocationMethod is not null
-               && weak.invocationMethod == strong.invocationMethod;
 
         /// <inheritdoc cref="IEventSubscriable{TNotification}.Subscribe(IEventHandler{TNotification})"/>
         public void Subscribe(IEventHandler<TNotification> handler) => m_Handlers.Add(handler);

@@ -68,8 +68,16 @@ namespace PeroTools2.AccessKing
         /// </summary>
         System.Reflection.MethodInfo IWeakEventInvocation.invocationMethod => m_Method;
 
+        object IWeakEventInvocation.invocationOwner => currentOwner;
+
+        /// <summary>
+        /// The owner that controls the lifecycle of this handler, or null when it was already collected.
+        /// It takes part in the equality because two providers may invoke the same method.
+        /// </summary>
+        private object currentOwner => m_Owner.TryGetTarget(out var owner) ? owner : null;
+
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
-        public bool isAlive => m_Owner.TryGetTarget(out _);
+        public bool isAlive => m_Owner.TryGetReference(out _);
 
         /// <summary>
         /// Create a weak event handler from a System.Action.
@@ -97,7 +105,7 @@ namespace PeroTools2.AccessKing
         public void Handle(<#=parameterDefinitions#>) { if (m_Owner.TryGetTarget(out var owner) && owner != null) m_Invocation.Invoke(<#=parameters#>); }
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
-        public override int GetHashCode() => m_Invocation != null ? m_Invocation.GetHashCode() : 0;
+        public override int GetHashCode() => unchecked((m_Method != null ? m_Method.GetHashCode() : 0) * 397 ^ (currentOwner != null ? currentOwner.GetHashCode() : 0));
 
         /// <summary>
         /// Verify if the target equals to event handler.
@@ -112,7 +120,7 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// Verify if the target equals to event handler.
         /// </summary>
-        public bool Equals(<#=weakEvenHandler#> other) => m_Method == other?.m_Method;
+        public bool Equals(<#=weakEvenHandler#> other) => other is not null && m_Method == other.m_Method && Equals(currentOwner, other.currentOwner);
 
         /// <summary>
         /// Verify if the target equals to event handler.
@@ -120,7 +128,8 @@ namespace PeroTools2.AccessKing
         public override bool Equals(object obj) => obj switch
         {
             <#=weakEvenHandler#> other => Equals(other),
-            <#=action#> action => action.Method == m_Method,
+            <#=action#> action => action.Method == m_Method && Equals(action.Target, currentOwner),
+            IEventInvocation invocation => invocation.invocationMethod == m_Method && Equals(invocation.invocationOwner, currentOwner),
             _ => false
         };
 

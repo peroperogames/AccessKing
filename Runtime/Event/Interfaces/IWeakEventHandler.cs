@@ -35,5 +35,10 @@ namespace PeroTools2.AccessKing
         /// The method that the weak handler invokes.
         /// </summary>
         System.Reflection.MethodInfo invocationMethod { get; }
+        /// <summary>
+        /// The owner that controls the lifetime of the handler, or null when it was already collected.
+        /// It is the target of the delegate for a strongly typed handler.
+        /// </summary>
+        object invocationOwner { get; }
     }
 }

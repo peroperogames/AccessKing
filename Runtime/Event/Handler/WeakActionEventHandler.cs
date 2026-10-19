@@ -41,8 +41,16 @@ namespace PeroTools2.AccessKing
         /// </summary>
         System.Reflection.MethodInfo IWeakEventInvocation.invocationMethod => m_Method;
 
+        object IWeakEventInvocation.invocationOwner => currentOwner;
+
+        /// <summary>
+        /// The owner that controls the lifecycle of this handler, or null when it was already collected.
+        /// It takes part in the equality because two providers may invoke the same method.
+        /// </summary>
+        private object currentOwner => m_Owner.TryGetTarget(out var owner) ? owner : null;
+
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
-        public bool isAlive => m_Owner.TryGetTarget(out _);
+        public bool isAlive => m_Owner.TryGetReference(out _);
 
         /// <summary>
         /// Create a weak event handler from a System.Action.
@@ -70,7 +78,7 @@ namespace PeroTools2.AccessKing
         public void Handle() { if (m_Owner.TryGetTarget(out var owner) && owner != null) m_Invocation.Invoke(); }
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
-        public override int GetHashCode() => m_Invocation != null ? m_Invocation.GetHashCode() : 0;
+        public override int GetHashCode() => unchecked((m_Method != null ? m_Method.GetHashCode() : 0) * 397 ^ (currentOwner != null ? currentOwner.GetHashCode() : 0));
 
         /// <summary>
         /// Verify if the target equals to event handler.
@@ -85,7 +93,7 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// Verify if the target equals to event handler.
         /// </summary>
-        public bool Equals(WeakActionEventHandler other) => m_Method == other?.m_Method;
+        public bool Equals(WeakActionEventHandler other) => other is not null && m_Method == other.m_Method && Equals(currentOwner, other.currentOwner);
 
         /// <summary>
         /// Verify if the target equals to event handler.
@@ -93,7 +101,8 @@ namespace PeroTools2.AccessKing
         public override bool Equals(object obj) => obj switch
         {
             WeakActionEventHandler other => Equals(other),
-            Action action => action.Method == m_Method,
+            Action action => action.Method == m_Method && Equals(action.Target, currentOwner),
+            IEventInvocation invocation => invocation.invocationMethod == m_Method && Equals(invocation.invocationOwner, currentOwner),
             _ => false
         };
 
@@ -160,8 +169,16 @@ namespace PeroTools2.AccessKing
         /// </summary>
         System.Reflection.MethodInfo IWeakEventInvocation.invocationMethod => m_Method;
 
+        object IWeakEventInvocation.invocationOwner => currentOwner;
+
+        /// <summary>
+        /// The owner that controls the lifecycle of this handler, or null when it was already collected.
+        /// It takes part in the equality because two providers may invoke the same method.
+        /// </summary>
+        private object currentOwner => m_Owner.TryGetTarget(out var owner) ? owner : null;
+
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
-        public bool isAlive => m_Owner.TryGetTarget(out _);
+        public bool isAlive => m_Owner.TryGetReference(out _);
 
         /// <summary>
         /// Create a weak event handler from a System.Action.
@@ -189,7 +206,7 @@ namespace PeroTools2.AccessKing
         public void Handle(T param) { if (m_Owner.TryGetTarget(out var owner) && owner != null) m_Invocation.Invoke(param); }
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
-        public override int GetHashCode() => m_Invocation != null ? m_Invocation.GetHashCode() : 0;
+        public override int GetHashCode() => unchecked((m_Method != null ? m_Method.GetHashCode() : 0) * 397 ^ (currentOwner != null ? currentOwner.GetHashCode() : 0));
 
         /// <summary>
         /// Verify if the target equals to event handler.
@@ -204,7 +221,7 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// Verify if the target equals to event handler.
         /// </summary>
-        public bool Equals(WeakActionEventHandler<T> other) => m_Method == other?.m_Method;
+        public bool Equals(WeakActionEventHandler<T> other) => other is not null && m_Method == other.m_Method && Equals(currentOwner, other.currentOwner);
 
         /// <summary>
         /// Verify if the target equals to event handler.
@@ -212,7 +229,8 @@ namespace PeroTools2.AccessKing
         public override bool Equals(object obj) => obj switch
         {
             WeakActionEventHandler<T> other => Equals(other),
-            Action<T> action => action.Method == m_Method,
+            Action<T> action => action.Method == m_Method && Equals(action.Target, currentOwner),
+            IEventInvocation invocation => invocation.invocationMethod == m_Method && Equals(invocation.invocationOwner, currentOwner),
             _ => false
         };
 
@@ -279,8 +297,16 @@ namespace PeroTools2.AccessKing
         /// </summary>
         System.Reflection.MethodInfo IWeakEventInvocation.invocationMethod => m_Method;
 
+        object IWeakEventInvocation.invocationOwner => currentOwner;
+
+        /// <summary>
+        /// The owner that controls the lifecycle of this handler, or null when it was already collected.
+        /// It takes part in the equality because two providers may invoke the same method.
+        /// </summary>
+        private object currentOwner => m_Owner.TryGetTarget(out var owner) ? owner : null;
+
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
-        public bool isAlive => m_Owner.TryGetTarget(out _);
+        public bool isAlive => m_Owner.TryGetReference(out _);
 
         /// <summary>
         /// Create a weak event handler from a System.Action.
@@ -308,7 +334,7 @@ namespace PeroTools2.AccessKing
         public void Handle(T1 param1, T2 param2) { if (m_Owner.TryGetTarget(out var owner) && owner != null) m_Invocation.Invoke(param1, param2); }
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
-        public override int GetHashCode() => m_Invocation != null ? m_Invocation.GetHashCode() : 0;
+        public override int GetHashCode() => unchecked((m_Method != null ? m_Method.GetHashCode() : 0) * 397 ^ (currentOwner != null ? currentOwner.GetHashCode() : 0));
 
         /// <summary>
         /// Verify if the target equals to event handler.
@@ -323,7 +349,7 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// Verify if the target equals to event handler.
         /// </summary>
-        public bool Equals(WeakActionEventHandler<T1, T2> other) => m_Method == other?.m_Method;
+        public bool Equals(WeakActionEventHandler<T1, T2> other) => other is not null && m_Method == other.m_Method && Equals(currentOwner, other.currentOwner);
 
         /// <summary>
         /// Verify if the target equals to event handler.
@@ -331,7 +357,8 @@ namespace PeroTools2.AccessKing
         public override bool Equals(object obj) => obj switch
         {
             WeakActionEventHandler<T1, T2> other => Equals(other),
-            Action<T1, T2> action => action.Method == m_Method,
+            Action<T1, T2> action => action.Method == m_Method && Equals(action.Target, currentOwner),
+            IEventInvocation invocation => invocation.invocationMethod == m_Method && Equals(invocation.invocationOwner, currentOwner),
             _ => false
         };
 
@@ -398,8 +425,16 @@ namespace PeroTools2.AccessKing
         /// </summary>
         System.Reflection.MethodInfo IWeakEventInvocation.invocationMethod => m_Method;
 
+        object IWeakEventInvocation.invocationOwner => currentOwner;
+
+        /// <summary>
+        /// The owner that controls the lifecycle of this handler, or null when it was already collected.
+        /// It takes part in the equality because two providers may invoke the same method.
+        /// </summary>
+        private object currentOwner => m_Owner.TryGetTarget(out var owner) ? owner : null;
+
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
-        public bool isAlive => m_Owner.TryGetTarget(out _);
+        public bool isAlive => m_Owner.TryGetReference(out _);
 
         /// <summary>
         /// Create a weak event handler from a System.Action.
@@ -427,7 +462,7 @@ namespace PeroTools2.AccessKing
         public void Handle(T1 param1, T2 param2, T3 param3) { if (m_Owner.TryGetTarget(out var owner) && owner != null) m_Invocation.Invoke(param1, param2, param3); }
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
-        public override int GetHashCode() => m_Invocation != null ? m_Invocation.GetHashCode() : 0;
+        public override int GetHashCode() => unchecked((m_Method != null ? m_Method.GetHashCode() : 0) * 397 ^ (currentOwner != null ? currentOwner.GetHashCode() : 0));
 
         /// <summary>
         /// Verify if the target equals to event handler.
@@ -442,7 +477,7 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// Verify if the target equals to event handler.
         /// </summary>
-        public bool Equals(WeakActionEventHandler<T1, T2, T3> other) => m_Method == other?.m_Method;
+        public bool Equals(WeakActionEventHandler<T1, T2, T3> other) => other is not null && m_Method == other.m_Method && Equals(currentOwner, other.currentOwner);
 
         /// <summary>
         /// Verify if the target equals to event handler.
@@ -450,7 +485,8 @@ namespace PeroTools2.AccessKing
         public override bool Equals(object obj) => obj switch
         {
             WeakActionEventHandler<T1, T2, T3> other => Equals(other),
-            Action<T1, T2, T3> action => action.Method == m_Method,
+            Action<T1, T2, T3> action => action.Method == m_Method && Equals(action.Target, currentOwner),
+            IEventInvocation invocation => invocation.invocationMethod == m_Method && Equals(invocation.invocationOwner, currentOwner),
             _ => false
         };
 
@@ -517,8 +553,16 @@ namespace PeroTools2.AccessKing
         /// </summary>
         System.Reflection.MethodInfo IWeakEventInvocation.invocationMethod => m_Method;
 
+        object IWeakEventInvocation.invocationOwner => currentOwner;
+
+        /// <summary>
+        /// The owner that controls the lifecycle of this handler, or null when it was already collected.
+        /// It takes part in the equality because two providers may invoke the same method.
+        /// </summary>
+        private object currentOwner => m_Owner.TryGetTarget(out var owner) ? owner : null;
+
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
-        public bool isAlive => m_Owner.TryGetTarget(out _);
+        public bool isAlive => m_Owner.TryGetReference(out _);
 
         /// <summary>
         /// Create a weak event handler from a System.Action.
@@ -546,7 +590,7 @@ namespace PeroTools2.AccessKing
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4) { if (m_Owner.TryGetTarget(out var owner) && owner != null) m_Invocation.Invoke(param1, param2, param3, param4); }
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
-        public override int GetHashCode() => m_Invocation != null ? m_Invocation.GetHashCode() : 0;
+        public override int GetHashCode() => unchecked((m_Method != null ? m_Method.GetHashCode() : 0) * 397 ^ (currentOwner != null ? currentOwner.GetHashCode() : 0));
 
         /// <summary>
         /// Verify if the target equals to event handler.
@@ -561,7 +605,7 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// Verify if the target equals to event handler.
         /// </summary>
-        public bool Equals(WeakActionEventHandler<T1, T2, T3, T4> other) => m_Method == other?.m_Method;
+        public bool Equals(WeakActionEventHandler<T1, T2, T3, T4> other) => other is not null && m_Method == other.m_Method && Equals(currentOwner, other.currentOwner);
 
         /// <summary>
         /// Verify if the target equals to event handler.
@@ -569,7 +613,8 @@ namespace PeroTools2.AccessKing
         public override bool Equals(object obj) => obj switch
         {
             WeakActionEventHandler<T1, T2, T3, T4> other => Equals(other),
-            Action<T1, T2, T3, T4> action => action.Method == m_Method,
+            Action<T1, T2, T3, T4> action => action.Method == m_Method && Equals(action.Target, currentOwner),
+            IEventInvocation invocation => invocation.invocationMethod == m_Method && Equals(invocation.invocationOwner, currentOwner),
             _ => false
         };
 
@@ -636,8 +681,16 @@ namespace PeroTools2.AccessKing
         /// </summary>
         System.Reflection.MethodInfo IWeakEventInvocation.invocationMethod => m_Method;
 
+        object IWeakEventInvocation.invocationOwner => currentOwner;
+
+        /// <summary>
+        /// The owner that controls the lifecycle of this handler, or null when it was already collected.
+        /// It takes part in the equality because two providers may invoke the same method.
+        /// </summary>
+        private object currentOwner => m_Owner.TryGetTarget(out var owner) ? owner : null;
+
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
-        public bool isAlive => m_Owner.TryGetTarget(out _);
+        public bool isAlive => m_Owner.TryGetReference(out _);
 
         /// <summary>
         /// Create a weak event handler from a System.Action.
@@ -665,7 +718,7 @@ namespace PeroTools2.AccessKing
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5) { if (m_Owner.TryGetTarget(out var owner) && owner != null) m_Invocation.Invoke(param1, param2, param3, param4, param5); }
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
-        public override int GetHashCode() => m_Invocation != null ? m_Invocation.GetHashCode() : 0;
+        public override int GetHashCode() => unchecked((m_Method != null ? m_Method.GetHashCode() : 0) * 397 ^ (currentOwner != null ? currentOwner.GetHashCode() : 0));
 
         /// <summary>
         /// Verify if the target equals to event handler.
@@ -680,7 +733,7 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// Verify if the target equals to event handler.
         /// </summary>
-        public bool Equals(WeakActionEventHandler<T1, T2, T3, T4, T5> other) => m_Method == other?.m_Method;
+        public bool Equals(WeakActionEventHandler<T1, T2, T3, T4, T5> other) => other is not null && m_Method == other.m_Method && Equals(currentOwner, other.currentOwner);
 
         /// <summary>
         /// Verify if the target equals to event handler.
@@ -688,7 +741,8 @@ namespace PeroTools2.AccessKing
         public override bool Equals(object obj) => obj switch
         {
             WeakActionEventHandler<T1, T2, T3, T4, T5> other => Equals(other),
-            Action<T1, T2, T3, T4, T5> action => action.Method == m_Method,
+            Action<T1, T2, T3, T4, T5> action => action.Method == m_Method && Equals(action.Target, currentOwner),
+            IEventInvocation invocation => invocation.invocationMethod == m_Method && Equals(invocation.invocationOwner, currentOwner),
             _ => false
         };
 
@@ -755,8 +809,16 @@ namespace PeroTools2.AccessKing
         /// </summary>
         System.Reflection.MethodInfo IWeakEventInvocation.invocationMethod => m_Method;
 
+        object IWeakEventInvocation.invocationOwner => currentOwner;
+
+        /// <summary>
+        /// The owner that controls the lifecycle of this handler, or null when it was already collected.
+        /// It takes part in the equality because two providers may invoke the same method.
+        /// </summary>
+        private object currentOwner => m_Owner.TryGetTarget(out var owner) ? owner : null;
+
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
-        public bool isAlive => m_Owner.TryGetTarget(out _);
+        public bool isAlive => m_Owner.TryGetReference(out _);
 
         /// <summary>
         /// Create a weak event handler from a System.Action.
@@ -784,7 +846,7 @@ namespace PeroTools2.AccessKing
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6) { if (m_Owner.TryGetTarget(out var owner) && owner != null) m_Invocation.Invoke(param1, param2, param3, param4, param5, param6); }
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
-        public override int GetHashCode() => m_Invocation != null ? m_Invocation.GetHashCode() : 0;
+        public override int GetHashCode() => unchecked((m_Method != null ? m_Method.GetHashCode() : 0) * 397 ^ (currentOwner != null ? currentOwner.GetHashCode() : 0));
 
         /// <summary>
         /// Verify if the target equals to event handler.
@@ -799,7 +861,7 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// Verify if the target equals to event handler.
         /// </summary>
-        public bool Equals(WeakActionEventHandler<T1, T2, T3, T4, T5, T6> other) => m_Method == other?.m_Method;
+        public bool Equals(WeakActionEventHandler<T1, T2, T3, T4, T5, T6> other) => other is not null && m_Method == other.m_Method && Equals(currentOwner, other.currentOwner);
 
         /// <summary>
         /// Verify if the target equals to event handler.
@@ -807,7 +869,8 @@ namespace PeroTools2.AccessKing
         public override bool Equals(object obj) => obj switch
         {
             WeakActionEventHandler<T1, T2, T3, T4, T5, T6> other => Equals(other),
-            Action<T1, T2, T3, T4, T5, T6> action => action.Method == m_Method,
+            Action<T1, T2, T3, T4, T5, T6> action => action.Method == m_Method && Equals(action.Target, currentOwner),
+            IEventInvocation invocation => invocation.invocationMethod == m_Method && Equals(invocation.invocationOwner, currentOwner),
             _ => false
         };
 
@@ -874,8 +937,16 @@ namespace PeroTools2.AccessKing
         /// </summary>
         System.Reflection.MethodInfo IWeakEventInvocation.invocationMethod => m_Method;
 
+        object IWeakEventInvocation.invocationOwner => currentOwner;
+
+        /// <summary>
+        /// The owner that controls the lifecycle of this handler, or null when it was already collected.
+        /// It takes part in the equality because two providers may invoke the same method.
+        /// </summary>
+        private object currentOwner => m_Owner.TryGetTarget(out var owner) ? owner : null;
+
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
-        public bool isAlive => m_Owner.TryGetTarget(out _);
+        public bool isAlive => m_Owner.TryGetReference(out _);
 
         /// <summary>
         /// Create a weak event handler from a System.Action.
@@ -903,7 +974,7 @@ namespace PeroTools2.AccessKing
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7) { if (m_Owner.TryGetTarget(out var owner) && owner != null) m_Invocation.Invoke(param1, param2, param3, param4, param5, param6, param7); }
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
-        public override int GetHashCode() => m_Invocation != null ? m_Invocation.GetHashCode() : 0;
+        public override int GetHashCode() => unchecked((m_Method != null ? m_Method.GetHashCode() : 0) * 397 ^ (currentOwner != null ? currentOwner.GetHashCode() : 0));
 
         /// <summary>
         /// Verify if the target equals to event handler.
@@ -918,7 +989,7 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// Verify if the target equals to event handler.
         /// </summary>
-        public bool Equals(WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7> other) => m_Method == other?.m_Method;
+        public bool Equals(WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7> other) => other is not null && m_Method == other.m_Method && Equals(currentOwner, other.currentOwner);
 
         /// <summary>
         /// Verify if the target equals to event handler.
@@ -926,7 +997,8 @@ namespace PeroTools2.AccessKing
         public override bool Equals(object obj) => obj switch
         {
             WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7> other => Equals(other),
-            Action<T1, T2, T3, T4, T5, T6, T7> action => action.Method == m_Method,
+            Action<T1, T2, T3, T4, T5, T6, T7> action => action.Method == m_Method && Equals(action.Target, currentOwner),
+            IEventInvocation invocation => invocation.invocationMethod == m_Method && Equals(invocation.invocationOwner, currentOwner),
             _ => false
         };
 
@@ -993,8 +1065,16 @@ namespace PeroTools2.AccessKing
         /// </summary>
         System.Reflection.MethodInfo IWeakEventInvocation.invocationMethod => m_Method;
 
+        object IWeakEventInvocation.invocationOwner => currentOwner;
+
+        /// <summary>
+        /// The owner that controls the lifecycle of this handler, or null when it was already collected.
+        /// It takes part in the equality because two providers may invoke the same method.
+        /// </summary>
+        private object currentOwner => m_Owner.TryGetTarget(out var owner) ? owner : null;
+
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
-        public bool isAlive => m_Owner.TryGetTarget(out _);
+        public bool isAlive => m_Owner.TryGetReference(out _);
 
         /// <summary>
         /// Create a weak event handler from a System.Action.
@@ -1022,7 +1102,7 @@ namespace PeroTools2.AccessKing
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8) { if (m_Owner.TryGetTarget(out var owner) && owner != null) m_Invocation.Invoke(param1, param2, param3, param4, param5, param6, param7, param8); }
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
-        public override int GetHashCode() => m_Invocation != null ? m_Invocation.GetHashCode() : 0;
+        public override int GetHashCode() => unchecked((m_Method != null ? m_Method.GetHashCode() : 0) * 397 ^ (currentOwner != null ? currentOwner.GetHashCode() : 0));
 
         /// <summary>
         /// Verify if the target equals to event handler.
@@ -1037,7 +1117,7 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// Verify if the target equals to event handler.
         /// </summary>
-        public bool Equals(WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8> other) => m_Method == other?.m_Method;
+        public bool Equals(WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8> other) => other is not null && m_Method == other.m_Method && Equals(currentOwner, other.currentOwner);
 
         /// <summary>
         /// Verify if the target equals to event handler.
@@ -1045,7 +1125,8 @@ namespace PeroTools2.AccessKing
         public override bool Equals(object obj) => obj switch
         {
             WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8> other => Equals(other),
-            Action<T1, T2, T3, T4, T5, T6, T7, T8> action => action.Method == m_Method,
+            Action<T1, T2, T3, T4, T5, T6, T7, T8> action => action.Method == m_Method && Equals(action.Target, currentOwner),
+            IEventInvocation invocation => invocation.invocationMethod == m_Method && Equals(invocation.invocationOwner, currentOwner),
             _ => false
         };
 
@@ -1112,8 +1193,16 @@ namespace PeroTools2.AccessKing
         /// </summary>
         System.Reflection.MethodInfo IWeakEventInvocation.invocationMethod => m_Method;
 
+        object IWeakEventInvocation.invocationOwner => currentOwner;
+
+        /// <summary>
+        /// The owner that controls the lifecycle of this handler, or null when it was already collected.
+        /// It takes part in the equality because two providers may invoke the same method.
+        /// </summary>
+        private object currentOwner => m_Owner.TryGetTarget(out var owner) ? owner : null;
+
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
-        public bool isAlive => m_Owner.TryGetTarget(out _);
+        public bool isAlive => m_Owner.TryGetReference(out _);
 
         /// <summary>
         /// Create a weak event handler from a System.Action.
@@ -1141,7 +1230,7 @@ namespace PeroTools2.AccessKing
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9) { if (m_Owner.TryGetTarget(out var owner) && owner != null) m_Invocation.Invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9); }
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
-        public override int GetHashCode() => m_Invocation != null ? m_Invocation.GetHashCode() : 0;
+        public override int GetHashCode() => unchecked((m_Method != null ? m_Method.GetHashCode() : 0) * 397 ^ (currentOwner != null ? currentOwner.GetHashCode() : 0));
 
         /// <summary>
         /// Verify if the target equals to event handler.
@@ -1156,7 +1245,7 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// Verify if the target equals to event handler.
         /// </summary>
-        public bool Equals(WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9> other) => m_Method == other?.m_Method;
+        public bool Equals(WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9> other) => other is not null && m_Method == other.m_Method && Equals(currentOwner, other.currentOwner);
 
         /// <summary>
         /// Verify if the target equals to event handler.
@@ -1164,7 +1253,8 @@ namespace PeroTools2.AccessKing
         public override bool Equals(object obj) => obj switch
         {
             WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9> other => Equals(other),
-            Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> action => action.Method == m_Method,
+            Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> action => action.Method == m_Method && Equals(action.Target, currentOwner),
+            IEventInvocation invocation => invocation.invocationMethod == m_Method && Equals(invocation.invocationOwner, currentOwner),
             _ => false
         };
 
@@ -1231,8 +1321,16 @@ namespace PeroTools2.AccessKing
         /// </summary>
         System.Reflection.MethodInfo IWeakEventInvocation.invocationMethod => m_Method;
 
+        object IWeakEventInvocation.invocationOwner => currentOwner;
+
+        /// <summary>
+        /// The owner that controls the lifecycle of this handler, or null when it was already collected.
+        /// It takes part in the equality because two providers may invoke the same method.
+        /// </summary>
+        private object currentOwner => m_Owner.TryGetTarget(out var owner) ? owner : null;
+
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
-        public bool isAlive => m_Owner.TryGetTarget(out _);
+        public bool isAlive => m_Owner.TryGetReference(out _);
 
         /// <summary>
         /// Create a weak event handler from a System.Action.
@@ -1260,7 +1358,7 @@ namespace PeroTools2.AccessKing
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10) { if (m_Owner.TryGetTarget(out var owner) && owner != null) m_Invocation.Invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10); }
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
-        public override int GetHashCode() => m_Invocation != null ? m_Invocation.GetHashCode() : 0;
+        public override int GetHashCode() => unchecked((m_Method != null ? m_Method.GetHashCode() : 0) * 397 ^ (currentOwner != null ? currentOwner.GetHashCode() : 0));
 
         /// <summary>
         /// Verify if the target equals to event handler.
@@ -1275,7 +1373,7 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// Verify if the target equals to event handler.
         /// </summary>
-        public bool Equals(WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> other) => m_Method == other?.m_Method;
+        public bool Equals(WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> other) => other is not null && m_Method == other.m_Method && Equals(currentOwner, other.currentOwner);
 
         /// <summary>
         /// Verify if the target equals to event handler.
@@ -1283,7 +1381,8 @@ namespace PeroTools2.AccessKing
         public override bool Equals(object obj) => obj switch
         {
             WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> other => Equals(other),
-            Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> action => action.Method == m_Method,
+            Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> action => action.Method == m_Method && Equals(action.Target, currentOwner),
+            IEventInvocation invocation => invocation.invocationMethod == m_Method && Equals(invocation.invocationOwner, currentOwner),
             _ => false
         };
 
@@ -1350,8 +1449,16 @@ namespace PeroTools2.AccessKing
         /// </summary>
         System.Reflection.MethodInfo IWeakEventInvocation.invocationMethod => m_Method;
 
+        object IWeakEventInvocation.invocationOwner => currentOwner;
+
+        /// <summary>
+        /// The owner that controls the lifecycle of this handler, or null when it was already collected.
+        /// It takes part in the equality because two providers may invoke the same method.
+        /// </summary>
+        private object currentOwner => m_Owner.TryGetTarget(out var owner) ? owner : null;
+
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
-        public bool isAlive => m_Owner.TryGetTarget(out _);
+        public bool isAlive => m_Owner.TryGetReference(out _);
 
         /// <summary>
         /// Create a weak event handler from a System.Action.
@@ -1379,7 +1486,7 @@ namespace PeroTools2.AccessKing
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11) { if (m_Owner.TryGetTarget(out var owner) && owner != null) m_Invocation.Invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11); }
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
-        public override int GetHashCode() => m_Invocation != null ? m_Invocation.GetHashCode() : 0;
+        public override int GetHashCode() => unchecked((m_Method != null ? m_Method.GetHashCode() : 0) * 397 ^ (currentOwner != null ? currentOwner.GetHashCode() : 0));
 
         /// <summary>
         /// Verify if the target equals to event handler.
@@ -1394,7 +1501,7 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// Verify if the target equals to event handler.
         /// </summary>
-        public bool Equals(WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> other) => m_Method == other?.m_Method;
+        public bool Equals(WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> other) => other is not null && m_Method == other.m_Method && Equals(currentOwner, other.currentOwner);
 
         /// <summary>
         /// Verify if the target equals to event handler.
@@ -1402,7 +1509,8 @@ namespace PeroTools2.AccessKing
         public override bool Equals(object obj) => obj switch
         {
             WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> other => Equals(other),
-            Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> action => action.Method == m_Method,
+            Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> action => action.Method == m_Method && Equals(action.Target, currentOwner),
+            IEventInvocation invocation => invocation.invocationMethod == m_Method && Equals(invocation.invocationOwner, currentOwner),
             _ => false
         };
 
@@ -1469,8 +1577,16 @@ namespace PeroTools2.AccessKing
         /// </summary>
         System.Reflection.MethodInfo IWeakEventInvocation.invocationMethod => m_Method;
 
+        object IWeakEventInvocation.invocationOwner => currentOwner;
+
+        /// <summary>
+        /// The owner that controls the lifecycle of this handler, or null when it was already collected.
+        /// It takes part in the equality because two providers may invoke the same method.
+        /// </summary>
+        private object currentOwner => m_Owner.TryGetTarget(out var owner) ? owner : null;
+
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
-        public bool isAlive => m_Owner.TryGetTarget(out _);
+        public bool isAlive => m_Owner.TryGetReference(out _);
 
         /// <summary>
         /// Create a weak event handler from a System.Action.
@@ -1498,7 +1614,7 @@ namespace PeroTools2.AccessKing
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11, T12 param12) { if (m_Owner.TryGetTarget(out var owner) && owner != null) m_Invocation.Invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12); }
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
-        public override int GetHashCode() => m_Invocation != null ? m_Invocation.GetHashCode() : 0;
+        public override int GetHashCode() => unchecked((m_Method != null ? m_Method.GetHashCode() : 0) * 397 ^ (currentOwner != null ? currentOwner.GetHashCode() : 0));
 
         /// <summary>
         /// Verify if the target equals to event handler.
@@ -1513,7 +1629,7 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// Verify if the target equals to event handler.
         /// </summary>
-        public bool Equals(WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> other) => m_Method == other?.m_Method;
+        public bool Equals(WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> other) => other is not null && m_Method == other.m_Method && Equals(currentOwner, other.currentOwner);
 
         /// <summary>
         /// Verify if the target equals to event handler.
@@ -1521,7 +1637,8 @@ namespace PeroTools2.AccessKing
         public override bool Equals(object obj) => obj switch
         {
             WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> other => Equals(other),
-            Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> action => action.Method == m_Method,
+            Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> action => action.Method == m_Method && Equals(action.Target, currentOwner),
+            IEventInvocation invocation => invocation.invocationMethod == m_Method && Equals(invocation.invocationOwner, currentOwner),
             _ => false
         };
 
@@ -1588,8 +1705,16 @@ namespace PeroTools2.AccessKing
         /// </summary>
         System.Reflection.MethodInfo IWeakEventInvocation.invocationMethod => m_Method;
 
+        object IWeakEventInvocation.invocationOwner => currentOwner;
+
+        /// <summary>
+        /// The owner that controls the lifecycle of this handler, or null when it was already collected.
+        /// It takes part in the equality because two providers may invoke the same method.
+        /// </summary>
+        private object currentOwner => m_Owner.TryGetTarget(out var owner) ? owner : null;
+
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
-        public bool isAlive => m_Owner.TryGetTarget(out _);
+        public bool isAlive => m_Owner.TryGetReference(out _);
 
         /// <summary>
         /// Create a weak event handler from a System.Action.
@@ -1617,7 +1742,7 @@ namespace PeroTools2.AccessKing
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11, T12 param12, T13 param13) { if (m_Owner.TryGetTarget(out var owner) && owner != null) m_Invocation.Invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12, param13); }
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
-        public override int GetHashCode() => m_Invocation != null ? m_Invocation.GetHashCode() : 0;
+        public override int GetHashCode() => unchecked((m_Method != null ? m_Method.GetHashCode() : 0) * 397 ^ (currentOwner != null ? currentOwner.GetHashCode() : 0));
 
         /// <summary>
         /// Verify if the target equals to event handler.
@@ -1632,7 +1757,7 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// Verify if the target equals to event handler.
         /// </summary>
-        public bool Equals(WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> other) => m_Method == other?.m_Method;
+        public bool Equals(WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> other) => other is not null && m_Method == other.m_Method && Equals(currentOwner, other.currentOwner);
 
         /// <summary>
         /// Verify if the target equals to event handler.
@@ -1640,7 +1765,8 @@ namespace PeroTools2.AccessKing
         public override bool Equals(object obj) => obj switch
         {
             WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> other => Equals(other),
-            Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> action => action.Method == m_Method,
+            Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> action => action.Method == m_Method && Equals(action.Target, currentOwner),
+            IEventInvocation invocation => invocation.invocationMethod == m_Method && Equals(invocation.invocationOwner, currentOwner),
             _ => false
         };
 
@@ -1707,8 +1833,16 @@ namespace PeroTools2.AccessKing
         /// </summary>
         System.Reflection.MethodInfo IWeakEventInvocation.invocationMethod => m_Method;
 
+        object IWeakEventInvocation.invocationOwner => currentOwner;
+
+        /// <summary>
+        /// The owner that controls the lifecycle of this handler, or null when it was already collected.
+        /// It takes part in the equality because two providers may invoke the same method.
+        /// </summary>
+        private object currentOwner => m_Owner.TryGetTarget(out var owner) ? owner : null;
+
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
-        public bool isAlive => m_Owner.TryGetTarget(out _);
+        public bool isAlive => m_Owner.TryGetReference(out _);
 
         /// <summary>
         /// Create a weak event handler from a System.Action.
@@ -1736,7 +1870,7 @@ namespace PeroTools2.AccessKing
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11, T12 param12, T13 param13, T14 param14) { if (m_Owner.TryGetTarget(out var owner) && owner != null) m_Invocation.Invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12, param13, param14); }
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
-        public override int GetHashCode() => m_Invocation != null ? m_Invocation.GetHashCode() : 0;
+        public override int GetHashCode() => unchecked((m_Method != null ? m_Method.GetHashCode() : 0) * 397 ^ (currentOwner != null ? currentOwner.GetHashCode() : 0));
 
         /// <summary>
         /// Verify if the target equals to event handler.
@@ -1751,7 +1885,7 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// Verify if the target equals to event handler.
         /// </summary>
-        public bool Equals(WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> other) => m_Method == other?.m_Method;
+        public bool Equals(WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> other) => other is not null && m_Method == other.m_Method && Equals(currentOwner, other.currentOwner);
 
         /// <summary>
         /// Verify if the target equals to event handler.
@@ -1759,7 +1893,8 @@ namespace PeroTools2.AccessKing
         public override bool Equals(object obj) => obj switch
         {
             WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> other => Equals(other),
-            Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> action => action.Method == m_Method,
+            Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> action => action.Method == m_Method && Equals(action.Target, currentOwner),
+            IEventInvocation invocation => invocation.invocationMethod == m_Method && Equals(invocation.invocationOwner, currentOwner),
             _ => false
         };
 
@@ -1826,8 +1961,16 @@ namespace PeroTools2.AccessKing
         /// </summary>
         System.Reflection.MethodInfo IWeakEventInvocation.invocationMethod => m_Method;
 
+        object IWeakEventInvocation.invocationOwner => currentOwner;
+
+        /// <summary>
+        /// The owner that controls the lifecycle of this handler, or null when it was already collected.
+        /// It takes part in the equality because two providers may invoke the same method.
+        /// </summary>
+        private object currentOwner => m_Owner.TryGetTarget(out var owner) ? owner : null;
+
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
-        public bool isAlive => m_Owner.TryGetTarget(out _);
+        public bool isAlive => m_Owner.TryGetReference(out _);
 
         /// <summary>
         /// Create a weak event handler from a System.Action.
@@ -1855,7 +1998,7 @@ namespace PeroTools2.AccessKing
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11, T12 param12, T13 param13, T14 param14, T15 param15) { if (m_Owner.TryGetTarget(out var owner) && owner != null) m_Invocation.Invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12, param13, param14, param15); }
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
-        public override int GetHashCode() => m_Invocation != null ? m_Invocation.GetHashCode() : 0;
+        public override int GetHashCode() => unchecked((m_Method != null ? m_Method.GetHashCode() : 0) * 397 ^ (currentOwner != null ? currentOwner.GetHashCode() : 0));
 
         /// <summary>
         /// Verify if the target equals to event handler.
@@ -1870,7 +2013,7 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// Verify if the target equals to event handler.
         /// </summary>
-        public bool Equals(WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> other) => m_Method == other?.m_Method;
+        public bool Equals(WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> other) => other is not null && m_Method == other.m_Method && Equals(currentOwner, other.currentOwner);
 
         /// <summary>
         /// Verify if the target equals to event handler.
@@ -1878,7 +2021,8 @@ namespace PeroTools2.AccessKing
         public override bool Equals(object obj) => obj switch
         {
             WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> other => Equals(other),
-            Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> action => action.Method == m_Method,
+            Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> action => action.Method == m_Method && Equals(action.Target, currentOwner),
+            IEventInvocation invocation => invocation.invocationMethod == m_Method && Equals(invocation.invocationOwner, currentOwner),
             _ => false
         };
 

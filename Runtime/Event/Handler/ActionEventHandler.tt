@@ -52,6 +52,8 @@ namespace PeroTools2.AccessKing
         /// </summary>
         System.Reflection.MethodInfo IEventInvocation.invocationMethod => m_Invocation?.Method;
 
+        object IEventInvocation.invocationOwner => m_Invocation?.Target;
+
         /// <inheritdoc cref="PeroTools2.AccessKing.IEventHandler.Handle"/>
         public void Handle(<#=parameterDefinitions#>) => m_Invocation?.Invoke(<#=parameters#>);
 
@@ -62,7 +64,7 @@ namespace PeroTools2.AccessKing
         public static implicit operator <#=evenHandler#>(<#=action#> delegation) => new(delegation);
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
-        public override int GetHashCode() => m_Invocation != null ? m_Invocation.GetHashCode() : 0;
+        public override int GetHashCode() => unchecked((m_Invocation != null ? m_Invocation.Method.GetHashCode() : 0) * 397 ^ (m_Invocation != null && m_Invocation.Target != null ? m_Invocation.Target.GetHashCode() : 0));
 
         /// <summary>
         /// Verify if the target equals to event handler.
@@ -86,6 +88,7 @@ namespace PeroTools2.AccessKing
         {
             <#=evenHandler#> other => Equals(other),
             <#=action#> action => action == m_Invocation,
+            IWeakEventInvocation weak => weak.invocationMethod == m_Invocation?.Method && Equals(weak.invocationOwner, m_Invocation?.Target),
             _ => false
         };
     }

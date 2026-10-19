@@ -64,7 +64,9 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
         public void Handle(ref <#=parameterNotification#> notification) => Handle(<#=notificationItems#>);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.<#=evenHandler.Replace('<','{').Replace('>','}')#>"/>
+        /// <summary>
+        /// Convert a delegate to the handler.
+        /// </summary>
         public static implicit operator <#=evenHandler#>(<#=func#> delegation) => new(delegation);
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>

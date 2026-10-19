@@ -14,7 +14,7 @@ namespace PeroTools2.AccessKing
     /// <summary>
     /// Default command schedule implementation.
     /// </summary>
-    /// <typeparam name="TTheme"></typeparam>
+    /// <typeparam name="TTheme">Theme of the command bus.</typeparam>
     public partial class CommandSchedule<TTheme> : ICommandSchedule<TTheme>
     {
         /// <summary>

@@ -41,7 +41,9 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
         public void Handle(ref Empty notification) => Handle();
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.FuncCommandHandler{TResult}"/>
+        /// <summary>
+        /// Convert a delegate to the handler.
+        /// </summary>
         public static implicit operator FuncCommandHandler<TResult>(Func<TResult> delegation) => new(delegation);
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
@@ -106,7 +108,9 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
         public void Handle(ref ParameterNotification<T> notification) => Handle(notification.item);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.FuncCommandHandler{T, TResult}"/>
+        /// <summary>
+        /// Convert a delegate to the handler.
+        /// </summary>
         public static implicit operator FuncCommandHandler<T, TResult>(Func<T, TResult> delegation) => new(delegation);
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
@@ -171,7 +175,9 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
         public void Handle(ref ParameterNotification<T1, T2> notification) => Handle(notification.item1, notification.item2);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.FuncCommandHandler{T1, T2, TResult}"/>
+        /// <summary>
+        /// Convert a delegate to the handler.
+        /// </summary>
         public static implicit operator FuncCommandHandler<T1, T2, TResult>(Func<T1, T2, TResult> delegation) => new(delegation);
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
@@ -236,7 +242,9 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
         public void Handle(ref ParameterNotification<T1, T2, T3> notification) => Handle(notification.item1, notification.item2, notification.item3);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.FuncCommandHandler{T1, T2, T3, TResult}"/>
+        /// <summary>
+        /// Convert a delegate to the handler.
+        /// </summary>
         public static implicit operator FuncCommandHandler<T1, T2, T3, TResult>(Func<T1, T2, T3, TResult> delegation) => new(delegation);
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
@@ -301,7 +309,9 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
         public void Handle(ref ParameterNotification<T1, T2, T3, T4> notification) => Handle(notification.item1, notification.item2, notification.item3, notification.item4);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.FuncCommandHandler{T1, T2, T3, T4, TResult}"/>
+        /// <summary>
+        /// Convert a delegate to the handler.
+        /// </summary>
         public static implicit operator FuncCommandHandler<T1, T2, T3, T4, TResult>(Func<T1, T2, T3, T4, TResult> delegation) => new(delegation);
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
@@ -366,7 +376,9 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
         public void Handle(ref ParameterNotification<T1, T2, T3, T4, T5> notification) => Handle(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.FuncCommandHandler{T1, T2, T3, T4, T5, TResult}"/>
+        /// <summary>
+        /// Convert a delegate to the handler.
+        /// </summary>
         public static implicit operator FuncCommandHandler<T1, T2, T3, T4, T5, TResult>(Func<T1, T2, T3, T4, T5, TResult> delegation) => new(delegation);
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
@@ -431,7 +443,9 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
         public void Handle(ref ParameterNotification<T1, T2, T3, T4, T5, T6> notification) => Handle(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.FuncCommandHandler{T1, T2, T3, T4, T5, T6, TResult}"/>
+        /// <summary>
+        /// Convert a delegate to the handler.
+        /// </summary>
         public static implicit operator FuncCommandHandler<T1, T2, T3, T4, T5, T6, TResult>(Func<T1, T2, T3, T4, T5, T6, TResult> delegation) => new(delegation);
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
@@ -496,7 +510,9 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
         public void Handle(ref ParameterNotification<T1, T2, T3, T4, T5, T6, T7> notification) => Handle(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.FuncCommandHandler{T1, T2, T3, T4, T5, T6, T7, TResult}"/>
+        /// <summary>
+        /// Convert a delegate to the handler.
+        /// </summary>
         public static implicit operator FuncCommandHandler<T1, T2, T3, T4, T5, T6, T7, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, TResult> delegation) => new(delegation);
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
@@ -561,7 +577,9 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
         public void Handle(ref ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8> notification) => Handle(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7, notification.item8);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.FuncCommandHandler{T1, T2, T3, T4, T5, T6, T7, T8, TResult}"/>
+        /// <summary>
+        /// Convert a delegate to the handler.
+        /// </summary>
         public static implicit operator FuncCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult> delegation) => new(delegation);
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
@@ -626,7 +644,9 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
         public void Handle(ref ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9> notification) => Handle(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7, notification.item8, notification.item9);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.FuncCommandHandler{T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult}"/>
+        /// <summary>
+        /// Convert a delegate to the handler.
+        /// </summary>
         public static implicit operator FuncCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> delegation) => new(delegation);
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
@@ -691,7 +711,9 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
         public void Handle(ref ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> notification) => Handle(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7, notification.item8, notification.item9, notification.item10);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.FuncCommandHandler{T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult}"/>
+        /// <summary>
+        /// Convert a delegate to the handler.
+        /// </summary>
         public static implicit operator FuncCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> delegation) => new(delegation);
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
@@ -756,7 +778,9 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
         public void Handle(ref ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> notification) => Handle(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7, notification.item8, notification.item9, notification.item10, notification.item11);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.FuncCommandHandler{T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult}"/>
+        /// <summary>
+        /// Convert a delegate to the handler.
+        /// </summary>
         public static implicit operator FuncCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> delegation) => new(delegation);
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
@@ -821,7 +845,9 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
         public void Handle(ref ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> notification) => Handle(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7, notification.item8, notification.item9, notification.item10, notification.item11, notification.item12);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.FuncCommandHandler{T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult}"/>
+        /// <summary>
+        /// Convert a delegate to the handler.
+        /// </summary>
         public static implicit operator FuncCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> delegation) => new(delegation);
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
@@ -886,7 +912,9 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
         public void Handle(ref ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> notification) => Handle(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7, notification.item8, notification.item9, notification.item10, notification.item11, notification.item12, notification.item13);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.FuncCommandHandler{T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult}"/>
+        /// <summary>
+        /// Convert a delegate to the handler.
+        /// </summary>
         public static implicit operator FuncCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> delegation) => new(delegation);
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
@@ -951,7 +979,9 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
         public void Handle(ref ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> notification) => Handle(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7, notification.item8, notification.item9, notification.item10, notification.item11, notification.item12, notification.item13, notification.item14);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.FuncCommandHandler{T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult}"/>
+        /// <summary>
+        /// Convert a delegate to the handler.
+        /// </summary>
         public static implicit operator FuncCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> delegation) => new(delegation);
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
@@ -1016,7 +1046,9 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
         public void Handle(ref ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> notification) => Handle(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7, notification.item8, notification.item9, notification.item10, notification.item11, notification.item12, notification.item13, notification.item14, notification.item15);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.FuncCommandHandler{T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult}"/>
+        /// <summary>
+        /// Convert a delegate to the handler.
+        /// </summary>
         public static implicit operator FuncCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> delegation) => new(delegation);
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>

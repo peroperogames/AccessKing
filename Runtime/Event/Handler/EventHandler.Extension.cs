@@ -14,10 +14,10 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// Get reference target and considering that the situation is UnityEngine.Object
         /// </summary>
-        /// <param name="weakReference"></param>
-        /// <param name="source"></param>
-        /// <typeparam name="TSource"></typeparam>
-        /// <returns></returns>
+        /// <param name="weakReference">Weak reference of the handler.</param>
+        /// <param name="source">The handler that the weak reference points to.</param>
+        /// <typeparam name="TSource">Type of the referenced handler.</typeparam>
+        /// <returns>Whether the reference is still alive and is not a destroyed <see cref="UnityEngine.Object"/>.</returns>
         internal static bool TryGetReference<TSource>(this WeakReference<TSource> weakReference, out TSource source) where TSource : class
         {
             if (!weakReference.TryGetTarget(out source))

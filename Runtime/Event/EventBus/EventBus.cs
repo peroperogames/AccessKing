@@ -10,7 +10,7 @@ using System.Collections.Generic;
 namespace PeroTools2.AccessKing
 {
     /// <inheritdoc cref="IEventBus{TNotification}"/>
-    public class EventBus<TNotification> : IEventBus<TNotification>, IAccessBus, IWeakEventSubscriable<TNotification> where TNotification : INotification
+    public class EventBus<TNotification> : IEventBus<TNotification>, IAccessBus where TNotification : INotification
     {
         /// <summary>
         /// Handler collections.

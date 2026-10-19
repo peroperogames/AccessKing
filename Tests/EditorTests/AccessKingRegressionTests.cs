@@ -243,6 +243,25 @@ namespace PeroTools2.AccessKing.Editor.Tests
         }
 
         /// <summary>
+        /// A disposed operation releases its collection once and refuses to be read afterwards.
+        /// </summary>
+        [Test]
+        public void DisposedOperationIsNotReadableTest()
+        {
+            var factory = new RegistryCommandHandlerFactory();
+            var bus = new CommandBus<Empty>(factory);
+            factory.RegisterHandler<Empty>(new ResultCommandHandler());
+
+            var operation = bus.Execute();
+            Assert.AreEqual(1, operation.GetResults<string>(false).Count);
+
+            operation.Dispose();
+            operation.Dispose();
+
+            Assert.Throws<InvalidOperationException>(() => operation.GetResults<string>(false));
+        }
+
+        /// <summary>
         /// A handler must be dispatched exactly once even when the command bus holds several factories.
         /// </summary>
         [Test]

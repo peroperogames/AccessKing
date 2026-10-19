@@ -11,9 +11,10 @@ using UnityEngine.Pool;
 namespace PeroTools2.AccessKing
 {
     /// <summary>
-    /// Command handlers executed result collection.
+    /// Command handlers executed result collection. The collection is rented from a shared pool, so it is
+    /// released by the first read when <c>autoRelease</c> is enabled and by <see cref="Dispose"/> otherwise.
     /// </summary>
-    public readonly struct CommandOperation
+    public readonly struct CommandOperation : IDisposable
     {
         /// <summary>
         /// Owns the pooled result getter collection so that it can be released at most once.
@@ -43,18 +44,25 @@ namespace PeroTools2.AccessKing
                 : m_Getters;
 
             /// <summary>
+            /// Release the pooled collection. Returns false when it was already released.
+            /// </summary>
+            internal bool TryRelease()
+            {
+                if (m_Released) return false;
+                m_Released = true;
+                CollectionPool<List<IResultAvailable>, IResultAvailable>.Release(m_Getters);
+                return true;
+            }
+
+            /// <summary>
             /// Release the pooled collection exactly once.
             /// </summary>
             /// <exception cref="InvalidOperationException">Throw when the collection is released twice.</exception>
             internal void Release()
             {
-                if (m_Released)
-                {
-                    throw new InvalidOperationException(
-                        "The command operation result has been released twice. Releasing a pooled collection twice would hand the same instance to two commands and corrupt their results.");
-                }
-                m_Released = true;
-                CollectionPool<List<IResultAvailable>, IResultAvailable>.Release(m_Getters);
+                if (TryRelease()) return;
+                throw new InvalidOperationException(
+                    "The command operation result has been released twice. Releasing a pooled collection twice would hand the same instance to two commands and corrupt their results.");
             }
         }
 
@@ -87,5 +95,11 @@ namespace PeroTools2.AccessKing
             }
             resultCollection.Release();
         }
+
+        /// <summary>
+        /// Release the result collection back to the shared pool. Disposing twice is a no-op, so the value can be
+        /// used with a using statement when the results were read with <c>autoRelease</c> disabled.
+        /// </summary>
+        public void Dispose() => resultCollection?.TryRelease();
     }
 }

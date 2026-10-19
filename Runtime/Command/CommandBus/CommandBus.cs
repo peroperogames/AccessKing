@@ -45,7 +45,7 @@ namespace PeroTools2.AccessKing
         public CommandOperation Execute(ref TNotification notification)
         {
             var handlers = CollectionPool<List<ICommandHandler<TNotification>>, ICommandHandler<TNotification>>.Get();
-            var results = CollectionPool<List<IResultAvailable>, IResultAvailable>.Get();
+            var results = CommandOperation.Rent();
             try
             {
                 foreach (var factory in m_HandlerFactories.Values)
@@ -68,7 +68,7 @@ namespace PeroTools2.AccessKing
             {
                 // Never leak the rented collections when a handler fails.
                 CollectionPool<List<ICommandHandler<TNotification>>, ICommandHandler<TNotification>>.Release(handlers);
-                CollectionPool<List<IResultAvailable>, IResultAvailable>.Release(results);
+                CommandOperation.Return(results);
                 throw;
             }
 

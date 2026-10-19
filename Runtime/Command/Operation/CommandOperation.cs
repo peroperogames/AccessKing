@@ -17,70 +17,80 @@ namespace PeroTools2.AccessKing
     public readonly struct CommandOperation : IDisposable
     {
         /// <summary>
-        /// Owns the pooled result getter collection so that it can be released at most once.
+        /// Pooled result getter collection. It carries a generation that is bumped every time the collection is
+        /// returned, so a copy of an operation that still refers to a recycled collection can be told apart from
+        /// the operation that currently owns it.
         /// </summary>
-        internal sealed class ResultCollection
+        internal sealed class ResultCollection : List<IResultAvailable>
         {
             /// <summary>
-            /// Pooled result getters.
+            /// Generation of the rental. Bumped when the collection goes back to the pool.
             /// </summary>
-            private readonly List<IResultAvailable> m_Getters;
+            internal int generation;
+        }
 
-            /// <summary>
-            /// Whether the pooled collection has been released back to the pool.
-            /// </summary>
-            private bool m_Released;
+        /// <summary>
+        /// The rented result collection.
+        /// </summary>
+        internal readonly ResultCollection resultCollection;
 
-            internal ResultCollection(List<IResultAvailable> getters) => m_Getters = getters;
+        /// <summary>
+        /// Generation of the collection at the moment this operation was created.
+        /// </summary>
+        internal readonly int generation;
 
-            /// <summary>
-            /// Get the result getters.
-            /// </summary>
-            /// <exception cref="InvalidOperationException">Throw when the result has already been released.</exception>
-            internal List<IResultAvailable> getters => m_Released
-                ? throw new InvalidOperationException(
-                    "The command operation result has already been released, its collection is back in the shared pool and may be reused by another Execute. " +
-                    "When autoRelease is enabled a CommandOperation can only be consumed once.")
-                : m_Getters;
+        internal CommandOperation(ResultCollection collection)
+        {
+            resultCollection = collection;
+            generation = collection.generation;
+        }
 
-            /// <summary>
-            /// Release the pooled collection. Returns false when it was already released.
-            /// </summary>
-            internal bool TryRelease()
+        /// <summary>
+        /// Rent a result collection from the shared pool. In steady state this does not allocate.
+        /// </summary>
+        internal static ResultCollection Rent() => CollectionPool<ResultCollection, IResultAvailable>.Get();
+
+        /// <summary>
+        /// Return the result collection to the shared pool. The generation bump invalidates every copy of the
+        /// operation that still refers to it, so the same collection can never be returned twice.
+        /// </summary>
+        internal static void Return(ResultCollection collection)
+        {
+            collection.generation++;
+            CollectionPool<ResultCollection, IResultAvailable>.Release(collection);
+        }
+
+        /// <summary>
+        /// Get the result getters of this operation.
+        /// </summary>
+        /// <exception cref="InvalidOperationException">Throw when this operation holds no result or its result has been released.</exception>
+        internal List<IResultAvailable> getters
+        {
+            get
             {
-                if (m_Released) return false;
-                m_Released = true;
-                CollectionPool<List<IResultAvailable>, IResultAvailable>.Release(m_Getters);
-                return true;
-            }
-
-            /// <summary>
-            /// Release the pooled collection exactly once.
-            /// </summary>
-            /// <exception cref="InvalidOperationException">Throw when the collection is released twice.</exception>
-            internal void Release()
-            {
-                if (TryRelease()) return;
-                throw new InvalidOperationException(
-                    "The command operation result has been released twice. Releasing a pooled collection twice would hand the same instance to two commands and corrupt their results.");
+                if (resultCollection is null)
+                {
+                    throw new InvalidOperationException(
+                        "The command operation holds no result. Do not consume the default value of CommandOperation, always use the value returned by Execute.");
+                }
+                if (resultCollection.generation != generation)
+                {
+                    throw new InvalidOperationException(
+                        "The command operation result has already been released, its collection is back in the shared pool and may be reused by another Execute.");
+                }
+                return resultCollection;
             }
         }
 
         /// <summary>
-        /// Result collection owner. All copies of this struct share the same collection.
+        /// Release the result collection back to the shared pool. Disposing twice is a no-op, so the value can be
+        /// used with a using statement when the results were read with <c>autoRelease</c> disabled.
         /// </summary>
-        internal readonly ResultCollection resultCollection;
-
-        internal CommandOperation(List<IResultAvailable> resultGetters) => resultCollection = new ResultCollection(resultGetters);
-
-        /// <summary>
-        /// Get the result getter collection of this operation.
-        /// </summary>
-        /// <exception cref="InvalidOperationException">Throw when this operation holds no result or its result has been released.</exception>
-        internal List<IResultAvailable> getters => resultCollection is null
-            ? throw new InvalidOperationException(
-                "The command operation holds no result. Do not consume the default value of CommandOperation, always use the value returned by Execute.")
-            : resultCollection.getters;
+        public void Dispose()
+        {
+            if (resultCollection is null || resultCollection.generation != generation) return;
+            Return(resultCollection);
+        }
 
         /// <summary>
         /// Release the result collection back to the shared pool.
@@ -88,18 +98,10 @@ namespace PeroTools2.AccessKing
         /// <exception cref="InvalidOperationException">Throw when this operation holds no result or its result has been released.</exception>
         internal void ReleaseResults()
         {
-            if (resultCollection is null)
-            {
-                throw new InvalidOperationException(
-                    "The command operation holds no result to release. Do not consume the default value of CommandOperation.");
-            }
-            resultCollection.Release();
+            // Reading the getters validates that this operation still owns the collection, which is what makes a
+            // second release impossible.
+            _ = getters;
+            Return(resultCollection);
         }
-
-        /// <summary>
-        /// Release the result collection back to the shared pool. Disposing twice is a no-op, so the value can be
-        /// used with a using statement when the results were read with <c>autoRelease</c> disabled.
-        /// </summary>
-        public void Dispose() => resultCollection?.TryRelease();
     }
 }

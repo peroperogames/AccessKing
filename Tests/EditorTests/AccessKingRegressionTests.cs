@@ -277,6 +277,25 @@ namespace PeroTools2.AccessKing.Editor.Tests
         }
 
         /// <summary>
+        /// A copy of the operation made before it was consumed must not be able to read or release the
+        /// collection again, the collection is pooled and already belongs to someone else.
+        /// </summary>
+        [Test]
+        public void StaleOperationCopyCannotConsumeTest()
+        {
+            var factory = new RegistryCommandHandlerFactory();
+            var bus = new CommandBus<Empty>(factory);
+            factory.RegisterHandler<Empty>(new ResultCommandHandler());
+
+            var operation = bus.Execute();
+            var stale = operation;
+
+            Assert.AreEqual(1, operation.GetResults<string>().Count);
+            Assert.Throws<InvalidOperationException>(() => stale.GetResults<string>());
+            stale.Dispose();
+        }
+
+        /// <summary>
         /// A handler must be dispatched exactly once even when the command bus holds several factories.
         /// </summary>
         [Test]

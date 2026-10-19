@@ -21,4 +21,16 @@ namespace PeroTools2.AccessKing
 
     /// <inheritdoc cref="IEventHandler{TNotification}"/>
     public interface IEventHandler : IEventHandler<Empty> { }
+
+    /// <summary>
+    /// Exposes the invocation method of a strongly typed event handler, so that a weak subscription
+    /// can be located again from the handler (or delegate) that created it.
+    /// </summary>
+    internal interface IEventInvocation
+    {
+        /// <summary>
+        /// The method that the handler invokes.
+        /// </summary>
+        System.Reflection.MethodInfo invocationMethod { get; }
+    }
 }

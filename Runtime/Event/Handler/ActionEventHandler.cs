@@ -11,7 +11,7 @@ namespace PeroTools2.AccessKing
     /// <summary>
     /// Event handler with System.Action.
     /// </summary>
-    public sealed class ActionEventHandler : IEventHandler, IEquatable<ActionEventHandler>
+    public sealed class ActionEventHandler : IEventHandler, IEventInvocation, IEquatable<ActionEventHandler>
     {
         /// <summary>
         /// Delegate with instance method provider.
@@ -23,6 +23,11 @@ namespace PeroTools2.AccessKing
         /// </summary>
         /// <param name="delegation">Delegation for creating EventHandler.</param>
         public ActionEventHandler(Action delegation) => m_Invocation = delegation;
+
+        /// <summary>
+        /// Exposes the invocation method, so that the event bus can locate this handler from the weak subscription that wraps the same delegate.
+        /// </summary>
+        System.Reflection.MethodInfo IEventInvocation.invocationMethod => m_Invocation?.Method;
 
         /// <inheritdoc cref="PeroTools2.AccessKing.IEventHandler.Handle"/>
         public void Handle() => m_Invocation?.Invoke();
@@ -65,7 +70,7 @@ namespace PeroTools2.AccessKing
     /// <summary>
     /// Event handler with System.Action.
     /// </summary>
-    public sealed class ActionEventHandler<T> : IEventHandler<ParameterNotification<T>>, IEquatable<ActionEventHandler<T>>
+    public sealed class ActionEventHandler<T> : IEventHandler<ParameterNotification<T>>, IEventInvocation, IEquatable<ActionEventHandler<T>>
     {
         /// <summary>
         /// Delegate with instance method provider.
@@ -77,6 +82,11 @@ namespace PeroTools2.AccessKing
         /// </summary>
         /// <param name="delegation">Delegation for creating EventHandler.</param>
         public ActionEventHandler(Action<T> delegation) => m_Invocation = delegation;
+
+        /// <summary>
+        /// Exposes the invocation method, so that the event bus can locate this handler from the weak subscription that wraps the same delegate.
+        /// </summary>
+        System.Reflection.MethodInfo IEventInvocation.invocationMethod => m_Invocation?.Method;
 
         /// <inheritdoc cref="PeroTools2.AccessKing.IEventHandler.Handle"/>
         public void Handle(T param) => m_Invocation?.Invoke(param);
@@ -119,7 +129,7 @@ namespace PeroTools2.AccessKing
     /// <summary>
     /// Event handler with System.Action.
     /// </summary>
-    public sealed class ActionEventHandler<T1, T2> : IEventHandler<ParameterNotification<T1, T2>>, IEquatable<ActionEventHandler<T1, T2>>
+    public sealed class ActionEventHandler<T1, T2> : IEventHandler<ParameterNotification<T1, T2>>, IEventInvocation, IEquatable<ActionEventHandler<T1, T2>>
     {
         /// <summary>
         /// Delegate with instance method provider.
@@ -131,6 +141,11 @@ namespace PeroTools2.AccessKing
         /// </summary>
         /// <param name="delegation">Delegation for creating EventHandler.</param>
         public ActionEventHandler(Action<T1, T2> delegation) => m_Invocation = delegation;
+
+        /// <summary>
+        /// Exposes the invocation method, so that the event bus can locate this handler from the weak subscription that wraps the same delegate.
+        /// </summary>
+        System.Reflection.MethodInfo IEventInvocation.invocationMethod => m_Invocation?.Method;
 
         /// <inheritdoc cref="PeroTools2.AccessKing.IEventHandler.Handle"/>
         public void Handle(T1 param1, T2 param2) => m_Invocation?.Invoke(param1, param2);
@@ -173,7 +188,7 @@ namespace PeroTools2.AccessKing
     /// <summary>
     /// Event handler with System.Action.
     /// </summary>
-    public sealed class ActionEventHandler<T1, T2, T3> : IEventHandler<ParameterNotification<T1, T2, T3>>, IEquatable<ActionEventHandler<T1, T2, T3>>
+    public sealed class ActionEventHandler<T1, T2, T3> : IEventHandler<ParameterNotification<T1, T2, T3>>, IEventInvocation, IEquatable<ActionEventHandler<T1, T2, T3>>
     {
         /// <summary>
         /// Delegate with instance method provider.
@@ -185,6 +200,11 @@ namespace PeroTools2.AccessKing
         /// </summary>
         /// <param name="delegation">Delegation for creating EventHandler.</param>
         public ActionEventHandler(Action<T1, T2, T3> delegation) => m_Invocation = delegation;
+
+        /// <summary>
+        /// Exposes the invocation method, so that the event bus can locate this handler from the weak subscription that wraps the same delegate.
+        /// </summary>
+        System.Reflection.MethodInfo IEventInvocation.invocationMethod => m_Invocation?.Method;
 
         /// <inheritdoc cref="PeroTools2.AccessKing.IEventHandler.Handle"/>
         public void Handle(T1 param1, T2 param2, T3 param3) => m_Invocation?.Invoke(param1, param2, param3);
@@ -227,7 +247,7 @@ namespace PeroTools2.AccessKing
     /// <summary>
     /// Event handler with System.Action.
     /// </summary>
-    public sealed class ActionEventHandler<T1, T2, T3, T4> : IEventHandler<ParameterNotification<T1, T2, T3, T4>>, IEquatable<ActionEventHandler<T1, T2, T3, T4>>
+    public sealed class ActionEventHandler<T1, T2, T3, T4> : IEventHandler<ParameterNotification<T1, T2, T3, T4>>, IEventInvocation, IEquatable<ActionEventHandler<T1, T2, T3, T4>>
     {
         /// <summary>
         /// Delegate with instance method provider.
@@ -239,6 +259,11 @@ namespace PeroTools2.AccessKing
         /// </summary>
         /// <param name="delegation">Delegation for creating EventHandler.</param>
         public ActionEventHandler(Action<T1, T2, T3, T4> delegation) => m_Invocation = delegation;
+
+        /// <summary>
+        /// Exposes the invocation method, so that the event bus can locate this handler from the weak subscription that wraps the same delegate.
+        /// </summary>
+        System.Reflection.MethodInfo IEventInvocation.invocationMethod => m_Invocation?.Method;
 
         /// <inheritdoc cref="PeroTools2.AccessKing.IEventHandler.Handle"/>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4) => m_Invocation?.Invoke(param1, param2, param3, param4);
@@ -281,7 +306,7 @@ namespace PeroTools2.AccessKing
     /// <summary>
     /// Event handler with System.Action.
     /// </summary>
-    public sealed class ActionEventHandler<T1, T2, T3, T4, T5> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5>>, IEquatable<ActionEventHandler<T1, T2, T3, T4, T5>>
+    public sealed class ActionEventHandler<T1, T2, T3, T4, T5> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5>>, IEventInvocation, IEquatable<ActionEventHandler<T1, T2, T3, T4, T5>>
     {
         /// <summary>
         /// Delegate with instance method provider.
@@ -293,6 +318,11 @@ namespace PeroTools2.AccessKing
         /// </summary>
         /// <param name="delegation">Delegation for creating EventHandler.</param>
         public ActionEventHandler(Action<T1, T2, T3, T4, T5> delegation) => m_Invocation = delegation;
+
+        /// <summary>
+        /// Exposes the invocation method, so that the event bus can locate this handler from the weak subscription that wraps the same delegate.
+        /// </summary>
+        System.Reflection.MethodInfo IEventInvocation.invocationMethod => m_Invocation?.Method;
 
         /// <inheritdoc cref="PeroTools2.AccessKing.IEventHandler.Handle"/>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5) => m_Invocation?.Invoke(param1, param2, param3, param4, param5);
@@ -335,7 +365,7 @@ namespace PeroTools2.AccessKing
     /// <summary>
     /// Event handler with System.Action.
     /// </summary>
-    public sealed class ActionEventHandler<T1, T2, T3, T4, T5, T6> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6>>, IEquatable<ActionEventHandler<T1, T2, T3, T4, T5, T6>>
+    public sealed class ActionEventHandler<T1, T2, T3, T4, T5, T6> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6>>, IEventInvocation, IEquatable<ActionEventHandler<T1, T2, T3, T4, T5, T6>>
     {
         /// <summary>
         /// Delegate with instance method provider.
@@ -347,6 +377,11 @@ namespace PeroTools2.AccessKing
         /// </summary>
         /// <param name="delegation">Delegation for creating EventHandler.</param>
         public ActionEventHandler(Action<T1, T2, T3, T4, T5, T6> delegation) => m_Invocation = delegation;
+
+        /// <summary>
+        /// Exposes the invocation method, so that the event bus can locate this handler from the weak subscription that wraps the same delegate.
+        /// </summary>
+        System.Reflection.MethodInfo IEventInvocation.invocationMethod => m_Invocation?.Method;
 
         /// <inheritdoc cref="PeroTools2.AccessKing.IEventHandler.Handle"/>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6) => m_Invocation?.Invoke(param1, param2, param3, param4, param5, param6);
@@ -389,7 +424,7 @@ namespace PeroTools2.AccessKing
     /// <summary>
     /// Event handler with System.Action.
     /// </summary>
-    public sealed class ActionEventHandler<T1, T2, T3, T4, T5, T6, T7> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7>>, IEquatable<ActionEventHandler<T1, T2, T3, T4, T5, T6, T7>>
+    public sealed class ActionEventHandler<T1, T2, T3, T4, T5, T6, T7> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7>>, IEventInvocation, IEquatable<ActionEventHandler<T1, T2, T3, T4, T5, T6, T7>>
     {
         /// <summary>
         /// Delegate with instance method provider.
@@ -401,6 +436,11 @@ namespace PeroTools2.AccessKing
         /// </summary>
         /// <param name="delegation">Delegation for creating EventHandler.</param>
         public ActionEventHandler(Action<T1, T2, T3, T4, T5, T6, T7> delegation) => m_Invocation = delegation;
+
+        /// <summary>
+        /// Exposes the invocation method, so that the event bus can locate this handler from the weak subscription that wraps the same delegate.
+        /// </summary>
+        System.Reflection.MethodInfo IEventInvocation.invocationMethod => m_Invocation?.Method;
 
         /// <inheritdoc cref="PeroTools2.AccessKing.IEventHandler.Handle"/>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7) => m_Invocation?.Invoke(param1, param2, param3, param4, param5, param6, param7);
@@ -443,7 +483,7 @@ namespace PeroTools2.AccessKing
     /// <summary>
     /// Event handler with System.Action.
     /// </summary>
-    public sealed class ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8>>, IEquatable<ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8>>
+    public sealed class ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8>>, IEventInvocation, IEquatable<ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8>>
     {
         /// <summary>
         /// Delegate with instance method provider.
@@ -455,6 +495,11 @@ namespace PeroTools2.AccessKing
         /// </summary>
         /// <param name="delegation">Delegation for creating EventHandler.</param>
         public ActionEventHandler(Action<T1, T2, T3, T4, T5, T6, T7, T8> delegation) => m_Invocation = delegation;
+
+        /// <summary>
+        /// Exposes the invocation method, so that the event bus can locate this handler from the weak subscription that wraps the same delegate.
+        /// </summary>
+        System.Reflection.MethodInfo IEventInvocation.invocationMethod => m_Invocation?.Method;
 
         /// <inheritdoc cref="PeroTools2.AccessKing.IEventHandler.Handle"/>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8) => m_Invocation?.Invoke(param1, param2, param3, param4, param5, param6, param7, param8);
@@ -497,7 +542,7 @@ namespace PeroTools2.AccessKing
     /// <summary>
     /// Event handler with System.Action.
     /// </summary>
-    public sealed class ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9>>, IEquatable<ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9>>
+    public sealed class ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9>>, IEventInvocation, IEquatable<ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9>>
     {
         /// <summary>
         /// Delegate with instance method provider.
@@ -509,6 +554,11 @@ namespace PeroTools2.AccessKing
         /// </summary>
         /// <param name="delegation">Delegation for creating EventHandler.</param>
         public ActionEventHandler(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> delegation) => m_Invocation = delegation;
+
+        /// <summary>
+        /// Exposes the invocation method, so that the event bus can locate this handler from the weak subscription that wraps the same delegate.
+        /// </summary>
+        System.Reflection.MethodInfo IEventInvocation.invocationMethod => m_Invocation?.Method;
 
         /// <inheritdoc cref="PeroTools2.AccessKing.IEventHandler.Handle"/>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9) => m_Invocation?.Invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9);
@@ -551,7 +601,7 @@ namespace PeroTools2.AccessKing
     /// <summary>
     /// Event handler with System.Action.
     /// </summary>
-    public sealed class ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>>, IEquatable<ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>>
+    public sealed class ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>>, IEventInvocation, IEquatable<ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>>
     {
         /// <summary>
         /// Delegate with instance method provider.
@@ -563,6 +613,11 @@ namespace PeroTools2.AccessKing
         /// </summary>
         /// <param name="delegation">Delegation for creating EventHandler.</param>
         public ActionEventHandler(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> delegation) => m_Invocation = delegation;
+
+        /// <summary>
+        /// Exposes the invocation method, so that the event bus can locate this handler from the weak subscription that wraps the same delegate.
+        /// </summary>
+        System.Reflection.MethodInfo IEventInvocation.invocationMethod => m_Invocation?.Method;
 
         /// <inheritdoc cref="PeroTools2.AccessKing.IEventHandler.Handle"/>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10) => m_Invocation?.Invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10);
@@ -605,7 +660,7 @@ namespace PeroTools2.AccessKing
     /// <summary>
     /// Event handler with System.Action.
     /// </summary>
-    public sealed class ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>>, IEquatable<ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>>
+    public sealed class ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>>, IEventInvocation, IEquatable<ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>>
     {
         /// <summary>
         /// Delegate with instance method provider.
@@ -617,6 +672,11 @@ namespace PeroTools2.AccessKing
         /// </summary>
         /// <param name="delegation">Delegation for creating EventHandler.</param>
         public ActionEventHandler(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> delegation) => m_Invocation = delegation;
+
+        /// <summary>
+        /// Exposes the invocation method, so that the event bus can locate this handler from the weak subscription that wraps the same delegate.
+        /// </summary>
+        System.Reflection.MethodInfo IEventInvocation.invocationMethod => m_Invocation?.Method;
 
         /// <inheritdoc cref="PeroTools2.AccessKing.IEventHandler.Handle"/>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11) => m_Invocation?.Invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11);
@@ -659,7 +719,7 @@ namespace PeroTools2.AccessKing
     /// <summary>
     /// Event handler with System.Action.
     /// </summary>
-    public sealed class ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>>, IEquatable<ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>>
+    public sealed class ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>>, IEventInvocation, IEquatable<ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>>
     {
         /// <summary>
         /// Delegate with instance method provider.
@@ -671,6 +731,11 @@ namespace PeroTools2.AccessKing
         /// </summary>
         /// <param name="delegation">Delegation for creating EventHandler.</param>
         public ActionEventHandler(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> delegation) => m_Invocation = delegation;
+
+        /// <summary>
+        /// Exposes the invocation method, so that the event bus can locate this handler from the weak subscription that wraps the same delegate.
+        /// </summary>
+        System.Reflection.MethodInfo IEventInvocation.invocationMethod => m_Invocation?.Method;
 
         /// <inheritdoc cref="PeroTools2.AccessKing.IEventHandler.Handle"/>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11, T12 param12) => m_Invocation?.Invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12);
@@ -713,7 +778,7 @@ namespace PeroTools2.AccessKing
     /// <summary>
     /// Event handler with System.Action.
     /// </summary>
-    public sealed class ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>>, IEquatable<ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>>
+    public sealed class ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>>, IEventInvocation, IEquatable<ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>>
     {
         /// <summary>
         /// Delegate with instance method provider.
@@ -725,6 +790,11 @@ namespace PeroTools2.AccessKing
         /// </summary>
         /// <param name="delegation">Delegation for creating EventHandler.</param>
         public ActionEventHandler(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> delegation) => m_Invocation = delegation;
+
+        /// <summary>
+        /// Exposes the invocation method, so that the event bus can locate this handler from the weak subscription that wraps the same delegate.
+        /// </summary>
+        System.Reflection.MethodInfo IEventInvocation.invocationMethod => m_Invocation?.Method;
 
         /// <inheritdoc cref="PeroTools2.AccessKing.IEventHandler.Handle"/>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11, T12 param12, T13 param13) => m_Invocation?.Invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12, param13);
@@ -767,7 +837,7 @@ namespace PeroTools2.AccessKing
     /// <summary>
     /// Event handler with System.Action.
     /// </summary>
-    public sealed class ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>>, IEquatable<ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>>
+    public sealed class ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>>, IEventInvocation, IEquatable<ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>>
     {
         /// <summary>
         /// Delegate with instance method provider.
@@ -779,6 +849,11 @@ namespace PeroTools2.AccessKing
         /// </summary>
         /// <param name="delegation">Delegation for creating EventHandler.</param>
         public ActionEventHandler(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> delegation) => m_Invocation = delegation;
+
+        /// <summary>
+        /// Exposes the invocation method, so that the event bus can locate this handler from the weak subscription that wraps the same delegate.
+        /// </summary>
+        System.Reflection.MethodInfo IEventInvocation.invocationMethod => m_Invocation?.Method;
 
         /// <inheritdoc cref="PeroTools2.AccessKing.IEventHandler.Handle"/>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11, T12 param12, T13 param13, T14 param14) => m_Invocation?.Invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12, param13, param14);
@@ -821,7 +896,7 @@ namespace PeroTools2.AccessKing
     /// <summary>
     /// Event handler with System.Action.
     /// </summary>
-    public sealed class ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>>, IEquatable<ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>>
+    public sealed class ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>>, IEventInvocation, IEquatable<ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>>
     {
         /// <summary>
         /// Delegate with instance method provider.
@@ -833,6 +908,11 @@ namespace PeroTools2.AccessKing
         /// </summary>
         /// <param name="delegation">Delegation for creating EventHandler.</param>
         public ActionEventHandler(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> delegation) => m_Invocation = delegation;
+
+        /// <summary>
+        /// Exposes the invocation method, so that the event bus can locate this handler from the weak subscription that wraps the same delegate.
+        /// </summary>
+        System.Reflection.MethodInfo IEventInvocation.invocationMethod => m_Invocation?.Method;
 
         /// <inheritdoc cref="PeroTools2.AccessKing.IEventHandler.Handle"/>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11, T12 param12, T13 param13, T14 param14, T15 param15) => m_Invocation?.Invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12, param13, param14, param15);
@@ -875,7 +955,7 @@ namespace PeroTools2.AccessKing
     /// <summary>
     /// Event handler with System.Action.
     /// </summary>
-    public sealed class ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>>, IEquatable<ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>>
+    public sealed class ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>>, IEventInvocation, IEquatable<ActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>>
     {
         /// <summary>
         /// Delegate with instance method provider.
@@ -887,6 +967,11 @@ namespace PeroTools2.AccessKing
         /// </summary>
         /// <param name="delegation">Delegation for creating EventHandler.</param>
         public ActionEventHandler(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> delegation) => m_Invocation = delegation;
+
+        /// <summary>
+        /// Exposes the invocation method, so that the event bus can locate this handler from the weak subscription that wraps the same delegate.
+        /// </summary>
+        System.Reflection.MethodInfo IEventInvocation.invocationMethod => m_Invocation?.Method;
 
         /// <inheritdoc cref="PeroTools2.AccessKing.IEventHandler.Handle"/>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11, T12 param12, T13 param13, T14 param14, T15 param15, T16 param16) => m_Invocation?.Invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12, param13, param14, param15, param16);

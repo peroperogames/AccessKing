@@ -16,7 +16,7 @@ namespace PeroTools2.AccessKing
     /// <summary>
     /// Event handler with System.Action which would reference the event provider by weak.
     /// </summary>
-    public sealed class WeakActionEventHandler : IEventHandler, IWeakEventHandler, IEquatable<WeakActionEventHandler>
+    public sealed class WeakActionEventHandler : IEventHandler, IWeakEventHandler, IWeakEventInvocation, IEquatable<WeakActionEventHandler>
     {
         [Preserve]
         private static ActionInvoker<object> s_Preserve;
@@ -35,6 +35,11 @@ namespace PeroTools2.AccessKing
         /// Raw method of the event provider.
         /// </summary>
         private readonly MethodInfo m_Method;
+
+        /// <summary>
+        /// The method that this weak handler invokes.
+        /// </summary>
+        System.Reflection.MethodInfo IWeakEventInvocation.invocationMethod => m_Method;
 
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
         public bool isAlive => m_Owner.TryGetTarget(out _);
@@ -130,7 +135,7 @@ namespace PeroTools2.AccessKing
     /// <summary>
     /// Event handler with System.Action which would reference the event provider by weak.
     /// </summary>
-    public sealed class WeakActionEventHandler<T> : IEventHandler<ParameterNotification<T>>, IWeakEventHandler<ParameterNotification<T>>, IEquatable<WeakActionEventHandler<T>>
+    public sealed class WeakActionEventHandler<T> : IEventHandler<ParameterNotification<T>>, IWeakEventHandler<ParameterNotification<T>>, IWeakEventInvocation, IEquatable<WeakActionEventHandler<T>>
     {
         [Preserve]
         private static ActionInvoker<object> s_Preserve;
@@ -149,6 +154,11 @@ namespace PeroTools2.AccessKing
         /// Raw method of the event provider.
         /// </summary>
         private readonly MethodInfo m_Method;
+
+        /// <summary>
+        /// The method that this weak handler invokes.
+        /// </summary>
+        System.Reflection.MethodInfo IWeakEventInvocation.invocationMethod => m_Method;
 
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
         public bool isAlive => m_Owner.TryGetTarget(out _);
@@ -244,7 +254,7 @@ namespace PeroTools2.AccessKing
     /// <summary>
     /// Event handler with System.Action which would reference the event provider by weak.
     /// </summary>
-    public sealed class WeakActionEventHandler<T1, T2> : IEventHandler<ParameterNotification<T1, T2>>, IWeakEventHandler<ParameterNotification<T1, T2>>, IEquatable<WeakActionEventHandler<T1, T2>>
+    public sealed class WeakActionEventHandler<T1, T2> : IEventHandler<ParameterNotification<T1, T2>>, IWeakEventHandler<ParameterNotification<T1, T2>>, IWeakEventInvocation, IEquatable<WeakActionEventHandler<T1, T2>>
     {
         [Preserve]
         private static ActionInvoker<object> s_Preserve;
@@ -263,6 +273,11 @@ namespace PeroTools2.AccessKing
         /// Raw method of the event provider.
         /// </summary>
         private readonly MethodInfo m_Method;
+
+        /// <summary>
+        /// The method that this weak handler invokes.
+        /// </summary>
+        System.Reflection.MethodInfo IWeakEventInvocation.invocationMethod => m_Method;
 
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
         public bool isAlive => m_Owner.TryGetTarget(out _);
@@ -358,7 +373,7 @@ namespace PeroTools2.AccessKing
     /// <summary>
     /// Event handler with System.Action which would reference the event provider by weak.
     /// </summary>
-    public sealed class WeakActionEventHandler<T1, T2, T3> : IEventHandler<ParameterNotification<T1, T2, T3>>, IWeakEventHandler<ParameterNotification<T1, T2, T3>>, IEquatable<WeakActionEventHandler<T1, T2, T3>>
+    public sealed class WeakActionEventHandler<T1, T2, T3> : IEventHandler<ParameterNotification<T1, T2, T3>>, IWeakEventHandler<ParameterNotification<T1, T2, T3>>, IWeakEventInvocation, IEquatable<WeakActionEventHandler<T1, T2, T3>>
     {
         [Preserve]
         private static ActionInvoker<object> s_Preserve;
@@ -377,6 +392,11 @@ namespace PeroTools2.AccessKing
         /// Raw method of the event provider.
         /// </summary>
         private readonly MethodInfo m_Method;
+
+        /// <summary>
+        /// The method that this weak handler invokes.
+        /// </summary>
+        System.Reflection.MethodInfo IWeakEventInvocation.invocationMethod => m_Method;
 
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
         public bool isAlive => m_Owner.TryGetTarget(out _);
@@ -472,7 +492,7 @@ namespace PeroTools2.AccessKing
     /// <summary>
     /// Event handler with System.Action which would reference the event provider by weak.
     /// </summary>
-    public sealed class WeakActionEventHandler<T1, T2, T3, T4> : IEventHandler<ParameterNotification<T1, T2, T3, T4>>, IWeakEventHandler<ParameterNotification<T1, T2, T3, T4>>, IEquatable<WeakActionEventHandler<T1, T2, T3, T4>>
+    public sealed class WeakActionEventHandler<T1, T2, T3, T4> : IEventHandler<ParameterNotification<T1, T2, T3, T4>>, IWeakEventHandler<ParameterNotification<T1, T2, T3, T4>>, IWeakEventInvocation, IEquatable<WeakActionEventHandler<T1, T2, T3, T4>>
     {
         [Preserve]
         private static ActionInvoker<object> s_Preserve;
@@ -491,6 +511,11 @@ namespace PeroTools2.AccessKing
         /// Raw method of the event provider.
         /// </summary>
         private readonly MethodInfo m_Method;
+
+        /// <summary>
+        /// The method that this weak handler invokes.
+        /// </summary>
+        System.Reflection.MethodInfo IWeakEventInvocation.invocationMethod => m_Method;
 
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
         public bool isAlive => m_Owner.TryGetTarget(out _);
@@ -586,7 +611,7 @@ namespace PeroTools2.AccessKing
     /// <summary>
     /// Event handler with System.Action which would reference the event provider by weak.
     /// </summary>
-    public sealed class WeakActionEventHandler<T1, T2, T3, T4, T5> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5>>, IWeakEventHandler<ParameterNotification<T1, T2, T3, T4, T5>>, IEquatable<WeakActionEventHandler<T1, T2, T3, T4, T5>>
+    public sealed class WeakActionEventHandler<T1, T2, T3, T4, T5> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5>>, IWeakEventHandler<ParameterNotification<T1, T2, T3, T4, T5>>, IWeakEventInvocation, IEquatable<WeakActionEventHandler<T1, T2, T3, T4, T5>>
     {
         [Preserve]
         private static ActionInvoker<object> s_Preserve;
@@ -605,6 +630,11 @@ namespace PeroTools2.AccessKing
         /// Raw method of the event provider.
         /// </summary>
         private readonly MethodInfo m_Method;
+
+        /// <summary>
+        /// The method that this weak handler invokes.
+        /// </summary>
+        System.Reflection.MethodInfo IWeakEventInvocation.invocationMethod => m_Method;
 
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
         public bool isAlive => m_Owner.TryGetTarget(out _);
@@ -700,7 +730,7 @@ namespace PeroTools2.AccessKing
     /// <summary>
     /// Event handler with System.Action which would reference the event provider by weak.
     /// </summary>
-    public sealed class WeakActionEventHandler<T1, T2, T3, T4, T5, T6> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6>>, IWeakEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6>>, IEquatable<WeakActionEventHandler<T1, T2, T3, T4, T5, T6>>
+    public sealed class WeakActionEventHandler<T1, T2, T3, T4, T5, T6> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6>>, IWeakEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6>>, IWeakEventInvocation, IEquatable<WeakActionEventHandler<T1, T2, T3, T4, T5, T6>>
     {
         [Preserve]
         private static ActionInvoker<object> s_Preserve;
@@ -719,6 +749,11 @@ namespace PeroTools2.AccessKing
         /// Raw method of the event provider.
         /// </summary>
         private readonly MethodInfo m_Method;
+
+        /// <summary>
+        /// The method that this weak handler invokes.
+        /// </summary>
+        System.Reflection.MethodInfo IWeakEventInvocation.invocationMethod => m_Method;
 
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
         public bool isAlive => m_Owner.TryGetTarget(out _);
@@ -814,7 +849,7 @@ namespace PeroTools2.AccessKing
     /// <summary>
     /// Event handler with System.Action which would reference the event provider by weak.
     /// </summary>
-    public sealed class WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7>>, IWeakEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7>>, IEquatable<WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7>>
+    public sealed class WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7>>, IWeakEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7>>, IWeakEventInvocation, IEquatable<WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7>>
     {
         [Preserve]
         private static ActionInvoker<object> s_Preserve;
@@ -833,6 +868,11 @@ namespace PeroTools2.AccessKing
         /// Raw method of the event provider.
         /// </summary>
         private readonly MethodInfo m_Method;
+
+        /// <summary>
+        /// The method that this weak handler invokes.
+        /// </summary>
+        System.Reflection.MethodInfo IWeakEventInvocation.invocationMethod => m_Method;
 
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
         public bool isAlive => m_Owner.TryGetTarget(out _);
@@ -928,7 +968,7 @@ namespace PeroTools2.AccessKing
     /// <summary>
     /// Event handler with System.Action which would reference the event provider by weak.
     /// </summary>
-    public sealed class WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8>>, IWeakEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8>>, IEquatable<WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8>>
+    public sealed class WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8>>, IWeakEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8>>, IWeakEventInvocation, IEquatable<WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8>>
     {
         [Preserve]
         private static ActionInvoker<object> s_Preserve;
@@ -947,6 +987,11 @@ namespace PeroTools2.AccessKing
         /// Raw method of the event provider.
         /// </summary>
         private readonly MethodInfo m_Method;
+
+        /// <summary>
+        /// The method that this weak handler invokes.
+        /// </summary>
+        System.Reflection.MethodInfo IWeakEventInvocation.invocationMethod => m_Method;
 
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
         public bool isAlive => m_Owner.TryGetTarget(out _);
@@ -1042,7 +1087,7 @@ namespace PeroTools2.AccessKing
     /// <summary>
     /// Event handler with System.Action which would reference the event provider by weak.
     /// </summary>
-    public sealed class WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9>>, IWeakEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9>>, IEquatable<WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9>>
+    public sealed class WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9>>, IWeakEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9>>, IWeakEventInvocation, IEquatable<WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9>>
     {
         [Preserve]
         private static ActionInvoker<object> s_Preserve;
@@ -1061,6 +1106,11 @@ namespace PeroTools2.AccessKing
         /// Raw method of the event provider.
         /// </summary>
         private readonly MethodInfo m_Method;
+
+        /// <summary>
+        /// The method that this weak handler invokes.
+        /// </summary>
+        System.Reflection.MethodInfo IWeakEventInvocation.invocationMethod => m_Method;
 
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
         public bool isAlive => m_Owner.TryGetTarget(out _);
@@ -1156,7 +1206,7 @@ namespace PeroTools2.AccessKing
     /// <summary>
     /// Event handler with System.Action which would reference the event provider by weak.
     /// </summary>
-    public sealed class WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>>, IWeakEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>>, IEquatable<WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>>
+    public sealed class WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>>, IWeakEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>>, IWeakEventInvocation, IEquatable<WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>>
     {
         [Preserve]
         private static ActionInvoker<object> s_Preserve;
@@ -1175,6 +1225,11 @@ namespace PeroTools2.AccessKing
         /// Raw method of the event provider.
         /// </summary>
         private readonly MethodInfo m_Method;
+
+        /// <summary>
+        /// The method that this weak handler invokes.
+        /// </summary>
+        System.Reflection.MethodInfo IWeakEventInvocation.invocationMethod => m_Method;
 
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
         public bool isAlive => m_Owner.TryGetTarget(out _);
@@ -1270,7 +1325,7 @@ namespace PeroTools2.AccessKing
     /// <summary>
     /// Event handler with System.Action which would reference the event provider by weak.
     /// </summary>
-    public sealed class WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>>, IWeakEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>>, IEquatable<WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>>
+    public sealed class WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>>, IWeakEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>>, IWeakEventInvocation, IEquatable<WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>>
     {
         [Preserve]
         private static ActionInvoker<object> s_Preserve;
@@ -1289,6 +1344,11 @@ namespace PeroTools2.AccessKing
         /// Raw method of the event provider.
         /// </summary>
         private readonly MethodInfo m_Method;
+
+        /// <summary>
+        /// The method that this weak handler invokes.
+        /// </summary>
+        System.Reflection.MethodInfo IWeakEventInvocation.invocationMethod => m_Method;
 
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
         public bool isAlive => m_Owner.TryGetTarget(out _);
@@ -1384,7 +1444,7 @@ namespace PeroTools2.AccessKing
     /// <summary>
     /// Event handler with System.Action which would reference the event provider by weak.
     /// </summary>
-    public sealed class WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>>, IWeakEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>>, IEquatable<WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>>
+    public sealed class WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>>, IWeakEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>>, IWeakEventInvocation, IEquatable<WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>>
     {
         [Preserve]
         private static ActionInvoker<object> s_Preserve;
@@ -1403,6 +1463,11 @@ namespace PeroTools2.AccessKing
         /// Raw method of the event provider.
         /// </summary>
         private readonly MethodInfo m_Method;
+
+        /// <summary>
+        /// The method that this weak handler invokes.
+        /// </summary>
+        System.Reflection.MethodInfo IWeakEventInvocation.invocationMethod => m_Method;
 
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
         public bool isAlive => m_Owner.TryGetTarget(out _);
@@ -1498,7 +1563,7 @@ namespace PeroTools2.AccessKing
     /// <summary>
     /// Event handler with System.Action which would reference the event provider by weak.
     /// </summary>
-    public sealed class WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>>, IWeakEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>>, IEquatable<WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>>
+    public sealed class WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>>, IWeakEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>>, IWeakEventInvocation, IEquatable<WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>>
     {
         [Preserve]
         private static ActionInvoker<object> s_Preserve;
@@ -1517,6 +1582,11 @@ namespace PeroTools2.AccessKing
         /// Raw method of the event provider.
         /// </summary>
         private readonly MethodInfo m_Method;
+
+        /// <summary>
+        /// The method that this weak handler invokes.
+        /// </summary>
+        System.Reflection.MethodInfo IWeakEventInvocation.invocationMethod => m_Method;
 
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
         public bool isAlive => m_Owner.TryGetTarget(out _);
@@ -1612,7 +1682,7 @@ namespace PeroTools2.AccessKing
     /// <summary>
     /// Event handler with System.Action which would reference the event provider by weak.
     /// </summary>
-    public sealed class WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>>, IWeakEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>>, IEquatable<WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>>
+    public sealed class WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>>, IWeakEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>>, IWeakEventInvocation, IEquatable<WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>>
     {
         [Preserve]
         private static ActionInvoker<object> s_Preserve;
@@ -1631,6 +1701,11 @@ namespace PeroTools2.AccessKing
         /// Raw method of the event provider.
         /// </summary>
         private readonly MethodInfo m_Method;
+
+        /// <summary>
+        /// The method that this weak handler invokes.
+        /// </summary>
+        System.Reflection.MethodInfo IWeakEventInvocation.invocationMethod => m_Method;
 
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
         public bool isAlive => m_Owner.TryGetTarget(out _);
@@ -1726,7 +1801,7 @@ namespace PeroTools2.AccessKing
     /// <summary>
     /// Event handler with System.Action which would reference the event provider by weak.
     /// </summary>
-    public sealed class WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>>, IWeakEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>>, IEquatable<WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>>
+    public sealed class WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> : IEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>>, IWeakEventHandler<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>>, IWeakEventInvocation, IEquatable<WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>>
     {
         [Preserve]
         private static ActionInvoker<object> s_Preserve;
@@ -1745,6 +1820,11 @@ namespace PeroTools2.AccessKing
         /// Raw method of the event provider.
         /// </summary>
         private readonly MethodInfo m_Method;
+
+        /// <summary>
+        /// The method that this weak handler invokes.
+        /// </summary>
+        System.Reflection.MethodInfo IWeakEventInvocation.invocationMethod => m_Method;
 
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
         public bool isAlive => m_Owner.TryGetTarget(out _);

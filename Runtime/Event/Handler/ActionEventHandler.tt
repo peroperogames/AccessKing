@@ -34,7 +34,7 @@ namespace PeroTools2.AccessKing
     /// <summary>
     /// Event handler with System.Action.
     /// </summary>
-    public sealed class <#=evenHandler#> : <#=ievenHandler#>, IEquatable<<#=evenHandler#>>
+    public sealed class <#=evenHandler#> : <#=ievenHandler#>, IEventInvocation, IEquatable<<#=evenHandler#>>
     {
         /// <summary>
         /// Delegate with instance method provider.
@@ -46,6 +46,11 @@ namespace PeroTools2.AccessKing
         /// </summary>
         /// <param name="delegation">Delegation for creating EventHandler.</param>
         public ActionEventHandler(<#=action#> delegation) => m_Invocation = delegation;
+
+        /// <summary>
+        /// Exposes the invocation method, so that the event bus can locate this handler from the weak subscription that wraps the same delegate.
+        /// </summary>
+        System.Reflection.MethodInfo IEventInvocation.invocationMethod => m_Invocation?.Method;
 
         /// <inheritdoc cref="PeroTools2.AccessKing.IEventHandler.Handle"/>
         public void Handle(<#=parameterDefinitions#>) => m_Invocation?.Invoke(<#=parameters#>);

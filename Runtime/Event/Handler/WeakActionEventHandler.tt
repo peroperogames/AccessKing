@@ -43,7 +43,7 @@ namespace PeroTools2.AccessKing
     /// <summary>
     /// Event handler with System.Action which would reference the event provider by weak.
     /// </summary>
-    public sealed class <#=weakEvenHandler#> : <#=ievenHandler#>, <#=iweakEvenHandler#>, IEquatable<<#=weakEvenHandler#>>
+    public sealed class <#=weakEvenHandler#> : <#=ievenHandler#>, <#=iweakEvenHandler#>, IWeakEventInvocation, IEquatable<<#=weakEvenHandler#>>
     {
         [Preserve]
         private static ActionInvoker<object> s_Preserve;
@@ -62,6 +62,11 @@ namespace PeroTools2.AccessKing
         /// Raw method of the event provider.
         /// </summary>
         private readonly MethodInfo m_Method;
+
+        /// <summary>
+        /// The method that this weak handler invokes.
+        /// </summary>
+        System.Reflection.MethodInfo IWeakEventInvocation.invocationMethod => m_Method;
 
         /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
         public bool isAlive => m_Owner.TryGetTarget(out _);

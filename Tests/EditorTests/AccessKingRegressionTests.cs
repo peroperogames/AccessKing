@@ -1,0 +1,271 @@
+﻿/*
+ * Copyright (c) PeroPeroGames Co., Ltd.
+ * Author: Gatongone
+ * Created On: 2026/10/12 16:10:00
+ */
+
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
+using NUnit.Framework;
+using UnityEngine;
+
+namespace PeroTools2.AccessKing.Editor.Tests
+{
+    /// <summary>
+    /// Regressions for the defects that the original suite could not discriminate.
+    /// </summary>
+    public sealed class AccessKingRegressionTests
+    {
+        #region Event bus
+
+        /// <summary>
+        /// Unsubscribing a weak handler must remove that handler and must not remove its neighbours.
+        /// </summary>
+        [Test]
+        public void WeakUnsubscribeRemovesOnlyTheTargetHandlerTest()
+        {
+            var bus = new EventBus<Empty>();
+            var owner = ScriptableObject.CreateInstance<TestOwner>();
+            var target = new WeakActionEventHandler(owner.Target, owner);
+            var bystander = new WeakActionEventHandler(owner.Bystander, owner);
+            ((IWeakEventSubscriable<Empty>) bus).SubscribeWeakly(target);
+            ((IWeakEventSubscriable<Empty>) bus).SubscribeWeakly(bystander);
+
+            Assert.IsTrue(bus.Unsubscribe(target));
+
+            bus.Broadcast();
+            Assert.AreEqual(0, owner.targetCount);
+            Assert.AreEqual(1, owner.bystanderCount);
+
+            UnityEngine.Object.DestroyImmediate(owner);
+        }
+
+        /// <summary>
+        /// The delegate based overload must be able to locate a weak subscription of the same method.
+        /// </summary>
+        [Test]
+        public void WeakUnsubscribeByDelegateRemovesTheHandlerTest()
+        {
+            var bus = new EventBus<Empty>();
+            var owner = ScriptableObject.CreateInstance<TestOwner>();
+            bus.SubscribeWeakly(owner, owner.Target);
+
+            Assert.IsTrue(bus.Unsubscribe(owner.Target));
+
+            bus.Broadcast();
+            Assert.AreEqual(0, owner.targetCount);
+
+            UnityEngine.Object.DestroyImmediate(owner);
+        }
+
+        /// <summary>
+        /// Subscribing an equal delegate twice keeps both subscriptions, the same way a C# event does,
+        /// and a single unsubscribe only removes one of them.
+        /// </summary>
+        [Test]
+        public void DuplicateSubscriptionsBothFireTest()
+        {
+            var bus = new EventBus<Empty>();
+            var count = 0;
+            Action action = () => count++;
+            bus.Subscribe(action);
+            bus.Subscribe(action);
+
+            bus.Broadcast();
+            Assert.AreEqual(2, count);
+
+            Assert.IsTrue(bus.Unsubscribe(action));
+            bus.Broadcast();
+            Assert.AreEqual(3, count);
+        }
+
+        /// <summary>
+        /// Comparing a handler with null must not throw, and a live handler must never look equal to null.
+        /// The operator intentionally keeps the <c>Equals</c> based null check, so that a destroyed
+        /// <see cref="UnityEngine.Object"/> based provider is never treated as an equal handler.
+        /// </summary>
+        [Test]
+        public void HandlerEqualityWithNullTest()
+        {
+            var owner = ScriptableObject.CreateInstance<TestOwner>();
+            var strongHandler = new ActionEventHandler(owner.Target);
+            var weakHandler = new WeakActionEventHandler(owner.Target, owner);
+
+            Assert.IsFalse(strongHandler == null);
+            Assert.IsTrue(strongHandler != null);
+            Assert.IsFalse(strongHandler.Equals((ActionEventHandler) null));
+
+            Assert.IsFalse(weakHandler == null);
+            Assert.IsTrue(weakHandler != null);
+            Assert.IsFalse(weakHandler.Equals((WeakActionEventHandler) null));
+
+            UnityEngine.Object.DestroyImmediate(owner);
+        }
+
+        #endregion
+
+        #region Command bus
+
+        /// <summary>
+        /// WhenAnyDone must not fail while renting the task collection.
+        /// </summary>
+        [Test]
+        public async Task WhenAnyDoneWithAsyncHandlerTest()
+        {
+            var factory = new RegistryCommandHandlerFactory();
+            var bus = new CommandBus<Empty>(factory);
+            factory.RegisterHandler(new AsyncCommandHandler());
+
+            await bus.Execute().WhenAnyDone();
+        }
+
+        /// <summary>
+        /// Consuming the result of an operation twice must fail loudly instead of corrupting the shared pool.
+        /// </summary>
+        [Test]
+        public void ConsumingOperationResultsTwiceThrowsTest()
+        {
+            var factory = new RegistryCommandHandlerFactory();
+            var bus = new CommandBus<Empty>(factory);
+            factory.RegisterHandler(new ResultCommandHandler());
+
+            var operation = bus.Execute();
+            Assert.AreEqual(1, operation.GetResults<string>().Count);
+            Assert.Throws<InvalidOperationException>(() => operation.GetResults<string>());
+        }
+
+        /// <summary>
+        /// A handler must be dispatched exactly once even when the command bus holds several factories.
+        /// </summary>
+        [Test]
+        public void EveryHandlerDispatchesOnceWithMultipleFactoriesTest()
+        {
+            var firstFactory = new RegistryCommandHandlerFactory();
+            var secondFactory = new SecondRegistryCommandHandlerFactory();
+            firstFactory.RegisterHandler(new CountingCommandHandler());
+            secondFactory.RegisterHandler(new CountingCommandHandler());
+            var bus = new CommandBus<Empty>(firstFactory, secondFactory);
+
+            bus.Execute();
+
+            Assert.AreEqual(2, CountingCommandHandler.totalCount);
+        }
+
+        /// <summary>
+        /// Clearing the factory must reset the observable handler count as well.
+        /// </summary>
+        [Test]
+        public void ClearHandlersResetsHandlerCountTest()
+        {
+            var factory = new RegistryCommandHandlerFactory();
+            factory.RegisterHandler(new ResultCommandHandler());
+            factory.RegisterHandler(new ResultCommandHandler());
+            Assert.AreEqual(2, factory.handlerCount);
+
+            factory.ClearHandlers();
+
+            Assert.AreEqual(0, factory.handlerCount);
+        }
+
+        #endregion
+
+        #region Schedules
+
+        /// <summary>
+        /// Looking up an existing theme with a mismatched notification type must report a miss, not throw.
+        /// </summary>
+        [Test]
+        public void EventScheduleTryGetBusWithWrongNotificationTypeTest()
+        {
+            var schedule = new EventSchedule<string>();
+            schedule.AddBus("theme", new EventBus<RegressionNotification>());
+
+            Assert.IsTrue(schedule.TryGetBus<RegressionNotification>("theme", out _));
+            Assert.IsFalse(schedule.TryGetBus<OtherRegressionNotification>("theme", out _));
+        }
+
+        /// <summary>
+        /// Removing a bus that is not in the schedule must report a miss, not throw.
+        /// </summary>
+        [Test]
+        public void RemoveUnknownBusReturnsFalseTest()
+        {
+            var eventSchedule = new EventSchedule<string>();
+            eventSchedule.AddBus("theme", new EventBus<RegressionNotification>());
+            Assert.IsFalse(((IAccessSchedule<string>) eventSchedule).RemoveBus(new EventBus<RegressionNotification>()));
+            Assert.IsTrue(eventSchedule.ContainsBus("theme"));
+
+            var commandSchedule = new CommandSchedule<string>();
+            commandSchedule.AddBus("theme", new CommandBus<RegressionNotification>());
+            Assert.IsFalse(((IAccessSchedule<string>) commandSchedule).RemoveBus(new CommandBus<RegressionNotification>()));
+            Assert.IsTrue(commandSchedule.ContainsBus("theme"));
+        }
+
+        #endregion
+
+        #region Test doubles
+
+        private sealed class TestOwner : ScriptableObject
+        {
+            public int targetCount;
+            public int bystanderCount;
+
+            public void Target() => targetCount++;
+
+            public void Bystander() => bystanderCount++;
+        }
+
+        private struct RegressionNotification : INotification { }
+
+        private struct OtherRegressionNotification : INotification { }
+
+        private sealed class AsyncCommandHandler : IAsyncCommandHandler<Empty>
+        {
+            public void Handle(ref Empty notification) { }
+
+            public UniTask GetResult() => UniTask.CompletedTask;
+
+            object IResultAvailable.GetResult() => UniTask.CompletedTask;
+        }
+
+        private sealed class ResultCommandHandler : ICommandHandler<Empty, string>
+        {
+            public void Handle(ref Empty notification) { }
+
+            public string GetResult() => nameof(ResultCommandHandler);
+
+            object IResultAvailable.GetResult() => GetResult();
+        }
+
+        private sealed class CountingCommandHandler : ICommandHandler<Empty>
+        {
+            public static int totalCount;
+
+            public void Handle(ref Empty notification) => totalCount++;
+        }
+
+        /// <summary>
+        /// A second factory type, because a command bus keys its factories by type.
+        /// </summary>
+        private sealed class SecondRegistryCommandHandlerFactory : ICommandHandlerFactory
+        {
+            private readonly RegistryCommandHandlerFactory m_Inner = new();
+
+            public void RegisterHandler<TNotification>(ICommandHandler<TNotification> handler) where TNotification : INotification
+                => m_Inner.RegisterHandler(handler);
+
+            public IEnumerable<ICommandHandler<TNotification>> GetHandlers<TNotification>() where TNotification : INotification
+                => m_Inner.GetHandlers<TNotification>();
+
+            public void GetHandlers<TNotification>(IList<ICommandHandler<TNotification>> collection) where TNotification : INotification
+                => m_Inner.GetHandlers(collection);
+        }
+
+        #endregion
+
+        [SetUp]
+        public void SetUp() => CountingCommandHandler.totalCount = 0;
+    }
+}

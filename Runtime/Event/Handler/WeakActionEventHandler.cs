@@ -59,6 +59,12 @@ namespace PeroTools2.AccessKing
         /// <param name="owner">The owner that control this weak event's lifecycle.</param>
         public WeakActionEventHandler(Action delegation, UnityEngine.Object owner)
         {
+            if (owner == null) throw new ArgumentNullException(nameof(owner));
+            if (delegation == null) throw new ArgumentNullException(nameof(delegation));
+            if (delegation.Target == null)
+            {
+                throw new ArgumentException("A weak subscription requires a delegate that targets an instance, a static method has no owner to keep alive.", nameof(delegation));
+            }
             m_Owner = new WeakReference<UnityEngine.Object>(owner);
             m_Method = delegation.Method;
             var invokerType = typeof(ActionInvoker<>).MakeGenericType(delegation.Target.GetType());
@@ -187,6 +193,12 @@ namespace PeroTools2.AccessKing
         /// <param name="owner">The owner that control this weak event's lifecycle.</param>
         public WeakActionEventHandler(Action<T> delegation, UnityEngine.Object owner)
         {
+            if (owner == null) throw new ArgumentNullException(nameof(owner));
+            if (delegation == null) throw new ArgumentNullException(nameof(delegation));
+            if (delegation.Target == null)
+            {
+                throw new ArgumentException("A weak subscription requires a delegate that targets an instance, a static method has no owner to keep alive.", nameof(delegation));
+            }
             m_Owner = new WeakReference<UnityEngine.Object>(owner);
             m_Method = delegation.Method;
             var invokerType = typeof(ActionInvoker<>).MakeGenericType(typeof(T), delegation.Target.GetType());
@@ -315,6 +327,12 @@ namespace PeroTools2.AccessKing
         /// <param name="owner">The owner that control this weak event's lifecycle.</param>
         public WeakActionEventHandler(Action<T1, T2> delegation, UnityEngine.Object owner)
         {
+            if (owner == null) throw new ArgumentNullException(nameof(owner));
+            if (delegation == null) throw new ArgumentNullException(nameof(delegation));
+            if (delegation.Target == null)
+            {
+                throw new ArgumentException("A weak subscription requires a delegate that targets an instance, a static method has no owner to keep alive.", nameof(delegation));
+            }
             m_Owner = new WeakReference<UnityEngine.Object>(owner);
             m_Method = delegation.Method;
             var invokerType = typeof(ActionInvoker<>).MakeGenericType(typeof(T1), typeof(T2), delegation.Target.GetType());
@@ -443,6 +461,12 @@ namespace PeroTools2.AccessKing
         /// <param name="owner">The owner that control this weak event's lifecycle.</param>
         public WeakActionEventHandler(Action<T1, T2, T3> delegation, UnityEngine.Object owner)
         {
+            if (owner == null) throw new ArgumentNullException(nameof(owner));
+            if (delegation == null) throw new ArgumentNullException(nameof(delegation));
+            if (delegation.Target == null)
+            {
+                throw new ArgumentException("A weak subscription requires a delegate that targets an instance, a static method has no owner to keep alive.", nameof(delegation));
+            }
             m_Owner = new WeakReference<UnityEngine.Object>(owner);
             m_Method = delegation.Method;
             var invokerType = typeof(ActionInvoker<>).MakeGenericType(typeof(T1), typeof(T2), typeof(T3), delegation.Target.GetType());
@@ -571,6 +595,12 @@ namespace PeroTools2.AccessKing
         /// <param name="owner">The owner that control this weak event's lifecycle.</param>
         public WeakActionEventHandler(Action<T1, T2, T3, T4> delegation, UnityEngine.Object owner)
         {
+            if (owner == null) throw new ArgumentNullException(nameof(owner));
+            if (delegation == null) throw new ArgumentNullException(nameof(delegation));
+            if (delegation.Target == null)
+            {
+                throw new ArgumentException("A weak subscription requires a delegate that targets an instance, a static method has no owner to keep alive.", nameof(delegation));
+            }
             m_Owner = new WeakReference<UnityEngine.Object>(owner);
             m_Method = delegation.Method;
             var invokerType = typeof(ActionInvoker<>).MakeGenericType(typeof(T1), typeof(T2), typeof(T3), typeof(T4), delegation.Target.GetType());
@@ -699,6 +729,12 @@ namespace PeroTools2.AccessKing
         /// <param name="owner">The owner that control this weak event's lifecycle.</param>
         public WeakActionEventHandler(Action<T1, T2, T3, T4, T5> delegation, UnityEngine.Object owner)
         {
+            if (owner == null) throw new ArgumentNullException(nameof(owner));
+            if (delegation == null) throw new ArgumentNullException(nameof(delegation));
+            if (delegation.Target == null)
+            {
+                throw new ArgumentException("A weak subscription requires a delegate that targets an instance, a static method has no owner to keep alive.", nameof(delegation));
+            }
             m_Owner = new WeakReference<UnityEngine.Object>(owner);
             m_Method = delegation.Method;
             var invokerType = typeof(ActionInvoker<>).MakeGenericType(typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), delegation.Target.GetType());
@@ -827,6 +863,12 @@ namespace PeroTools2.AccessKing
         /// <param name="owner">The owner that control this weak event's lifecycle.</param>
         public WeakActionEventHandler(Action<T1, T2, T3, T4, T5, T6> delegation, UnityEngine.Object owner)
         {
+            if (owner == null) throw new ArgumentNullException(nameof(owner));
+            if (delegation == null) throw new ArgumentNullException(nameof(delegation));
+            if (delegation.Target == null)
+            {
+                throw new ArgumentException("A weak subscription requires a delegate that targets an instance, a static method has no owner to keep alive.", nameof(delegation));
+            }
             m_Owner = new WeakReference<UnityEngine.Object>(owner);
             m_Method = delegation.Method;
             var invokerType = typeof(ActionInvoker<>).MakeGenericType(typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), delegation.Target.GetType());
@@ -955,6 +997,12 @@ namespace PeroTools2.AccessKing
         /// <param name="owner">The owner that control this weak event's lifecycle.</param>
         public WeakActionEventHandler(Action<T1, T2, T3, T4, T5, T6, T7> delegation, UnityEngine.Object owner)
         {
+            if (owner == null) throw new ArgumentNullException(nameof(owner));
+            if (delegation == null) throw new ArgumentNullException(nameof(delegation));
+            if (delegation.Target == null)
+            {
+                throw new ArgumentException("A weak subscription requires a delegate that targets an instance, a static method has no owner to keep alive.", nameof(delegation));
+            }
             m_Owner = new WeakReference<UnityEngine.Object>(owner);
             m_Method = delegation.Method;
             var invokerType = typeof(ActionInvoker<>).MakeGenericType(typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7), delegation.Target.GetType());
@@ -1083,6 +1131,12 @@ namespace PeroTools2.AccessKing
         /// <param name="owner">The owner that control this weak event's lifecycle.</param>
         public WeakActionEventHandler(Action<T1, T2, T3, T4, T5, T6, T7, T8> delegation, UnityEngine.Object owner)
         {
+            if (owner == null) throw new ArgumentNullException(nameof(owner));
+            if (delegation == null) throw new ArgumentNullException(nameof(delegation));
+            if (delegation.Target == null)
+            {
+                throw new ArgumentException("A weak subscription requires a delegate that targets an instance, a static method has no owner to keep alive.", nameof(delegation));
+            }
             m_Owner = new WeakReference<UnityEngine.Object>(owner);
             m_Method = delegation.Method;
             var invokerType = typeof(ActionInvoker<>).MakeGenericType(typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7), typeof(T8), delegation.Target.GetType());
@@ -1211,6 +1265,12 @@ namespace PeroTools2.AccessKing
         /// <param name="owner">The owner that control this weak event's lifecycle.</param>
         public WeakActionEventHandler(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> delegation, UnityEngine.Object owner)
         {
+            if (owner == null) throw new ArgumentNullException(nameof(owner));
+            if (delegation == null) throw new ArgumentNullException(nameof(delegation));
+            if (delegation.Target == null)
+            {
+                throw new ArgumentException("A weak subscription requires a delegate that targets an instance, a static method has no owner to keep alive.", nameof(delegation));
+            }
             m_Owner = new WeakReference<UnityEngine.Object>(owner);
             m_Method = delegation.Method;
             var invokerType = typeof(ActionInvoker<>).MakeGenericType(typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7), typeof(T8), typeof(T9), delegation.Target.GetType());
@@ -1339,6 +1399,12 @@ namespace PeroTools2.AccessKing
         /// <param name="owner">The owner that control this weak event's lifecycle.</param>
         public WeakActionEventHandler(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> delegation, UnityEngine.Object owner)
         {
+            if (owner == null) throw new ArgumentNullException(nameof(owner));
+            if (delegation == null) throw new ArgumentNullException(nameof(delegation));
+            if (delegation.Target == null)
+            {
+                throw new ArgumentException("A weak subscription requires a delegate that targets an instance, a static method has no owner to keep alive.", nameof(delegation));
+            }
             m_Owner = new WeakReference<UnityEngine.Object>(owner);
             m_Method = delegation.Method;
             var invokerType = typeof(ActionInvoker<>).MakeGenericType(typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7), typeof(T8), typeof(T9), typeof(T10), delegation.Target.GetType());
@@ -1467,6 +1533,12 @@ namespace PeroTools2.AccessKing
         /// <param name="owner">The owner that control this weak event's lifecycle.</param>
         public WeakActionEventHandler(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> delegation, UnityEngine.Object owner)
         {
+            if (owner == null) throw new ArgumentNullException(nameof(owner));
+            if (delegation == null) throw new ArgumentNullException(nameof(delegation));
+            if (delegation.Target == null)
+            {
+                throw new ArgumentException("A weak subscription requires a delegate that targets an instance, a static method has no owner to keep alive.", nameof(delegation));
+            }
             m_Owner = new WeakReference<UnityEngine.Object>(owner);
             m_Method = delegation.Method;
             var invokerType = typeof(ActionInvoker<>).MakeGenericType(typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7), typeof(T8), typeof(T9), typeof(T10), typeof(T11), delegation.Target.GetType());
@@ -1595,6 +1667,12 @@ namespace PeroTools2.AccessKing
         /// <param name="owner">The owner that control this weak event's lifecycle.</param>
         public WeakActionEventHandler(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> delegation, UnityEngine.Object owner)
         {
+            if (owner == null) throw new ArgumentNullException(nameof(owner));
+            if (delegation == null) throw new ArgumentNullException(nameof(delegation));
+            if (delegation.Target == null)
+            {
+                throw new ArgumentException("A weak subscription requires a delegate that targets an instance, a static method has no owner to keep alive.", nameof(delegation));
+            }
             m_Owner = new WeakReference<UnityEngine.Object>(owner);
             m_Method = delegation.Method;
             var invokerType = typeof(ActionInvoker<>).MakeGenericType(typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7), typeof(T8), typeof(T9), typeof(T10), typeof(T11), typeof(T12), delegation.Target.GetType());
@@ -1723,6 +1801,12 @@ namespace PeroTools2.AccessKing
         /// <param name="owner">The owner that control this weak event's lifecycle.</param>
         public WeakActionEventHandler(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> delegation, UnityEngine.Object owner)
         {
+            if (owner == null) throw new ArgumentNullException(nameof(owner));
+            if (delegation == null) throw new ArgumentNullException(nameof(delegation));
+            if (delegation.Target == null)
+            {
+                throw new ArgumentException("A weak subscription requires a delegate that targets an instance, a static method has no owner to keep alive.", nameof(delegation));
+            }
             m_Owner = new WeakReference<UnityEngine.Object>(owner);
             m_Method = delegation.Method;
             var invokerType = typeof(ActionInvoker<>).MakeGenericType(typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7), typeof(T8), typeof(T9), typeof(T10), typeof(T11), typeof(T12), typeof(T13), delegation.Target.GetType());
@@ -1851,6 +1935,12 @@ namespace PeroTools2.AccessKing
         /// <param name="owner">The owner that control this weak event's lifecycle.</param>
         public WeakActionEventHandler(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> delegation, UnityEngine.Object owner)
         {
+            if (owner == null) throw new ArgumentNullException(nameof(owner));
+            if (delegation == null) throw new ArgumentNullException(nameof(delegation));
+            if (delegation.Target == null)
+            {
+                throw new ArgumentException("A weak subscription requires a delegate that targets an instance, a static method has no owner to keep alive.", nameof(delegation));
+            }
             m_Owner = new WeakReference<UnityEngine.Object>(owner);
             m_Method = delegation.Method;
             var invokerType = typeof(ActionInvoker<>).MakeGenericType(typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7), typeof(T8), typeof(T9), typeof(T10), typeof(T11), typeof(T12), typeof(T13), typeof(T14), delegation.Target.GetType());
@@ -1979,6 +2069,12 @@ namespace PeroTools2.AccessKing
         /// <param name="owner">The owner that control this weak event's lifecycle.</param>
         public WeakActionEventHandler(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> delegation, UnityEngine.Object owner)
         {
+            if (owner == null) throw new ArgumentNullException(nameof(owner));
+            if (delegation == null) throw new ArgumentNullException(nameof(delegation));
+            if (delegation.Target == null)
+            {
+                throw new ArgumentException("A weak subscription requires a delegate that targets an instance, a static method has no owner to keep alive.", nameof(delegation));
+            }
             m_Owner = new WeakReference<UnityEngine.Object>(owner);
             m_Method = delegation.Method;
             var invokerType = typeof(ActionInvoker<>).MakeGenericType(typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7), typeof(T8), typeof(T9), typeof(T10), typeof(T11), typeof(T12), typeof(T13), typeof(T14), typeof(T15), delegation.Target.GetType());

@@ -121,6 +121,21 @@ namespace PeroTools2.AccessKing.Editor.Tests
         }
 
         /// <summary>
+        /// A static delegation has no owner to keep alive, so a weak subscription is rejected when it is created.
+        /// </summary>
+        [Test]
+        public void StaticDelegationIsRejectedTest()
+        {
+            var owner = ScriptableObject.CreateInstance<TestOwner>();
+
+            Assert.Throws<ArgumentException>(() => new WeakActionEventHandler(StaticTarget, owner));
+
+            UnityEngine.Object.DestroyImmediate(owner);
+        }
+
+        private static void StaticTarget() { }
+
+        /// <summary>
         /// Two owners that subscribe the same method must be unsubscribed independently.
         /// </summary>
         [Test]

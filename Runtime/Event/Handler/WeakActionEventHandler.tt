@@ -86,6 +86,12 @@ namespace PeroTools2.AccessKing
         /// <param name="owner">The owner that control this weak event's lifecycle.</param>
         public WeakActionEventHandler(<#=action#> delegation, UnityEngine.Object owner)
         {
+            if (owner == null) throw new ArgumentNullException(nameof(owner));
+            if (delegation == null) throw new ArgumentNullException(nameof(delegation));
+            if (delegation.Target == null)
+            {
+                throw new ArgumentException("A weak subscription requires a delegate that targets an instance, a static method has no owner to keep alive.", nameof(delegation));
+            }
             m_Owner = new WeakReference<UnityEngine.Object>(owner);
             m_Method = delegation.Method;
             var invokerType = typeof(ActionInvoker<>).MakeGenericType(<#= i == 0 ? string.Empty : typeofStrings + ", " #>delegation.Target.GetType());

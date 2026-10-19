@@ -48,7 +48,7 @@ namespace PeroTools2.AccessKing
         /// <exception cref="ArgumentException">Throw when the bus can't assign to <see cref="IEventBus{TNotification}"/> type.</exception>
         void IAccessSchedule<TTheme>.AddBus(TTheme theme, object bus)
         {
-            Assert.IsNotNull(bus);
+            if (bus == null) throw new ArgumentNullException(nameof(bus));
 
             // ReSharper disable once UseIsOperator.2
             // Check whether implements ICommand<>

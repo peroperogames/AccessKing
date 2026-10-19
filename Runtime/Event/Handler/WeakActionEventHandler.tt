@@ -12,9 +12,6 @@ using System;
 using System.Reflection;
 using UnityEngine.Scripting;
 
-#pragma warning disable CS1712 // Type parameter has no matching typeparam tag in the XML comment (but other type parameters do)
-
-// ReSharper disable InvalidXmlDocComment
 namespace PeroTools2.AccessKing
 {<#
     for (var i = 0; i < 16; i++)
@@ -76,7 +73,7 @@ namespace PeroTools2.AccessKing
         /// </summary>
         private object currentOwner => m_Owner.TryGetTarget(out var owner) ? owner : null;
 
-        /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
+        /// <summary>Whether the provider that owns this handler is still alive.</summary>
         public bool isAlive => m_Owner.TryGetReference(out _);
 
         /// <summary>
@@ -98,16 +95,16 @@ namespace PeroTools2.AccessKing
             m_Invocation = Activator.CreateInstance(invokerType, delegation.Target, delegation) as IInvocation;
         }
 
-        /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
+        /// <inheritdoc/>
         public bool TryHandle(in <#=parameterNotification#> notification) => m_Owner.TryGetTarget(out var owner) && owner != null && m_Invocation.Invoke(<#=notificationItems#>);
 
-        /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
+        /// <summary>Try to handle the notification and report whether the provider is still alive.</summary>
         public bool TryHandle(<#=parameterDefinitions#>) => m_Owner.TryGetTarget(out var owner) && owner != null && m_Invocation.Invoke(<#=parameters#>);
 
-        /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
+        /// <inheritdoc/>
         public void Handle(in <#=parameterNotification#> notification) { if (m_Owner.TryGetTarget(out var owner) && owner != null) m_Invocation.Invoke(<#=notificationItems#>); }
 
-        /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
+        /// <summary>Handle the notification when the provider is still alive.</summary>
         public void Handle(<#=parameterDefinitions#>) { if (m_Owner.TryGetTarget(out var owner) && owner != null) m_Invocation.Invoke(<#=parameters#>); }
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>

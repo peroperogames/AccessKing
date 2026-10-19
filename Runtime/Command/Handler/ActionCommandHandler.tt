@@ -47,10 +47,10 @@ namespace PeroTools2.AccessKing
         /// <param name="delegation">Delegation for creating CommandHandler.</param>
         public ActionCommandHandler(<#=action#> delegation) => m_Invocation = delegation;
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <summary>Handle the command.</summary>
         public void Handle(<#=parameterDefinitions#>) => m_Invocation?.Invoke(<#=parameters#>);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <inheritdoc/>
         public void Handle(ref <#=parameterNotification#> notification) => Handle(<#=notificationItems#>);
 
         /// <summary>

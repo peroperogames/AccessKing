@@ -73,7 +73,7 @@ namespace PeroTools2.AccessKing
             }
         }
 
-        /// <inheritdoc cref="IEventSchedule{TTheme}.TryGetBus(TTheme, out object)"/>
+        /// <inheritdoc cref="IAccessSchedule{TTheme}.TryGetBus(TTheme, out object)"/>
         bool IAccessSchedule<TTheme>.TryGetBus(TTheme theme, out object bus) => m_CommandBusMaps.TryGetValue(theme, out bus);
 
         /// <inheritdoc cref="ICommandSchedule{TTheme}.TryGetBus{TNotification}(TTheme, out ICommandBus{TNotification})"/>

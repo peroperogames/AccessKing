@@ -8,16 +8,11 @@
  * Created On: 2023/12/11 10:12:16
  */
 
-using System.Diagnostics.CodeAnalysis;
-
-#pragma warning disable CS1573 // Parameter has no matching param tag in the XML comment (but other parameters do)
-
 namespace PeroTools2.AccessKing
 {
     /// <summary>
     /// Extensions for <see cref="ICommandBus{TNotification}"/>.
     /// </summary>
-    [SuppressMessage("ReSharper", "InvalidXmlDocComment")]
     public static class CommandBusExtensions
     {<#
     for (var i = 0; i < 17; i++)
@@ -36,13 +31,14 @@ namespace PeroTools2.AccessKing
         }
         var parameterNotification = i == 0 ? "Empty" : $"ParameterNotification<{genericArgs}>";
         var commandBus = $"ICommandBus{(i == 0 ? "<Empty>" : $"<{parameterNotification}>")}";
+        var paramDocs = i == 0 ? string.Empty : string.Join(System.Environment.NewLine, from index in Enumerable.Range(1, i) select $"        /// <param name=\"param{index}\">Parameter {index} of the notification.</param>") + System.Environment.NewLine;
 #>
 
         /// <summary>
         /// Execute all handler's handle method in bus with <#= i #> argument<#= i == 0 || i == 1 ? string.Empty : "s"#> types parameter notification.
         /// </summary>
         /// <param name="commandBus">Command Bus.</param>
-        public static CommandOperation Execute<#=genericArgsWithAngleBrackets#>(this <#=commandBus#> commandBus<#=parameterDefinitions#>)
+<#=paramDocs#>        public static CommandOperation Execute<#=genericArgsWithAngleBrackets#>(this <#=commandBus#> commandBus<#=parameterDefinitions#>)
         {
             var notification = <#= i == 0 ? "ParameterNotification.Empty" : $"ParameterNotification.Create({parameters})"#>;
             return commandBus.Execute(ref notification);

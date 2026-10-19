@@ -24,10 +24,10 @@ namespace PeroTools2.AccessKing
         /// <param name="delegation">Delegation for creating CommandHandler.</param>
         public ActionCommandHandler(Action delegation) => m_Invocation = delegation;
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <summary>Handle the command.</summary>
         public void Handle() => m_Invocation?.Invoke();
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <inheritdoc/>
         public void Handle(ref Empty notification) => Handle();
 
         /// <summary>
@@ -80,10 +80,10 @@ namespace PeroTools2.AccessKing
         /// <param name="delegation">Delegation for creating CommandHandler.</param>
         public ActionCommandHandler(Action<T> delegation) => m_Invocation = delegation;
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <summary>Handle the command.</summary>
         public void Handle(T param) => m_Invocation?.Invoke(param);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <inheritdoc/>
         public void Handle(ref ParameterNotification<T> notification) => Handle(notification.item);
 
         /// <summary>
@@ -136,10 +136,10 @@ namespace PeroTools2.AccessKing
         /// <param name="delegation">Delegation for creating CommandHandler.</param>
         public ActionCommandHandler(Action<T1, T2> delegation) => m_Invocation = delegation;
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <summary>Handle the command.</summary>
         public void Handle(T1 param1, T2 param2) => m_Invocation?.Invoke(param1, param2);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <inheritdoc/>
         public void Handle(ref ParameterNotification<T1, T2> notification) => Handle(notification.item1, notification.item2);
 
         /// <summary>
@@ -192,10 +192,10 @@ namespace PeroTools2.AccessKing
         /// <param name="delegation">Delegation for creating CommandHandler.</param>
         public ActionCommandHandler(Action<T1, T2, T3> delegation) => m_Invocation = delegation;
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <summary>Handle the command.</summary>
         public void Handle(T1 param1, T2 param2, T3 param3) => m_Invocation?.Invoke(param1, param2, param3);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <inheritdoc/>
         public void Handle(ref ParameterNotification<T1, T2, T3> notification) => Handle(notification.item1, notification.item2, notification.item3);
 
         /// <summary>
@@ -248,10 +248,10 @@ namespace PeroTools2.AccessKing
         /// <param name="delegation">Delegation for creating CommandHandler.</param>
         public ActionCommandHandler(Action<T1, T2, T3, T4> delegation) => m_Invocation = delegation;
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <summary>Handle the command.</summary>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4) => m_Invocation?.Invoke(param1, param2, param3, param4);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <inheritdoc/>
         public void Handle(ref ParameterNotification<T1, T2, T3, T4> notification) => Handle(notification.item1, notification.item2, notification.item3, notification.item4);
 
         /// <summary>
@@ -304,10 +304,10 @@ namespace PeroTools2.AccessKing
         /// <param name="delegation">Delegation for creating CommandHandler.</param>
         public ActionCommandHandler(Action<T1, T2, T3, T4, T5> delegation) => m_Invocation = delegation;
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <summary>Handle the command.</summary>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5) => m_Invocation?.Invoke(param1, param2, param3, param4, param5);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <inheritdoc/>
         public void Handle(ref ParameterNotification<T1, T2, T3, T4, T5> notification) => Handle(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5);
 
         /// <summary>
@@ -360,10 +360,10 @@ namespace PeroTools2.AccessKing
         /// <param name="delegation">Delegation for creating CommandHandler.</param>
         public ActionCommandHandler(Action<T1, T2, T3, T4, T5, T6> delegation) => m_Invocation = delegation;
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <summary>Handle the command.</summary>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6) => m_Invocation?.Invoke(param1, param2, param3, param4, param5, param6);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <inheritdoc/>
         public void Handle(ref ParameterNotification<T1, T2, T3, T4, T5, T6> notification) => Handle(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6);
 
         /// <summary>
@@ -416,10 +416,10 @@ namespace PeroTools2.AccessKing
         /// <param name="delegation">Delegation for creating CommandHandler.</param>
         public ActionCommandHandler(Action<T1, T2, T3, T4, T5, T6, T7> delegation) => m_Invocation = delegation;
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <summary>Handle the command.</summary>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7) => m_Invocation?.Invoke(param1, param2, param3, param4, param5, param6, param7);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <inheritdoc/>
         public void Handle(ref ParameterNotification<T1, T2, T3, T4, T5, T6, T7> notification) => Handle(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7);
 
         /// <summary>
@@ -472,10 +472,10 @@ namespace PeroTools2.AccessKing
         /// <param name="delegation">Delegation for creating CommandHandler.</param>
         public ActionCommandHandler(Action<T1, T2, T3, T4, T5, T6, T7, T8> delegation) => m_Invocation = delegation;
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <summary>Handle the command.</summary>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8) => m_Invocation?.Invoke(param1, param2, param3, param4, param5, param6, param7, param8);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <inheritdoc/>
         public void Handle(ref ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8> notification) => Handle(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7, notification.item8);
 
         /// <summary>
@@ -528,10 +528,10 @@ namespace PeroTools2.AccessKing
         /// <param name="delegation">Delegation for creating CommandHandler.</param>
         public ActionCommandHandler(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> delegation) => m_Invocation = delegation;
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <summary>Handle the command.</summary>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9) => m_Invocation?.Invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <inheritdoc/>
         public void Handle(ref ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9> notification) => Handle(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7, notification.item8, notification.item9);
 
         /// <summary>
@@ -584,10 +584,10 @@ namespace PeroTools2.AccessKing
         /// <param name="delegation">Delegation for creating CommandHandler.</param>
         public ActionCommandHandler(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> delegation) => m_Invocation = delegation;
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <summary>Handle the command.</summary>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10) => m_Invocation?.Invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <inheritdoc/>
         public void Handle(ref ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> notification) => Handle(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7, notification.item8, notification.item9, notification.item10);
 
         /// <summary>
@@ -640,10 +640,10 @@ namespace PeroTools2.AccessKing
         /// <param name="delegation">Delegation for creating CommandHandler.</param>
         public ActionCommandHandler(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> delegation) => m_Invocation = delegation;
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <summary>Handle the command.</summary>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11) => m_Invocation?.Invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <inheritdoc/>
         public void Handle(ref ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> notification) => Handle(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7, notification.item8, notification.item9, notification.item10, notification.item11);
 
         /// <summary>
@@ -696,10 +696,10 @@ namespace PeroTools2.AccessKing
         /// <param name="delegation">Delegation for creating CommandHandler.</param>
         public ActionCommandHandler(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> delegation) => m_Invocation = delegation;
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <summary>Handle the command.</summary>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11, T12 param12) => m_Invocation?.Invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <inheritdoc/>
         public void Handle(ref ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> notification) => Handle(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7, notification.item8, notification.item9, notification.item10, notification.item11, notification.item12);
 
         /// <summary>
@@ -752,10 +752,10 @@ namespace PeroTools2.AccessKing
         /// <param name="delegation">Delegation for creating CommandHandler.</param>
         public ActionCommandHandler(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> delegation) => m_Invocation = delegation;
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <summary>Handle the command.</summary>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11, T12 param12, T13 param13) => m_Invocation?.Invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12, param13);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <inheritdoc/>
         public void Handle(ref ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> notification) => Handle(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7, notification.item8, notification.item9, notification.item10, notification.item11, notification.item12, notification.item13);
 
         /// <summary>
@@ -808,10 +808,10 @@ namespace PeroTools2.AccessKing
         /// <param name="delegation">Delegation for creating CommandHandler.</param>
         public ActionCommandHandler(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> delegation) => m_Invocation = delegation;
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <summary>Handle the command.</summary>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11, T12 param12, T13 param13, T14 param14) => m_Invocation?.Invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12, param13, param14);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <inheritdoc/>
         public void Handle(ref ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> notification) => Handle(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7, notification.item8, notification.item9, notification.item10, notification.item11, notification.item12, notification.item13, notification.item14);
 
         /// <summary>
@@ -864,10 +864,10 @@ namespace PeroTools2.AccessKing
         /// <param name="delegation">Delegation for creating CommandHandler.</param>
         public ActionCommandHandler(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> delegation) => m_Invocation = delegation;
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <summary>Handle the command.</summary>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11, T12 param12, T13 param13, T14 param14, T15 param15) => m_Invocation?.Invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12, param13, param14, param15);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <inheritdoc/>
         public void Handle(ref ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> notification) => Handle(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7, notification.item8, notification.item9, notification.item10, notification.item11, notification.item12, notification.item13, notification.item14, notification.item15);
 
         /// <summary>
@@ -920,10 +920,10 @@ namespace PeroTools2.AccessKing
         /// <param name="delegation">Delegation for creating CommandHandler.</param>
         public ActionCommandHandler(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> delegation) => m_Invocation = delegation;
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <summary>Handle the command.</summary>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11, T12 param12, T13 param13, T14 param14, T15 param15, T16 param16) => m_Invocation?.Invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12, param13, param14, param15, param16);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <inheritdoc/>
         public void Handle(ref ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> notification) => Handle(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7, notification.item8, notification.item9, notification.item10, notification.item11, notification.item12, notification.item13, notification.item14, notification.item15, notification.item16);
 
         /// <summary>

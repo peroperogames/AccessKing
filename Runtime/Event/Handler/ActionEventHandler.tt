@@ -54,10 +54,10 @@ namespace PeroTools2.AccessKing
 
         object IEventInvocation.invocationOwner => m_Invocation?.Target;
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.IEventHandler.Handle"/>
+        /// <summary>Handle the notification.</summary>
         public void Handle(<#=parameterDefinitions#>) => m_Invocation?.Invoke(<#=parameters#>);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.IEventHandler.Handle"/>
+        /// <inheritdoc/>
         public void Handle(in <#=parameterNotification#> notification) => Handle(<#=notificationItems#>);
 
         /// <summary>

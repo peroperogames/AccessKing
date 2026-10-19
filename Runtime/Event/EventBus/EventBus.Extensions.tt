@@ -9,16 +9,12 @@
  */
 
 using System;
-using System.Diagnostics.CodeAnalysis;
-
-#pragma warning disable CS1573 // Parameter has no matching param tag in the XML comment (but other parameters do)
 
 namespace PeroTools2.AccessKing
 {
     /// <summary>
     /// Extensions for <see cref="IEventBus{TNotification}"/>.
     /// </summary>
-    [SuppressMessage("ReSharper", "InvalidXmlDocComment")]
     public static class EventBusExtensions
     {
         #region Subscribe
@@ -167,13 +163,14 @@ namespace PeroTools2.AccessKing
         }
         var parameterNotification = i == 0 ? "Empty" : $"ParameterNotification<{genericArgs}>";
         var eventBus = $"IEventBroadcastable{(i == 0 ? "<Empty>" : $"<{parameterNotification}>")}";
+        var paramDocs = i == 0 ? string.Empty : string.Join(System.Environment.NewLine, from index in Enumerable.Range(1, i) select $"        /// <param name=\"param{index}\">Parameter {index} of the notification.</param>") + System.Environment.NewLine;
 #>
 
         /// <summary>
         /// Execute all handler's handle method in bus with argument<#= i == 0 || i == 1 ? string.Empty : "s"#> argument types parameter notification.
         /// </summary>
         /// <param name="eventBus">Event bus.</param>
-        public static void Broadcast<#=genericArgsWithAngleBrackets#>(this <#=eventBus#> eventBus<#=parameterDefinitions#>)
+<#=paramDocs#>        public static void Broadcast<#=genericArgsWithAngleBrackets#>(this <#=eventBus#> eventBus<#=parameterDefinitions#>)
             => eventBus.Broadcast(<#= i == 0 ? "ParameterNotification.Empty" : $"ParameterNotification.Create({parameters})"#>);
 <#
     }

@@ -8,9 +8,7 @@ using System;
 using System.Reflection;
 using UnityEngine.Scripting;
 
-#pragma warning disable CS1712 // Type parameter has no matching typeparam tag in the XML comment (but other type parameters do)
 
-// ReSharper disable InvalidXmlDocComment
 namespace PeroTools2.AccessKing
 {
     /// <summary>
@@ -49,7 +47,7 @@ namespace PeroTools2.AccessKing
         /// </summary>
         private object currentOwner => m_Owner.TryGetTarget(out var owner) ? owner : null;
 
-        /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
+        /// <summary>Whether the provider that owns this handler is still alive.</summary>
         public bool isAlive => m_Owner.TryGetReference(out _);
 
         /// <summary>
@@ -71,16 +69,16 @@ namespace PeroTools2.AccessKing
             m_Invocation = Activator.CreateInstance(invokerType, delegation.Target, delegation) as IInvocation;
         }
 
-        /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
+        /// <inheritdoc/>
         public bool TryHandle(in Empty notification) => m_Owner.TryGetTarget(out var owner) && owner != null && m_Invocation.Invoke();
 
-        /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
+        /// <summary>Try to handle the notification and report whether the provider is still alive.</summary>
         public bool TryHandle() => m_Owner.TryGetTarget(out var owner) && owner != null && m_Invocation.Invoke();
 
-        /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
+        /// <inheritdoc/>
         public void Handle(in Empty notification) { if (m_Owner.TryGetTarget(out var owner) && owner != null) m_Invocation.Invoke(); }
 
-        /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
+        /// <summary>Handle the notification when the provider is still alive.</summary>
         public void Handle() { if (m_Owner.TryGetTarget(out var owner) && owner != null) m_Invocation.Invoke(); }
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
@@ -183,7 +181,7 @@ namespace PeroTools2.AccessKing
         /// </summary>
         private object currentOwner => m_Owner.TryGetTarget(out var owner) ? owner : null;
 
-        /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
+        /// <summary>Whether the provider that owns this handler is still alive.</summary>
         public bool isAlive => m_Owner.TryGetReference(out _);
 
         /// <summary>
@@ -205,16 +203,16 @@ namespace PeroTools2.AccessKing
             m_Invocation = Activator.CreateInstance(invokerType, delegation.Target, delegation) as IInvocation;
         }
 
-        /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
+        /// <inheritdoc/>
         public bool TryHandle(in ParameterNotification<T> notification) => m_Owner.TryGetTarget(out var owner) && owner != null && m_Invocation.Invoke(notification.item);
 
-        /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
+        /// <summary>Try to handle the notification and report whether the provider is still alive.</summary>
         public bool TryHandle(T param) => m_Owner.TryGetTarget(out var owner) && owner != null && m_Invocation.Invoke(param);
 
-        /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
+        /// <inheritdoc/>
         public void Handle(in ParameterNotification<T> notification) { if (m_Owner.TryGetTarget(out var owner) && owner != null) m_Invocation.Invoke(notification.item); }
 
-        /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
+        /// <summary>Handle the notification when the provider is still alive.</summary>
         public void Handle(T param) { if (m_Owner.TryGetTarget(out var owner) && owner != null) m_Invocation.Invoke(param); }
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
@@ -317,7 +315,7 @@ namespace PeroTools2.AccessKing
         /// </summary>
         private object currentOwner => m_Owner.TryGetTarget(out var owner) ? owner : null;
 
-        /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
+        /// <summary>Whether the provider that owns this handler is still alive.</summary>
         public bool isAlive => m_Owner.TryGetReference(out _);
 
         /// <summary>
@@ -339,16 +337,16 @@ namespace PeroTools2.AccessKing
             m_Invocation = Activator.CreateInstance(invokerType, delegation.Target, delegation) as IInvocation;
         }
 
-        /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
+        /// <inheritdoc/>
         public bool TryHandle(in ParameterNotification<T1, T2> notification) => m_Owner.TryGetTarget(out var owner) && owner != null && m_Invocation.Invoke(notification.item1, notification.item2);
 
-        /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
+        /// <summary>Try to handle the notification and report whether the provider is still alive.</summary>
         public bool TryHandle(T1 param1, T2 param2) => m_Owner.TryGetTarget(out var owner) && owner != null && m_Invocation.Invoke(param1, param2);
 
-        /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
+        /// <inheritdoc/>
         public void Handle(in ParameterNotification<T1, T2> notification) { if (m_Owner.TryGetTarget(out var owner) && owner != null) m_Invocation.Invoke(notification.item1, notification.item2); }
 
-        /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
+        /// <summary>Handle the notification when the provider is still alive.</summary>
         public void Handle(T1 param1, T2 param2) { if (m_Owner.TryGetTarget(out var owner) && owner != null) m_Invocation.Invoke(param1, param2); }
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
@@ -451,7 +449,7 @@ namespace PeroTools2.AccessKing
         /// </summary>
         private object currentOwner => m_Owner.TryGetTarget(out var owner) ? owner : null;
 
-        /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
+        /// <summary>Whether the provider that owns this handler is still alive.</summary>
         public bool isAlive => m_Owner.TryGetReference(out _);
 
         /// <summary>
@@ -473,16 +471,16 @@ namespace PeroTools2.AccessKing
             m_Invocation = Activator.CreateInstance(invokerType, delegation.Target, delegation) as IInvocation;
         }
 
-        /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
+        /// <inheritdoc/>
         public bool TryHandle(in ParameterNotification<T1, T2, T3> notification) => m_Owner.TryGetTarget(out var owner) && owner != null && m_Invocation.Invoke(notification.item1, notification.item2, notification.item3);
 
-        /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
+        /// <summary>Try to handle the notification and report whether the provider is still alive.</summary>
         public bool TryHandle(T1 param1, T2 param2, T3 param3) => m_Owner.TryGetTarget(out var owner) && owner != null && m_Invocation.Invoke(param1, param2, param3);
 
-        /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
+        /// <inheritdoc/>
         public void Handle(in ParameterNotification<T1, T2, T3> notification) { if (m_Owner.TryGetTarget(out var owner) && owner != null) m_Invocation.Invoke(notification.item1, notification.item2, notification.item3); }
 
-        /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
+        /// <summary>Handle the notification when the provider is still alive.</summary>
         public void Handle(T1 param1, T2 param2, T3 param3) { if (m_Owner.TryGetTarget(out var owner) && owner != null) m_Invocation.Invoke(param1, param2, param3); }
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
@@ -585,7 +583,7 @@ namespace PeroTools2.AccessKing
         /// </summary>
         private object currentOwner => m_Owner.TryGetTarget(out var owner) ? owner : null;
 
-        /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
+        /// <summary>Whether the provider that owns this handler is still alive.</summary>
         public bool isAlive => m_Owner.TryGetReference(out _);
 
         /// <summary>
@@ -607,16 +605,16 @@ namespace PeroTools2.AccessKing
             m_Invocation = Activator.CreateInstance(invokerType, delegation.Target, delegation) as IInvocation;
         }
 
-        /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
+        /// <inheritdoc/>
         public bool TryHandle(in ParameterNotification<T1, T2, T3, T4> notification) => m_Owner.TryGetTarget(out var owner) && owner != null && m_Invocation.Invoke(notification.item1, notification.item2, notification.item3, notification.item4);
 
-        /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
+        /// <summary>Try to handle the notification and report whether the provider is still alive.</summary>
         public bool TryHandle(T1 param1, T2 param2, T3 param3, T4 param4) => m_Owner.TryGetTarget(out var owner) && owner != null && m_Invocation.Invoke(param1, param2, param3, param4);
 
-        /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
+        /// <inheritdoc/>
         public void Handle(in ParameterNotification<T1, T2, T3, T4> notification) { if (m_Owner.TryGetTarget(out var owner) && owner != null) m_Invocation.Invoke(notification.item1, notification.item2, notification.item3, notification.item4); }
 
-        /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
+        /// <summary>Handle the notification when the provider is still alive.</summary>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4) { if (m_Owner.TryGetTarget(out var owner) && owner != null) m_Invocation.Invoke(param1, param2, param3, param4); }
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
@@ -719,7 +717,7 @@ namespace PeroTools2.AccessKing
         /// </summary>
         private object currentOwner => m_Owner.TryGetTarget(out var owner) ? owner : null;
 
-        /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
+        /// <summary>Whether the provider that owns this handler is still alive.</summary>
         public bool isAlive => m_Owner.TryGetReference(out _);
 
         /// <summary>
@@ -741,16 +739,16 @@ namespace PeroTools2.AccessKing
             m_Invocation = Activator.CreateInstance(invokerType, delegation.Target, delegation) as IInvocation;
         }
 
-        /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
+        /// <inheritdoc/>
         public bool TryHandle(in ParameterNotification<T1, T2, T3, T4, T5> notification) => m_Owner.TryGetTarget(out var owner) && owner != null && m_Invocation.Invoke(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5);
 
-        /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
+        /// <summary>Try to handle the notification and report whether the provider is still alive.</summary>
         public bool TryHandle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5) => m_Owner.TryGetTarget(out var owner) && owner != null && m_Invocation.Invoke(param1, param2, param3, param4, param5);
 
-        /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
+        /// <inheritdoc/>
         public void Handle(in ParameterNotification<T1, T2, T3, T4, T5> notification) { if (m_Owner.TryGetTarget(out var owner) && owner != null) m_Invocation.Invoke(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5); }
 
-        /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
+        /// <summary>Handle the notification when the provider is still alive.</summary>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5) { if (m_Owner.TryGetTarget(out var owner) && owner != null) m_Invocation.Invoke(param1, param2, param3, param4, param5); }
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
@@ -853,7 +851,7 @@ namespace PeroTools2.AccessKing
         /// </summary>
         private object currentOwner => m_Owner.TryGetTarget(out var owner) ? owner : null;
 
-        /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
+        /// <summary>Whether the provider that owns this handler is still alive.</summary>
         public bool isAlive => m_Owner.TryGetReference(out _);
 
         /// <summary>
@@ -875,16 +873,16 @@ namespace PeroTools2.AccessKing
             m_Invocation = Activator.CreateInstance(invokerType, delegation.Target, delegation) as IInvocation;
         }
 
-        /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
+        /// <inheritdoc/>
         public bool TryHandle(in ParameterNotification<T1, T2, T3, T4, T5, T6> notification) => m_Owner.TryGetTarget(out var owner) && owner != null && m_Invocation.Invoke(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6);
 
-        /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
+        /// <summary>Try to handle the notification and report whether the provider is still alive.</summary>
         public bool TryHandle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6) => m_Owner.TryGetTarget(out var owner) && owner != null && m_Invocation.Invoke(param1, param2, param3, param4, param5, param6);
 
-        /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
+        /// <inheritdoc/>
         public void Handle(in ParameterNotification<T1, T2, T3, T4, T5, T6> notification) { if (m_Owner.TryGetTarget(out var owner) && owner != null) m_Invocation.Invoke(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6); }
 
-        /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
+        /// <summary>Handle the notification when the provider is still alive.</summary>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6) { if (m_Owner.TryGetTarget(out var owner) && owner != null) m_Invocation.Invoke(param1, param2, param3, param4, param5, param6); }
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
@@ -987,7 +985,7 @@ namespace PeroTools2.AccessKing
         /// </summary>
         private object currentOwner => m_Owner.TryGetTarget(out var owner) ? owner : null;
 
-        /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
+        /// <summary>Whether the provider that owns this handler is still alive.</summary>
         public bool isAlive => m_Owner.TryGetReference(out _);
 
         /// <summary>
@@ -1009,16 +1007,16 @@ namespace PeroTools2.AccessKing
             m_Invocation = Activator.CreateInstance(invokerType, delegation.Target, delegation) as IInvocation;
         }
 
-        /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
+        /// <inheritdoc/>
         public bool TryHandle(in ParameterNotification<T1, T2, T3, T4, T5, T6, T7> notification) => m_Owner.TryGetTarget(out var owner) && owner != null && m_Invocation.Invoke(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7);
 
-        /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
+        /// <summary>Try to handle the notification and report whether the provider is still alive.</summary>
         public bool TryHandle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7) => m_Owner.TryGetTarget(out var owner) && owner != null && m_Invocation.Invoke(param1, param2, param3, param4, param5, param6, param7);
 
-        /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
+        /// <inheritdoc/>
         public void Handle(in ParameterNotification<T1, T2, T3, T4, T5, T6, T7> notification) { if (m_Owner.TryGetTarget(out var owner) && owner != null) m_Invocation.Invoke(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7); }
 
-        /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
+        /// <summary>Handle the notification when the provider is still alive.</summary>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7) { if (m_Owner.TryGetTarget(out var owner) && owner != null) m_Invocation.Invoke(param1, param2, param3, param4, param5, param6, param7); }
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
@@ -1121,7 +1119,7 @@ namespace PeroTools2.AccessKing
         /// </summary>
         private object currentOwner => m_Owner.TryGetTarget(out var owner) ? owner : null;
 
-        /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
+        /// <summary>Whether the provider that owns this handler is still alive.</summary>
         public bool isAlive => m_Owner.TryGetReference(out _);
 
         /// <summary>
@@ -1143,16 +1141,16 @@ namespace PeroTools2.AccessKing
             m_Invocation = Activator.CreateInstance(invokerType, delegation.Target, delegation) as IInvocation;
         }
 
-        /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
+        /// <inheritdoc/>
         public bool TryHandle(in ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8> notification) => m_Owner.TryGetTarget(out var owner) && owner != null && m_Invocation.Invoke(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7, notification.item8);
 
-        /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
+        /// <summary>Try to handle the notification and report whether the provider is still alive.</summary>
         public bool TryHandle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8) => m_Owner.TryGetTarget(out var owner) && owner != null && m_Invocation.Invoke(param1, param2, param3, param4, param5, param6, param7, param8);
 
-        /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
+        /// <inheritdoc/>
         public void Handle(in ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8> notification) { if (m_Owner.TryGetTarget(out var owner) && owner != null) m_Invocation.Invoke(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7, notification.item8); }
 
-        /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
+        /// <summary>Handle the notification when the provider is still alive.</summary>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8) { if (m_Owner.TryGetTarget(out var owner) && owner != null) m_Invocation.Invoke(param1, param2, param3, param4, param5, param6, param7, param8); }
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
@@ -1255,7 +1253,7 @@ namespace PeroTools2.AccessKing
         /// </summary>
         private object currentOwner => m_Owner.TryGetTarget(out var owner) ? owner : null;
 
-        /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
+        /// <summary>Whether the provider that owns this handler is still alive.</summary>
         public bool isAlive => m_Owner.TryGetReference(out _);
 
         /// <summary>
@@ -1277,16 +1275,16 @@ namespace PeroTools2.AccessKing
             m_Invocation = Activator.CreateInstance(invokerType, delegation.Target, delegation) as IInvocation;
         }
 
-        /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
+        /// <inheritdoc/>
         public bool TryHandle(in ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9> notification) => m_Owner.TryGetTarget(out var owner) && owner != null && m_Invocation.Invoke(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7, notification.item8, notification.item9);
 
-        /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
+        /// <summary>Try to handle the notification and report whether the provider is still alive.</summary>
         public bool TryHandle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9) => m_Owner.TryGetTarget(out var owner) && owner != null && m_Invocation.Invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9);
 
-        /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
+        /// <inheritdoc/>
         public void Handle(in ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9> notification) { if (m_Owner.TryGetTarget(out var owner) && owner != null) m_Invocation.Invoke(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7, notification.item8, notification.item9); }
 
-        /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
+        /// <summary>Handle the notification when the provider is still alive.</summary>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9) { if (m_Owner.TryGetTarget(out var owner) && owner != null) m_Invocation.Invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9); }
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
@@ -1389,7 +1387,7 @@ namespace PeroTools2.AccessKing
         /// </summary>
         private object currentOwner => m_Owner.TryGetTarget(out var owner) ? owner : null;
 
-        /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
+        /// <summary>Whether the provider that owns this handler is still alive.</summary>
         public bool isAlive => m_Owner.TryGetReference(out _);
 
         /// <summary>
@@ -1411,16 +1409,16 @@ namespace PeroTools2.AccessKing
             m_Invocation = Activator.CreateInstance(invokerType, delegation.Target, delegation) as IInvocation;
         }
 
-        /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
+        /// <inheritdoc/>
         public bool TryHandle(in ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> notification) => m_Owner.TryGetTarget(out var owner) && owner != null && m_Invocation.Invoke(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7, notification.item8, notification.item9, notification.item10);
 
-        /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
+        /// <summary>Try to handle the notification and report whether the provider is still alive.</summary>
         public bool TryHandle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10) => m_Owner.TryGetTarget(out var owner) && owner != null && m_Invocation.Invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10);
 
-        /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
+        /// <inheritdoc/>
         public void Handle(in ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> notification) { if (m_Owner.TryGetTarget(out var owner) && owner != null) m_Invocation.Invoke(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7, notification.item8, notification.item9, notification.item10); }
 
-        /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
+        /// <summary>Handle the notification when the provider is still alive.</summary>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10) { if (m_Owner.TryGetTarget(out var owner) && owner != null) m_Invocation.Invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10); }
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
@@ -1523,7 +1521,7 @@ namespace PeroTools2.AccessKing
         /// </summary>
         private object currentOwner => m_Owner.TryGetTarget(out var owner) ? owner : null;
 
-        /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
+        /// <summary>Whether the provider that owns this handler is still alive.</summary>
         public bool isAlive => m_Owner.TryGetReference(out _);
 
         /// <summary>
@@ -1545,16 +1543,16 @@ namespace PeroTools2.AccessKing
             m_Invocation = Activator.CreateInstance(invokerType, delegation.Target, delegation) as IInvocation;
         }
 
-        /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
+        /// <inheritdoc/>
         public bool TryHandle(in ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> notification) => m_Owner.TryGetTarget(out var owner) && owner != null && m_Invocation.Invoke(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7, notification.item8, notification.item9, notification.item10, notification.item11);
 
-        /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
+        /// <summary>Try to handle the notification and report whether the provider is still alive.</summary>
         public bool TryHandle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11) => m_Owner.TryGetTarget(out var owner) && owner != null && m_Invocation.Invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11);
 
-        /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
+        /// <inheritdoc/>
         public void Handle(in ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> notification) { if (m_Owner.TryGetTarget(out var owner) && owner != null) m_Invocation.Invoke(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7, notification.item8, notification.item9, notification.item10, notification.item11); }
 
-        /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
+        /// <summary>Handle the notification when the provider is still alive.</summary>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11) { if (m_Owner.TryGetTarget(out var owner) && owner != null) m_Invocation.Invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11); }
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
@@ -1657,7 +1655,7 @@ namespace PeroTools2.AccessKing
         /// </summary>
         private object currentOwner => m_Owner.TryGetTarget(out var owner) ? owner : null;
 
-        /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
+        /// <summary>Whether the provider that owns this handler is still alive.</summary>
         public bool isAlive => m_Owner.TryGetReference(out _);
 
         /// <summary>
@@ -1679,16 +1677,16 @@ namespace PeroTools2.AccessKing
             m_Invocation = Activator.CreateInstance(invokerType, delegation.Target, delegation) as IInvocation;
         }
 
-        /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
+        /// <inheritdoc/>
         public bool TryHandle(in ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> notification) => m_Owner.TryGetTarget(out var owner) && owner != null && m_Invocation.Invoke(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7, notification.item8, notification.item9, notification.item10, notification.item11, notification.item12);
 
-        /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
+        /// <summary>Try to handle the notification and report whether the provider is still alive.</summary>
         public bool TryHandle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11, T12 param12) => m_Owner.TryGetTarget(out var owner) && owner != null && m_Invocation.Invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12);
 
-        /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
+        /// <inheritdoc/>
         public void Handle(in ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> notification) { if (m_Owner.TryGetTarget(out var owner) && owner != null) m_Invocation.Invoke(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7, notification.item8, notification.item9, notification.item10, notification.item11, notification.item12); }
 
-        /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
+        /// <summary>Handle the notification when the provider is still alive.</summary>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11, T12 param12) { if (m_Owner.TryGetTarget(out var owner) && owner != null) m_Invocation.Invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12); }
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
@@ -1791,7 +1789,7 @@ namespace PeroTools2.AccessKing
         /// </summary>
         private object currentOwner => m_Owner.TryGetTarget(out var owner) ? owner : null;
 
-        /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
+        /// <summary>Whether the provider that owns this handler is still alive.</summary>
         public bool isAlive => m_Owner.TryGetReference(out _);
 
         /// <summary>
@@ -1813,16 +1811,16 @@ namespace PeroTools2.AccessKing
             m_Invocation = Activator.CreateInstance(invokerType, delegation.Target, delegation) as IInvocation;
         }
 
-        /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
+        /// <inheritdoc/>
         public bool TryHandle(in ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> notification) => m_Owner.TryGetTarget(out var owner) && owner != null && m_Invocation.Invoke(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7, notification.item8, notification.item9, notification.item10, notification.item11, notification.item12, notification.item13);
 
-        /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
+        /// <summary>Try to handle the notification and report whether the provider is still alive.</summary>
         public bool TryHandle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11, T12 param12, T13 param13) => m_Owner.TryGetTarget(out var owner) && owner != null && m_Invocation.Invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12, param13);
 
-        /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
+        /// <inheritdoc/>
         public void Handle(in ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> notification) { if (m_Owner.TryGetTarget(out var owner) && owner != null) m_Invocation.Invoke(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7, notification.item8, notification.item9, notification.item10, notification.item11, notification.item12, notification.item13); }
 
-        /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
+        /// <summary>Handle the notification when the provider is still alive.</summary>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11, T12 param12, T13 param13) { if (m_Owner.TryGetTarget(out var owner) && owner != null) m_Invocation.Invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12, param13); }
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
@@ -1925,7 +1923,7 @@ namespace PeroTools2.AccessKing
         /// </summary>
         private object currentOwner => m_Owner.TryGetTarget(out var owner) ? owner : null;
 
-        /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
+        /// <summary>Whether the provider that owns this handler is still alive.</summary>
         public bool isAlive => m_Owner.TryGetReference(out _);
 
         /// <summary>
@@ -1947,16 +1945,16 @@ namespace PeroTools2.AccessKing
             m_Invocation = Activator.CreateInstance(invokerType, delegation.Target, delegation) as IInvocation;
         }
 
-        /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
+        /// <inheritdoc/>
         public bool TryHandle(in ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> notification) => m_Owner.TryGetTarget(out var owner) && owner != null && m_Invocation.Invoke(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7, notification.item8, notification.item9, notification.item10, notification.item11, notification.item12, notification.item13, notification.item14);
 
-        /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
+        /// <summary>Try to handle the notification and report whether the provider is still alive.</summary>
         public bool TryHandle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11, T12 param12, T13 param13, T14 param14) => m_Owner.TryGetTarget(out var owner) && owner != null && m_Invocation.Invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12, param13, param14);
 
-        /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
+        /// <inheritdoc/>
         public void Handle(in ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> notification) { if (m_Owner.TryGetTarget(out var owner) && owner != null) m_Invocation.Invoke(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7, notification.item8, notification.item9, notification.item10, notification.item11, notification.item12, notification.item13, notification.item14); }
 
-        /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
+        /// <summary>Handle the notification when the provider is still alive.</summary>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11, T12 param12, T13 param13, T14 param14) { if (m_Owner.TryGetTarget(out var owner) && owner != null) m_Invocation.Invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12, param13, param14); }
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
@@ -2059,7 +2057,7 @@ namespace PeroTools2.AccessKing
         /// </summary>
         private object currentOwner => m_Owner.TryGetTarget(out var owner) ? owner : null;
 
-        /// <inheritdoc cref="IWeakEventHandler{TNotification}.isAlive"/>
+        /// <summary>Whether the provider that owns this handler is still alive.</summary>
         public bool isAlive => m_Owner.TryGetReference(out _);
 
         /// <summary>
@@ -2081,16 +2079,16 @@ namespace PeroTools2.AccessKing
             m_Invocation = Activator.CreateInstance(invokerType, delegation.Target, delegation) as IInvocation;
         }
 
-        /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
+        /// <inheritdoc/>
         public bool TryHandle(in ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> notification) => m_Owner.TryGetTarget(out var owner) && owner != null && m_Invocation.Invoke(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7, notification.item8, notification.item9, notification.item10, notification.item11, notification.item12, notification.item13, notification.item14, notification.item15);
 
-        /// <inheritdoc cref="IWeakEventHandler{TNotification}.TryHandle"/>
+        /// <summary>Try to handle the notification and report whether the provider is still alive.</summary>
         public bool TryHandle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11, T12 param12, T13 param13, T14 param14, T15 param15) => m_Owner.TryGetTarget(out var owner) && owner != null && m_Invocation.Invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12, param13, param14, param15);
 
-        /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
+        /// <inheritdoc/>
         public void Handle(in ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> notification) { if (m_Owner.TryGetTarget(out var owner) && owner != null) m_Invocation.Invoke(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7, notification.item8, notification.item9, notification.item10, notification.item11, notification.item12, notification.item13, notification.item14, notification.item15); }
 
-        /// <inheritdoc cref="IEventHandler{TNotification}.Handle"/>
+        /// <summary>Handle the notification when the provider is still alive.</summary>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11, T12 param12, T13 param13, T14 param14, T15 param15) { if (m_Owner.TryGetTarget(out var owner) && owner != null) m_Invocation.Invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12, param13, param14, param15); }
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>

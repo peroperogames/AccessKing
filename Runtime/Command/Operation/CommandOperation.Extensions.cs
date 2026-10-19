@@ -159,7 +159,6 @@ namespace PeroTools2.AccessKing
         /// Get all results with Task type.
         /// </summary>
         /// <param name="operation">Result operation.</param>
-        /// <param name="results">Result collection.</param>
         /// <param name="autoRelease">Release operation.</param>
         /// <returns>Results of task type collection.</returns>
         public static IReadOnlyList<UniTask> GetAllAsyncTasks(this CommandOperation operation, bool autoRelease = true)
@@ -202,6 +201,7 @@ namespace PeroTools2.AccessKing
         /// Wait for all async tasks done.
         /// </summary>
         /// <param name="autoRelease">Release operation.</param>
+        /// <param name="operation">Result operation.</param>
         public static async UniTask WhenAllDone(this CommandOperation operation, bool autoRelease = true)
         {
             var getters = operation.getters;
@@ -227,6 +227,7 @@ namespace PeroTools2.AccessKing
         /// Wait for any async task done.
         /// </summary>
         /// <param name="autoRelease">Release operation.</param>
+        /// <param name="operation">Result operation.</param>
         public static async UniTask WhenAnyDone(this CommandOperation operation, bool autoRelease = true)
         {
             var getters = operation.getters;

@@ -32,7 +32,7 @@ namespace PeroTools2.AccessKing
         bool IAccessSchedule<TTheme>.RemoveBus(object bus)
         {
             var pair = m_CommandBusMaps.FirstOrDefault(kv => kv.Value.Equals(bus));
-            return pair.Key != null && m_CommandBusMaps.Remove(pair.Key);
+            return pair.Value != null && m_CommandBusMaps.Remove(pair.Key);
         }
 
         /// <inheritdoc cref="ICommandSchedule{TTheme}.RemoveBus{TNotification}(ICommandBus{TNotification})"/>

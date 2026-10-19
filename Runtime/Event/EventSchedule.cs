@@ -31,7 +31,7 @@ namespace PeroTools2.AccessKing
         bool IAccessSchedule<TTheme>.RemoveBus(object bus)
         {
             var kv = m_EventBusMaps.FirstOrDefault(kv => kv.Value == bus);
-            return m_EventBusMaps.Remove(kv.Key);
+            return kv.Value != null && m_EventBusMaps.Remove(kv.Key);
         }
 
         /// <inheritdoc cref="IEventSchedule{TTheme}.RemoveBus{TNotification}(IEventBus{TNotification})"/>
@@ -66,9 +66,9 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IEventSchedule{TTheme}.TryGetBus{TNotification}(TTheme, out IEventBus{TNotification})"/>
         public bool TryGetBus<TNotification>(TTheme theme, out IEventBus<TNotification> bus) where TNotification : INotification
         {
-            if (m_EventBusMaps.TryGetValue(theme, out var accessBus))
+            if (m_EventBusMaps.TryGetValue(theme, out var accessBus) && accessBus is IEventBus<TNotification> eventBus)
             {
-                bus = (IEventBus<TNotification>) accessBus;
+                bus = eventBus;
                 return true;
             }
 

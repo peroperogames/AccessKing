@@ -58,7 +58,11 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// Remove all registered handlers.
         /// </summary>
-        public void ClearHandlers() => m_HandlerMaps.Clear();
+        public void ClearHandlers()
+        {
+            m_HandlerMaps.Clear();
+            handlerCount = 0;
+        }
 
         /// <inheritdoc cref="ICommandHandlerFactory.GetHandlers{TNotification}()"/>
         public IEnumerable<ICommandHandler<TNotification>> GetHandlers<TNotification>() where TNotification : INotification

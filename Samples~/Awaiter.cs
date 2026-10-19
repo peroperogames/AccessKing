@@ -14,7 +14,6 @@ namespace PeroTools2.AccessKing.Samples.Game.Utils
     public class Awaiter : INotifyCompletion
     {
         private readonly YieldInstruction m_Yielder;
-        private static GameObject m_Timer = new();
         public bool IsCompleted { get; private set; }
         private Action m_OnCompleted;
 
@@ -27,6 +26,7 @@ namespace PeroTools2.AccessKing.Samples.Game.Utils
         private IEnumerator WaitForCompleted()
         {
             yield return m_Yielder;
+            IsCompleted = true;
             m_OnCompleted?.Invoke();
         }
 

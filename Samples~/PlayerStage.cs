@@ -21,13 +21,21 @@ namespace PeroTools2.AccessKing.Samples.Game.Stage.Player
         [SerializeField] private int m_Hp = 100;
         public Text TxtHP;
         public Character character => Character.Player;
+        private FuncCommandHandler<Task> m_StageHandler;
+        private RegistryCommandHandlerFactory m_StageFactory;
 
         public void Awake()
         {
-            GameCommands.global
+            m_StageHandler = new FuncCommandHandler<Task>(StartPlayerStageFlow);
+            m_StageFactory = GameCommands.global
                 .Require<GameCommands.StartPlayerStage>()
-                .RequireFactory<RegistryCommandHandlerFactory>()
-                .RegisterFuncHandler(StartPlayerStageFlow);
+                .RequireFactory<RegistryCommandHandlerFactory>();
+            m_StageFactory.RegisterHandler(m_StageHandler);
+        }
+
+        private void OnDestroy()
+        {
+            m_StageFactory.UnregisterHandler(m_StageHandler);
         }
 
         public void ResetHp()

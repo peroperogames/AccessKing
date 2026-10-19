@@ -4,13 +4,14 @@
  * Created On: 2023/03/30 16:03:11
  */
 
+using System;
 using PeroTools2.AccessKing.Samples.Game.Access;
 using PeroTools2.AccessKing.Samples.Game.Core;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.UI;
 
-namespace PeroTools2.AccessKing.Game.Core
+namespace PeroTools2.AccessKing.Samples.Game.Core
 {
     public class GameFlow : MonoBehaviour
     {
@@ -23,13 +24,23 @@ namespace PeroTools2.AccessKing.Game.Core
         private bool m_IsBattle;
         private bool m_IsGameOver;
         private int m_Turn;
+        private Action m_Restart;
 
         private void Awake()
         {
             btnStartTurn.onClick.AddListener(StartTurnAsync);
-            btnRestart.onClick.AddListener(() => GameEvents.global.Require<GameEvents.GameStart>().Broadcast());
+            m_Restart = () => GameEvents.global.Require<GameEvents.GameStart>().Broadcast();
+            btnRestart.onClick.AddListener(m_Restart);
             GameEvents.global.Require<GameEvents.GameOver>().Subscribe(GameOver);
             GameEvents.global.Require<GameEvents.GameStart>().Subscribe(GameStart);
+        }
+
+        private void OnDestroy()
+        {
+            btnStartTurn.onClick.RemoveListener(StartTurnAsync);
+            btnRestart.onClick.RemoveListener(m_Restart);
+            GameEvents.global.Require<GameEvents.GameOver>().Unsubscribe(GameOver);
+            GameEvents.global.Require<GameEvents.GameStart>().Unsubscribe(GameStart);
         }
 
         private void Start() => GameEvents.global.Require<GameEvents.GameStart>().Broadcast();

@@ -49,7 +49,7 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// Verify if the target equals to command handler.
         /// </summary>
-        public bool Equals(ActionCommandHandler other) => other != null && m_Invocation == other.m_Invocation;
+        public bool Equals(ActionCommandHandler other) => other is not null && m_Invocation == other.m_Invocation;
 
         /// <summary>
         /// Verify if the target equals to command handler.
@@ -103,7 +103,7 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// Verify if the target equals to command handler.
         /// </summary>
-        public bool Equals(ActionCommandHandler<T> other) => other != null && m_Invocation == other.m_Invocation;
+        public bool Equals(ActionCommandHandler<T> other) => other is not null && m_Invocation == other.m_Invocation;
 
         /// <summary>
         /// Verify if the target equals to command handler.
@@ -157,7 +157,7 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// Verify if the target equals to command handler.
         /// </summary>
-        public bool Equals(ActionCommandHandler<T1, T2> other) => other != null && m_Invocation == other.m_Invocation;
+        public bool Equals(ActionCommandHandler<T1, T2> other) => other is not null && m_Invocation == other.m_Invocation;
 
         /// <summary>
         /// Verify if the target equals to command handler.
@@ -211,7 +211,7 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// Verify if the target equals to command handler.
         /// </summary>
-        public bool Equals(ActionCommandHandler<T1, T2, T3> other) => other != null && m_Invocation == other.m_Invocation;
+        public bool Equals(ActionCommandHandler<T1, T2, T3> other) => other is not null && m_Invocation == other.m_Invocation;
 
         /// <summary>
         /// Verify if the target equals to command handler.
@@ -265,7 +265,7 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// Verify if the target equals to command handler.
         /// </summary>
-        public bool Equals(ActionCommandHandler<T1, T2, T3, T4> other) => other != null && m_Invocation == other.m_Invocation;
+        public bool Equals(ActionCommandHandler<T1, T2, T3, T4> other) => other is not null && m_Invocation == other.m_Invocation;
 
         /// <summary>
         /// Verify if the target equals to command handler.
@@ -319,7 +319,7 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// Verify if the target equals to command handler.
         /// </summary>
-        public bool Equals(ActionCommandHandler<T1, T2, T3, T4, T5> other) => other != null && m_Invocation == other.m_Invocation;
+        public bool Equals(ActionCommandHandler<T1, T2, T3, T4, T5> other) => other is not null && m_Invocation == other.m_Invocation;
 
         /// <summary>
         /// Verify if the target equals to command handler.
@@ -373,7 +373,7 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// Verify if the target equals to command handler.
         /// </summary>
-        public bool Equals(ActionCommandHandler<T1, T2, T3, T4, T5, T6> other) => other != null && m_Invocation == other.m_Invocation;
+        public bool Equals(ActionCommandHandler<T1, T2, T3, T4, T5, T6> other) => other is not null && m_Invocation == other.m_Invocation;
 
         /// <summary>
         /// Verify if the target equals to command handler.
@@ -427,7 +427,7 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// Verify if the target equals to command handler.
         /// </summary>
-        public bool Equals(ActionCommandHandler<T1, T2, T3, T4, T5, T6, T7> other) => other != null && m_Invocation == other.m_Invocation;
+        public bool Equals(ActionCommandHandler<T1, T2, T3, T4, T5, T6, T7> other) => other is not null && m_Invocation == other.m_Invocation;
 
         /// <summary>
         /// Verify if the target equals to command handler.
@@ -481,7 +481,7 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// Verify if the target equals to command handler.
         /// </summary>
-        public bool Equals(ActionCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8> other) => other != null && m_Invocation == other.m_Invocation;
+        public bool Equals(ActionCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8> other) => other is not null && m_Invocation == other.m_Invocation;
 
         /// <summary>
         /// Verify if the target equals to command handler.
@@ -535,7 +535,7 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// Verify if the target equals to command handler.
         /// </summary>
-        public bool Equals(ActionCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9> other) => other != null && m_Invocation == other.m_Invocation;
+        public bool Equals(ActionCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9> other) => other is not null && m_Invocation == other.m_Invocation;
 
         /// <summary>
         /// Verify if the target equals to command handler.
@@ -589,7 +589,7 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// Verify if the target equals to command handler.
         /// </summary>
-        public bool Equals(ActionCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> other) => other != null && m_Invocation == other.m_Invocation;
+        public bool Equals(ActionCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> other) => other is not null && m_Invocation == other.m_Invocation;
 
         /// <summary>
         /// Verify if the target equals to command handler.
@@ -643,7 +643,7 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// Verify if the target equals to command handler.
         /// </summary>
-        public bool Equals(ActionCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> other) => other != null && m_Invocation == other.m_Invocation;
+        public bool Equals(ActionCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> other) => other is not null && m_Invocation == other.m_Invocation;
 
         /// <summary>
         /// Verify if the target equals to command handler.
@@ -697,7 +697,7 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// Verify if the target equals to command handler.
         /// </summary>
-        public bool Equals(ActionCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> other) => other != null && m_Invocation == other.m_Invocation;
+        public bool Equals(ActionCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> other) => other is not null && m_Invocation == other.m_Invocation;
 
         /// <summary>
         /// Verify if the target equals to command handler.
@@ -751,7 +751,7 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// Verify if the target equals to command handler.
         /// </summary>
-        public bool Equals(ActionCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> other) => other != null && m_Invocation == other.m_Invocation;
+        public bool Equals(ActionCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> other) => other is not null && m_Invocation == other.m_Invocation;
 
         /// <summary>
         /// Verify if the target equals to command handler.
@@ -805,7 +805,7 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// Verify if the target equals to command handler.
         /// </summary>
-        public bool Equals(ActionCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> other) => other != null && m_Invocation == other.m_Invocation;
+        public bool Equals(ActionCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> other) => other is not null && m_Invocation == other.m_Invocation;
 
         /// <summary>
         /// Verify if the target equals to command handler.
@@ -859,7 +859,7 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// Verify if the target equals to command handler.
         /// </summary>
-        public bool Equals(ActionCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> other) => other != null && m_Invocation == other.m_Invocation;
+        public bool Equals(ActionCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> other) => other is not null && m_Invocation == other.m_Invocation;
 
         /// <summary>
         /// Verify if the target equals to command handler.
@@ -913,7 +913,7 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// Verify if the target equals to command handler.
         /// </summary>
-        public bool Equals(ActionCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> other) => other != null && m_Invocation == other.m_Invocation;
+        public bool Equals(ActionCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> other) => other is not null && m_Invocation == other.m_Invocation;
 
         /// <summary>
         /// Verify if the target equals to command handler.

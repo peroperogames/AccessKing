@@ -72,7 +72,7 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// Verify if the target equals to command handler.
         /// </summary>
-        public bool Equals(<#=evenHandler#> other) => other != null && m_Invocation == other.m_Invocation;
+        public bool Equals(<#=evenHandler#> other) => other is not null && m_Invocation == other.m_Invocation;
 
         /// <summary>
         /// Verify if the target equals to command handler.

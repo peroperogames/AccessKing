@@ -20,7 +20,7 @@ namespace PeroTools2.AccessKing
         {
             private static readonly ConcurrentStack<List<UniTask>> s_Cache = new();
 
-            public static List<UniTask> Rent() => !s_Cache.TryPop(out var tasks) ? tasks : new List<UniTask>();
+            public static List<UniTask> Rent() => s_Cache.TryPop(out var tasks) ? tasks : new List<UniTask>();
 
             public static void Return(List<UniTask> tasks)
             {

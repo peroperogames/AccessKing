@@ -63,7 +63,7 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// The method that this weak handler invokes.
         /// </summary>
-        System.Reflection.MethodInfo IWeakEventInvocation.invocationMethod => m_Method;
+        MethodInfo IWeakEventInvocation.invocationMethod => m_Method;
 
         object IWeakEventInvocation.invocationOwner => currentOwner;
 
@@ -83,8 +83,14 @@ namespace PeroTools2.AccessKing
         /// <param name="owner">The owner that control this weak event's lifecycle.</param>
         public WeakActionEventHandler(<#=action#> delegation, UnityEngine.Object owner)
         {
-            if (owner == null) throw new ArgumentNullException(nameof(owner));
-            if (delegation == null) throw new ArgumentNullException(nameof(delegation));
+            if (owner == null)
+            {
+                throw new ArgumentNullException(nameof(owner));
+            }
+            if (delegation == null)
+            {
+                throw new ArgumentNullException(nameof(delegation));
+            }
             if (delegation.Target == null)
             {
                 throw new ArgumentException("A weak subscription requires a delegate that targets an instance, a static method has no owner to keep alive.", nameof(delegation));
@@ -105,7 +111,13 @@ namespace PeroTools2.AccessKing
         public void Handle(in <#=parameterNotification#> notification) { if (m_Owner.TryGetTarget(out var owner) && owner != null) m_Invocation.Invoke(<#=notificationItems#>); }
 
         /// <summary>Handle the notification when the provider is still alive.</summary>
-        public void Handle(<#=parameterDefinitions#>) { if (m_Owner.TryGetTarget(out var owner) && owner != null) m_Invocation.Invoke(<#=parameters#>); }
+        public void Handle(<#=parameterDefinitions#>)
+        {
+            if (m_Owner.TryGetTarget(out var owner) && owner != null)
+            {
+                m_Invocation.Invoke(<#=parameters#>);
+            }
+        }
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
         public override int GetHashCode() => unchecked((m_Method != null ? m_Method.GetHashCode() : 0) * 397 ^ (currentOwner != null ? currentOwner.GetHashCode() : 0));

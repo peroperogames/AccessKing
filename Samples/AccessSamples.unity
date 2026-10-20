@@ -1047,7 +1047,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Hp: 100
-  TxtHP: {fileID: 688029283}
+  m_TxtHp: {fileID: 688029283}
 --- !u!114 &1341212595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1061,7 +1061,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Hp: 100
-  TxtHP: {fileID: 1974220666}
+  m_TxtHp: {fileID: 1974220666}
 --- !u!1 &1429382200
 GameObject:
   m_ObjectHideFlags: 0

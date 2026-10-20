@@ -15,11 +15,16 @@ using Random = System.Random;
 
 namespace PeroTools2.AccessKing.Samples.Game.Stage.Enemy
 {
-    public class EnemyStage : MonoBehaviour, ICharacterStage
+    public sealed class EnemyStage : MonoBehaviour, ICharacterStage
     {
         private const string log_color = "#FF4500";
-        [SerializeField] int m_Hp = 100;
-        public Text TxtHP;
+
+        [SerializeField]
+        private int m_Hp = 100;
+
+        [SerializeField]
+        private Text m_TxtHp;
+
         public Character character => Character.Enemy;
         private FuncCommandHandler<Task> m_StageHandler;
         private RegistryCommandHandlerFactory m_StageFactory;
@@ -41,7 +46,7 @@ namespace PeroTools2.AccessKing.Samples.Game.Stage.Enemy
         public void ResetHp()
         {
             m_Hp = 100;
-            TxtHP.text = m_Hp.ToString();
+            m_TxtHp.text = m_Hp.ToString();
         }
 
         public void Hurt(int damage)
@@ -52,7 +57,7 @@ namespace PeroTools2.AccessKing.Samples.Game.Stage.Enemy
                 m_Hp = 0;
                 GameEvents.global.Require<GameEvents.GameOver>().Broadcast(Character.Player);
             }
-            TxtHP.text = m_Hp.ToString();
+            m_TxtHp.text = m_Hp.ToString();
         }
 
         private async Task StartEnemyStageFlow()

@@ -116,7 +116,7 @@ namespace PeroTools2.AccessKing.Editor.Tests
         {
             var bus = new EventBus<Empty>();
 
-            Assert.Throws<ArgumentNullException>(() => bus.Subscribe((IEventHandler<Empty>) null));
+            Assert.Throws<ArgumentNullException>(() => bus.Subscribe(null));
             Assert.Throws<ArgumentNullException>(() => ((IWeakEventSubscriable<Empty>) bus).SubscribeWeakly(null));
         }
 
@@ -128,7 +128,7 @@ namespace PeroTools2.AccessKing.Editor.Tests
         {
             var owner = ScriptableObject.CreateInstance<TestOwner>();
 
-            Assert.Throws<ArgumentException>(() => new WeakActionEventHandler(StaticTarget, owner));
+            Assert.Throws<ArgumentException>(() => _ = new WeakActionEventHandler(StaticTarget, owner));
 
             UnityEngine.Object.DestroyImmediate(owner);
         }
@@ -382,16 +382,16 @@ namespace PeroTools2.AccessKing.Editor.Tests
 
         private sealed class AsyncCommandHandler : IAsyncCommandHandler<Empty>
         {
-            public void Handle(ref Empty notification) { }
+            void ICommandHandler<Empty>.Handle(ref Empty notification) { }
 
-            public UniTask GetResult() => UniTask.CompletedTask;
+            UniTask IResultAvailable<UniTask>.GetResult() => UniTask.CompletedTask;
 
             object IResultAvailable.GetResult() => UniTask.CompletedTask;
         }
 
         private sealed class ResultCommandHandler : ICommandHandler<Empty, string>
         {
-            public void Handle(ref Empty notification) { }
+            void ICommandHandler<Empty>.Handle(ref Empty notification) { }
 
             public string GetResult() => nameof(ResultCommandHandler);
 
@@ -402,7 +402,7 @@ namespace PeroTools2.AccessKing.Editor.Tests
         {
             public static int totalCount;
 
-            public void Handle(ref Empty notification) => totalCount++;
+            void ICommandHandler<Empty>.Handle(ref Empty notification) => totalCount++;
         }
 
         /// <summary>
@@ -415,11 +415,9 @@ namespace PeroTools2.AccessKing.Editor.Tests
             public void RegisterHandler<TNotification>(ICommandHandler<TNotification> handler) where TNotification : INotification
                 => m_Inner.RegisterHandler(handler);
 
-            public IEnumerable<ICommandHandler<TNotification>> GetHandlers<TNotification>() where TNotification : INotification
-                => m_Inner.GetHandlers<TNotification>();
+            IEnumerable<ICommandHandler<TNotification>> ICommandHandlerFactory.GetHandlers<TNotification>() => m_Inner.GetHandlers<TNotification>();
 
-            public void GetHandlers<TNotification>(IList<ICommandHandler<TNotification>> collection) where TNotification : INotification
-                => m_Inner.GetHandlers(collection);
+            void ICommandHandlerFactory.GetHandlers<TNotification>(IList<ICommandHandler<TNotification>> collection) => m_Inner.GetHandlers(collection);
         }
 
         #endregion

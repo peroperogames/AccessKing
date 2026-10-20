@@ -4,18 +4,15 @@
  * Created On: 2023/03/30 16:03:11
  */
 
-using System;
 using PeroTools2.AccessKing.Samples.Game.Access;
-using PeroTools2.AccessKing.Samples.Game.Core;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace PeroTools2.AccessKing.Samples.Game.Core
 {
-    public class GameFlow : MonoBehaviour
+    public sealed class GameFlow : MonoBehaviour
     {
         private const string log_color = "#00CED1";
         public GameObject pnlGameOver;

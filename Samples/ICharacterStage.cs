@@ -8,7 +8,7 @@ using PeroTools2.AccessKing.Samples.Game.Core;
 
 namespace PeroTools2.AccessKing.Samples.Game.Stage
 {
-    public interface ICharacterStage
+    internal interface ICharacterStage
     {
         Character character { get; }
         void ResetHp();

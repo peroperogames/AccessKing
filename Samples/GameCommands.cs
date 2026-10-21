@@ -10,14 +10,16 @@ namespace PeroTools2.AccessKing.Samples.Game.Access
 {
     public class GameCommands : CommandSchedule<Type>
     {
-        private static readonly Lazy<GameCommands> s_Instance = new(()=>new GameCommands());
-        public static readonly GameCommands global = s_Instance.Value;
+        private static readonly Lazy<GameCommands> s_Instance = new(static () => new GameCommands());
+        internal static readonly GameCommands global = s_Instance.Value;
 
         #region CommandLists
 
-        public class InitStage : ParameterCommandBus { }
-        public class StartPlayerStage : ParameterCommandBus { }
-        public class StartEnemyStage : ParameterCommandBus { }
+        internal sealed class InitStage : ParameterCommandBus { }
+
+        internal sealed class StartPlayerStage : ParameterCommandBus { }
+
+        internal sealed class StartEnemyStage : ParameterCommandBus { }
 
         #endregion
     }

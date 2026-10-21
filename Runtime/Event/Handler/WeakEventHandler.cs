@@ -12,7 +12,7 @@ namespace PeroTools2.AccessKing
     /// The handler wrapper that create a weak reference for the input handler.
     /// </summary>
     /// <typeparam name="TNotification">Implementation type of <see cref="INotification"/>.</typeparam>
-    internal sealed class WeakEventHandler<TNotification> : IWeakEventHandler<TNotification> where TNotification : INotification
+    internal sealed class WeakEventHandler<TNotification> : IWeakEventHandler<TNotification>, IWeakEventInvocation where TNotification : INotification
     {
         /// <summary>
         /// Weak reference for the input handler.
@@ -42,5 +42,22 @@ namespace PeroTools2.AccessKing
             handler.Handle(in notification);
             return true;
         }
+
+        /// <summary>
+        /// Compare with the wrapped handler so that a subscription made through this wrapper can be
+        /// located again by the handler instance that created it.
+        /// </summary>
+        public override bool Equals(object obj) => m_WeakHandler.TryGetReference(out var handler) && handler.Equals(obj);
+
+        /// <inheritdoc cref="System.Object.GetHashCode()"/>
+        public override int GetHashCode() => m_WeakHandler.TryGetReference(out var handler) ? handler.GetHashCode() : 0;
+        /// <summary>
+        /// The invocation method of the wrapped handler, used to locate the subscription from its delegate.
+        /// </summary>
+        System.Reflection.MethodInfo IWeakEventInvocation.invocationMethod
+            => m_WeakHandler.TryGetReference(out var handler) && handler is IWeakEventInvocation weak ? weak.invocationMethod : null;
+
+        object IWeakEventInvocation.invocationOwner
+            => m_WeakHandler.TryGetReference(out var handler) && handler is IWeakEventInvocation weak ? weak.invocationOwner : null;
     }
 }

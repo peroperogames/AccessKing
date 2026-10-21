@@ -24,13 +24,15 @@ namespace PeroTools2.AccessKing
         /// <param name="delegation">Delegation for creating CommandHandler.</param>
         public ActionCommandHandler(Action delegation) => m_Invocation = delegation;
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <summary>Handle the command.</summary>
         public void Handle() => m_Invocation?.Invoke();
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <inheritdoc/>
         public void Handle(ref Empty notification) => Handle();
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ActionCommandHandler"/>
+        /// <summary>
+        /// Convert a delegate to the handler.
+        /// </summary>
         public static implicit operator ActionCommandHandler(Action delegation) => new(delegation);
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
@@ -49,7 +51,7 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// Verify if the target equals to command handler.
         /// </summary>
-        public bool Equals(ActionCommandHandler other) => other != null && m_Invocation == other.m_Invocation;
+        public bool Equals(ActionCommandHandler other) => other is not null && m_Invocation == other.m_Invocation;
 
         /// <summary>
         /// Verify if the target equals to command handler.
@@ -78,13 +80,15 @@ namespace PeroTools2.AccessKing
         /// <param name="delegation">Delegation for creating CommandHandler.</param>
         public ActionCommandHandler(Action<T> delegation) => m_Invocation = delegation;
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <summary>Handle the command.</summary>
         public void Handle(T param) => m_Invocation?.Invoke(param);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <inheritdoc/>
         public void Handle(ref ParameterNotification<T> notification) => Handle(notification.item);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ActionCommandHandler{T}"/>
+        /// <summary>
+        /// Convert a delegate to the handler.
+        /// </summary>
         public static implicit operator ActionCommandHandler<T>(Action<T> delegation) => new(delegation);
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
@@ -103,7 +107,7 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// Verify if the target equals to command handler.
         /// </summary>
-        public bool Equals(ActionCommandHandler<T> other) => other != null && m_Invocation == other.m_Invocation;
+        public bool Equals(ActionCommandHandler<T> other) => other is not null && m_Invocation == other.m_Invocation;
 
         /// <summary>
         /// Verify if the target equals to command handler.
@@ -132,13 +136,15 @@ namespace PeroTools2.AccessKing
         /// <param name="delegation">Delegation for creating CommandHandler.</param>
         public ActionCommandHandler(Action<T1, T2> delegation) => m_Invocation = delegation;
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <summary>Handle the command.</summary>
         public void Handle(T1 param1, T2 param2) => m_Invocation?.Invoke(param1, param2);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <inheritdoc/>
         public void Handle(ref ParameterNotification<T1, T2> notification) => Handle(notification.item1, notification.item2);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ActionCommandHandler{T1, T2}"/>
+        /// <summary>
+        /// Convert a delegate to the handler.
+        /// </summary>
         public static implicit operator ActionCommandHandler<T1, T2>(Action<T1, T2> delegation) => new(delegation);
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
@@ -157,7 +163,7 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// Verify if the target equals to command handler.
         /// </summary>
-        public bool Equals(ActionCommandHandler<T1, T2> other) => other != null && m_Invocation == other.m_Invocation;
+        public bool Equals(ActionCommandHandler<T1, T2> other) => other is not null && m_Invocation == other.m_Invocation;
 
         /// <summary>
         /// Verify if the target equals to command handler.
@@ -186,13 +192,15 @@ namespace PeroTools2.AccessKing
         /// <param name="delegation">Delegation for creating CommandHandler.</param>
         public ActionCommandHandler(Action<T1, T2, T3> delegation) => m_Invocation = delegation;
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <summary>Handle the command.</summary>
         public void Handle(T1 param1, T2 param2, T3 param3) => m_Invocation?.Invoke(param1, param2, param3);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <inheritdoc/>
         public void Handle(ref ParameterNotification<T1, T2, T3> notification) => Handle(notification.item1, notification.item2, notification.item3);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ActionCommandHandler{T1, T2, T3}"/>
+        /// <summary>
+        /// Convert a delegate to the handler.
+        /// </summary>
         public static implicit operator ActionCommandHandler<T1, T2, T3>(Action<T1, T2, T3> delegation) => new(delegation);
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
@@ -211,7 +219,7 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// Verify if the target equals to command handler.
         /// </summary>
-        public bool Equals(ActionCommandHandler<T1, T2, T3> other) => other != null && m_Invocation == other.m_Invocation;
+        public bool Equals(ActionCommandHandler<T1, T2, T3> other) => other is not null && m_Invocation == other.m_Invocation;
 
         /// <summary>
         /// Verify if the target equals to command handler.
@@ -240,13 +248,15 @@ namespace PeroTools2.AccessKing
         /// <param name="delegation">Delegation for creating CommandHandler.</param>
         public ActionCommandHandler(Action<T1, T2, T3, T4> delegation) => m_Invocation = delegation;
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <summary>Handle the command.</summary>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4) => m_Invocation?.Invoke(param1, param2, param3, param4);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <inheritdoc/>
         public void Handle(ref ParameterNotification<T1, T2, T3, T4> notification) => Handle(notification.item1, notification.item2, notification.item3, notification.item4);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ActionCommandHandler{T1, T2, T3, T4}"/>
+        /// <summary>
+        /// Convert a delegate to the handler.
+        /// </summary>
         public static implicit operator ActionCommandHandler<T1, T2, T3, T4>(Action<T1, T2, T3, T4> delegation) => new(delegation);
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
@@ -265,7 +275,7 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// Verify if the target equals to command handler.
         /// </summary>
-        public bool Equals(ActionCommandHandler<T1, T2, T3, T4> other) => other != null && m_Invocation == other.m_Invocation;
+        public bool Equals(ActionCommandHandler<T1, T2, T3, T4> other) => other is not null && m_Invocation == other.m_Invocation;
 
         /// <summary>
         /// Verify if the target equals to command handler.
@@ -294,13 +304,15 @@ namespace PeroTools2.AccessKing
         /// <param name="delegation">Delegation for creating CommandHandler.</param>
         public ActionCommandHandler(Action<T1, T2, T3, T4, T5> delegation) => m_Invocation = delegation;
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <summary>Handle the command.</summary>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5) => m_Invocation?.Invoke(param1, param2, param3, param4, param5);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <inheritdoc/>
         public void Handle(ref ParameterNotification<T1, T2, T3, T4, T5> notification) => Handle(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ActionCommandHandler{T1, T2, T3, T4, T5}"/>
+        /// <summary>
+        /// Convert a delegate to the handler.
+        /// </summary>
         public static implicit operator ActionCommandHandler<T1, T2, T3, T4, T5>(Action<T1, T2, T3, T4, T5> delegation) => new(delegation);
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
@@ -319,7 +331,7 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// Verify if the target equals to command handler.
         /// </summary>
-        public bool Equals(ActionCommandHandler<T1, T2, T3, T4, T5> other) => other != null && m_Invocation == other.m_Invocation;
+        public bool Equals(ActionCommandHandler<T1, T2, T3, T4, T5> other) => other is not null && m_Invocation == other.m_Invocation;
 
         /// <summary>
         /// Verify if the target equals to command handler.
@@ -348,13 +360,15 @@ namespace PeroTools2.AccessKing
         /// <param name="delegation">Delegation for creating CommandHandler.</param>
         public ActionCommandHandler(Action<T1, T2, T3, T4, T5, T6> delegation) => m_Invocation = delegation;
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <summary>Handle the command.</summary>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6) => m_Invocation?.Invoke(param1, param2, param3, param4, param5, param6);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <inheritdoc/>
         public void Handle(ref ParameterNotification<T1, T2, T3, T4, T5, T6> notification) => Handle(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ActionCommandHandler{T1, T2, T3, T4, T5, T6}"/>
+        /// <summary>
+        /// Convert a delegate to the handler.
+        /// </summary>
         public static implicit operator ActionCommandHandler<T1, T2, T3, T4, T5, T6>(Action<T1, T2, T3, T4, T5, T6> delegation) => new(delegation);
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
@@ -373,7 +387,7 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// Verify if the target equals to command handler.
         /// </summary>
-        public bool Equals(ActionCommandHandler<T1, T2, T3, T4, T5, T6> other) => other != null && m_Invocation == other.m_Invocation;
+        public bool Equals(ActionCommandHandler<T1, T2, T3, T4, T5, T6> other) => other is not null && m_Invocation == other.m_Invocation;
 
         /// <summary>
         /// Verify if the target equals to command handler.
@@ -402,13 +416,15 @@ namespace PeroTools2.AccessKing
         /// <param name="delegation">Delegation for creating CommandHandler.</param>
         public ActionCommandHandler(Action<T1, T2, T3, T4, T5, T6, T7> delegation) => m_Invocation = delegation;
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <summary>Handle the command.</summary>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7) => m_Invocation?.Invoke(param1, param2, param3, param4, param5, param6, param7);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <inheritdoc/>
         public void Handle(ref ParameterNotification<T1, T2, T3, T4, T5, T6, T7> notification) => Handle(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ActionCommandHandler{T1, T2, T3, T4, T5, T6, T7}"/>
+        /// <summary>
+        /// Convert a delegate to the handler.
+        /// </summary>
         public static implicit operator ActionCommandHandler<T1, T2, T3, T4, T5, T6, T7>(Action<T1, T2, T3, T4, T5, T6, T7> delegation) => new(delegation);
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
@@ -427,7 +443,7 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// Verify if the target equals to command handler.
         /// </summary>
-        public bool Equals(ActionCommandHandler<T1, T2, T3, T4, T5, T6, T7> other) => other != null && m_Invocation == other.m_Invocation;
+        public bool Equals(ActionCommandHandler<T1, T2, T3, T4, T5, T6, T7> other) => other is not null && m_Invocation == other.m_Invocation;
 
         /// <summary>
         /// Verify if the target equals to command handler.
@@ -456,13 +472,15 @@ namespace PeroTools2.AccessKing
         /// <param name="delegation">Delegation for creating CommandHandler.</param>
         public ActionCommandHandler(Action<T1, T2, T3, T4, T5, T6, T7, T8> delegation) => m_Invocation = delegation;
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <summary>Handle the command.</summary>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8) => m_Invocation?.Invoke(param1, param2, param3, param4, param5, param6, param7, param8);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <inheritdoc/>
         public void Handle(ref ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8> notification) => Handle(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7, notification.item8);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ActionCommandHandler{T1, T2, T3, T4, T5, T6, T7, T8}"/>
+        /// <summary>
+        /// Convert a delegate to the handler.
+        /// </summary>
         public static implicit operator ActionCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8>(Action<T1, T2, T3, T4, T5, T6, T7, T8> delegation) => new(delegation);
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
@@ -481,7 +499,7 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// Verify if the target equals to command handler.
         /// </summary>
-        public bool Equals(ActionCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8> other) => other != null && m_Invocation == other.m_Invocation;
+        public bool Equals(ActionCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8> other) => other is not null && m_Invocation == other.m_Invocation;
 
         /// <summary>
         /// Verify if the target equals to command handler.
@@ -510,13 +528,15 @@ namespace PeroTools2.AccessKing
         /// <param name="delegation">Delegation for creating CommandHandler.</param>
         public ActionCommandHandler(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> delegation) => m_Invocation = delegation;
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <summary>Handle the command.</summary>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9) => m_Invocation?.Invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <inheritdoc/>
         public void Handle(ref ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9> notification) => Handle(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7, notification.item8, notification.item9);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ActionCommandHandler{T1, T2, T3, T4, T5, T6, T7, T8, T9}"/>
+        /// <summary>
+        /// Convert a delegate to the handler.
+        /// </summary>
         public static implicit operator ActionCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> delegation) => new(delegation);
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
@@ -535,7 +555,7 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// Verify if the target equals to command handler.
         /// </summary>
-        public bool Equals(ActionCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9> other) => other != null && m_Invocation == other.m_Invocation;
+        public bool Equals(ActionCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9> other) => other is not null && m_Invocation == other.m_Invocation;
 
         /// <summary>
         /// Verify if the target equals to command handler.
@@ -564,13 +584,15 @@ namespace PeroTools2.AccessKing
         /// <param name="delegation">Delegation for creating CommandHandler.</param>
         public ActionCommandHandler(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> delegation) => m_Invocation = delegation;
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <summary>Handle the command.</summary>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10) => m_Invocation?.Invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <inheritdoc/>
         public void Handle(ref ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> notification) => Handle(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7, notification.item8, notification.item9, notification.item10);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ActionCommandHandler{T1, T2, T3, T4, T5, T6, T7, T8, T9, T10}"/>
+        /// <summary>
+        /// Convert a delegate to the handler.
+        /// </summary>
         public static implicit operator ActionCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> delegation) => new(delegation);
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
@@ -589,7 +611,7 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// Verify if the target equals to command handler.
         /// </summary>
-        public bool Equals(ActionCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> other) => other != null && m_Invocation == other.m_Invocation;
+        public bool Equals(ActionCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> other) => other is not null && m_Invocation == other.m_Invocation;
 
         /// <summary>
         /// Verify if the target equals to command handler.
@@ -618,13 +640,15 @@ namespace PeroTools2.AccessKing
         /// <param name="delegation">Delegation for creating CommandHandler.</param>
         public ActionCommandHandler(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> delegation) => m_Invocation = delegation;
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <summary>Handle the command.</summary>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11) => m_Invocation?.Invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <inheritdoc/>
         public void Handle(ref ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> notification) => Handle(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7, notification.item8, notification.item9, notification.item10, notification.item11);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ActionCommandHandler{T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11}"/>
+        /// <summary>
+        /// Convert a delegate to the handler.
+        /// </summary>
         public static implicit operator ActionCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> delegation) => new(delegation);
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
@@ -643,7 +667,7 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// Verify if the target equals to command handler.
         /// </summary>
-        public bool Equals(ActionCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> other) => other != null && m_Invocation == other.m_Invocation;
+        public bool Equals(ActionCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> other) => other is not null && m_Invocation == other.m_Invocation;
 
         /// <summary>
         /// Verify if the target equals to command handler.
@@ -672,13 +696,15 @@ namespace PeroTools2.AccessKing
         /// <param name="delegation">Delegation for creating CommandHandler.</param>
         public ActionCommandHandler(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> delegation) => m_Invocation = delegation;
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <summary>Handle the command.</summary>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11, T12 param12) => m_Invocation?.Invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <inheritdoc/>
         public void Handle(ref ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> notification) => Handle(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7, notification.item8, notification.item9, notification.item10, notification.item11, notification.item12);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ActionCommandHandler{T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12}"/>
+        /// <summary>
+        /// Convert a delegate to the handler.
+        /// </summary>
         public static implicit operator ActionCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> delegation) => new(delegation);
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
@@ -697,7 +723,7 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// Verify if the target equals to command handler.
         /// </summary>
-        public bool Equals(ActionCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> other) => other != null && m_Invocation == other.m_Invocation;
+        public bool Equals(ActionCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> other) => other is not null && m_Invocation == other.m_Invocation;
 
         /// <summary>
         /// Verify if the target equals to command handler.
@@ -726,13 +752,15 @@ namespace PeroTools2.AccessKing
         /// <param name="delegation">Delegation for creating CommandHandler.</param>
         public ActionCommandHandler(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> delegation) => m_Invocation = delegation;
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <summary>Handle the command.</summary>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11, T12 param12, T13 param13) => m_Invocation?.Invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12, param13);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <inheritdoc/>
         public void Handle(ref ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> notification) => Handle(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7, notification.item8, notification.item9, notification.item10, notification.item11, notification.item12, notification.item13);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ActionCommandHandler{T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13}"/>
+        /// <summary>
+        /// Convert a delegate to the handler.
+        /// </summary>
         public static implicit operator ActionCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> delegation) => new(delegation);
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
@@ -751,7 +779,7 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// Verify if the target equals to command handler.
         /// </summary>
-        public bool Equals(ActionCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> other) => other != null && m_Invocation == other.m_Invocation;
+        public bool Equals(ActionCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> other) => other is not null && m_Invocation == other.m_Invocation;
 
         /// <summary>
         /// Verify if the target equals to command handler.
@@ -780,13 +808,15 @@ namespace PeroTools2.AccessKing
         /// <param name="delegation">Delegation for creating CommandHandler.</param>
         public ActionCommandHandler(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> delegation) => m_Invocation = delegation;
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <summary>Handle the command.</summary>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11, T12 param12, T13 param13, T14 param14) => m_Invocation?.Invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12, param13, param14);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <inheritdoc/>
         public void Handle(ref ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> notification) => Handle(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7, notification.item8, notification.item9, notification.item10, notification.item11, notification.item12, notification.item13, notification.item14);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ActionCommandHandler{T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14}"/>
+        /// <summary>
+        /// Convert a delegate to the handler.
+        /// </summary>
         public static implicit operator ActionCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> delegation) => new(delegation);
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
@@ -805,7 +835,7 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// Verify if the target equals to command handler.
         /// </summary>
-        public bool Equals(ActionCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> other) => other != null && m_Invocation == other.m_Invocation;
+        public bool Equals(ActionCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> other) => other is not null && m_Invocation == other.m_Invocation;
 
         /// <summary>
         /// Verify if the target equals to command handler.
@@ -834,13 +864,15 @@ namespace PeroTools2.AccessKing
         /// <param name="delegation">Delegation for creating CommandHandler.</param>
         public ActionCommandHandler(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> delegation) => m_Invocation = delegation;
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <summary>Handle the command.</summary>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11, T12 param12, T13 param13, T14 param14, T15 param15) => m_Invocation?.Invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12, param13, param14, param15);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <inheritdoc/>
         public void Handle(ref ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> notification) => Handle(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7, notification.item8, notification.item9, notification.item10, notification.item11, notification.item12, notification.item13, notification.item14, notification.item15);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ActionCommandHandler{T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15}"/>
+        /// <summary>
+        /// Convert a delegate to the handler.
+        /// </summary>
         public static implicit operator ActionCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> delegation) => new(delegation);
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
@@ -859,7 +891,7 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// Verify if the target equals to command handler.
         /// </summary>
-        public bool Equals(ActionCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> other) => other != null && m_Invocation == other.m_Invocation;
+        public bool Equals(ActionCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> other) => other is not null && m_Invocation == other.m_Invocation;
 
         /// <summary>
         /// Verify if the target equals to command handler.
@@ -888,13 +920,15 @@ namespace PeroTools2.AccessKing
         /// <param name="delegation">Delegation for creating CommandHandler.</param>
         public ActionCommandHandler(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> delegation) => m_Invocation = delegation;
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <summary>Handle the command.</summary>
         public void Handle(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11, T12 param12, T13 param13, T14 param14, T15 param15, T16 param16) => m_Invocation?.Invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12, param13, param14, param15, param16);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <inheritdoc/>
         public void Handle(ref ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> notification) => Handle(notification.item1, notification.item2, notification.item3, notification.item4, notification.item5, notification.item6, notification.item7, notification.item8, notification.item9, notification.item10, notification.item11, notification.item12, notification.item13, notification.item14, notification.item15, notification.item16);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ActionCommandHandler{T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16}"/>
+        /// <summary>
+        /// Convert a delegate to the handler.
+        /// </summary>
         public static implicit operator ActionCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> delegation) => new(delegation);
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
@@ -913,7 +947,7 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// Verify if the target equals to command handler.
         /// </summary>
-        public bool Equals(ActionCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> other) => other != null && m_Invocation == other.m_Invocation;
+        public bool Equals(ActionCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> other) => other is not null && m_Invocation == other.m_Invocation;
 
         /// <summary>
         /// Verify if the target equals to command handler.

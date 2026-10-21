@@ -52,19 +52,21 @@ namespace PeroTools2.AccessKing
         /// <param name="delegation">Delegation for creating CommandHandler.</param>
         public FuncCommandHandler(<#=func#> delegation) => m_Invocation = delegation;
 
-        /// <inheritdoc cref="IResultAvailable{TResult}.GetResult()"/>
+        /// <inheritdoc/>
         public TResult GetResult() => m_Result;
 
-        /// <inheritdoc cref="IResultAvailable.GetResult()"/>
+        /// <inheritdoc/>
         object IResultAvailable.GetResult() => GetResult();
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <summary>Handle the command.</summary>
         public void Handle(<#=parameterDefinitions#>) => m_Result = m_Invocation.Invoke(<#=parameters#>);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.ICommandHandler.Handle"/>
+        /// <inheritdoc/>
         public void Handle(ref <#=parameterNotification#> notification) => Handle(<#=notificationItems#>);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.<#=evenHandler.Replace('<','{').Replace('>','}')#>"/>
+        /// <summary>
+        /// Convert a delegate to the handler.
+        /// </summary>
         public static implicit operator <#=evenHandler#>(<#=func#> delegation) => new(delegation);
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
@@ -83,7 +85,7 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// Verify if the target equals to command handler.
         /// </summary>
-        public bool Equals(<#=evenHandler#> other) => other != null && m_Invocation == other.m_Invocation;
+        public bool Equals(<#=evenHandler#> other) => other is not null && m_Invocation == other.m_Invocation;
 
         /// <summary>
         /// Verify if the target equals to command handler.

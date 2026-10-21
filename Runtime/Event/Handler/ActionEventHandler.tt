@@ -34,7 +34,7 @@ namespace PeroTools2.AccessKing
     /// <summary>
     /// Event handler with System.Action.
     /// </summary>
-    public sealed class <#=evenHandler#> : <#=ievenHandler#>, IEquatable<<#=evenHandler#>>
+    public sealed class <#=evenHandler#> : <#=ievenHandler#>, IEventInvocation, IEquatable<<#=evenHandler#>>
     {
         /// <summary>
         /// Delegate with instance method provider.
@@ -47,17 +47,26 @@ namespace PeroTools2.AccessKing
         /// <param name="delegation">Delegation for creating EventHandler.</param>
         public ActionEventHandler(<#=action#> delegation) => m_Invocation = delegation;
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.IEventHandler.Handle"/>
+        /// <summary>
+        /// Exposes the invocation method, so that the event bus can locate this handler from the weak subscription that wraps the same delegate.
+        /// </summary>
+        System.Reflection.MethodInfo IEventInvocation.invocationMethod => m_Invocation?.Method;
+
+        object IEventInvocation.invocationOwner => m_Invocation?.Target;
+
+        /// <summary>Handle the notification.</summary>
         public void Handle(<#=parameterDefinitions#>) => m_Invocation?.Invoke(<#=parameters#>);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.IEventHandler.Handle"/>
+        /// <inheritdoc/>
         public void Handle(in <#=parameterNotification#> notification) => Handle(<#=notificationItems#>);
 
-        /// <inheritdoc cref="PeroTools2.AccessKing.<#=evenHandler.Replace('<','{').Replace('>','}')#>"/>
+        /// <summary>
+        /// Convert a delegate to the handler.
+        /// </summary>
         public static implicit operator <#=evenHandler#>(<#=action#> delegation) => new(delegation);
 
         /// <inheritdoc cref="System.Object.GetHashCode()"/>
-        public override int GetHashCode() => m_Invocation != null ? m_Invocation.GetHashCode() : 0;
+        public override int GetHashCode() => unchecked((m_Invocation != null ? m_Invocation.Method.GetHashCode() : 0) * 397 ^ (m_Invocation != null && m_Invocation.Target != null ? m_Invocation.Target.GetHashCode() : 0));
 
         /// <summary>
         /// Verify if the target equals to event handler.
@@ -72,7 +81,7 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// Verify if the target equals to event handler.
         /// </summary>
-        public bool Equals(<#=evenHandler#> other) => other != null && m_Invocation == other.m_Invocation;
+        public bool Equals(<#=evenHandler#> other) => other is not null && m_Invocation == other.m_Invocation;
 
         /// <summary>
         /// Verify if the target equals to event handler.
@@ -81,6 +90,7 @@ namespace PeroTools2.AccessKing
         {
             <#=evenHandler#> other => Equals(other),
             <#=action#> action => action == m_Invocation,
+            IWeakEventInvocation weak => weak.invocationMethod == m_Invocation?.Method && Equals(weak.invocationOwner, m_Invocation?.Target),
             _ => false
         };
     }

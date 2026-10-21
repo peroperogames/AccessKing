@@ -5,17 +5,14 @@
  */
 
 using System;
-using System.Diagnostics.CodeAnalysis;
 
-#pragma warning disable CS1573 // Parameter has no matching param tag in the XML comment (but other parameters do)
 
 namespace PeroTools2.AccessKing
 {
     /// <summary>
     /// Extensions for <see cref="IEventBus{TNotification}"/>.
     /// </summary>
-    [SuppressMessage("ReSharper", "InvalidXmlDocComment")]
-    public static class EventBusExtensions
+        public static class EventBusExtensions
     {
         #region Subscribe
 
@@ -643,6 +640,7 @@ namespace PeroTools2.AccessKing
         /// Execute all handler's handle method in bus with argument argument types parameter notification.
         /// </summary>
         /// <param name="eventBus">Event bus.</param>
+        /// <param name="param">The parameter of the notification.</param>
         public static void Broadcast<T>(this IEventBroadcastable<ParameterNotification<T>> eventBus, T param)
             => eventBus.Broadcast(ParameterNotification.Create(param));
 
@@ -650,6 +648,8 @@ namespace PeroTools2.AccessKing
         /// Execute all handler's handle method in bus with arguments argument types parameter notification.
         /// </summary>
         /// <param name="eventBus">Event bus.</param>
+        /// <param name="param1">Parameter 1 of the notification.</param>
+        /// <param name="param2">Parameter 2 of the notification.</param>
         public static void Broadcast<T1, T2>(this IEventBroadcastable<ParameterNotification<T1, T2>> eventBus, T1 param1, T2 param2)
             => eventBus.Broadcast(ParameterNotification.Create(param1, param2));
 
@@ -657,6 +657,9 @@ namespace PeroTools2.AccessKing
         /// Execute all handler's handle method in bus with arguments argument types parameter notification.
         /// </summary>
         /// <param name="eventBus">Event bus.</param>
+        /// <param name="param1">Parameter 1 of the notification.</param>
+        /// <param name="param2">Parameter 2 of the notification.</param>
+        /// <param name="param3">Parameter 3 of the notification.</param>
         public static void Broadcast<T1, T2, T3>(this IEventBroadcastable<ParameterNotification<T1, T2, T3>> eventBus, T1 param1, T2 param2, T3 param3)
             => eventBus.Broadcast(ParameterNotification.Create(param1, param2, param3));
 
@@ -664,6 +667,10 @@ namespace PeroTools2.AccessKing
         /// Execute all handler's handle method in bus with arguments argument types parameter notification.
         /// </summary>
         /// <param name="eventBus">Event bus.</param>
+        /// <param name="param1">Parameter 1 of the notification.</param>
+        /// <param name="param2">Parameter 2 of the notification.</param>
+        /// <param name="param3">Parameter 3 of the notification.</param>
+        /// <param name="param4">Parameter 4 of the notification.</param>
         public static void Broadcast<T1, T2, T3, T4>(this IEventBroadcastable<ParameterNotification<T1, T2, T3, T4>> eventBus, T1 param1, T2 param2, T3 param3, T4 param4)
             => eventBus.Broadcast(ParameterNotification.Create(param1, param2, param3, param4));
 
@@ -671,6 +678,11 @@ namespace PeroTools2.AccessKing
         /// Execute all handler's handle method in bus with arguments argument types parameter notification.
         /// </summary>
         /// <param name="eventBus">Event bus.</param>
+        /// <param name="param1">Parameter 1 of the notification.</param>
+        /// <param name="param2">Parameter 2 of the notification.</param>
+        /// <param name="param3">Parameter 3 of the notification.</param>
+        /// <param name="param4">Parameter 4 of the notification.</param>
+        /// <param name="param5">Parameter 5 of the notification.</param>
         public static void Broadcast<T1, T2, T3, T4, T5>(this IEventBroadcastable<ParameterNotification<T1, T2, T3, T4, T5>> eventBus, T1 param1, T2 param2, T3 param3, T4 param4, T5 param5)
             => eventBus.Broadcast(ParameterNotification.Create(param1, param2, param3, param4, param5));
 
@@ -678,6 +690,12 @@ namespace PeroTools2.AccessKing
         /// Execute all handler's handle method in bus with arguments argument types parameter notification.
         /// </summary>
         /// <param name="eventBus">Event bus.</param>
+        /// <param name="param1">Parameter 1 of the notification.</param>
+        /// <param name="param2">Parameter 2 of the notification.</param>
+        /// <param name="param3">Parameter 3 of the notification.</param>
+        /// <param name="param4">Parameter 4 of the notification.</param>
+        /// <param name="param5">Parameter 5 of the notification.</param>
+        /// <param name="param6">Parameter 6 of the notification.</param>
         public static void Broadcast<T1, T2, T3, T4, T5, T6>(this IEventBroadcastable<ParameterNotification<T1, T2, T3, T4, T5, T6>> eventBus, T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6)
             => eventBus.Broadcast(ParameterNotification.Create(param1, param2, param3, param4, param5, param6));
 
@@ -685,6 +703,13 @@ namespace PeroTools2.AccessKing
         /// Execute all handler's handle method in bus with arguments argument types parameter notification.
         /// </summary>
         /// <param name="eventBus">Event bus.</param>
+        /// <param name="param1">Parameter 1 of the notification.</param>
+        /// <param name="param2">Parameter 2 of the notification.</param>
+        /// <param name="param3">Parameter 3 of the notification.</param>
+        /// <param name="param4">Parameter 4 of the notification.</param>
+        /// <param name="param5">Parameter 5 of the notification.</param>
+        /// <param name="param6">Parameter 6 of the notification.</param>
+        /// <param name="param7">Parameter 7 of the notification.</param>
         public static void Broadcast<T1, T2, T3, T4, T5, T6, T7>(this IEventBroadcastable<ParameterNotification<T1, T2, T3, T4, T5, T6, T7>> eventBus, T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7)
             => eventBus.Broadcast(ParameterNotification.Create(param1, param2, param3, param4, param5, param6, param7));
 
@@ -692,6 +717,14 @@ namespace PeroTools2.AccessKing
         /// Execute all handler's handle method in bus with arguments argument types parameter notification.
         /// </summary>
         /// <param name="eventBus">Event bus.</param>
+        /// <param name="param1">Parameter 1 of the notification.</param>
+        /// <param name="param2">Parameter 2 of the notification.</param>
+        /// <param name="param3">Parameter 3 of the notification.</param>
+        /// <param name="param4">Parameter 4 of the notification.</param>
+        /// <param name="param5">Parameter 5 of the notification.</param>
+        /// <param name="param6">Parameter 6 of the notification.</param>
+        /// <param name="param7">Parameter 7 of the notification.</param>
+        /// <param name="param8">Parameter 8 of the notification.</param>
         public static void Broadcast<T1, T2, T3, T4, T5, T6, T7, T8>(this IEventBroadcastable<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8>> eventBus, T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8)
             => eventBus.Broadcast(ParameterNotification.Create(param1, param2, param3, param4, param5, param6, param7, param8));
 
@@ -699,6 +732,15 @@ namespace PeroTools2.AccessKing
         /// Execute all handler's handle method in bus with arguments argument types parameter notification.
         /// </summary>
         /// <param name="eventBus">Event bus.</param>
+        /// <param name="param1">Parameter 1 of the notification.</param>
+        /// <param name="param2">Parameter 2 of the notification.</param>
+        /// <param name="param3">Parameter 3 of the notification.</param>
+        /// <param name="param4">Parameter 4 of the notification.</param>
+        /// <param name="param5">Parameter 5 of the notification.</param>
+        /// <param name="param6">Parameter 6 of the notification.</param>
+        /// <param name="param7">Parameter 7 of the notification.</param>
+        /// <param name="param8">Parameter 8 of the notification.</param>
+        /// <param name="param9">Parameter 9 of the notification.</param>
         public static void Broadcast<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this IEventBroadcastable<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9>> eventBus, T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9)
             => eventBus.Broadcast(ParameterNotification.Create(param1, param2, param3, param4, param5, param6, param7, param8, param9));
 
@@ -706,6 +748,16 @@ namespace PeroTools2.AccessKing
         /// Execute all handler's handle method in bus with arguments argument types parameter notification.
         /// </summary>
         /// <param name="eventBus">Event bus.</param>
+        /// <param name="param1">Parameter 1 of the notification.</param>
+        /// <param name="param2">Parameter 2 of the notification.</param>
+        /// <param name="param3">Parameter 3 of the notification.</param>
+        /// <param name="param4">Parameter 4 of the notification.</param>
+        /// <param name="param5">Parameter 5 of the notification.</param>
+        /// <param name="param6">Parameter 6 of the notification.</param>
+        /// <param name="param7">Parameter 7 of the notification.</param>
+        /// <param name="param8">Parameter 8 of the notification.</param>
+        /// <param name="param9">Parameter 9 of the notification.</param>
+        /// <param name="param10">Parameter 10 of the notification.</param>
         public static void Broadcast<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this IEventBroadcastable<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>> eventBus, T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10)
             => eventBus.Broadcast(ParameterNotification.Create(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10));
 
@@ -713,6 +765,17 @@ namespace PeroTools2.AccessKing
         /// Execute all handler's handle method in bus with arguments argument types parameter notification.
         /// </summary>
         /// <param name="eventBus">Event bus.</param>
+        /// <param name="param1">Parameter 1 of the notification.</param>
+        /// <param name="param2">Parameter 2 of the notification.</param>
+        /// <param name="param3">Parameter 3 of the notification.</param>
+        /// <param name="param4">Parameter 4 of the notification.</param>
+        /// <param name="param5">Parameter 5 of the notification.</param>
+        /// <param name="param6">Parameter 6 of the notification.</param>
+        /// <param name="param7">Parameter 7 of the notification.</param>
+        /// <param name="param8">Parameter 8 of the notification.</param>
+        /// <param name="param9">Parameter 9 of the notification.</param>
+        /// <param name="param10">Parameter 10 of the notification.</param>
+        /// <param name="param11">Parameter 11 of the notification.</param>
         public static void Broadcast<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this IEventBroadcastable<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>> eventBus, T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11)
             => eventBus.Broadcast(ParameterNotification.Create(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11));
 
@@ -720,6 +783,18 @@ namespace PeroTools2.AccessKing
         /// Execute all handler's handle method in bus with arguments argument types parameter notification.
         /// </summary>
         /// <param name="eventBus">Event bus.</param>
+        /// <param name="param1">Parameter 1 of the notification.</param>
+        /// <param name="param2">Parameter 2 of the notification.</param>
+        /// <param name="param3">Parameter 3 of the notification.</param>
+        /// <param name="param4">Parameter 4 of the notification.</param>
+        /// <param name="param5">Parameter 5 of the notification.</param>
+        /// <param name="param6">Parameter 6 of the notification.</param>
+        /// <param name="param7">Parameter 7 of the notification.</param>
+        /// <param name="param8">Parameter 8 of the notification.</param>
+        /// <param name="param9">Parameter 9 of the notification.</param>
+        /// <param name="param10">Parameter 10 of the notification.</param>
+        /// <param name="param11">Parameter 11 of the notification.</param>
+        /// <param name="param12">Parameter 12 of the notification.</param>
         public static void Broadcast<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this IEventBroadcastable<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>> eventBus, T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11, T12 param12)
             => eventBus.Broadcast(ParameterNotification.Create(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12));
 
@@ -727,6 +802,19 @@ namespace PeroTools2.AccessKing
         /// Execute all handler's handle method in bus with arguments argument types parameter notification.
         /// </summary>
         /// <param name="eventBus">Event bus.</param>
+        /// <param name="param1">Parameter 1 of the notification.</param>
+        /// <param name="param2">Parameter 2 of the notification.</param>
+        /// <param name="param3">Parameter 3 of the notification.</param>
+        /// <param name="param4">Parameter 4 of the notification.</param>
+        /// <param name="param5">Parameter 5 of the notification.</param>
+        /// <param name="param6">Parameter 6 of the notification.</param>
+        /// <param name="param7">Parameter 7 of the notification.</param>
+        /// <param name="param8">Parameter 8 of the notification.</param>
+        /// <param name="param9">Parameter 9 of the notification.</param>
+        /// <param name="param10">Parameter 10 of the notification.</param>
+        /// <param name="param11">Parameter 11 of the notification.</param>
+        /// <param name="param12">Parameter 12 of the notification.</param>
+        /// <param name="param13">Parameter 13 of the notification.</param>
         public static void Broadcast<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this IEventBroadcastable<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>> eventBus, T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11, T12 param12, T13 param13)
             => eventBus.Broadcast(ParameterNotification.Create(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12, param13));
 
@@ -734,6 +822,20 @@ namespace PeroTools2.AccessKing
         /// Execute all handler's handle method in bus with arguments argument types parameter notification.
         /// </summary>
         /// <param name="eventBus">Event bus.</param>
+        /// <param name="param1">Parameter 1 of the notification.</param>
+        /// <param name="param2">Parameter 2 of the notification.</param>
+        /// <param name="param3">Parameter 3 of the notification.</param>
+        /// <param name="param4">Parameter 4 of the notification.</param>
+        /// <param name="param5">Parameter 5 of the notification.</param>
+        /// <param name="param6">Parameter 6 of the notification.</param>
+        /// <param name="param7">Parameter 7 of the notification.</param>
+        /// <param name="param8">Parameter 8 of the notification.</param>
+        /// <param name="param9">Parameter 9 of the notification.</param>
+        /// <param name="param10">Parameter 10 of the notification.</param>
+        /// <param name="param11">Parameter 11 of the notification.</param>
+        /// <param name="param12">Parameter 12 of the notification.</param>
+        /// <param name="param13">Parameter 13 of the notification.</param>
+        /// <param name="param14">Parameter 14 of the notification.</param>
         public static void Broadcast<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this IEventBroadcastable<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>> eventBus, T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11, T12 param12, T13 param13, T14 param14)
             => eventBus.Broadcast(ParameterNotification.Create(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12, param13, param14));
 
@@ -741,6 +843,21 @@ namespace PeroTools2.AccessKing
         /// Execute all handler's handle method in bus with arguments argument types parameter notification.
         /// </summary>
         /// <param name="eventBus">Event bus.</param>
+        /// <param name="param1">Parameter 1 of the notification.</param>
+        /// <param name="param2">Parameter 2 of the notification.</param>
+        /// <param name="param3">Parameter 3 of the notification.</param>
+        /// <param name="param4">Parameter 4 of the notification.</param>
+        /// <param name="param5">Parameter 5 of the notification.</param>
+        /// <param name="param6">Parameter 6 of the notification.</param>
+        /// <param name="param7">Parameter 7 of the notification.</param>
+        /// <param name="param8">Parameter 8 of the notification.</param>
+        /// <param name="param9">Parameter 9 of the notification.</param>
+        /// <param name="param10">Parameter 10 of the notification.</param>
+        /// <param name="param11">Parameter 11 of the notification.</param>
+        /// <param name="param12">Parameter 12 of the notification.</param>
+        /// <param name="param13">Parameter 13 of the notification.</param>
+        /// <param name="param14">Parameter 14 of the notification.</param>
+        /// <param name="param15">Parameter 15 of the notification.</param>
         public static void Broadcast<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this IEventBroadcastable<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>> eventBus, T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11, T12 param12, T13 param13, T14 param14, T15 param15)
             => eventBus.Broadcast(ParameterNotification.Create(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12, param13, param14, param15));
 
@@ -748,6 +865,22 @@ namespace PeroTools2.AccessKing
         /// Execute all handler's handle method in bus with arguments argument types parameter notification.
         /// </summary>
         /// <param name="eventBus">Event bus.</param>
+        /// <param name="param1">Parameter 1 of the notification.</param>
+        /// <param name="param2">Parameter 2 of the notification.</param>
+        /// <param name="param3">Parameter 3 of the notification.</param>
+        /// <param name="param4">Parameter 4 of the notification.</param>
+        /// <param name="param5">Parameter 5 of the notification.</param>
+        /// <param name="param6">Parameter 6 of the notification.</param>
+        /// <param name="param7">Parameter 7 of the notification.</param>
+        /// <param name="param8">Parameter 8 of the notification.</param>
+        /// <param name="param9">Parameter 9 of the notification.</param>
+        /// <param name="param10">Parameter 10 of the notification.</param>
+        /// <param name="param11">Parameter 11 of the notification.</param>
+        /// <param name="param12">Parameter 12 of the notification.</param>
+        /// <param name="param13">Parameter 13 of the notification.</param>
+        /// <param name="param14">Parameter 14 of the notification.</param>
+        /// <param name="param15">Parameter 15 of the notification.</param>
+        /// <param name="param16">Parameter 16 of the notification.</param>
         public static void Broadcast<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(this IEventBroadcastable<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>> eventBus, T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11, T12 param12, T13 param13, T14 param14, T15 param15, T16 param16)
             => eventBus.Broadcast(ParameterNotification.Create(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12, param13, param14, param15, param16));
 

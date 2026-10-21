@@ -13,7 +13,7 @@ namespace PeroTools2.AccessKing
     /// Command handler with task result.
     /// </summary>
     /// <typeparam name="TNotification">Implementation type of <see cref="INotification"/>.</typeparam>
-    /// <typeparam name="TTaskResult"></typeparam>
+    /// <typeparam name="TTaskResult">Result type of the task that the handler returns.</typeparam>
     public interface ITaskCommandHandler<TNotification, out TTaskResult> : ICommandHandler<TNotification, TTaskResult>
         where TNotification : INotification
         where TTaskResult : Task { }

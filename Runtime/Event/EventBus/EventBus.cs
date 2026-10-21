@@ -10,7 +10,7 @@ using System.Collections.Generic;
 namespace PeroTools2.AccessKing
 {
     /// <inheritdoc cref="IEventBus{TNotification}"/>
-    public class EventBus<TNotification> : IEventBus<TNotification>, IAccessBus, IWeakEventSubscriable<TNotification> where TNotification : INotification
+    public class EventBus<TNotification> : IEventBus<TNotification>, IAccessBus where TNotification : INotification
     {
         /// <summary>
         /// Handler collections.
@@ -32,7 +32,7 @@ namespace PeroTools2.AccessKing
             }
             else
             {
-                throw new InvalidCastException($"{notification.GetType()} is not a ${typeof(TNotification)} type. ");
+                throw new InvalidCastException($"{notification.GetType()} is not a {typeof(TNotification)} type. ");
             }
             return null;
         }
@@ -64,7 +64,7 @@ namespace PeroTools2.AccessKing
                 // Check the target is alive.
                 if (weakTarget.isAlive)
                 {
-                    if (weakTarget.Equals(handler)) continue;
+                    if (!weakTarget.Equals(handler)) continue;
                     m_WeakHandlers.RemoveAt(index);
                     return true;
                 }
@@ -77,18 +77,28 @@ namespace PeroTools2.AccessKing
         }
 
         /// <inheritdoc cref="IEventSubscriable{TNotification}.Subscribe(IEventHandler{TNotification})"/>
-        public void Subscribe(IEventHandler<TNotification> handler) => m_Handlers.Add(handler);
+        /// <exception cref="ArgumentNullException">Throw when the handler is null.</exception>
+        public void Subscribe(IEventHandler<TNotification> handler)
+        {
+            if (handler == null) throw new ArgumentNullException(nameof(handler));
+            m_Handlers.Add(handler);
+        }
 
         /// <inheritdoc cref="IWeakEventSubscriable{TNotification}.SubscribeWeakly(IWeakEventHandler{TNotification})"/>
-        void IWeakEventSubscriable<TNotification>.SubscribeWeakly(IWeakEventHandler<TNotification> handler) => m_WeakHandlers.Add(handler);
+        /// <exception cref="ArgumentNullException">Throw when the handler is null.</exception>
+        void IWeakEventSubscriable<TNotification>.SubscribeWeakly(IWeakEventHandler<TNotification> handler)
+        {
+            if (handler == null) throw new ArgumentNullException(nameof(handler));
+            m_WeakHandlers.Add(handler);
+        }
 
         /// <inheritdoc cref="IEventBroadcastable{TNotification}.Broadcast"/>
         public void Broadcast(in TNotification notification)
         {
             // Dispatch all normal handlers.
-            for (var index = 0; index < m_Handlers.Count; index++)
+            foreach (var handler in m_Handlers)
             {
-                m_Handlers[index].Handle(notification);
+                handler.Handle(notification);
             }
 
             // Dispatch all weak handlers.

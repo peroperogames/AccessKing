@@ -9,18 +9,18 @@ using PeroTools2.AccessKing.Samples.Game.Core;
 
 namespace PeroTools2.AccessKing.Samples.Game.Access
 {
-    public class GameEvents : EventSchedule<Type>
+    public sealed class GameEvents : EventSchedule<Type>
     {
         private static readonly Lazy<GameEvents> s_Instance = new(() => new GameEvents());
-        public static readonly GameEvents global = s_Instance.Value;
+        internal static readonly GameEvents global = s_Instance.Value;
 
         //Params: Character = Winner
-        public class GameOver : ParameterEventBus<Character> { }
+        internal sealed class GameOver : ParameterEventBus<Character> { }
+
         //Params: None
-        public class GameStart : ParameterEventBus { }
+        internal sealed class GameStart : ParameterEventBus { }
+
         //Params: Character = CurrentStage | int = Damage
-        public class CreateDamage : ParameterEventBus<Character,int> { }
+        internal sealed class CreateDamage : ParameterEventBus<Character, int> { }
     }
-
-
 }

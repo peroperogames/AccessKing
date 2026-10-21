@@ -8,7 +8,6 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
-using UnityEngine.Pool;
 
 namespace PeroTools2.AccessKing
 {
@@ -21,7 +20,7 @@ namespace PeroTools2.AccessKing
         {
             private static readonly ConcurrentStack<List<UniTask>> s_Cache = new();
 
-            public static List<UniTask> Rent() => !s_Cache.TryPop(out var tasks) ? tasks : new List<UniTask>();
+            public static List<UniTask> Rent() => s_Cache.TryPop(out var tasks) ? tasks : new List<UniTask>();
 
             public static void Return(List<UniTask> tasks)
             {
@@ -56,7 +55,7 @@ namespace PeroTools2.AccessKing
         /// <returns>Results of specified type collection.</returns>
         public static void GetResults<TResult>(this CommandOperation operation, List<TResult> results, bool autoRelease = true)
         {
-            var getters = operation.resultGetters;
+            var getters = operation.getters;
             for (var index = 0; index < getters.Count; index++)
             {
                 var item = getters[index];
@@ -79,7 +78,7 @@ namespace PeroTools2.AccessKing
             }
             if (autoRelease)
             {
-                CollectionPool<List<IResultAvailable>, IResultAvailable>.Release(getters);
+                operation.ReleaseResults();
             }
         }
 
@@ -133,7 +132,7 @@ namespace PeroTools2.AccessKing
         /// <returns>Results of task type collection.</returns>
         public static async UniTask GetResultsAsync<TResult>(this CommandOperation operation, IList<TResult> results, bool autoRelease = true)
         {
-            var getters = operation.resultGetters;
+            var getters = operation.getters;
             for (var index = 0; index < getters.Count; index++)
             {
                 var item = getters[index];
@@ -152,7 +151,7 @@ namespace PeroTools2.AccessKing
             }
             if (autoRelease)
             {
-                CollectionPool<List<IResultAvailable>, IResultAvailable>.Release(getters);
+                operation.ReleaseResults();
             }
         }
 
@@ -160,7 +159,6 @@ namespace PeroTools2.AccessKing
         /// Get all results with Task type.
         /// </summary>
         /// <param name="operation">Result operation.</param>
-        /// <param name="results">Result collection.</param>
         /// <param name="autoRelease">Release operation.</param>
         /// <returns>Results of task type collection.</returns>
         public static IReadOnlyList<UniTask> GetAllAsyncTasks(this CommandOperation operation, bool autoRelease = true)
@@ -179,7 +177,7 @@ namespace PeroTools2.AccessKing
         /// <returns>Results of task type collection.</returns>
         public static void GetAllAsyncTasks(this CommandOperation operation, IList<UniTask> results, bool autoRelease = true)
         {
-            var getters = operation.resultGetters;
+            var getters = operation.getters;
             for (var index = 0; index < getters.Count; index++)
             {
                 var item = getters[index];
@@ -195,7 +193,7 @@ namespace PeroTools2.AccessKing
             }
             if (autoRelease)
             {
-                CollectionPool<List<IResultAvailable>, IResultAvailable>.Release(getters);
+                operation.ReleaseResults();
             }
         }
 
@@ -203,9 +201,10 @@ namespace PeroTools2.AccessKing
         /// Wait for all async tasks done.
         /// </summary>
         /// <param name="autoRelease">Release operation.</param>
+        /// <param name="operation">Result operation.</param>
         public static async UniTask WhenAllDone(this CommandOperation operation, bool autoRelease = true)
         {
-            var getters = operation.resultGetters;
+            var getters = operation.getters;
             for (var index = 0; index < getters.Count; index++)
             {
                 var item = getters[index];
@@ -220,7 +219,7 @@ namespace PeroTools2.AccessKing
             }
             if (autoRelease)
             {
-                CollectionPool<List<IResultAvailable>, IResultAvailable>.Release(getters);
+                operation.ReleaseResults();
             }
         }
 
@@ -228,9 +227,10 @@ namespace PeroTools2.AccessKing
         /// Wait for any async task done.
         /// </summary>
         /// <param name="autoRelease">Release operation.</param>
+        /// <param name="operation">Result operation.</param>
         public static async UniTask WhenAnyDone(this CommandOperation operation, bool autoRelease = true)
         {
-            var getters = operation.resultGetters;
+            var getters = operation.getters;
             var tasks = UniTaskCollection.Rent();
             for (var index = 0; index < getters.Count; index++)
             {
@@ -248,7 +248,7 @@ namespace PeroTools2.AccessKing
             UniTaskCollection.Return(tasks);
             if (autoRelease)
             {
-                CollectionPool<List<IResultAvailable>, IResultAvailable>.Release(getters);
+                operation.ReleaseResults();
             }
         }
 

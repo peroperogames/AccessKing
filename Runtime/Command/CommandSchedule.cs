@@ -14,7 +14,7 @@ namespace PeroTools2.AccessKing
     /// <summary>
     /// Default command schedule implementation.
     /// </summary>
-    /// <typeparam name="TTheme"></typeparam>
+    /// <typeparam name="TTheme">Theme of the command bus.</typeparam>
     public partial class CommandSchedule<TTheme> : ICommandSchedule<TTheme>
     {
         /// <summary>
@@ -32,7 +32,7 @@ namespace PeroTools2.AccessKing
         bool IAccessSchedule<TTheme>.RemoveBus(object bus)
         {
             var pair = m_CommandBusMaps.FirstOrDefault(kv => kv.Value.Equals(bus));
-            return pair.Key != null && m_CommandBusMaps.Remove(pair.Key);
+            return pair.Value != null && m_CommandBusMaps.Remove(pair.Key);
         }
 
         /// <inheritdoc cref="ICommandSchedule{TTheme}.RemoveBus{TNotification}(ICommandBus{TNotification})"/>
@@ -48,7 +48,7 @@ namespace PeroTools2.AccessKing
         /// <exception cref="ArgumentException">Throw when the bus can't assign to <see cref="IEventBus{TNotification}"/> type.</exception>
         void IAccessSchedule<TTheme>.AddBus(TTheme theme, object bus)
         {
-            Assert.IsNotNull(bus);
+            if (bus == null) throw new ArgumentNullException(nameof(bus));
 
             // ReSharper disable once UseIsOperator.2
             // Check whether implements ICommand<>
@@ -73,7 +73,7 @@ namespace PeroTools2.AccessKing
             }
         }
 
-        /// <inheritdoc cref="IEventSchedule{TTheme}.TryGetBus(TTheme, out object)"/>
+        /// <inheritdoc cref="IAccessSchedule{TTheme}.TryGetBus(TTheme, out object)"/>
         bool IAccessSchedule<TTheme>.TryGetBus(TTheme theme, out object bus) => m_CommandBusMaps.TryGetValue(theme, out bus);
 
         /// <inheritdoc cref="ICommandSchedule{TTheme}.TryGetBus{TNotification}(TTheme, out ICommandBus{TNotification})"/>

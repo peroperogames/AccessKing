@@ -5,17 +5,17 @@
  */
 
 using PeroTools2.AccessKing.Samples.Game.Access;
-using PeroTools2.AccessKing.Samples.Game.Core;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
-namespace PeroTools2.AccessKing.Game.Core
+namespace PeroTools2.AccessKing.Samples.Game.Core
 {
-    public class GameFlow : MonoBehaviour
+    public sealed class GameFlow : MonoBehaviour
     {
         private const string log_color = "#00CED1";
-        public GameObject PnlGameOver;
+        public GameObject pnlGameOver;
         public Button btnStartTurn;
         public Button btnRestart;
         public Text txtWinner;
@@ -23,13 +23,23 @@ namespace PeroTools2.AccessKing.Game.Core
         private bool m_IsBattle;
         private bool m_IsGameOver;
         private int m_Turn;
+        private UnityAction m_Restart;
 
         private void Awake()
         {
             btnStartTurn.onClick.AddListener(StartTurnAsync);
-            btnRestart.onClick.AddListener(() => GameEvents.global.Require<GameEvents.GameStart>().Broadcast());
+            m_Restart = static () => GameEvents.global.Require<GameEvents.GameStart>().Broadcast();
+            btnRestart.onClick.AddListener(m_Restart);
             GameEvents.global.Require<GameEvents.GameOver>().Subscribe(GameOver);
             GameEvents.global.Require<GameEvents.GameStart>().Subscribe(GameStart);
+        }
+
+        private void OnDestroy()
+        {
+            btnStartTurn.onClick.RemoveListener(StartTurnAsync);
+            btnRestart.onClick.RemoveListener(m_Restart);
+            GameEvents.global.Require<GameEvents.GameOver>().Unsubscribe(GameOver);
+            GameEvents.global.Require<GameEvents.GameStart>().Unsubscribe(GameStart);
         }
 
         private void Start() => GameEvents.global.Require<GameEvents.GameStart>().Broadcast();
@@ -39,7 +49,7 @@ namespace PeroTools2.AccessKing.Game.Core
             m_IsBattle = false;
             btnStartTurn.interactable = true;
             m_IsGameOver = false;
-            PnlGameOver.SetActive(false);
+            pnlGameOver.SetActive(false);
             m_Turn = 0;
             txtTurnCount.text = m_Turn.ToString();
         }
@@ -47,7 +57,7 @@ namespace PeroTools2.AccessKing.Game.Core
         public void GameOver(Character winner)
         {
             m_IsGameOver = true;
-            PnlGameOver.SetActive(true);
+            pnlGameOver.SetActive(true);
             txtWinner.text = winner.ToString();
         }
 

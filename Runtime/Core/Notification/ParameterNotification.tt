@@ -25,7 +25,7 @@ namespace PeroTools2.AccessKing
         /// </summary>
         public static readonly Empty Empty = new Empty(); 
 <#
-    for (var i = 1; i <= 17; i++)
+    for (var i = 1; i <= 16; i++)
     {
         var genericTypes = i == 1 ? "T" : string.Join(", ", from index in Enumerable.Range(1, i) select $"T{index}");
         var parameterDefinitions = i == 1 ? "T param" : string.Join(", ", from index in Enumerable.Range(1, i) select $"T{index} param{index}");

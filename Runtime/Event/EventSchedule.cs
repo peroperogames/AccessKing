@@ -7,7 +7,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine.Assertions;
 
 namespace PeroTools2.AccessKing
 {
@@ -31,7 +30,7 @@ namespace PeroTools2.AccessKing
         bool IAccessSchedule<TTheme>.RemoveBus(object bus)
         {
             var kv = m_EventBusMaps.FirstOrDefault(kv => kv.Value == bus);
-            return m_EventBusMaps.Remove(kv.Key);
+            return kv.Value != null && m_EventBusMaps.Remove(kv.Key);
         }
 
         /// <inheritdoc cref="IEventSchedule{TTheme}.RemoveBus{TNotification}(IEventBus{TNotification})"/>
@@ -46,9 +45,9 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IEventSchedule{TTheme}.GetBus{TNotification}(TTheme)"/>
         public IEventBus<TNotification> GetBus<TNotification>(TTheme theme) where TNotification : INotification
         {
-            if (TryGetBus<TNotification>(theme, out var bus))
+            if (m_EventBusMaps.TryGetValue(theme, out var bus))
             {
-                return bus;
+                return (IEventBus<TNotification>) bus;
             }
             throw new ArgumentException("Non existing theme: " + theme);
         }
@@ -66,9 +65,9 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="IEventSchedule{TTheme}.TryGetBus{TNotification}(TTheme, out IEventBus{TNotification})"/>
         public bool TryGetBus<TNotification>(TTheme theme, out IEventBus<TNotification> bus) where TNotification : INotification
         {
-            if (m_EventBusMaps.TryGetValue(theme, out var accessBus))
+            if (m_EventBusMaps.TryGetValue(theme, out var accessBus) && accessBus is IEventBus<TNotification> eventBus)
             {
-                bus = (IEventBus<TNotification>) accessBus;
+                bus = eventBus;
                 return true;
             }
 
@@ -76,14 +75,14 @@ namespace PeroTools2.AccessKing
             return false;
         }
 
-        /// <inheritdoc cref="IEventSchedule{TTheme}.TryGetBus(TTheme, out object)"/>
+        /// <inheritdoc cref="IAccessSchedule{TTheme}.TryGetBus(TTheme, out object)"/>
         bool IAccessSchedule<TTheme>.TryGetBus(TTheme theme, out object bus) => m_EventBusMaps.TryGetValue(theme, out bus);
 
         /// <inheritdoc cref="IAccessSchedule{TTheme}.AddBus(TTheme, object)"/>
         /// <exception cref="ArgumentException">Throw when the bus can't assign to <see cref="IEventBus{TNotification}"/> type.</exception>
         void IAccessSchedule<TTheme>.AddBus(TTheme theme, object bus)
         {
-            Assert.IsNotNull(bus);
+            if (bus == null) throw new ArgumentNullException(nameof(bus));
 
             // ReSharper disable once UseIsOperator.2
             // Check whether implements IEventBus<>

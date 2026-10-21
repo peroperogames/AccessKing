@@ -31,15 +31,11 @@ namespace PeroTools2.AccessKing
         /// <exception cref="InvalidCastException">Throw when the notification cannot match to the generic type.</exception>
         object IAccessBus.Dispatch(INotification notification)
         {
-            if (m_HandlerFactories == null)
-            {
-                return null;
-            }
             if (notification is TNotification tNotification)
             {
                 return Execute(ref tNotification);
             }
-            throw new InvalidCastException($"{notification.GetType()} is not a ${typeof(TNotification)} type. ");
+            throw new InvalidCastException($"{notification.GetType()} is not a {typeof(TNotification)} type. ");
         }
 
         /// <inheritdoc cref="ICommandBus{TNotification}.Execute(ref TNotification)"/>.
@@ -48,20 +44,34 @@ namespace PeroTools2.AccessKing
         /// <inheritdoc cref="ICommandBus{TNotification}.Execute(ref TNotification)"/>.
         public CommandOperation Execute(ref TNotification notification)
         {
-            var results = CollectionPool<List<IResultAvailable>, IResultAvailable>.Get();
             var handlers = CollectionPool<List<ICommandHandler<TNotification>>, ICommandHandler<TNotification>>.Get();
-            foreach (var factory in m_HandlerFactories.Values)
+            var results = CommandOperation.Rent();
+            try
             {
-                factory.GetHandlers(handlers);
-                foreach (var handler in handlers)
+                foreach (var factory in m_HandlerFactories.Values)
                 {
-                    handler.Handle(ref notification);
-                    if (handler is IResultAvailable resultGetter)
+                    // The factory appends into the collection, so it must be cleared for every factory
+                    // to keep each handler dispatched exactly once.
+                    handlers.Clear();
+                    factory.GetHandlers(handlers);
+                    foreach (var handler in handlers)
                     {
-                        results.Add(resultGetter);
+                        handler.Handle(ref notification);
+                        if (handler is IResultAvailable resultGetter)
+                        {
+                            results.Add(resultGetter);
+                        }
                     }
                 }
             }
+            catch
+            {
+                // Never leak the rented collections when a handler fails.
+                CollectionPool<List<ICommandHandler<TNotification>>, ICommandHandler<TNotification>>.Release(handlers);
+                CommandOperation.Return(results);
+                throw;
+            }
+
             CollectionPool<List<ICommandHandler<TNotification>>, ICommandHandler<TNotification>>.Release(handlers);
 
             return new CommandOperation(results);

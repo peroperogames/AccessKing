@@ -6,6 +6,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using NUnit.Framework;
 
 namespace PeroTools2.AccessKing.Editor.Tests
@@ -91,7 +92,7 @@ namespace PeroTools2.AccessKing.Editor.Tests
         {
             var bus = new EventBus<TestNotification>();
             if (!isKeepInstanceAlive)
-                CreateInstance(bus);
+                CreateInstanceAndForget(bus);
             else
                 m_Handler = CreateInstance(bus);
 
@@ -101,11 +102,19 @@ namespace PeroTools2.AccessKing.Editor.Tests
             {
                 GC.Collect();
                 GC.WaitForPendingFinalizers();
+                GC.Collect();
             }
 
             var notification = new TestNotification();
             bus.Broadcast(notification);
             return notification.isSucceed;
+
+            [MethodImpl(MethodImplOptions.NoInlining)]
+            static void CreateInstanceAndForget(EventBus<TestNotification> eventBus)
+            {
+                var handler = new TestHandler<TestNotification>();
+                eventBus.SubscribeWeakly(handler);
+            }
         }
 
         [Test]
@@ -140,10 +149,7 @@ namespace PeroTools2.AccessKing.Editor.Tests
                     bus.Broadcast();
                 };
                 bus.SubscribeWeakly(handler);
-                Assert.Catch<InvalidOperationException>(() =>
-                {
-                    bus.Broadcast();
-                });
+                Assert.Catch<InvalidOperationException>(() => { bus.Broadcast(); });
             }
         }
 

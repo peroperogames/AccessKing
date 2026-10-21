@@ -15,25 +15,38 @@ using Random = System.Random;
 
 namespace PeroTools2.AccessKing.Samples.Game.Stage.Player
 {
-    public class PlayerStage : MonoBehaviour, ICharacterStage
+    public sealed class PlayerStage : MonoBehaviour, ICharacterStage
     {
         private const string log_color = "#7FFF00";
-        [SerializeField] private int m_Hp = 100;
-        public Text TxtHP;
+
+        [SerializeField]
+        private int m_Hp = 100;
+
+        [SerializeField]
+        private Text m_TxtHp;
+
         public Character character => Character.Player;
+        private FuncCommandHandler<Task> m_StageHandler;
+        private RegistryCommandHandlerFactory m_StageFactory;
 
         public void Awake()
         {
-            GameCommands.global
+            m_StageHandler = new FuncCommandHandler<Task>(StartPlayerStageFlow);
+            m_StageFactory = GameCommands.global
                 .Require<GameCommands.StartPlayerStage>()
-                .RequireFactory<RegistryCommandHandlerFactory>()
-                .RegisterFuncHandler(StartPlayerStageFlow);
+                .RequireFactory<RegistryCommandHandlerFactory>();
+            m_StageFactory.RegisterHandler(m_StageHandler);
+        }
+
+        private void OnDestroy()
+        {
+            m_StageFactory.UnregisterHandler(m_StageHandler);
         }
 
         public void ResetHp()
         {
             m_Hp = 100;
-            TxtHP.text = m_Hp.ToString();
+            m_TxtHp.text = m_Hp.ToString();
         }
 
         public void Hurt(int damage)
@@ -44,10 +57,10 @@ namespace PeroTools2.AccessKing.Samples.Game.Stage.Player
                 m_Hp = 0;
                 GameEvents.global.Require<GameEvents.GameOver>().Broadcast(Character.Enemy);
             }
-            TxtHP.text = m_Hp.ToString();
+            m_TxtHp.text = m_Hp.ToString();
         }
 
-        public async Task StartPlayerStageFlow()
+        private async Task StartPlayerStageFlow()
         {
             // 模拟玩家需要一段时间才能完成的操作：
             Debug.Log($"<color={log_color}><b>Player action...</b></color>");

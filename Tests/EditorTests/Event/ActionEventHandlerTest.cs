@@ -576,6 +576,7 @@ namespace PeroTools2.AccessKing.Editor.Tests
                     bus16.Broadcast(default, default, default, default, default, default, default, default, default, default, default, default, default, default, default, default);
                     break;
             }
+            Assert.IsTrue(m_HandleCount == 1);
         }
 
 		[TestCase(0)]

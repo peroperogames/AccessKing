@@ -3224,6 +3224,10 @@
             <summary>
             Minimal collection pool. The core assembly owns it so that it does not depend on the engine pool.
             </summary>
+            <remarks>
+            Renting and releasing are thread safe, because the asynchronous result helpers may release the collection from a
+            different thread than the one that executed the command.
+            </remarks>
         </member>
         <member name="F:PeroTools2.AccessKing.CollectionPool`2.s_Pool">
             <summary>
@@ -6518,24 +6522,17 @@
             Allows the event bus to have the behavior of holding a weak reference to the EventHandler when it is registered.
             </summary>
             <typeparam name="TNotification">Implementation type of <see cref="T:PeroTools2.AccessKing.INotification"/>.</typeparam>
+            <remarks>
+            The unsubscription and the clearing members are inherited from <see cref="T:PeroTools2.AccessKing.IEventSubscriable`1"/> instead of
+            being declared again: <see cref="T:PeroTools2.AccessKing.IEventBus`1"/> derives from both interfaces, and two separate declarations
+            of the same member would make every call through the bus interface ambiguous.
+            </remarks>
         </member>
         <member name="M:PeroTools2.AccessKing.IWeakEventSubscriable`1.SubscribeWeakly(PeroTools2.AccessKing.IWeakEventHandler{`0})">
             <summary>
             Subscribe handler by weak reference.
             </summary>
             <param name="handler">The event handler with notification.</param>
-        </member>
-        <member name="M:PeroTools2.AccessKing.IWeakEventSubscriable`1.Unsubscribe(PeroTools2.AccessKing.IEventHandler{`0})">
-            <summary>
-            Remove handler from bus.
-            </summary>
-            <param name="handler">The event handler with notification.</param>
-            <returns>Is removed succeed.</returns>
-        </member>
-        <member name="M:PeroTools2.AccessKing.IWeakEventSubscriable`1.Clear">
-            <summary>
-            Remove all handlers from bus.
-            </summary>
         </member>
     </members>
 </doc>

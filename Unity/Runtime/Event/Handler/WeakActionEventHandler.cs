@@ -47,7 +47,7 @@ namespace PeroTools2.AccessKing
         private object currentOwner => m_Owner.TryGetTarget(out var owner) ? owner : null;
 
         /// <summary>Whether the provider that owns this handler is still alive.</summary>
-        public bool isAlive => m_Owner.TryGetTarget(out var owner) && owner != null;
+        public bool isAlive => m_Owner.TryGetTarget(out var owner) && owner != null && m_Invocation.isAlive;
 
         /// <summary>
         /// Create a weak event handler from a System.Action.
@@ -129,6 +129,11 @@ namespace PeroTools2.AccessKing
 
         private interface IInvocation
         {
+            /// <summary>
+            /// Whether the event provider that this invocation targets is still alive.
+            /// </summary>
+            bool isAlive { get; }
+
             bool Invoke();
         }
 
@@ -149,6 +154,11 @@ namespace PeroTools2.AccessKing
                 m_Provider = new WeakReference<TProvider>(provider);
                 m_Invocation = action.Method.CreateDelegate(typeof(Action<TProvider>)) as Action<TProvider>;
             }
+
+            /// <summary>
+            /// Whether the wrapped event provider is still alive.
+            /// </summary>
+            public bool isAlive => m_Provider.TryGetTarget(out _);
 
             public bool Invoke()
             {
@@ -199,7 +209,7 @@ namespace PeroTools2.AccessKing
         private object currentOwner => m_Owner.TryGetTarget(out var owner) ? owner : null;
 
         /// <summary>Whether the provider that owns this handler is still alive.</summary>
-        public bool isAlive => m_Owner.TryGetTarget(out var owner) && owner != null;
+        public bool isAlive => m_Owner.TryGetTarget(out var owner) && owner != null && m_Invocation.isAlive;
 
         /// <summary>
         /// Create a weak event handler from a System.Action.
@@ -281,6 +291,11 @@ namespace PeroTools2.AccessKing
 
         private interface IInvocation
         {
+            /// <summary>
+            /// Whether the event provider that this invocation targets is still alive.
+            /// </summary>
+            bool isAlive { get; }
+
             bool Invoke(T param);
         }
 
@@ -301,6 +316,11 @@ namespace PeroTools2.AccessKing
                 m_Provider = new WeakReference<TProvider>(provider);
                 m_Invocation = action.Method.CreateDelegate(typeof(Action<TProvider, T>)) as Action<TProvider, T>;
             }
+
+            /// <summary>
+            /// Whether the wrapped event provider is still alive.
+            /// </summary>
+            public bool isAlive => m_Provider.TryGetTarget(out _);
 
             public bool Invoke(T param)
             {
@@ -352,7 +372,7 @@ namespace PeroTools2.AccessKing
         private object currentOwner => m_Owner.TryGetTarget(out var owner) ? owner : null;
 
         /// <summary>Whether the provider that owns this handler is still alive.</summary>
-        public bool isAlive => m_Owner.TryGetTarget(out var owner) && owner != null;
+        public bool isAlive => m_Owner.TryGetTarget(out var owner) && owner != null && m_Invocation.isAlive;
 
         /// <summary>
         /// Create a weak event handler from a System.Action.
@@ -434,6 +454,11 @@ namespace PeroTools2.AccessKing
 
         private interface IInvocation
         {
+            /// <summary>
+            /// Whether the event provider that this invocation targets is still alive.
+            /// </summary>
+            bool isAlive { get; }
+
             bool Invoke(T1 param1, T2 param2);
         }
 
@@ -454,6 +479,11 @@ namespace PeroTools2.AccessKing
                 m_Provider = new WeakReference<TProvider>(provider);
                 m_Invocation = action.Method.CreateDelegate(typeof(Action<TProvider, T1, T2>)) as Action<TProvider, T1, T2>;
             }
+
+            /// <summary>
+            /// Whether the wrapped event provider is still alive.
+            /// </summary>
+            public bool isAlive => m_Provider.TryGetTarget(out _);
 
             public bool Invoke(T1 param1, T2 param2)
             {
@@ -505,7 +535,7 @@ namespace PeroTools2.AccessKing
         private object currentOwner => m_Owner.TryGetTarget(out var owner) ? owner : null;
 
         /// <summary>Whether the provider that owns this handler is still alive.</summary>
-        public bool isAlive => m_Owner.TryGetTarget(out var owner) && owner != null;
+        public bool isAlive => m_Owner.TryGetTarget(out var owner) && owner != null && m_Invocation.isAlive;
 
         /// <summary>
         /// Create a weak event handler from a System.Action.
@@ -588,6 +618,11 @@ namespace PeroTools2.AccessKing
 
         private interface IInvocation
         {
+            /// <summary>
+            /// Whether the event provider that this invocation targets is still alive.
+            /// </summary>
+            bool isAlive { get; }
+
             bool Invoke(T1 param1, T2 param2, T3 param3);
         }
 
@@ -608,6 +643,11 @@ namespace PeroTools2.AccessKing
                 m_Provider = new WeakReference<TProvider>(provider);
                 m_Invocation = action.Method.CreateDelegate(typeof(Action<TProvider, T1, T2, T3>)) as Action<TProvider, T1, T2, T3>;
             }
+
+            /// <summary>
+            /// Whether the wrapped event provider is still alive.
+            /// </summary>
+            public bool isAlive => m_Provider.TryGetTarget(out _);
 
             public bool Invoke(T1 param1, T2 param2, T3 param3)
             {
@@ -659,7 +699,7 @@ namespace PeroTools2.AccessKing
         private object currentOwner => m_Owner.TryGetTarget(out var owner) ? owner : null;
 
         /// <summary>Whether the provider that owns this handler is still alive.</summary>
-        public bool isAlive => m_Owner.TryGetTarget(out var owner) && owner != null;
+        public bool isAlive => m_Owner.TryGetTarget(out var owner) && owner != null && m_Invocation.isAlive;
 
         /// <summary>
         /// Create a weak event handler from a System.Action.
@@ -742,6 +782,11 @@ namespace PeroTools2.AccessKing
 
         private interface IInvocation
         {
+            /// <summary>
+            /// Whether the event provider that this invocation targets is still alive.
+            /// </summary>
+            bool isAlive { get; }
+
             bool Invoke(T1 param1, T2 param2, T3 param3, T4 param4);
         }
 
@@ -762,6 +807,11 @@ namespace PeroTools2.AccessKing
                 m_Provider = new WeakReference<TProvider>(provider);
                 m_Invocation = action.Method.CreateDelegate(typeof(Action<TProvider, T1, T2, T3, T4>)) as Action<TProvider, T1, T2, T3, T4>;
             }
+
+            /// <summary>
+            /// Whether the wrapped event provider is still alive.
+            /// </summary>
+            public bool isAlive => m_Provider.TryGetTarget(out _);
 
             public bool Invoke(T1 param1, T2 param2, T3 param3, T4 param4)
             {
@@ -813,7 +863,7 @@ namespace PeroTools2.AccessKing
         private object currentOwner => m_Owner.TryGetTarget(out var owner) ? owner : null;
 
         /// <summary>Whether the provider that owns this handler is still alive.</summary>
-        public bool isAlive => m_Owner.TryGetTarget(out var owner) && owner != null;
+        public bool isAlive => m_Owner.TryGetTarget(out var owner) && owner != null && m_Invocation.isAlive;
 
         /// <summary>
         /// Create a weak event handler from a System.Action.
@@ -898,6 +948,11 @@ namespace PeroTools2.AccessKing
 
         private interface IInvocation
         {
+            /// <summary>
+            /// Whether the event provider that this invocation targets is still alive.
+            /// </summary>
+            bool isAlive { get; }
+
             bool Invoke(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5);
         }
 
@@ -918,6 +973,11 @@ namespace PeroTools2.AccessKing
                 m_Provider = new WeakReference<TProvider>(provider);
                 m_Invocation = action.Method.CreateDelegate(typeof(Action<TProvider, T1, T2, T3, T4, T5>)) as Action<TProvider, T1, T2, T3, T4, T5>;
             }
+
+            /// <summary>
+            /// Whether the wrapped event provider is still alive.
+            /// </summary>
+            public bool isAlive => m_Provider.TryGetTarget(out _);
 
             public bool Invoke(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5)
             {
@@ -969,7 +1029,7 @@ namespace PeroTools2.AccessKing
         private object currentOwner => m_Owner.TryGetTarget(out var owner) ? owner : null;
 
         /// <summary>Whether the provider that owns this handler is still alive.</summary>
-        public bool isAlive => m_Owner.TryGetTarget(out var owner) && owner != null;
+        public bool isAlive => m_Owner.TryGetTarget(out var owner) && owner != null && m_Invocation.isAlive;
 
         /// <summary>
         /// Create a weak event handler from a System.Action.
@@ -1054,6 +1114,11 @@ namespace PeroTools2.AccessKing
 
         private interface IInvocation
         {
+            /// <summary>
+            /// Whether the event provider that this invocation targets is still alive.
+            /// </summary>
+            bool isAlive { get; }
+
             bool Invoke(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6);
         }
 
@@ -1074,6 +1139,11 @@ namespace PeroTools2.AccessKing
                 m_Provider = new WeakReference<TProvider>(provider);
                 m_Invocation = action.Method.CreateDelegate(typeof(Action<TProvider, T1, T2, T3, T4, T5, T6>)) as Action<TProvider, T1, T2, T3, T4, T5, T6>;
             }
+
+            /// <summary>
+            /// Whether the wrapped event provider is still alive.
+            /// </summary>
+            public bool isAlive => m_Provider.TryGetTarget(out _);
 
             public bool Invoke(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6)
             {
@@ -1125,7 +1195,7 @@ namespace PeroTools2.AccessKing
         private object currentOwner => m_Owner.TryGetTarget(out var owner) ? owner : null;
 
         /// <summary>Whether the provider that owns this handler is still alive.</summary>
-        public bool isAlive => m_Owner.TryGetTarget(out var owner) && owner != null;
+        public bool isAlive => m_Owner.TryGetTarget(out var owner) && owner != null && m_Invocation.isAlive;
 
         /// <summary>
         /// Create a weak event handler from a System.Action.
@@ -1210,6 +1280,11 @@ namespace PeroTools2.AccessKing
 
         private interface IInvocation
         {
+            /// <summary>
+            /// Whether the event provider that this invocation targets is still alive.
+            /// </summary>
+            bool isAlive { get; }
+
             bool Invoke(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7);
         }
 
@@ -1230,6 +1305,11 @@ namespace PeroTools2.AccessKing
                 m_Provider = new WeakReference<TProvider>(provider);
                 m_Invocation = action.Method.CreateDelegate(typeof(Action<TProvider, T1, T2, T3, T4, T5, T6, T7>)) as Action<TProvider, T1, T2, T3, T4, T5, T6, T7>;
             }
+
+            /// <summary>
+            /// Whether the wrapped event provider is still alive.
+            /// </summary>
+            public bool isAlive => m_Provider.TryGetTarget(out _);
 
             public bool Invoke(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7)
             {
@@ -1281,7 +1361,7 @@ namespace PeroTools2.AccessKing
         private object currentOwner => m_Owner.TryGetTarget(out var owner) ? owner : null;
 
         /// <summary>Whether the provider that owns this handler is still alive.</summary>
-        public bool isAlive => m_Owner.TryGetTarget(out var owner) && owner != null;
+        public bool isAlive => m_Owner.TryGetTarget(out var owner) && owner != null && m_Invocation.isAlive;
 
         /// <summary>
         /// Create a weak event handler from a System.Action.
@@ -1365,6 +1445,11 @@ namespace PeroTools2.AccessKing
 
         private interface IInvocation
         {
+            /// <summary>
+            /// Whether the event provider that this invocation targets is still alive.
+            /// </summary>
+            bool isAlive { get; }
+
             bool Invoke(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8);
         }
 
@@ -1385,6 +1470,11 @@ namespace PeroTools2.AccessKing
                 m_Provider = new WeakReference<TProvider>(provider);
                 m_Invocation = action.Method.CreateDelegate(typeof(Action<TProvider, T1, T2, T3, T4, T5, T6, T7, T8>)) as Action<TProvider, T1, T2, T3, T4, T5, T6, T7, T8>;
             }
+
+            /// <summary>
+            /// Whether the wrapped event provider is still alive.
+            /// </summary>
+            public bool isAlive => m_Provider.TryGetTarget(out _);
 
             public bool Invoke(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8)
             {
@@ -1436,7 +1526,7 @@ namespace PeroTools2.AccessKing
         private object currentOwner => m_Owner.TryGetTarget(out var owner) ? owner : null;
 
         /// <summary>Whether the provider that owns this handler is still alive.</summary>
-        public bool isAlive => m_Owner.TryGetTarget(out var owner) && owner != null;
+        public bool isAlive => m_Owner.TryGetTarget(out var owner) && owner != null && m_Invocation.isAlive;
 
         /// <summary>
         /// Create a weak event handler from a System.Action.
@@ -1525,6 +1615,11 @@ namespace PeroTools2.AccessKing
 
         private interface IInvocation
         {
+            /// <summary>
+            /// Whether the event provider that this invocation targets is still alive.
+            /// </summary>
+            bool isAlive { get; }
+
             bool Invoke(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9);
         }
 
@@ -1545,6 +1640,11 @@ namespace PeroTools2.AccessKing
                 m_Provider = new WeakReference<TProvider>(provider);
                 m_Invocation = action.Method.CreateDelegate(typeof(Action<TProvider, T1, T2, T3, T4, T5, T6, T7, T8, T9>)) as Action<TProvider, T1, T2, T3, T4, T5, T6, T7, T8, T9>;
             }
+
+            /// <summary>
+            /// Whether the wrapped event provider is still alive.
+            /// </summary>
+            public bool isAlive => m_Provider.TryGetTarget(out _);
 
             public bool Invoke(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9)
             {
@@ -1596,7 +1696,7 @@ namespace PeroTools2.AccessKing
         private object currentOwner => m_Owner.TryGetTarget(out var owner) ? owner : null;
 
         /// <summary>Whether the provider that owns this handler is still alive.</summary>
-        public bool isAlive => m_Owner.TryGetTarget(out var owner) && owner != null;
+        public bool isAlive => m_Owner.TryGetTarget(out var owner) && owner != null && m_Invocation.isAlive;
 
         /// <summary>
         /// Create a weak event handler from a System.Action.
@@ -1684,6 +1784,11 @@ namespace PeroTools2.AccessKing
 
         private interface IInvocation
         {
+            /// <summary>
+            /// Whether the event provider that this invocation targets is still alive.
+            /// </summary>
+            bool isAlive { get; }
+
             bool Invoke(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10);
         }
 
@@ -1704,6 +1809,11 @@ namespace PeroTools2.AccessKing
                 m_Provider = new WeakReference<TProvider>(provider);
                 m_Invocation = action.Method.CreateDelegate(typeof(Action<TProvider, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>)) as Action<TProvider, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>;
             }
+
+            /// <summary>
+            /// Whether the wrapped event provider is still alive.
+            /// </summary>
+            public bool isAlive => m_Provider.TryGetTarget(out _);
 
             public bool Invoke(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10)
             {
@@ -1755,7 +1865,7 @@ namespace PeroTools2.AccessKing
         private object currentOwner => m_Owner.TryGetTarget(out var owner) ? owner : null;
 
         /// <summary>Whether the provider that owns this handler is still alive.</summary>
-        public bool isAlive => m_Owner.TryGetTarget(out var owner) && owner != null;
+        public bool isAlive => m_Owner.TryGetTarget(out var owner) && owner != null && m_Invocation.isAlive;
 
         /// <summary>
         /// Create a weak event handler from a System.Action.
@@ -1844,6 +1954,11 @@ namespace PeroTools2.AccessKing
 
         private interface IInvocation
         {
+            /// <summary>
+            /// Whether the event provider that this invocation targets is still alive.
+            /// </summary>
+            bool isAlive { get; }
+
             bool Invoke(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11);
         }
 
@@ -1864,6 +1979,11 @@ namespace PeroTools2.AccessKing
                 m_Provider = new WeakReference<TProvider>(provider);
                 m_Invocation = action.Method.CreateDelegate(typeof(Action<TProvider, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>)) as Action<TProvider, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>;
             }
+
+            /// <summary>
+            /// Whether the wrapped event provider is still alive.
+            /// </summary>
+            public bool isAlive => m_Provider.TryGetTarget(out _);
 
             public bool Invoke(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11)
             {
@@ -1916,7 +2036,7 @@ namespace PeroTools2.AccessKing
         private object currentOwner => m_Owner.TryGetTarget(out var owner) ? owner : null;
 
         /// <summary>Whether the provider that owns this handler is still alive.</summary>
-        public bool isAlive => m_Owner.TryGetTarget(out var owner) && owner != null;
+        public bool isAlive => m_Owner.TryGetTarget(out var owner) && owner != null && m_Invocation.isAlive;
 
         /// <summary>
         /// Create a weak event handler from a System.Action.
@@ -2007,6 +2127,11 @@ namespace PeroTools2.AccessKing
 
         private interface IInvocation
         {
+            /// <summary>
+            /// Whether the event provider that this invocation targets is still alive.
+            /// </summary>
+            bool isAlive { get; }
+
             bool Invoke(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11, T12 param12);
         }
 
@@ -2028,6 +2153,11 @@ namespace PeroTools2.AccessKing
                 m_Invocation =
                     action.Method.CreateDelegate(typeof(Action<TProvider, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>)) as Action<TProvider, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>;
             }
+
+            /// <summary>
+            /// Whether the wrapped event provider is still alive.
+            /// </summary>
+            public bool isAlive => m_Provider.TryGetTarget(out _);
 
             public bool Invoke(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11, T12 param12)
             {
@@ -2080,7 +2210,7 @@ namespace PeroTools2.AccessKing
         private object currentOwner => m_Owner.TryGetTarget(out var owner) ? owner : null;
 
         /// <summary>Whether the provider that owns this handler is still alive.</summary>
-        public bool isAlive => m_Owner.TryGetTarget(out var owner) && owner != null;
+        public bool isAlive => m_Owner.TryGetTarget(out var owner) && owner != null && m_Invocation.isAlive;
 
         /// <summary>
         /// Create a weak event handler from a System.Action.
@@ -2171,6 +2301,11 @@ namespace PeroTools2.AccessKing
 
         private interface IInvocation
         {
+            /// <summary>
+            /// Whether the event provider that this invocation targets is still alive.
+            /// </summary>
+            bool isAlive { get; }
+
             bool Invoke(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11, T12 param12, T13 param13);
         }
 
@@ -2193,6 +2328,11 @@ namespace PeroTools2.AccessKing
                     action.Method.CreateDelegate(typeof(Action<TProvider, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>)) as
                         Action<TProvider, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>;
             }
+
+            /// <summary>
+            /// Whether the wrapped event provider is still alive.
+            /// </summary>
+            public bool isAlive => m_Provider.TryGetTarget(out _);
 
             public bool Invoke(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11, T12 param12, T13 param13)
             {
@@ -2246,7 +2386,7 @@ namespace PeroTools2.AccessKing
         private object currentOwner => m_Owner.TryGetTarget(out var owner) ? owner : null;
 
         /// <summary>Whether the provider that owns this handler is still alive.</summary>
-        public bool isAlive => m_Owner.TryGetTarget(out var owner) && owner != null;
+        public bool isAlive => m_Owner.TryGetTarget(out var owner) && owner != null && m_Invocation.isAlive;
 
         /// <summary>
         /// Create a weak event handler from a System.Action.
@@ -2335,6 +2475,11 @@ namespace PeroTools2.AccessKing
 
         private interface IInvocation
         {
+            /// <summary>
+            /// Whether the event provider that this invocation targets is still alive.
+            /// </summary>
+            bool isAlive { get; }
+
             bool Invoke(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11, T12 param12, T13 param13, T14 param14);
         }
 
@@ -2357,6 +2502,11 @@ namespace PeroTools2.AccessKing
                     action.Method.CreateDelegate(typeof(Action<TProvider, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>)) as
                         Action<TProvider, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>;
             }
+
+            /// <summary>
+            /// Whether the wrapped event provider is still alive.
+            /// </summary>
+            public bool isAlive => m_Provider.TryGetTarget(out _);
 
             public bool Invoke(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11, T12 param12, T13 param13, T14 param14)
             {
@@ -2410,7 +2560,7 @@ namespace PeroTools2.AccessKing
         private object currentOwner => m_Owner.TryGetTarget(out var owner) ? owner : null;
 
         /// <summary>Whether the provider that owns this handler is still alive.</summary>
-        public bool isAlive => m_Owner.TryGetTarget(out var owner) && owner != null;
+        public bool isAlive => m_Owner.TryGetTarget(out var owner) && owner != null && m_Invocation.isAlive;
 
         /// <summary>
         /// Create a weak event handler from a System.Action.
@@ -2500,6 +2650,11 @@ namespace PeroTools2.AccessKing
 
         private interface IInvocation
         {
+            /// <summary>
+            /// Whether the event provider that this invocation targets is still alive.
+            /// </summary>
+            bool isAlive { get; }
+
             bool Invoke(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11, T12 param12, T13 param13, T14 param14,
                 T15 param15);
         }
@@ -2523,6 +2678,11 @@ namespace PeroTools2.AccessKing
                     action.Method.CreateDelegate(typeof(Action<TProvider, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>)) as
                         Action<TProvider, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>;
             }
+
+            /// <summary>
+            /// Whether the wrapped event provider is still alive.
+            /// </summary>
+            public bool isAlive => m_Provider.TryGetTarget(out _);
 
             public bool Invoke(T1 param1, T2 param2, T3 param3, T4 param4, T5 param5, T6 param6, T7 param7, T8 param8, T9 param9, T10 param10, T11 param11, T12 param12, T13 param13, T14 param14,
                 T15 param15)

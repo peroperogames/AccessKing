@@ -76,25 +76,32 @@ namespace PeroTools2.AccessKing
         public static async UniTask GetResultsAsync<TResult>(this CommandOperation operation, IList<TResult> results, bool autoRelease = true)
         {
             var getters = operation.getters;
-            for (var index = 0; index < getters.Count; index++)
+            try
             {
-                var item = getters[index];
-                switch (item)
+                for (var index = 0; index < getters.Count; index++)
                 {
-                    case IResultAvailable<TResult> resultGetter:
-                        results.Add(resultGetter.GetResult());
-                        break;
-                    case IResultAvailable<Task<TResult>> resultTaskGetter:
-                        results.Add(await resultTaskGetter.GetResult());
-                        break;
-                    case IResultAvailable<UniTask<TResult>> resultUniTaskGetter:
-                        results.Add(await resultUniTaskGetter.GetResult());
-                        break;
+                    var item = getters[index];
+                    switch (item)
+                    {
+                        case IResultAvailable<TResult> resultGetter:
+                            results.Add(resultGetter.GetResult());
+                            break;
+                        case IResultAvailable<Task<TResult>> resultTaskGetter:
+                            results.Add(await resultTaskGetter.GetResult());
+                            break;
+                        case IResultAvailable<UniTask<TResult>> resultUniTaskGetter:
+                            results.Add(await resultUniTaskGetter.GetResult());
+                            break;
+                    }
                 }
             }
-            if (autoRelease)
+            finally
             {
-                operation.ReleaseResults();
+                // A faulted task must not strand the rented collection in the pool.
+                if (autoRelease)
+                {
+                    operation.ReleaseResults();
+                }
             }
         }
 
@@ -148,21 +155,28 @@ namespace PeroTools2.AccessKing
         public static async UniTask WhenAllDone(this CommandOperation operation, bool autoRelease = true)
         {
             var getters = operation.getters;
-            for (var index = 0; index < getters.Count; index++)
+            try
             {
-                var item = getters[index];
-                if (item is IResultAvailable<Task> resultTaskGetter)
+                for (var index = 0; index < getters.Count; index++)
                 {
-                    await resultTaskGetter.GetResult();
-                }
-                else if (item is IResultAvailable<UniTask> resultUnitaskGetter)
-                {
-                    await resultUnitaskGetter.GetResult();
+                    var item = getters[index];
+                    if (item is IResultAvailable<Task> resultTaskGetter)
+                    {
+                        await resultTaskGetter.GetResult();
+                    }
+                    else if (item is IResultAvailable<UniTask> resultUnitaskGetter)
+                    {
+                        await resultUnitaskGetter.GetResult();
+                    }
                 }
             }
-            if (autoRelease)
+            finally
             {
-                operation.ReleaseResults();
+                // A faulted task must not strand the rented collection in the pool.
+                if (autoRelease)
+                {
+                    operation.ReleaseResults();
+                }
             }
         }
 
@@ -175,23 +189,31 @@ namespace PeroTools2.AccessKing
         {
             var getters = operation.getters;
             var tasks = UniTaskCollection.Rent();
-            for (var index = 0; index < getters.Count; index++)
+            try
             {
-                var item = getters[index];
-                if (item is IResultAvailable<Task> resultTaskGetter)
+                for (var index = 0; index < getters.Count; index++)
                 {
-                    tasks.Add(resultTaskGetter.GetResult().AsUniTask());
+                    var item = getters[index];
+                    if (item is IResultAvailable<Task> resultTaskGetter)
+                    {
+                        tasks.Add(resultTaskGetter.GetResult().AsUniTask());
+                    }
+                    else if (item is IResultAvailable<UniTask> resultUnitaskGetter)
+                    {
+                        tasks.Add(resultUnitaskGetter.GetResult());
+                    }
                 }
-                else if (item is IResultAvailable<UniTask> resultUnitaskGetter)
-                {
-                    tasks.Add(resultUnitaskGetter.GetResult());
-                }
+
+                await UniTask.WhenAny(tasks);
             }
-            await UniTask.WhenAny(tasks);
-            UniTaskCollection.Return(tasks);
-            if (autoRelease)
+            finally
             {
-                operation.ReleaseResults();
+                // Never leak the rented collections, whichever way the wait ends.
+                UniTaskCollection.Return(tasks);
+                if (autoRelease)
+                {
+                    operation.ReleaseResults();
+                }
             }
         }
     }

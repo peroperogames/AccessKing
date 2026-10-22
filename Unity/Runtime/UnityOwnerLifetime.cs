@@ -32,7 +32,7 @@ namespace PeroTools2.AccessKing
 
             bool IEqualityComparer<object>.Equals(object a, object b) => ReferenceEquals(a, b) || (a is not null && a.Equals(b));
 
-            int IEqualityComparer<object>.GetHashCode(object o) => o is null ? 0 : o.GetHashCode();
+            int IEqualityComparer<object>.GetHashCode(object o) => o?.GetHashCode() ?? 0;
         }
     }
 }

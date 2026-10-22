@@ -4,7 +4,6 @@
  * Created On: 2023/06/01 17:06:57
  */
 
-using System.Threading.Tasks;
 using NUnit.Framework;
 
 namespace PeroTools2.AccessKing.Tests;

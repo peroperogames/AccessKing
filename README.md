@@ -4,7 +4,6 @@ A cross-domain message bus for Unity: **event bus**, **command bus** and theme k
 
 - Decoupled, allocation aware dispatch: handlers are located by notification type, not by direct references.
 - Every handler receives the notification through `in`/`ref`, so a notification can both carry data and be mutated by a command.
-- Subscription, unsubscription and dispatch work while the bus is broadcasting, which keeps the bus usable from arbitrary Unity callbacks.
 - Weak subscriptions follow the lifetime of a `UnityEngine.Object` owner and are dropped automatically once it is destroyed.
 - Command handlers may return results, synchronous or asynchronous, without boxing the result collection in the common path.
 
@@ -288,6 +287,8 @@ Two rules matter here:
        public void Awake()
        {
            // Correct: the subscription dies with the Monster, even though the target is a plain class.
+           // Note that such a subscription cannot be removed with Unsubscribe(m_Hurt.Handle): its identity is
+           // (this, Handle), so it only ends together with this MonoBehaviour.
            HurtEvents.instance.SubscribeWeakly(this, m_Hurt.Handle);
        }
    }
@@ -298,7 +299,9 @@ Two rules matter here:
    }
    ```
 
-2. A weak subscription is identified by **(owner, method)**, not by the delegate instance, so `Unsubscribe` locates it from a freshly created delegate — and two `MonoBehaviour`s that expose the same method stay independent.
+2. A weak subscription is identified by **(owner, method)**, not by the delegate instance: `Unsubscribe` locates it from a freshly created delegate, and two `MonoBehaviour`s that expose the same method stay independent.
+
+   The identity uses the **owner**, not the delegate target, so the two are only interchangeable when they are the same object. Subscribing with `SubscribeWeakly(this, Handle)` (owner and target are the same `MonoBehaviour`) can be removed by `Unsubscribe(Handle)`; with a separate target, as in `SubscribeWeakly(this, m_Hurt.Handle)`, the subscription is bound to the owner's lifetime and `Unsubscribe(Handle)` does not find it — it ends when the owner is destroyed.
 
 ```csharp
 HurtEvents.instance.Unsubscribe(Handle); // Works for the weak subscription as well.
@@ -616,9 +619,3 @@ public void Start()
 
 private void Test(int value) => Debug.Log("Test value = " + value);
 ```
-
-## Notes
-
-- **Unity fake null.** Weak subscriptions rely on the owner comparison installed by the Unity layer, so a destroyed `UnityEngine.Object` counts as dead. The core assembly itself stays engine free and falls back to plain equality.
-- **Operation lifetime.** `Execute` rents a result collection. Reading the results releases it unless `autoRelease: false` is passed; ignoring the returned `CommandOperation` keeps the collection rented until a `Dispose` that never happens, so prefer `var operation = bus.Execute(...)` or call `Dispose`.
-- **Result identity.** An operation may be read once per generation: reading it after it was released throws `InvalidOperationException` instead of returning another execution's results.

@@ -14,6 +14,10 @@ namespace PeroTools2.AccessKing.Tests;
 public sealed class EventBusTest
 {
     private static int s_HandleCount;
+
+    /// <summary>
+    /// Keeps the weakly subscribed handler reachable, so the collected case really is collected.
+    /// </summary>
     private IEventHandler<TestNotification> m_Handler;
 
     [SetUp]
@@ -88,7 +92,7 @@ public sealed class EventBusTest
     [TestCase(true, false, ExpectedResult = true)]
     [TestCase(false, true, ExpectedResult = false)]
     [TestCase(false, false, ExpectedResult = true)]
-    public bool EventBusSubscribeWeaklyTest(bool isKeepInstanceAlive, bool isInvokeGC)
+    public bool EventBusSubscribeWeaklyTest(bool isKeepInstanceAlive, bool isInvokeGc)
     {
         var bus = new EventBus<TestNotification>();
         if (!isKeepInstanceAlive)
@@ -98,7 +102,7 @@ public sealed class EventBusTest
 
         CreateBlob(10);
 
-        if (isInvokeGC)
+        if (isInvokeGc)
         {
             GC.Collect();
             GC.WaitForPendingFinalizers();
@@ -168,10 +172,11 @@ public sealed class EventBusTest
             trash.Add(new Blob());
         }
 
+        GC.KeepAlive(trash);
         trash.Clear();
     }
 
-    private class TestHandler<TNotification> : IEventHandler<TNotification> where TNotification : ITestNotification
+    private class TestHandler<TNotification> : IEventHandler<TNotification> where TNotification : class, ITestNotification
     {
         public void Handle(in TNotification notification)
         {
@@ -211,7 +216,9 @@ public sealed class EventBusTest
             return isAlive;
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Handle the empty notification used by the parameterless bus.
+        /// </summary>
         public void Handle(in Empty notification)
         {
             if (isAlive)

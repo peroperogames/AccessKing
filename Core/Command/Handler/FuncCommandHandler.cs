@@ -27,7 +27,15 @@ public sealed class FuncCommandHandler<TResult> : ICommandHandler<Empty, TResult
     /// Create a command handler from a System.Func
     /// </summary>
     /// <param name="delegation">Delegation for creating CommandHandler.</param>
-    public FuncCommandHandler(Func<TResult> delegation) => m_Invocation = delegation;
+    public FuncCommandHandler(Func<TResult> delegation)
+    {
+        if (delegation is null)
+        {
+            throw new ArgumentNullException(nameof(delegation));
+        }
+
+        m_Invocation = delegation;
+    }
 
     /// <inheritdoc/>
     public TResult GetResult() => m_Result;
@@ -94,7 +102,15 @@ public sealed class FuncCommandHandler<T, TResult> : ICommandHandler<ParameterNo
     /// Create a command handler from a System.Func
     /// </summary>
     /// <param name="delegation">Delegation for creating CommandHandler.</param>
-    public FuncCommandHandler(Func<T, TResult> delegation) => m_Invocation = delegation;
+    public FuncCommandHandler(Func<T, TResult> delegation)
+    {
+        if (delegation is null)
+        {
+            throw new ArgumentNullException(nameof(delegation));
+        }
+
+        m_Invocation = delegation;
+    }
 
     /// <inheritdoc/>
     public TResult GetResult() => m_Result;
@@ -161,7 +177,15 @@ public sealed class FuncCommandHandler<T1, T2, TResult> : ICommandHandler<Parame
     /// Create a command handler from a System.Func
     /// </summary>
     /// <param name="delegation">Delegation for creating CommandHandler.</param>
-    public FuncCommandHandler(Func<T1, T2, TResult> delegation) => m_Invocation = delegation;
+    public FuncCommandHandler(Func<T1, T2, TResult> delegation)
+    {
+        if (delegation is null)
+        {
+            throw new ArgumentNullException(nameof(delegation));
+        }
+
+        m_Invocation = delegation;
+    }
 
     /// <inheritdoc/>
     public TResult GetResult() => m_Result;
@@ -228,7 +252,15 @@ public sealed class FuncCommandHandler<T1, T2, T3, TResult> : ICommandHandler<Pa
     /// Create a command handler from a System.Func
     /// </summary>
     /// <param name="delegation">Delegation for creating CommandHandler.</param>
-    public FuncCommandHandler(Func<T1, T2, T3, TResult> delegation) => m_Invocation = delegation;
+    public FuncCommandHandler(Func<T1, T2, T3, TResult> delegation)
+    {
+        if (delegation is null)
+        {
+            throw new ArgumentNullException(nameof(delegation));
+        }
+
+        m_Invocation = delegation;
+    }
 
     /// <inheritdoc/>
     public TResult GetResult() => m_Result;
@@ -295,7 +327,15 @@ public sealed class FuncCommandHandler<T1, T2, T3, T4, TResult> : ICommandHandle
     /// Create a command handler from a System.Func
     /// </summary>
     /// <param name="delegation">Delegation for creating CommandHandler.</param>
-    public FuncCommandHandler(Func<T1, T2, T3, T4, TResult> delegation) => m_Invocation = delegation;
+    public FuncCommandHandler(Func<T1, T2, T3, T4, TResult> delegation)
+    {
+        if (delegation is null)
+        {
+            throw new ArgumentNullException(nameof(delegation));
+        }
+
+        m_Invocation = delegation;
+    }
 
     /// <inheritdoc/>
     public TResult GetResult() => m_Result;
@@ -362,7 +402,15 @@ public sealed class FuncCommandHandler<T1, T2, T3, T4, T5, TResult> : ICommandHa
     /// Create a command handler from a System.Func
     /// </summary>
     /// <param name="delegation">Delegation for creating CommandHandler.</param>
-    public FuncCommandHandler(Func<T1, T2, T3, T4, T5, TResult> delegation) => m_Invocation = delegation;
+    public FuncCommandHandler(Func<T1, T2, T3, T4, T5, TResult> delegation)
+    {
+        if (delegation is null)
+        {
+            throw new ArgumentNullException(nameof(delegation));
+        }
+
+        m_Invocation = delegation;
+    }
 
     /// <inheritdoc/>
     public TResult GetResult() => m_Result;
@@ -429,7 +477,15 @@ public sealed class FuncCommandHandler<T1, T2, T3, T4, T5, T6, TResult> : IComma
     /// Create a command handler from a System.Func
     /// </summary>
     /// <param name="delegation">Delegation for creating CommandHandler.</param>
-    public FuncCommandHandler(Func<T1, T2, T3, T4, T5, T6, TResult> delegation) => m_Invocation = delegation;
+    public FuncCommandHandler(Func<T1, T2, T3, T4, T5, T6, TResult> delegation)
+    {
+        if (delegation is null)
+        {
+            throw new ArgumentNullException(nameof(delegation));
+        }
+
+        m_Invocation = delegation;
+    }
 
     /// <inheritdoc/>
     public TResult GetResult() => m_Result;
@@ -496,7 +552,15 @@ public sealed class FuncCommandHandler<T1, T2, T3, T4, T5, T6, T7, TResult> : IC
     /// Create a command handler from a System.Func
     /// </summary>
     /// <param name="delegation">Delegation for creating CommandHandler.</param>
-    public FuncCommandHandler(Func<T1, T2, T3, T4, T5, T6, T7, TResult> delegation) => m_Invocation = delegation;
+    public FuncCommandHandler(Func<T1, T2, T3, T4, T5, T6, T7, TResult> delegation)
+    {
+        if (delegation is null)
+        {
+            throw new ArgumentNullException(nameof(delegation));
+        }
+
+        m_Invocation = delegation;
+    }
 
     /// <inheritdoc/>
     public TResult GetResult() => m_Result;
@@ -563,7 +627,15 @@ public sealed class FuncCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8, TResult> 
     /// Create a command handler from a System.Func
     /// </summary>
     /// <param name="delegation">Delegation for creating CommandHandler.</param>
-    public FuncCommandHandler(Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult> delegation) => m_Invocation = delegation;
+    public FuncCommandHandler(Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult> delegation)
+    {
+        if (delegation is null)
+        {
+            throw new ArgumentNullException(nameof(delegation));
+        }
+
+        m_Invocation = delegation;
+    }
 
     /// <inheritdoc/>
     public TResult GetResult() => m_Result;
@@ -630,7 +702,15 @@ public sealed class FuncCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResu
     /// Create a command handler from a System.Func
     /// </summary>
     /// <param name="delegation">Delegation for creating CommandHandler.</param>
-    public FuncCommandHandler(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> delegation) => m_Invocation = delegation;
+    public FuncCommandHandler(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult> delegation)
+    {
+        if (delegation is null)
+        {
+            throw new ArgumentNullException(nameof(delegation));
+        }
+
+        m_Invocation = delegation;
+    }
 
     /// <inheritdoc/>
     public TResult GetResult() => m_Result;
@@ -697,7 +777,15 @@ public sealed class FuncCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, 
     /// Create a command handler from a System.Func
     /// </summary>
     /// <param name="delegation">Delegation for creating CommandHandler.</param>
-    public FuncCommandHandler(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> delegation) => m_Invocation = delegation;
+    public FuncCommandHandler(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult> delegation)
+    {
+        if (delegation is null)
+        {
+            throw new ArgumentNullException(nameof(delegation));
+        }
+
+        m_Invocation = delegation;
+    }
 
     /// <inheritdoc/>
     public TResult GetResult() => m_Result;
@@ -764,7 +852,15 @@ public sealed class FuncCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, 
     /// Create a command handler from a System.Func
     /// </summary>
     /// <param name="delegation">Delegation for creating CommandHandler.</param>
-    public FuncCommandHandler(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> delegation) => m_Invocation = delegation;
+    public FuncCommandHandler(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult> delegation)
+    {
+        if (delegation is null)
+        {
+            throw new ArgumentNullException(nameof(delegation));
+        }
+
+        m_Invocation = delegation;
+    }
 
     /// <inheritdoc/>
     public TResult GetResult() => m_Result;
@@ -831,7 +927,15 @@ public sealed class FuncCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, 
     /// Create a command handler from a System.Func
     /// </summary>
     /// <param name="delegation">Delegation for creating CommandHandler.</param>
-    public FuncCommandHandler(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> delegation) => m_Invocation = delegation;
+    public FuncCommandHandler(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult> delegation)
+    {
+        if (delegation is null)
+        {
+            throw new ArgumentNullException(nameof(delegation));
+        }
+
+        m_Invocation = delegation;
+    }
 
     /// <inheritdoc/>
     public TResult GetResult() => m_Result;
@@ -898,7 +1002,15 @@ public sealed class FuncCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, 
     /// Create a command handler from a System.Func
     /// </summary>
     /// <param name="delegation">Delegation for creating CommandHandler.</param>
-    public FuncCommandHandler(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> delegation) => m_Invocation = delegation;
+    public FuncCommandHandler(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult> delegation)
+    {
+        if (delegation is null)
+        {
+            throw new ArgumentNullException(nameof(delegation));
+        }
+
+        m_Invocation = delegation;
+    }
 
     /// <inheritdoc/>
     public TResult GetResult() => m_Result;
@@ -965,7 +1077,15 @@ public sealed class FuncCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, 
     /// Create a command handler from a System.Func
     /// </summary>
     /// <param name="delegation">Delegation for creating CommandHandler.</param>
-    public FuncCommandHandler(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> delegation) => m_Invocation = delegation;
+    public FuncCommandHandler(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult> delegation)
+    {
+        if (delegation is null)
+        {
+            throw new ArgumentNullException(nameof(delegation));
+        }
+
+        m_Invocation = delegation;
+    }
 
     /// <inheritdoc/>
     public TResult GetResult() => m_Result;
@@ -1032,7 +1152,15 @@ public sealed class FuncCommandHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, 
     /// Create a command handler from a System.Func
     /// </summary>
     /// <param name="delegation">Delegation for creating CommandHandler.</param>
-    public FuncCommandHandler(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> delegation) => m_Invocation = delegation;
+    public FuncCommandHandler(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult> delegation)
+    {
+        if (delegation is null)
+        {
+            throw new ArgumentNullException(nameof(delegation));
+        }
+
+        m_Invocation = delegation;
+    }
 
     /// <inheritdoc/>
     public TResult GetResult() => m_Result;

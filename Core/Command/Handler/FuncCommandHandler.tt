@@ -50,7 +50,15 @@ public sealed class <#=evenHandler#> : <#=ievenHandler#>, IEquatable<<#=evenHand
     /// Create a command handler from a System.Func
     /// </summary>
     /// <param name="delegation">Delegation for creating CommandHandler.</param>
-    public FuncCommandHandler(<#=func#> delegation) => m_Invocation = delegation;
+    public FuncCommandHandler(<#=func#> delegation)
+    {
+        if (delegation is null)
+        {
+            throw new ArgumentNullException(nameof(delegation));
+        }
+
+        m_Invocation = delegation;
+    }
 
     /// <inheritdoc/>
     public TResult GetResult() => m_Result;

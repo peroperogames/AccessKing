@@ -1,0 +1,109 @@
+<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ import namespace="System.Linq" #>
+<#@ assembly name="System.Core" #>
+<#@ output extension=".cs" #>
+/*
+ * Copyright (c) PeroPeroGames Co., Ltd.
+ * Author: Gatongone
+ * Created On: 2023/05/23 16:05:45
+ */
+
+using System;
+
+namespace PeroTools2.AccessKing
+{
+    /// <summary>
+    /// Extensions for <see cref="IEventBus{TNotification}"/>.
+    /// </summary>
+    public static class EventBusExtensions
+    {
+        #region Subscribe
+<#
+    for (var i = 0; i < 17; i++)
+    {
+        var genericArgs = string.Empty;
+        var genericArgsWithAngleBrackets = string.Empty;
+        if (i > 0)
+        {
+            genericArgs = i == 1 ? "T" : string.Join(", ", from index in Enumerable.Range(1, i) select $"T{index}");
+            genericArgsWithAngleBrackets = i == 1 ? "<T>" : $"<{string.Join(", ", from index in Enumerable.Range(1, i) select $"T{index}")}>";
+        }
+        var parameterNotification = i == 0 ? "Empty" : $"ParameterNotification<{genericArgs}>";
+        var action = i == 0 ? "Action" : $"Action<{genericArgs}>";
+        var evenHandler = $"ActionEventHandler{(i == 0 ? string.Empty : $"<{genericArgs}>")}";
+        var evenBus = $"IEventSubscriable{(i == 0 ? "<Empty>" : $"<{parameterNotification}>")}";
+#>
+
+        /// <summary>
+        /// Convert action delegate to ActionEventHandler, then register to event bus.
+        /// </summary>
+        /// <param name="eventBus">Event bus.</param>
+        /// <param name="action">The delegate which convert to ActionEventHandler.</param>
+        public static void Subscribe<#=genericArgsWithAngleBrackets#>(this <#=evenBus#> eventBus, <#=action#> action)
+            => eventBus.Subscribe(new <#=evenHandler#>(action));
+<#
+    }
+#>
+
+        #endregion
+
+        #region SubscribeWeakly
+<#
+    for (var i = 0; i < 16; i++)
+    {
+        var genericArgs = string.Empty;
+        var genericArgsWithAngleBrackets = string.Empty;
+        if (i > 0)
+        {
+            genericArgs = i == 1 ? "T" : string.Join(", ", from index in Enumerable.Range(1, i) select $"T{index}");
+            genericArgsWithAngleBrackets = i == 1 ? "<T>" : $"<{string.Join(", ", from index in Enumerable.Range(1, i) select $"T{index}")}>";
+        }
+        var parameterNotification = i == 0 ? "Empty" : $"ParameterNotification<{genericArgs}>";
+        var action = i == 0 ? "Action" : $"Action<{genericArgs}>";
+        var evenHandler = $"WeakActionEventHandler{(i == 0 ? string.Empty : $"<{genericArgs}>")}";
+        var eventBus = $"IWeakEventSubscriable{(i == 0 ? "<Empty>" : $"<{parameterNotification}>")}";
+#>
+
+        /// <summary>
+        /// Convert action delegate to ActionEventHandler, then register to event bus.
+        /// </summary>
+        /// <param name="eventBus">Event bus.</param>
+        /// <param name="action">The delegate which convert to ActionEventHandler.</param>
+        /// <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+        [Obsolete("Use SubscribeWeakly<#=genericArgsWithAngleBrackets#>(UnityEngine.Object provider, <#=action#> action) instead.")]
+        public static void SubscribeWeakly<#=genericArgsWithAngleBrackets#>(this <#=eventBus#> eventBus, <#=action#> action, UnityEngine.Object provider)
+            => eventBus.SubscribeWeakly(new <#=evenHandler#>(action, provider));
+<#
+    }
+#>
+<#
+    for (var i = 0; i < 16; i++)
+    {
+        var genericArgs = string.Empty;
+        var genericArgsWithAngleBrackets = string.Empty;
+        if (i > 0)
+        {
+            genericArgs = i == 1 ? "T" : string.Join(", ", from index in Enumerable.Range(1, i) select $"T{index}");
+            genericArgsWithAngleBrackets = i == 1 ? "<T>" : $"<{string.Join(", ", from index in Enumerable.Range(1, i) select $"T{index}")}>";
+        }
+        var parameterNotification = i == 0 ? "Empty" : $"ParameterNotification<{genericArgs}>";
+        var action = i == 0 ? "Action" : $"Action<{genericArgs}>";
+        var evenHandler = $"WeakActionEventHandler{(i == 0 ? string.Empty : $"<{genericArgs}>")}";
+        var eventBus = $"IWeakEventSubscriable{(i == 0 ? "<Empty>" : $"<{parameterNotification}>")}";
+#>
+
+        /// <summary>
+        /// Convert action delegate to ActionEventHandler, then register to event bus.
+        /// </summary>
+        /// <param name="eventBus">Event bus.</param>
+        /// <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+        /// <param name="action">The delegate which convert to ActionEventHandler.</param>
+        public static void SubscribeWeakly<#=genericArgsWithAngleBrackets#>(this <#=eventBus#> eventBus, UnityEngine.Object provider, <#=action#> action)
+            => eventBus.SubscribeWeakly(new <#=evenHandler#>(action, provider));
+<#
+    }
+#>
+
+        #endregion
+    }
+}

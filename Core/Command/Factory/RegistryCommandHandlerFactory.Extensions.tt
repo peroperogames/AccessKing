@@ -1,0 +1,128 @@
+<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ import namespace="System.Linq" #>
+<#@ assembly name="System.Core" #>
+<#@ output extension=".cs" #>
+/*
+ * Copyright (c) PeroPeroGames Co., Ltd.
+ * Author: Gatongone
+ * Created On: 2023/12/11 09:12:22
+ */
+
+using System;
+
+namespace PeroTools2.AccessKing;
+
+/// <summary>
+/// Extensions for <see cref="ICommandHandlerFactory"/>.
+/// </summary>
+public static class RegistryCommandHandlerFactoryExtensions
+{
+    #region RegisterActionHandler
+<#
+for (var i = 0; i < 17; i++)
+{
+    var genericArgs = string.Empty;
+    if (i > 0)
+    {
+        genericArgs = i == 1 ? "T" : string.Join(", ", from index in Enumerable.Range(1, i) select $"T{index}");
+    }
+    var action = i == 0 ? "Action" : $"Action<{genericArgs}>";
+    var evenHandler = $"ActionCommandHandler{(i == 0 ? string.Empty : $"<{genericArgs}>")}";
+    var registerActionHandler = $"RegisterActionHandler{(i == 0 ? string.Empty : $"<{genericArgs}>")}";
+#>
+
+    /// <summary>
+    /// Convert action delegate to ActionCommandHandler, then register to command bus.
+    /// </summary>
+    /// <param name="factory">Command handler factory.</param>
+    /// <param name="action">The delegate which convert to ActionCommandHandler.</param>
+    public static void <#=registerActionHandler#>(this RegistryCommandHandlerFactory factory, <#=action#> action)
+        => factory.RegisterHandler(new <#=evenHandler#>(action));
+<#
+}
+#>
+    #endregion
+
+    #region RegisterFuncHandler
+<#
+for (var i = 0; i < 16; i++)
+{
+    var genericArgs = string.Empty;
+    if (i > 0)
+    {
+        genericArgs = i == 1 ? "T" : string.Join(", ", from index in Enumerable.Range(1, i) select $"T{index}");
+    }
+    var func = i == 0 ? "Func<TResult>" : $"Func<{genericArgs}, TResult>";
+    var evenHandler = $"FuncCommandHandler{(i == 0 ? "<TResult>" : $"<{genericArgs}, TResult>")}";
+    var registerFuncHandler = $"RegisterFuncHandler{(i == 0 ? "<TResult>" : $"<{genericArgs}, TResult>")}";
+#>
+
+    /// <summary>
+    /// Convert func delegate to FuncCommandHandler, then register to command bus.
+    /// </summary>
+    /// <param name="factory">Command handler factory.</param>
+    /// <param name="func">The delegate which convert to ActionCommandHandler.</param>
+    public static void <#=registerFuncHandler#>(this RegistryCommandHandlerFactory factory, <#=func#> func)
+        => factory.RegisterHandler(new <#=evenHandler#>(func));
+<#
+}
+#>
+
+    #endregion
+
+    #region UnRegisterActionHandler
+<#
+for (var i = 0; i < 17; i++)
+{
+    var genericArgs = string.Empty;
+    if (i > 0)
+    {
+        genericArgs = i == 1 ? "T" : string.Join(", ", from index in Enumerable.Range(1, i) select $"T{index}");
+    }
+    var action = i == 0 ? "Action" : $"Action<{genericArgs}>";
+    var evenHandler = $"ActionCommandHandler{(i == 0 ? string.Empty : $"<{genericArgs}>")}";
+    var unregisterActionHandler = $"UnregisterActionHandler{(i == 0 ? string.Empty : $"<{genericArgs}>")}";
+#>
+
+    /// <summary>
+    /// Convert action delegate to ActionCommandHandler, then remove from command bus.
+    /// </summary>
+    /// <param name="factory">Command handler factory.</param>
+    /// <param name="action">The delegate which convert to ActionCommandHandler.</param>
+    /// <returns>Is removed succeed.</returns>
+    public static bool <#=unregisterActionHandler#>(this RegistryCommandHandlerFactory factory, <#=action#> action)
+        => factory.UnregisterHandler(new <#=evenHandler#>(action));
+<#
+}
+#>
+
+    #endregion
+
+    #region UnregisterFuncHandler
+<#
+for (var i = 0; i < 16; i++)
+{
+    var genericArgs = string.Empty;
+    if (i > 0)
+    {
+        genericArgs = i == 1 ? "T" : string.Join(", ", from index in Enumerable.Range(1, i) select $"T{index}");
+    }
+    var func = i == 0 ? "Func<TResult>" : $"Func<{genericArgs}, TResult>";
+    var evenHandler = $"FuncCommandHandler{(i == 0 ? "<TResult>" : $"<{genericArgs}, TResult>")}";
+    var registerFuncHandler = $"UnregisterFuncHandler{(i == 0 ? "<TResult>" : $"<{genericArgs}, TResult>")}";
+#>
+
+    /// <summary>
+    /// Convert func delegate to FuncCommandHandler, then remove from command bus.
+    /// </summary>
+    /// <param name="factory">Command handler factory.</param>
+    /// <param name="func">The delegate which convert to FuncCommandHandler.</param>
+    /// <returns>Is removed succeed.</returns>
+    public static bool <#=registerFuncHandler#>(this RegistryCommandHandlerFactory factory, <#=func#> func)
+        => factory.UnregisterHandler(new <#=evenHandler#>(func));
+<#
+}
+#>
+
+    #endregion
+}

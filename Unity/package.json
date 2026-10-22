@@ -1,0 +1,24 @@
+{
+  "name": "com.prpr.accessking",
+  "displayName": "AccessKing",
+  "description": "PeroTools2's access bus for cross-domain service access: event bus, command bus and theme keyed schedules.",
+  "version": "0.2.4",
+  "unity": "2021.3",
+  "author": {
+    "name": "Peropero",
+    "email": "unity@peropero.net"
+  },
+  "documentationUrl": "https://github.com/peroperogames/AccessKing/blob/master/README.md",
+  "changelogUrl": "https://github.com/peroperogames/AccessKing/releases",
+  "samples": [
+    {
+      "displayName": "Sample",
+      "description": "Command/Event Samples",
+      "path": "Samples~"
+    }
+  ],
+  "type": "tool",
+  "dependencies": {
+    "com.cysharp.unitask": "2.5.5"
+  }
+}

@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>14</LangVersion>
+    <AssemblyName>PeroTools2.AccessKing.Core</AssemblyName>
+    <RootNamespace>PeroTools2.AccessKing</RootNamespace>
+    <Nullable>disable</Nullable>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+  <!-- Unity consumes the core as a precompiled assembly, keep the copy in the package up to date. -->
+  <Target Name="CopyToUnityPackage" AfterTargets="Build" Condition="'$(Configuration)' == 'Release'">
+    <!-- The symbols and the xml docs travel with the assembly, so the package can be stepped into and documented. -->
+    <ItemGroup>
+      <UnityPluginFile Include="$(TargetPath)" />
+      <UnityPluginFile Include="$(TargetDir)$(AssemblyName).pdb" />
+      <UnityPluginFile Include="$(TargetDir)$(AssemblyName).xml" />
+    </ItemGroup>
+    <Copy SourceFiles="@(UnityPluginFile)" DestinationFolder="$(MSBuildThisFileDirectory)../Unity/Plugins/" SkipUnchangedFiles="true" />
+  </Target>
+  <!-- The unity layer implements the internal invocation interfaces, keep the public surface tight. -->
+  <ItemGroup>
+    <InternalsVisibleTo Include="PeroTools2.AccessKing" />
+  </ItemGroup>
+</Project>

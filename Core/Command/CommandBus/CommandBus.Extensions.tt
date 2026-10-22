@@ -1,0 +1,53 @@
+<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ import namespace="System.Linq" #>
+<#@ assembly name="System.Core" #>
+<#@ output extension=".cs" #>
+/*
+ * Copyright (c) PeroPeroGames Co., Ltd.
+ * Author: Gatongone
+ * Created On: 2023/12/11 10:12:16
+ */
+
+namespace PeroTools2.AccessKing;
+
+/// <summary>
+/// Extensions for <see cref="ICommandBus{TNotification}"/>.
+/// </summary>
+public static class CommandBusExtensions
+{<#
+for (var i = 0; i < 17; i++)
+{
+    var genericArgs = string.Empty;
+    var parameterDefinitions = string.Empty;
+    var parameters = string.Empty;
+    var genericArgsWithAngleBrackets = string.Empty;
+    
+    if (i > 0)
+    {
+        genericArgs = i == 1 ? "T" : string.Join(", ", from index in Enumerable.Range(1, i) select $"T{index}");
+        parameters = i == 1 ? "param" : string.Join(", ", from index in Enumerable.Range(1, i) select $"param{index}");
+        parameterDefinitions = i == 1 ? ", T param" : $", {string.Join(", ", from index in Enumerable.Range(1, i) select $"T{index} param{index}")}";
+        genericArgsWithAngleBrackets = i == 1 ? "<T>" : $"<{string.Join(", ", from index in Enumerable.Range(1, i) select $"T{index}")}>";
+    }
+    var parameterNotification = i == 0 ? "Empty" : $"ParameterNotification<{genericArgs}>";
+    var commandBus = $"ICommandBus{(i == 0 ? "<Empty>" : $"<{parameterNotification}>")}";
+    var paramDocs = i == 0
+        ? string.Empty
+        : i == 1
+            ? "        /// <param name=\"param\">The parameter of the notification.</param>" + "\n"
+            : string.Join("\n", from index in Enumerable.Range(1, i) select $"        /// <param name=\"param{index}\">Parameter {index} of the notification.</param>") + "\n";
+#>
+
+    /// <summary>
+    /// Execute all handler's handle method in bus with <#= i #> argument<#= i == 0 || i == 1 ? string.Empty : "s"#> types parameter notification.
+    /// </summary>
+    /// <param name="commandBus">Command Bus.</param>
+<#=paramDocs#>        public static CommandOperation Execute<#=genericArgsWithAngleBrackets#>(this <#=commandBus#> commandBus<#=parameterDefinitions#>)
+    {
+        var notification = <#= i == 0 ? "ParameterNotification.Empty" : $"ParameterNotification.Create({parameters})"#>;
+        return commandBus.Execute(ref notification);
+    }
+<#
+}
+#>
+}

@@ -1,7 +1,12 @@
-# 如果要从更高级别的目录继承 .editorconfig 设置，请删除以下行
+# Remove the following line to inherit the settings from a parent .editorconfig
 root = true
 
-# c# 文件
+# All text files: UTF-8 without BOM, LF line endings
+[*]
+charset = utf-8
+end_of_line = lf
+
+# C# files
 [*.cs]
 
 charset = utf-8

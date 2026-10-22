@@ -145,7 +145,7 @@ public sealed class EventBusTest
             Assert.That(handler4.invokedCount, Is.EqualTo(1));
         }
         {
-            ((IWeakEventSubscriable<Empty>) bus).Clear();
+            bus.Clear();
             var handler = new TestWeakEventHandler(null);
             handler.onHandle = () =>
             {

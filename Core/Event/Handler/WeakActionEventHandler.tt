@@ -7,16 +7,15 @@
  * Author: Gatongone
  * Created On: 2023/12/05 16:12:42
  */
+
 using System;
 using System.Reflection;
 
 namespace PeroTools2.AccessKing;
-
 <#
 for (var i = 0; i < 16; i++)
 {
-    var genericArgs = i == 0 ? string.Empty : (i == 1 ? "T" : string.Join(", ", from index in Enumerable.Range(1, i) select $"T{index}"));
-    var genericArgsWithAngleBrackets = i == 0 ? string.Empty : $"<{genericArgs}>";
+    var genericArgs = i == 0 ? string.Empty : i == 1 ? "T" : string.Join(", ", from index in Enumerable.Range(1, i) select $"T{index}");
     var parameterNotification = i == 0 ? "Empty" : $"ParameterNotification<{genericArgs}>";
     var action = i == 0 ? "Action" : $"Action<{genericArgs}>";
     var handler = i == 0 ? "WeakActionEventHandler" : $"WeakActionEventHandler<{genericArgs}>";

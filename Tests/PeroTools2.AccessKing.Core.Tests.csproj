@@ -8,12 +8,13 @@
     <AssemblyName>PeroTools2.AccessKing.Core.Tests</AssemblyName>
     <RootNamespace>PeroTools2.AccessKing.Tests</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Core/PeroTools2.AccessKing.Core.csproj" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
     <PackageReference Include="NUnit" Version="4.2.2" />
     <PackageReference Include="NUnit3TestAdapter" Version="4.6.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Core.Standalone\PeroTools2.AccessKing.Core.Standalone.csproj" />
   </ItemGroup>
 </Project>

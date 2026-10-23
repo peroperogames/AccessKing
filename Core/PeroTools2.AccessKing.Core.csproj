@@ -8,8 +8,19 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <Configurations>Debug;Release;Unity</Configurations>
+  </PropertyGroup>
+  <!--
+    The engine free core builds in two flavours. Debug and Release carry the Task based async helpers, which the Unity
+    layer implements itself; the Unity configuration leaves them out and produces the assembly that ships in
+    Unity/Plugins, so the two versions of the extension methods can never be compiled together.
+  -->
+  <PropertyGroup Condition="'$(Configuration)' != 'Unity'">
+    <DefineConstants>$(DefineConstants);ACCESSKING_STANDALONE</DefineConstants>
+  </PropertyGroup>
   <!-- Unity consumes the core as a precompiled assembly, keep the copy in the package up to date. -->
-  <Target Name="CopyToUnityPackage" AfterTargets="Build" Condition="'$(Configuration)' == 'Release'">
+  <Target Name="CopyToUnityPackage" AfterTargets="Build" Condition="'$(Configuration)' == 'Unity'">
     <!-- The symbols and the xml docs travel with the assembly, so the package can be stepped into and documented. -->
     <ItemGroup>
       <UnityPluginFile Include="$(TargetPath)" />

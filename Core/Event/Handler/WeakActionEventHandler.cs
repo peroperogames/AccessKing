@@ -3,11 +3,11 @@
  * Author: Gatongone
  * Created On: 2023/12/05 16:12:42
  */
+
 using System;
 using System.Reflection;
 
 namespace PeroTools2.AccessKing;
-
 
 /// <summary>
 /// Event handler with System.Action which would reference the event provider by weak.

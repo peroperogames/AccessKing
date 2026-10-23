@@ -3,6 +3,7 @@
  * Author: Gatongone
  * Created On: 2023/05/23 16:05:45
  */
+
 using System;
 
 namespace PeroTools2.AccessKing;
@@ -81,7 +82,8 @@ public static class EventBusWeakExtensions
     /// <param name="action">The delegate which convert to ActionEventHandler.</param>
     /// <param name="provider">The event provider which should contains the delegation that from instance method.</param>
     [Obsolete("Use SubscribeWeakly<T1, T2, T3, T4, T5, T6>(object provider, Action<T1, T2, T3, T4, T5, T6> action) instead.")]
-    public static void SubscribeWeakly<T1, T2, T3, T4, T5, T6>(this IWeakEventSubscriable<ParameterNotification<T1, T2, T3, T4, T5, T6>> eventBus, Action<T1, T2, T3, T4, T5, T6> action, object provider)
+    public static void SubscribeWeakly<T1, T2, T3, T4, T5, T6>(this IWeakEventSubscriable<ParameterNotification<T1, T2, T3, T4, T5, T6>> eventBus, Action<T1, T2, T3, T4, T5, T6> action,
+        object provider)
         => eventBus.SubscribeWeakly(new WeakActionEventHandler<T1, T2, T3, T4, T5, T6>(action, provider));
 
     /// <summary>
@@ -91,7 +93,8 @@ public static class EventBusWeakExtensions
     /// <param name="action">The delegate which convert to ActionEventHandler.</param>
     /// <param name="provider">The event provider which should contains the delegation that from instance method.</param>
     [Obsolete("Use SubscribeWeakly<T1, T2, T3, T4, T5, T6, T7>(object provider, Action<T1, T2, T3, T4, T5, T6, T7> action) instead.")]
-    public static void SubscribeWeakly<T1, T2, T3, T4, T5, T6, T7>(this IWeakEventSubscriable<ParameterNotification<T1, T2, T3, T4, T5, T6, T7>> eventBus, Action<T1, T2, T3, T4, T5, T6, T7> action, object provider)
+    public static void SubscribeWeakly<T1, T2, T3, T4, T5, T6, T7>(this IWeakEventSubscriable<ParameterNotification<T1, T2, T3, T4, T5, T6, T7>> eventBus, Action<T1, T2, T3, T4, T5, T6, T7> action,
+        object provider)
         => eventBus.SubscribeWeakly(new WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7>(action, provider));
 
     /// <summary>
@@ -101,7 +104,8 @@ public static class EventBusWeakExtensions
     /// <param name="action">The delegate which convert to ActionEventHandler.</param>
     /// <param name="provider">The event provider which should contains the delegation that from instance method.</param>
     [Obsolete("Use SubscribeWeakly<T1, T2, T3, T4, T5, T6, T7, T8>(object provider, Action<T1, T2, T3, T4, T5, T6, T7, T8> action) instead.")]
-    public static void SubscribeWeakly<T1, T2, T3, T4, T5, T6, T7, T8>(this IWeakEventSubscriable<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8>> eventBus, Action<T1, T2, T3, T4, T5, T6, T7, T8> action, object provider)
+    public static void SubscribeWeakly<T1, T2, T3, T4, T5, T6, T7, T8>(this IWeakEventSubscriable<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8>> eventBus,
+        Action<T1, T2, T3, T4, T5, T6, T7, T8> action, object provider)
         => eventBus.SubscribeWeakly(new WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8>(action, provider));
 
     /// <summary>
@@ -111,7 +115,8 @@ public static class EventBusWeakExtensions
     /// <param name="action">The delegate which convert to ActionEventHandler.</param>
     /// <param name="provider">The event provider which should contains the delegation that from instance method.</param>
     [Obsolete("Use SubscribeWeakly<T1, T2, T3, T4, T5, T6, T7, T8, T9>(object provider, Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> action) instead.")]
-    public static void SubscribeWeakly<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this IWeakEventSubscriable<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9>> eventBus, Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> action, object provider)
+    public static void SubscribeWeakly<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this IWeakEventSubscriable<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9>> eventBus,
+        Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> action, object provider)
         => eventBus.SubscribeWeakly(new WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9>(action, provider));
 
     /// <summary>
@@ -121,7 +126,8 @@ public static class EventBusWeakExtensions
     /// <param name="action">The delegate which convert to ActionEventHandler.</param>
     /// <param name="provider">The event provider which should contains the delegation that from instance method.</param>
     [Obsolete("Use SubscribeWeakly<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(object provider, Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> action) instead.")]
-    public static void SubscribeWeakly<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this IWeakEventSubscriable<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>> eventBus, Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> action, object provider)
+    public static void SubscribeWeakly<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this IWeakEventSubscriable<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>> eventBus,
+        Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> action, object provider)
         => eventBus.SubscribeWeakly(new WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(action, provider));
 
     /// <summary>
@@ -131,7 +137,8 @@ public static class EventBusWeakExtensions
     /// <param name="action">The delegate which convert to ActionEventHandler.</param>
     /// <param name="provider">The event provider which should contains the delegation that from instance method.</param>
     [Obsolete("Use SubscribeWeakly<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(object provider, Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> action) instead.")]
-    public static void SubscribeWeakly<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this IWeakEventSubscriable<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>> eventBus, Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> action, object provider)
+    public static void SubscribeWeakly<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this IWeakEventSubscriable<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>> eventBus,
+        Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> action, object provider)
         => eventBus.SubscribeWeakly(new WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(action, provider));
 
     /// <summary>
@@ -141,7 +148,8 @@ public static class EventBusWeakExtensions
     /// <param name="action">The delegate which convert to ActionEventHandler.</param>
     /// <param name="provider">The event provider which should contains the delegation that from instance method.</param>
     [Obsolete("Use SubscribeWeakly<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(object provider, Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> action) instead.")]
-    public static void SubscribeWeakly<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this IWeakEventSubscriable<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>> eventBus, Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> action, object provider)
+    public static void SubscribeWeakly<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this IWeakEventSubscriable<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>> eventBus,
+        Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> action, object provider)
         => eventBus.SubscribeWeakly(new WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(action, provider));
 
     /// <summary>
@@ -151,7 +159,9 @@ public static class EventBusWeakExtensions
     /// <param name="action">The delegate which convert to ActionEventHandler.</param>
     /// <param name="provider">The event provider which should contains the delegation that from instance method.</param>
     [Obsolete("Use SubscribeWeakly<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(object provider, Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> action) instead.")]
-    public static void SubscribeWeakly<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this IWeakEventSubscriable<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>> eventBus, Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> action, object provider)
+    public static void SubscribeWeakly<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(
+        this IWeakEventSubscriable<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>> eventBus, Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> action,
+        object provider)
         => eventBus.SubscribeWeakly(new WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(action, provider));
 
     /// <summary>
@@ -161,7 +171,9 @@ public static class EventBusWeakExtensions
     /// <param name="action">The delegate which convert to ActionEventHandler.</param>
     /// <param name="provider">The event provider which should contains the delegation that from instance method.</param>
     [Obsolete("Use SubscribeWeakly<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(object provider, Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> action) instead.")]
-    public static void SubscribeWeakly<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this IWeakEventSubscriable<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>> eventBus, Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> action, object provider)
+    public static void SubscribeWeakly<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(
+        this IWeakEventSubscriable<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>> eventBus,
+        Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> action, object provider)
         => eventBus.SubscribeWeakly(new WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(action, provider));
 
     /// <summary>
@@ -170,8 +182,11 @@ public static class EventBusWeakExtensions
     /// <param name="eventBus">Event bus.</param>
     /// <param name="action">The delegate which convert to ActionEventHandler.</param>
     /// <param name="provider">The event provider which should contains the delegation that from instance method.</param>
-    [Obsolete("Use SubscribeWeakly<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(object provider, Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> action) instead.")]
-    public static void SubscribeWeakly<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this IWeakEventSubscriable<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>> eventBus, Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> action, object provider)
+    [Obsolete(
+        "Use SubscribeWeakly<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(object provider, Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> action) instead.")]
+    public static void SubscribeWeakly<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(
+        this IWeakEventSubscriable<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>> eventBus,
+        Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> action, object provider)
         => eventBus.SubscribeWeakly(new WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(action, provider));
 
     /// <summary>
@@ -234,7 +249,8 @@ public static class EventBusWeakExtensions
     /// <param name="eventBus">Event bus.</param>
     /// <param name="provider">The event provider which should contains the delegation that from instance method.</param>
     /// <param name="action">The delegate which convert to ActionEventHandler.</param>
-    public static void SubscribeWeakly<T1, T2, T3, T4, T5, T6>(this IWeakEventSubscriable<ParameterNotification<T1, T2, T3, T4, T5, T6>> eventBus, object provider, Action<T1, T2, T3, T4, T5, T6> action)
+    public static void SubscribeWeakly<T1, T2, T3, T4, T5, T6>(this IWeakEventSubscriable<ParameterNotification<T1, T2, T3, T4, T5, T6>> eventBus, object provider,
+        Action<T1, T2, T3, T4, T5, T6> action)
         => eventBus.SubscribeWeakly(new WeakActionEventHandler<T1, T2, T3, T4, T5, T6>(action, provider));
 
     /// <summary>
@@ -243,7 +259,8 @@ public static class EventBusWeakExtensions
     /// <param name="eventBus">Event bus.</param>
     /// <param name="provider">The event provider which should contains the delegation that from instance method.</param>
     /// <param name="action">The delegate which convert to ActionEventHandler.</param>
-    public static void SubscribeWeakly<T1, T2, T3, T4, T5, T6, T7>(this IWeakEventSubscriable<ParameterNotification<T1, T2, T3, T4, T5, T6, T7>> eventBus, object provider, Action<T1, T2, T3, T4, T5, T6, T7> action)
+    public static void SubscribeWeakly<T1, T2, T3, T4, T5, T6, T7>(this IWeakEventSubscriable<ParameterNotification<T1, T2, T3, T4, T5, T6, T7>> eventBus, object provider,
+        Action<T1, T2, T3, T4, T5, T6, T7> action)
         => eventBus.SubscribeWeakly(new WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7>(action, provider));
 
     /// <summary>
@@ -252,7 +269,8 @@ public static class EventBusWeakExtensions
     /// <param name="eventBus">Event bus.</param>
     /// <param name="provider">The event provider which should contains the delegation that from instance method.</param>
     /// <param name="action">The delegate which convert to ActionEventHandler.</param>
-    public static void SubscribeWeakly<T1, T2, T3, T4, T5, T6, T7, T8>(this IWeakEventSubscriable<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8>> eventBus, object provider, Action<T1, T2, T3, T4, T5, T6, T7, T8> action)
+    public static void SubscribeWeakly<T1, T2, T3, T4, T5, T6, T7, T8>(this IWeakEventSubscriable<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8>> eventBus, object provider,
+        Action<T1, T2, T3, T4, T5, T6, T7, T8> action)
         => eventBus.SubscribeWeakly(new WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8>(action, provider));
 
     /// <summary>
@@ -261,7 +279,8 @@ public static class EventBusWeakExtensions
     /// <param name="eventBus">Event bus.</param>
     /// <param name="provider">The event provider which should contains the delegation that from instance method.</param>
     /// <param name="action">The delegate which convert to ActionEventHandler.</param>
-    public static void SubscribeWeakly<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this IWeakEventSubscriable<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9>> eventBus, object provider, Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> action)
+    public static void SubscribeWeakly<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this IWeakEventSubscriable<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9>> eventBus, object provider,
+        Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> action)
         => eventBus.SubscribeWeakly(new WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9>(action, provider));
 
     /// <summary>
@@ -270,7 +289,8 @@ public static class EventBusWeakExtensions
     /// <param name="eventBus">Event bus.</param>
     /// <param name="provider">The event provider which should contains the delegation that from instance method.</param>
     /// <param name="action">The delegate which convert to ActionEventHandler.</param>
-    public static void SubscribeWeakly<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this IWeakEventSubscriable<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>> eventBus, object provider, Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> action)
+    public static void SubscribeWeakly<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this IWeakEventSubscriable<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>> eventBus, object provider,
+        Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> action)
         => eventBus.SubscribeWeakly(new WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(action, provider));
 
     /// <summary>
@@ -279,7 +299,8 @@ public static class EventBusWeakExtensions
     /// <param name="eventBus">Event bus.</param>
     /// <param name="provider">The event provider which should contains the delegation that from instance method.</param>
     /// <param name="action">The delegate which convert to ActionEventHandler.</param>
-    public static void SubscribeWeakly<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this IWeakEventSubscriable<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>> eventBus, object provider, Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> action)
+    public static void SubscribeWeakly<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this IWeakEventSubscriable<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>> eventBus,
+        object provider, Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> action)
         => eventBus.SubscribeWeakly(new WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(action, provider));
 
     /// <summary>
@@ -288,7 +309,8 @@ public static class EventBusWeakExtensions
     /// <param name="eventBus">Event bus.</param>
     /// <param name="provider">The event provider which should contains the delegation that from instance method.</param>
     /// <param name="action">The delegate which convert to ActionEventHandler.</param>
-    public static void SubscribeWeakly<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this IWeakEventSubscriable<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>> eventBus, object provider, Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> action)
+    public static void SubscribeWeakly<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(this IWeakEventSubscriable<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>> eventBus,
+        object provider, Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> action)
         => eventBus.SubscribeWeakly(new WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(action, provider));
 
     /// <summary>
@@ -297,7 +319,9 @@ public static class EventBusWeakExtensions
     /// <param name="eventBus">Event bus.</param>
     /// <param name="provider">The event provider which should contains the delegation that from instance method.</param>
     /// <param name="action">The delegate which convert to ActionEventHandler.</param>
-    public static void SubscribeWeakly<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(this IWeakEventSubscriable<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>> eventBus, object provider, Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> action)
+    public static void SubscribeWeakly<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(
+        this IWeakEventSubscriable<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>> eventBus, object provider,
+        Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> action)
         => eventBus.SubscribeWeakly(new WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(action, provider));
 
     /// <summary>
@@ -306,7 +330,9 @@ public static class EventBusWeakExtensions
     /// <param name="eventBus">Event bus.</param>
     /// <param name="provider">The event provider which should contains the delegation that from instance method.</param>
     /// <param name="action">The delegate which convert to ActionEventHandler.</param>
-    public static void SubscribeWeakly<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(this IWeakEventSubscriable<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>> eventBus, object provider, Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> action)
+    public static void SubscribeWeakly<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(
+        this IWeakEventSubscriable<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>> eventBus, object provider,
+        Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> action)
         => eventBus.SubscribeWeakly(new WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(action, provider));
 
     /// <summary>
@@ -315,7 +341,9 @@ public static class EventBusWeakExtensions
     /// <param name="eventBus">Event bus.</param>
     /// <param name="provider">The event provider which should contains the delegation that from instance method.</param>
     /// <param name="action">The delegate which convert to ActionEventHandler.</param>
-    public static void SubscribeWeakly<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(this IWeakEventSubscriable<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>> eventBus, object provider, Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> action)
+    public static void SubscribeWeakly<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(
+        this IWeakEventSubscriable<ParameterNotification<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>> eventBus, object provider,
+        Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> action)
         => eventBus.SubscribeWeakly(new WeakActionEventHandler<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(action, provider));
 
     #endregion

@@ -625,3 +625,7 @@ public void Start()
 
 private void Test(int value) => Debug.Log("Test value = " + value);
 ```
+
+## Known Issues
+
+- **NativeAOT cannot create weak delegate subscriptions whose notification carries value type parameters.** `SubscribeWeakly(owner, action)` builds its typed invoker through reflection, and NativeAOT only compiles generic instantiations whose type arguments are all reference types. A subscription over a value type parameter, for example `ParameterEventBus<int>`, therefore throws `NotSupportedException: ... is missing native code or metadata` on the first subscription, while parameterless subscriptions (`Empty`) and reference type parameters work. The limitation is NativeAOT only: the JIT never hits it, and Unity IL2CPP was verified with `Managed Stripping Level = High` plus `stripEngineCode` enabled, where all three cases pass without any `[Preserve]` attribute. Under NativeAOT subscribe an `IEventHandler<TNotification>` instead of a delegate, because that path only holds a weak reference and creates no generics at runtime.

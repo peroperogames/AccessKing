@@ -88,7 +88,7 @@ Two cross domain message type kinds are provided by default:
 - **Event** — reacts to a system change. An event must not decide a result.
 - **Command** — causes a system state change. A command may produce a result.
 
-## AccessBuss
+## Access bus
 
 An access bus is an abstraction of a message pipeline that allows a specific type of message to be passed across domains; it is described by the `IAccessBus` interface.
 

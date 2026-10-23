@@ -6,7 +6,15 @@ jobs:
   call-publish:
     if: github.actor != 'perotoolsbot[bot]'
     uses: peroperogames/ToolsWorkflow/.github/workflows/publish-npm.yml@main
+    # A called workflow cannot grant itself permission the caller did not give, and
+    # the npmjs/nuget channels authenticate with OIDC rather than a token.
+    permissions:
+      contents: write   # the version commit the publish pushes
+      id-token: write   # the OIDC token npmjs and nuget.org exchange
     with:
-          working-directory: 'Unity'
-          channels: peronpm,npmjs,nuget
+      # No `channels` line: PeroNPM is the workflow's default, and that is what this
+      # repository publishes to today. The release that publishes to npmjs adds
+      # `channels: peronpm,npmjs` — after the package exists there and its trusted
+      # publisher is configured.
+      working-directory: 'Unity'
     secrets: inherit

@@ -4,21 +4,19 @@
  * Created On: 2026/10/22 19:10:00
  */
 
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using NUnit.Framework;
 
 namespace PeroTools2.AccessKing.Tests;
 
 /// <summary>
-/// Covers the Task based async helpers of the standalone build of the core assembly. The Unity package ships the
-/// default build instead, which leaves these helpers to the Unity layer.
+/// Covers the Task based async helpers. The Unity configuration leaves them to the Unity layer, which implements the
+/// same helpers on top of UniTask, so this fixture is compiled out of that configuration.
 /// </summary>
-[TestFixture]
-internal sealed class CommandOperationAsyncTests
+public sealed class CommandOperationAsyncTest
 {
     [Test]
-    public async Task GetResultsAsync_collects_task_results()
+    public async Task GetResultsAsyncTaskResultsTest()
     {
         var bus = NewBus(new TaskResultHandler(5));
 
@@ -28,7 +26,7 @@ internal sealed class CommandOperationAsyncTests
     }
 
     [Test]
-    public async Task GetResultsAsync_mixes_sync_and_task_results()
+    public async Task GetResultsAsyncMixedResultsTest()
     {
         var factory = new RegistryCommandHandlerFactory();
         factory.RegisterHandler(new NineHandler());
@@ -41,7 +39,7 @@ internal sealed class CommandOperationAsyncTests
     }
 
     [Test]
-    public async Task WhenAllDone_waits_for_every_async_handler()
+    public async Task WhenAllDoneTest()
     {
         var handler = new SignalingTaskHandler();
         var bus = NewBus(handler);
@@ -52,7 +50,7 @@ internal sealed class CommandOperationAsyncTests
     }
 
     [Test]
-    public async Task WhenAnyDone_completes_with_at_least_one_handler()
+    public async Task WhenAnyDoneTest()
     {
         var handler = new SignalingTaskHandler();
         var bus = NewBus(handler);
@@ -63,7 +61,7 @@ internal sealed class CommandOperationAsyncTests
     }
 
     [Test]
-    public void GetAllAsyncTasks_collects_the_pending_tasks()
+    public void GetAllAsyncTasksTest()
     {
         var bus = NewBus(new SignalingTaskHandler());
 

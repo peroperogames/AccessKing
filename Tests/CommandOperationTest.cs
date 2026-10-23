@@ -9,11 +9,10 @@ using NUnit.Framework;
 
 namespace PeroTools2.AccessKing.Tests;
 
-[TestFixture]
-internal sealed class CommandOperationTests
+public sealed class CommandOperationTest
 {
     [Test]
-    public void Consuming_the_results_twice_throws()
+    public void GetResultsTwiceTest()
     {
         var bus = NewBus(new NineHandler());
         var operation = bus.Execute(new Counter());
@@ -24,7 +23,7 @@ internal sealed class CommandOperationTests
     }
 
     [Test]
-    public void Reading_the_default_operation_throws()
+    public void DefaultOperationGetResultsTest()
     {
         CommandOperation operation = default;
 
@@ -32,7 +31,7 @@ internal sealed class CommandOperationTests
     }
 
     [Test]
-    public void Dispose_is_idempotent_and_keeps_the_pool_usable()
+    public void DisposeRepeatTest()
     {
         var bus = NewBus(new NineHandler());
 
@@ -49,7 +48,7 @@ internal sealed class CommandOperationTests
     }
 
     [Test]
-    public void A_throwing_handler_does_not_poison_the_pooled_collections()
+    public void ThrowingHandlerKeepsPoolUsableTest()
     {
         var throwingBus = NewBus(new ThrowingCommandHandler());
         Assert.Throws<InvalidOperationException>(() => throwingBus.Execute(new Counter()).Dispose());

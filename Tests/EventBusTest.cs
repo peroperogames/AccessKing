@@ -122,7 +122,7 @@ public sealed class EventBusTest
     }
 
     [Test]
-    public void ConsecutiveWeakEventCalls()
+    public void ConsecutiveWeakEventCallsTest()
     {
         IEventBus<Empty> bus = new EventBus<Empty>();
         {

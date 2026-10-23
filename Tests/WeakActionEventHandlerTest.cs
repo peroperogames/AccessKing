@@ -14,8 +14,7 @@ namespace PeroTools2.AccessKing.Tests;
 /// Covers the weak subscription that lives in the engine free assembly. The host installs the lifetime comparer,
 /// these tests install a fake one that counts a flagged owner as dead.
 /// </summary>
-[TestFixture]
-internal sealed class WeakActionEventHandlerTest
+public sealed class WeakActionEventHandlerTest
 {
     private IEqualityComparer<object> m_Previous;
 
@@ -30,7 +29,7 @@ internal sealed class WeakActionEventHandlerTest
     public void TearDown() => OwnerLifetime.comparer = m_Previous;
 
     [Test]
-    public void Broadcast_reaches_a_weakly_subscribed_delegate()
+    public void BroadcastWeakSubscriptionTest()
     {
         var bus = new ParameterEventBus<int>();
         var owner = new FakeOwner();
@@ -42,7 +41,7 @@ internal sealed class WeakActionEventHandlerTest
     }
 
     [Test]
-    public void Unsubscribe_locates_the_weak_subscription_from_a_fresh_delegate()
+    public void UnsubscribeWithFreshDelegateTest()
     {
         var bus = new ParameterEventBus<int>();
         var owner = new FakeOwner();
@@ -56,7 +55,7 @@ internal sealed class WeakActionEventHandlerTest
     }
 
     [Test]
-    public void A_destroyed_owner_counts_as_dead()
+    public void DestroyedOwnerDeadTest()
     {
         var bus = new ParameterEventBus<int>();
         var owner = new FakeOwner();
@@ -69,7 +68,7 @@ internal sealed class WeakActionEventHandlerTest
     }
 
     [Test]
-    public void The_handler_dies_when_the_delegate_provider_is_collected()
+    public void HandlerDiesWithCollectedProviderTest()
     {
         var handler = CreateHandler();
         Assert.That(handler.isAlive, Is.True);

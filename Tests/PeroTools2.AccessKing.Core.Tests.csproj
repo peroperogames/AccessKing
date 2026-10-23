@@ -1,20 +1,29 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <LangVersion>14</LangVersion>
-    <Nullable>disable</Nullable>
-    <ImplicitUsings>disable</ImplicitUsings>
-    <IsPackable>false</IsPackable>
-    <AssemblyName>PeroTools2.AccessKing.Core.Tests</AssemblyName>
-    <RootNamespace>PeroTools2.AccessKing.Tests</RootNamespace>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <LangVersion>14</LangVersion>
+        <Nullable>disable</Nullable>
+        <ImplicitUsings>disable</ImplicitUsings>
+        <IsPackable>false</IsPackable>
+        <AssemblyName>PeroTools2.AccessKing.Core.Tests</AssemblyName>
+        <RootNamespace>PeroTools2.AccessKing.Tests</RootNamespace>
+        <Configurations>Debug;Release;Unity</Configurations>
+    </PropertyGroup>
+    <!--
+      The Unity configuration of the core leaves the Task based async helpers out, so this configuration drops the tests
+      that cover them as well. Every configuration then builds a consistent pair of assemblies, and no configuration
+      points the tests at members the core it was built against does not have.
+    -->
+    <ItemGroup Condition="'$(Configuration)' == 'Unity'">
+        <Compile Remove="CommandOperationAsyncTest.cs"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="../Core/PeroTools2.AccessKing.Core.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
-    <PackageReference Include="NUnit" Version="4.2.2" />
-    <PackageReference Include="NUnit3TestAdapter" Version="4.6.0" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="../Core/PeroTools2.AccessKing.Core.csproj"/>
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1"/>
+        <PackageReference Include="NUnit" Version="4.2.2"/>
+        <PackageReference Include="NUnit3TestAdapter" Version="4.6.0"/>
+    </ItemGroup>
 </Project>

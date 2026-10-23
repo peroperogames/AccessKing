@@ -1,36 +1,49 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
-    <LangVersion>14</LangVersion>
-    <AssemblyName>PeroTools2.AccessKing.Core</AssemblyName>
-    <RootNamespace>PeroTools2.AccessKing</RootNamespace>
-    <Nullable>disable</Nullable>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>netstandard2.1</TargetFramework>
+        <LangVersion>14</LangVersion>
+        <AssemblyName>PeroTools2.AccessKing.Core</AssemblyName>
+        <RootNamespace>PeroTools2.AccessKing</RootNamespace>
+        <Nullable>disable</Nullable>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <Version>0.2.5</Version>
+        <AssemblyVersion>0.2.5</AssemblyVersion>
+        <FileVersion>0.2.5</FileVersion>
+        <Title>AccessKing</Title>
+        <Authors>PeroperoGames</Authors>
+        <Description>Event Bus &amp; Command Bus</Description>
+        <Copyright>© 2026 PeroperoGames</Copyright>
+        <PackageProjectUrl>https://github.com/peroperogames/AccessKing</PackageProjectUrl>
+        <PackageLicenseUrl>https://github.com/peroperogames/AccessKing/LICENSE</PackageLicenseUrl>
+        <RepositoryUrl>https://github.com/peroperogames/AccessKing</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageTags>event-bus;command-bus</PackageTags>
+        <Company>PeroperoGames</Company>
+    </PropertyGroup>
 
-  <PropertyGroup>
-    <Configurations>Debug;Release;Unity</Configurations>
-  </PropertyGroup>
-  <!--
-    The engine free core builds in two flavours. Debug and Release carry the Task based async helpers, which the Unity
-    layer implements itself; the Unity configuration leaves them out and produces the assembly that ships in
-    Unity/Plugins, so the two versions of the extension methods can never be compiled together.
-  -->
-  <PropertyGroup Condition="'$(Configuration)' != 'Unity'">
-    <DefineConstants>$(DefineConstants);ACCESSKING_STANDALONE</DefineConstants>
-  </PropertyGroup>
-  <!-- Unity consumes the core as a precompiled assembly, keep the copy in the package up to date. -->
-  <Target Name="CopyToUnityPackage" AfterTargets="Build" Condition="'$(Configuration)' == 'Unity'">
-    <!-- The symbols and the xml docs travel with the assembly, so the package can be stepped into and documented. -->
-    <ItemGroup>
-      <UnityPluginFile Include="$(TargetPath)" />
-      <UnityPluginFile Include="$(TargetDir)$(AssemblyName).pdb" />
-      <UnityPluginFile Include="$(TargetDir)$(AssemblyName).xml" />
+    <PropertyGroup>
+        <Configurations>Debug;Release;Unity</Configurations>
+    </PropertyGroup>
+    <!--
+      The engine free core builds two variants. Debug and Release carry the Task based async helpers, which the Unity
+      layer implements itself; the Unity configuration leaves the file out of the compilation and produces the assembly
+      that ships in Unity/Plugins, so the two versions of the extension methods can never be compiled together.
+    -->
+    <ItemGroup Condition="'$(Configuration)' == 'Unity'">
+        <Compile Remove="Command/Operation/CommandOperationAsyncExtensions.cs"/>
     </ItemGroup>
-    <Copy SourceFiles="@(UnityPluginFile)" DestinationFolder="$(MSBuildThisFileDirectory)../Unity/Plugins/" SkipUnchangedFiles="true" />
-  </Target>
-  <!-- The unity layer implements the internal invocation interfaces, keep the public surface tight. -->
-  <ItemGroup>
-    <InternalsVisibleTo Include="PeroTools2.AccessKing" />
-  </ItemGroup>
+    <!-- Unity consumes the core as a precompiled assembly, keep the copy in the package up to date. -->
+    <Target Name="CopyToUnityPackage" AfterTargets="Build" Condition="'$(Configuration)' == 'Unity'">
+        <!-- The symbols and the xml docs travel with the assembly, so the package can be stepped into and documented. -->
+        <ItemGroup>
+            <UnityPluginFile Include="$(TargetPath)"/>
+            <UnityPluginFile Include="$(TargetDir)$(AssemblyName).pdb"/>
+            <UnityPluginFile Include="$(TargetDir)$(AssemblyName).xml"/>
+        </ItemGroup>
+        <Copy SourceFiles="@(UnityPluginFile)" DestinationFolder="$(MSBuildThisFileDirectory)../Unity/Plugins/" SkipUnchangedFiles="true"/>
+    </Target>
+    <!-- The unity layer implements the internal invocation interfaces, keep the public surface tight. -->
+    <ItemGroup>
+        <InternalsVisibleTo Include="PeroTools2.AccessKing"/>
+    </ItemGroup>
 </Project>

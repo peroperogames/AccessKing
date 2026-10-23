@@ -4,7 +4,6 @@
  * Created On: 2026/10/22 19:00:00
  */
 
-#if ACCESSKING_STANDALONE
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -12,8 +11,8 @@ using System.Threading.Tasks;
 namespace PeroTools2.AccessKing;
 
 /// <summary>
-/// Task based asynchronous result helpers. They are only compiled into the standalone build of the core assembly,
-/// because the Unity package implements the same helpers on top of UniTask.
+/// Task based asynchronous result helpers. The Unity configuration leaves this file out of the compilation, because
+/// the Unity layer implements the same helpers on top of UniTask.
 /// </summary>
 public static class CommandOperationAsyncExtensions
 {
@@ -194,4 +193,3 @@ public static class CommandOperationAsyncExtensions
         }
     }
 }
-#endif

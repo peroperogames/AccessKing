@@ -81,20 +81,22 @@ openupm add com.prpr.accessking
 
 | Term | Meaning |
 | --- | --- |
-| **Bus** | The communication structure defined on top of an entity. A bus is bound to exactly one notification type, which gives the bus its meaning. |
+| **Bus** | A bus is a communication structure defined on an entity; a bus may have unique domain access message types to determine the semantics of bus messages. |
 | **Notification** | The data that travels through a bus. Any type implementing `INotification`. |
-| **Message** | The abstraction of the data exchanged between buses: a notification plus the convention that produced it. Events and commands are the two message kinds. |
+| **Message** | Message is an abstraction of the data exchanged between buses; it includes notifications and the conventions for exchanging notifications between entities. The message category is cross domain message type. |
 | **Handler** | The entity attached to a bus that reacts to the notifications it receives. |
 | **Schedule** | A collection of bus instances, i.e. a service locator. It binds every bus to a theme so that business code does not need to see the bus implementation. |
 
-Two message kinds are provided by default:
+Two cross domain message type kinds are provided by default:
 
 - **Event** — reacts to a system change. An event must not decide a result.
 - **Command** — causes a system state change. A command may produce a result.
 
-Both are described by `IAccessBus`, the abstract message pipeline that allows a message kind to cross domains.
+## Access bus
 
-## Event bus
+An access bus is an abstraction of a message pipeline that allows a specific type of message to be passed across domains; it is described by the `IAccessBus` interface.
+
+### Event bus
 
 An event bus broadcasts a single notification type to all of its handlers.
 
@@ -108,7 +110,7 @@ public struct MyNotification : INotification
 public class MyEvents : EventBus<MyNotification> { }
 ```
 
-### Subscribe, unsubscribe and broadcast
+#### Subscribe, unsubscribe and broadcast
 
 A type implementing `IEventHandler<TNotification>` can be registered on the bus of the matching notification type:
 
@@ -164,7 +166,7 @@ public class GameManager : IDisposable
 
 `Broadcast`, `Subscribe` and `Unsubscribe` are also available as `Action`/`Func` overloads; the bus then waits for the `ParameterNotification<T1...T16>` or `Empty` notification type.
 
-### Delegate support
+#### Delegate support
 
 ```csharp
 // A bus that accepts a delegate with one parameter.
@@ -208,7 +210,7 @@ public class Bar : IDisposable
 }
 ```
 
-### Weak subscriptions
+#### Weak subscriptions
 
 An event bus may hold a **weak** reference to its handler. The bus then does not keep the handler alive: once the handler is collected (or, for a `UnityEngine.Object`, destroyed), the subscription is dropped automatically. This is the usual case for a `MonoBehaviour` that must stop listening after `Destroy`.
 
@@ -311,7 +313,7 @@ Two rules matter here:
 HurtEvents.instance.Unsubscribe(Handle); // Works for the weak subscription as well.
 ```
 
-## Command bus
+### Command bus
 
 A command bus changes system state. Handlers are usually long lived and created by a **handler factory**, which lets the same bus work for many handler sets.
 
@@ -354,7 +356,7 @@ bus.AddFactory(new RegistryCommandHandlerFactory());
 bus.AddFactory(new MyFactory());
 ```
 
-### Synchronous results
+#### Synchronous results
 
 A handler may expose a result by adding a second generic argument. The result type does not have to be unique: `GetResults<TResult>()` filters the produced results by type.
 
@@ -418,7 +420,7 @@ operation.GetResults(cache, autoRelease: false);
 > **Warning**
 > Reading results synchronously blocks the calling thread. If a handler queues asynchronous work that resumes on the Unity thread, waiting for it from the same thread deadlocks. Use `GetResultsAsync` (below) or keep the asynchronous work off the Unity thread.
 
-### Asynchronous results
+#### Asynchronous results
 
 `IAsyncCommandHandler<TNotification>` returns a `UniTask`, and `IAsyncCommandHandler<TNotification, TResult>` returns a `UniTask<TResult>`:
 
@@ -476,7 +478,7 @@ await commandBus.Execute(ref myNotification).WhenAnyDone();
 await commandBus.Execute(ref myNotification).WhenAllDone();
 ```
 
-### Func and Action handlers
+#### Func and Action handlers
 
 A command bus bound to `ParameterNotification<T1...T16>` or `Empty` accepts delegates directly:
 

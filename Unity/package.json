@@ -2,7 +2,7 @@
   "name": "com.prpr.accessking",
   "displayName": "AccessKing",
   "description": "PeroTools2's access bus for cross-domain service access: event bus, command bus and theme keyed schedules.",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "unity": "2021.3",
   "author": {
     "name": "Peropero",
@@ -17,8 +17,5 @@
       "path": "Samples~"
     }
   ],
-  "type": "tool",
-  "dependencies": {
-    "com.cysharp.unitask": "2.5.5"
-  }
+  "type": "tool"
 }

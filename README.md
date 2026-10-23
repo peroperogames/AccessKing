@@ -10,7 +10,11 @@ A cross-domain message bus for Unity: **event bus**, **command bus** and theme k
 ## Requirements
 
 - Unity 2021.3 or later.
-- [UniTask](https://github.com/Cysharp/UniTask) `2.5.5` (`com.cysharp.unitask`) for the asynchronous command results.
+- [UniTask](https://github.com/Cysharp/UniTask) (`com.cysharp.unitask`) is **optional**. When the package is present the asynchronous command handlers and the operation helpers are `UniTask` based; when it is absent they fall back to `Task` and the package has no external dependency. Declare it yourself in your project manifest if you want the `UniTask` flavour:
+
+  ```json
+  { "dependencies": { "com.cysharp.unitask": "2.5.5" } }
+  ```
 
 ## Install
 

@@ -7,7 +7,9 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+#if ACCESSKING_UNITASK
 using Cysharp.Threading.Tasks;
+#endif
 using NUnit.Framework;
 using UnityEngine;
 
@@ -403,11 +405,19 @@ namespace PeroTools2.AccessKing.Editor.Tests
 
         private sealed class AsyncCommandHandler : IAsyncCommandHandler<Empty>
         {
+#if ACCESSKING_UNITASK
             void ICommandHandler<Empty>.Handle(ref Empty notification) { }
 
             UniTask IResultAvailable<UniTask>.GetResult() => UniTask.CompletedTask;
 
             object IResultAvailable.GetResult() => UniTask.CompletedTask;
+#else
+            void ICommandHandler<Empty>.Handle(ref Empty notification) { }
+
+            Task IResultAvailable<Task>.GetResult() => Task.CompletedTask;
+
+            object IResultAvailable.GetResult() => Task.CompletedTask;
+#endif
         }
 
         private sealed class ResultCommandHandler : ICommandHandler<Empty, string>

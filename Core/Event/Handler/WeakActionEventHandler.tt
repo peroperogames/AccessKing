@@ -7,10 +7,8 @@
  * Author: Gatongone
  * Created On: 2023/12/05 16:12:42
  */
-
 using System;
 using System.Reflection;
-using UnityEngine.Scripting;
 
 namespace PeroTools2.AccessKing
 {
@@ -37,8 +35,6 @@ namespace PeroTools2.AccessKing
     /// </summary>
     public sealed class <#= handler #> : <#= eventHandler #>, <#= weakEventHandler #>, IWeakEventInvocation, IEquatable<<#= handler #>>
     {
-        [Preserve]
-        private static ActionInvoker<object> s_Preserve;
 
         /// <summary>
         /// Delegate with instance method provider.
@@ -48,7 +44,7 @@ namespace PeroTools2.AccessKing
         /// <summary>
         /// The owner that control this weak event's lifecycle.
         /// </summary>
-        private readonly WeakReference<UnityEngine.Object> m_Owner;
+        private readonly WeakReference<object> m_Owner;
 
         /// <summary>
         /// Raw method of the event provider.
@@ -69,16 +65,16 @@ namespace PeroTools2.AccessKing
         private object currentOwner => m_Owner.TryGetTarget(out var owner) ? owner : null;
 
         /// <summary>Whether the provider that owns this handler is still alive.</summary>
-        public bool isAlive => m_Owner.TryGetTarget(out var owner) && owner != null && m_Invocation.isAlive;
+        public bool isAlive => m_Owner.TryGetTarget(out var owner) && !OwnerLifetime.comparer.Equals(owner, null) && m_Invocation.isAlive;
 
         /// <summary>
         /// Create a weak event handler from a System.Action.
         /// </summary>
         /// <param name="delegation">Delegation for creating EventHandler.</param>
         /// <param name="owner">The owner that control this weak event's lifecycle.</param>
-        public WeakActionEventHandler(<#= action #> delegation, UnityEngine.Object owner)
+        public WeakActionEventHandler(<#= action #> delegation, object owner)
         {
-            if (owner == null)
+            if (OwnerLifetime.comparer.Equals(owner, null))
             {
                 throw new ArgumentNullException(nameof(owner));
             }
@@ -90,22 +86,22 @@ namespace PeroTools2.AccessKing
             {
                 throw new ArgumentException("A weak subscription requires a delegate that targets an instance, a static method has no owner to keep alive.", nameof(delegation));
             }
-            m_Owner = new WeakReference<UnityEngine.Object>(owner);
+            m_Owner = new WeakReference<object>(owner);
             m_Method = delegation.Method;
             var invokerType = typeof(ActionInvoker<>).MakeGenericType(<#= typeArguments #>delegation.Target.GetType());
             m_Invocation = Activator.CreateInstance(invokerType, delegation.Target, delegation) as IInvocation;
         }
 
         /// <inheritdoc/>
-        public bool TryHandle(in <#= parameterNotification #> notification) => m_Owner.TryGetTarget(out var owner) && owner != null && m_Invocation.Invoke(<#= notificationItems #>);
+        public bool TryHandle(in <#= parameterNotification #> notification) => m_Owner.TryGetTarget(out var owner) && !OwnerLifetime.comparer.Equals(owner, null) && m_Invocation.Invoke(<#= notificationItems #>);
 
         /// <summary>Try to handle the notification and report whether the provider is still alive.</summary>
-        public bool TryHandle(<#= parameterDefinitions #>) => m_Owner.TryGetTarget(out var owner) && owner != null && m_Invocation.Invoke(<#= parameters #>);
+        public bool TryHandle(<#= parameterDefinitions #>) => m_Owner.TryGetTarget(out var owner) && !OwnerLifetime.comparer.Equals(owner, null) && m_Invocation.Invoke(<#= parameters #>);
 
         /// <inheritdoc/>
         public void Handle(in <#= parameterNotification #> notification)
         {
-            if (m_Owner.TryGetTarget(out var owner) && owner != null)
+            if (m_Owner.TryGetTarget(out var owner) && !OwnerLifetime.comparer.Equals(owner, null))
             {
                 m_Invocation.Invoke(<#= notificationItems #>);
             }
@@ -114,7 +110,7 @@ namespace PeroTools2.AccessKing
         /// <summary>Handle the notification when the provider is still alive.</summary>
         public void Handle(<#= parameterDefinitions #>)
         {
-            if (m_Owner.TryGetTarget(out var owner) && owner != null)
+            if (m_Owner.TryGetTarget(out var owner) && !OwnerLifetime.comparer.Equals(owner, null))
             {
                 m_Invocation.Invoke(<#= parameters #>);
             }
@@ -149,7 +145,7 @@ namespace PeroTools2.AccessKing
             _ => false
         };
 
-        private interface IInvocation
+        internal interface IInvocation
         {
             /// <summary>
             /// Whether the event provider that this invocation targets is still alive.
@@ -159,7 +155,7 @@ namespace PeroTools2.AccessKing
             bool Invoke(<#= parameterDefinitions #>);
         }
 
-        private sealed class ActionInvoker<TProvider> : IInvocation where TProvider : class
+        internal sealed class ActionInvoker<TProvider> : IInvocation where TProvider : class
         {
             /// <summary>
             /// The event provider.

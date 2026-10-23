@@ -4532,6 +4532,267 @@
             Comparer used for weak subscription owners.
             </summary>
         </member>
+        <member name="T:PeroTools2.AccessKing.EventBusWeakExtensions">
+            <summary>
+            Event bus extensions whose provider is a <c>object</c>.
+            </summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.Empty},System.Action,System.Object)">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``1(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0}},System.Action{``0},System.Object)">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``2(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1}},System.Action{``0,``1},System.Object)">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``3(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2}},System.Action{``0,``1,``2},System.Object)">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``4(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3}},System.Action{``0,``1,``2,``3},System.Object)">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``5(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4}},System.Action{``0,``1,``2,``3,``4},System.Object)">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``6(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5}},System.Action{``0,``1,``2,``3,``4,``5},System.Object)">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``7(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5,``6}},System.Action{``0,``1,``2,``3,``4,``5,``6},System.Object)">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``8(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5,``6,``7}},System.Action{``0,``1,``2,``3,``4,``5,``6,``7},System.Object)">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``9(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5,``6,``7,``8}},System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8},System.Object)">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``10(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9}},System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9},System.Object)">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``11(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10}},System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10},System.Object)">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``12(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11}},System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11},System.Object)">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``13(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12}},System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12},System.Object)">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``14(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13}},System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13},System.Object)">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``15(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14}},System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14},System.Object)">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.Empty},System.Object,System.Action)">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``1(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0}},System.Object,System.Action{``0})">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``2(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1}},System.Object,System.Action{``0,``1})">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``3(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2}},System.Object,System.Action{``0,``1,``2})">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``4(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3}},System.Object,System.Action{``0,``1,``2,``3})">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``5(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4}},System.Object,System.Action{``0,``1,``2,``3,``4})">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``6(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5}},System.Object,System.Action{``0,``1,``2,``3,``4,``5})">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``7(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5,``6}},System.Object,System.Action{``0,``1,``2,``3,``4,``5,``6})">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``8(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5,``6,``7}},System.Object,System.Action{``0,``1,``2,``3,``4,``5,``6,``7})">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``9(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5,``6,``7,``8}},System.Object,System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8})">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``10(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9}},System.Object,System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9})">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``11(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10}},System.Object,System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10})">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``12(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11}},System.Object,System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11})">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``13(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12}},System.Object,System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12})">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``14(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13}},System.Object,System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13})">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``15(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14}},System.Object,System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14})">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+        </member>
         <member name="T:PeroTools2.AccessKing.EventBus`1">
             <inheritdoc cref="T:PeroTools2.AccessKing.IEventBus`1"/>
         </member>
@@ -6326,6 +6587,1542 @@
             <param name="source">The handler that the weak reference points to.</param>
             <typeparam name="TSource">Type of the referenced handler.</typeparam>
             <returns>Whether the reference is still alive and is not an owner that the host counts as null.</returns>
+        </member>
+        <member name="T:PeroTools2.AccessKing.WeakActionEventHandler">
+            <summary>
+            Event handler with System.Action which would reference the event provider by weak.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler.m_Invocation">
+            <summary>
+            Delegate with instance method provider.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler.m_Owner">
+            <summary>
+            The owner that control this weak event's lifecycle.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler.m_Method">
+            <summary>
+            Raw method of the event provider.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler.PeroTools2#AccessKing#IWeakEventInvocation#invocationMethod">
+            <summary>
+            The method that this weak handler invokes.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler.currentOwner">
+            <summary>
+            The owner that controls the lifecycle of this handler, or null when it was already collected.
+            It takes part in the equality because two providers may invoke the same method.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler.isAlive">
+            <summary>Whether the provider that owns this handler is still alive.</summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler.#ctor(System.Action,System.Object)">
+            <summary>
+            Create a weak event handler from a System.Action.
+            </summary>
+            <param name="delegation">Delegation for creating EventHandler.</param>
+            <param name="owner">The owner that control this weak event's lifecycle.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler.TryHandle(PeroTools2.AccessKing.Empty@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler.TryHandle">
+            <summary>Try to handle the notification and report whether the provider is still alive.</summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler.Handle(PeroTools2.AccessKing.Empty@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler.Handle">
+            <summary>Handle the notification when the provider is still alive.</summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler.GetHashCode">
+            <inheritdoc cref="M:System.Object.GetHashCode"/>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler.op_Equality(PeroTools2.AccessKing.WeakActionEventHandler,System.Object)">
+            <summary>
+            Verify if the target equals to event handler.
+            </summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler.op_Inequality(PeroTools2.AccessKing.WeakActionEventHandler,System.Object)">
+            <summary>
+            Verify if the target not equals to event handler.
+            </summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler.Equals(PeroTools2.AccessKing.WeakActionEventHandler)">
+            <summary>
+            Verify if the target equals to event handler.
+            </summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler.Equals(System.Object)">
+            <summary>
+            Verify if the target equals to event handler.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler.IInvocation.isAlive">
+            <summary>
+            Whether the event provider that this invocation targets is still alive.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler.ActionInvoker`1.m_Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler.ActionInvoker`1.m_Invocation">
+            <summary>
+            Wrapped action.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler.ActionInvoker`1.isAlive">
+            <summary>
+            Whether the wrapped event provider is still alive.
+            </summary>
+        </member>
+        <member name="T:PeroTools2.AccessKing.WeakActionEventHandler`1">
+            <summary>
+            Event handler with System.Action which would reference the event provider by weak.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`1.m_Invocation">
+            <summary>
+            Delegate with instance method provider.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`1.m_Owner">
+            <summary>
+            The owner that control this weak event's lifecycle.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`1.m_Method">
+            <summary>
+            Raw method of the event provider.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`1.PeroTools2#AccessKing#IWeakEventInvocation#invocationMethod">
+            <summary>
+            The method that this weak handler invokes.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`1.currentOwner">
+            <summary>
+            The owner that controls the lifecycle of this handler, or null when it was already collected.
+            It takes part in the equality because two providers may invoke the same method.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`1.isAlive">
+            <summary>Whether the provider that owns this handler is still alive.</summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`1.#ctor(System.Action{`0},System.Object)">
+            <summary>
+            Create a weak event handler from a System.Action.
+            </summary>
+            <param name="delegation">Delegation for creating EventHandler.</param>
+            <param name="owner">The owner that control this weak event's lifecycle.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`1.TryHandle(PeroTools2.AccessKing.ParameterNotification{`0}@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`1.TryHandle(`0)">
+            <summary>Try to handle the notification and report whether the provider is still alive.</summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`1.Handle(PeroTools2.AccessKing.ParameterNotification{`0}@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`1.Handle(`0)">
+            <summary>Handle the notification when the provider is still alive.</summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`1.GetHashCode">
+            <inheritdoc cref="M:System.Object.GetHashCode"/>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`1.op_Equality(PeroTools2.AccessKing.WeakActionEventHandler{`0},System.Object)">
+            <summary>
+            Verify if the target equals to event handler.
+            </summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`1.op_Inequality(PeroTools2.AccessKing.WeakActionEventHandler{`0},System.Object)">
+            <summary>
+            Verify if the target not equals to event handler.
+            </summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`1.Equals(PeroTools2.AccessKing.WeakActionEventHandler{`0})">
+            <summary>
+            Verify if the target equals to event handler.
+            </summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`1.Equals(System.Object)">
+            <summary>
+            Verify if the target equals to event handler.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`1.IInvocation.isAlive">
+            <summary>
+            Whether the event provider that this invocation targets is still alive.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`1.ActionInvoker`1.m_Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`1.ActionInvoker`1.m_Invocation">
+            <summary>
+            Wrapped action.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`1.ActionInvoker`1.isAlive">
+            <summary>
+            Whether the wrapped event provider is still alive.
+            </summary>
+        </member>
+        <member name="T:PeroTools2.AccessKing.WeakActionEventHandler`2">
+            <summary>
+            Event handler with System.Action which would reference the event provider by weak.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`2.m_Invocation">
+            <summary>
+            Delegate with instance method provider.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`2.m_Owner">
+            <summary>
+            The owner that control this weak event's lifecycle.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`2.m_Method">
+            <summary>
+            Raw method of the event provider.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`2.PeroTools2#AccessKing#IWeakEventInvocation#invocationMethod">
+            <summary>
+            The method that this weak handler invokes.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`2.currentOwner">
+            <summary>
+            The owner that controls the lifecycle of this handler, or null when it was already collected.
+            It takes part in the equality because two providers may invoke the same method.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`2.isAlive">
+            <summary>Whether the provider that owns this handler is still alive.</summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`2.#ctor(System.Action{`0,`1},System.Object)">
+            <summary>
+            Create a weak event handler from a System.Action.
+            </summary>
+            <param name="delegation">Delegation for creating EventHandler.</param>
+            <param name="owner">The owner that control this weak event's lifecycle.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`2.TryHandle(PeroTools2.AccessKing.ParameterNotification{`0,`1}@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`2.TryHandle(`0,`1)">
+            <summary>Try to handle the notification and report whether the provider is still alive.</summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`2.Handle(PeroTools2.AccessKing.ParameterNotification{`0,`1}@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`2.Handle(`0,`1)">
+            <summary>Handle the notification when the provider is still alive.</summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`2.GetHashCode">
+            <inheritdoc cref="M:System.Object.GetHashCode"/>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`2.op_Equality(PeroTools2.AccessKing.WeakActionEventHandler{`0,`1},System.Object)">
+            <summary>
+            Verify if the target equals to event handler.
+            </summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`2.op_Inequality(PeroTools2.AccessKing.WeakActionEventHandler{`0,`1},System.Object)">
+            <summary>
+            Verify if the target not equals to event handler.
+            </summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`2.Equals(PeroTools2.AccessKing.WeakActionEventHandler{`0,`1})">
+            <summary>
+            Verify if the target equals to event handler.
+            </summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`2.Equals(System.Object)">
+            <summary>
+            Verify if the target equals to event handler.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`2.IInvocation.isAlive">
+            <summary>
+            Whether the event provider that this invocation targets is still alive.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`2.ActionInvoker`1.m_Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`2.ActionInvoker`1.m_Invocation">
+            <summary>
+            Wrapped action.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`2.ActionInvoker`1.isAlive">
+            <summary>
+            Whether the wrapped event provider is still alive.
+            </summary>
+        </member>
+        <member name="T:PeroTools2.AccessKing.WeakActionEventHandler`3">
+            <summary>
+            Event handler with System.Action which would reference the event provider by weak.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`3.m_Invocation">
+            <summary>
+            Delegate with instance method provider.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`3.m_Owner">
+            <summary>
+            The owner that control this weak event's lifecycle.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`3.m_Method">
+            <summary>
+            Raw method of the event provider.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`3.PeroTools2#AccessKing#IWeakEventInvocation#invocationMethod">
+            <summary>
+            The method that this weak handler invokes.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`3.currentOwner">
+            <summary>
+            The owner that controls the lifecycle of this handler, or null when it was already collected.
+            It takes part in the equality because two providers may invoke the same method.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`3.isAlive">
+            <summary>Whether the provider that owns this handler is still alive.</summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`3.#ctor(System.Action{`0,`1,`2},System.Object)">
+            <summary>
+            Create a weak event handler from a System.Action.
+            </summary>
+            <param name="delegation">Delegation for creating EventHandler.</param>
+            <param name="owner">The owner that control this weak event's lifecycle.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`3.TryHandle(PeroTools2.AccessKing.ParameterNotification{`0,`1,`2}@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`3.TryHandle(`0,`1,`2)">
+            <summary>Try to handle the notification and report whether the provider is still alive.</summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`3.Handle(PeroTools2.AccessKing.ParameterNotification{`0,`1,`2}@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`3.Handle(`0,`1,`2)">
+            <summary>Handle the notification when the provider is still alive.</summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`3.GetHashCode">
+            <inheritdoc cref="M:System.Object.GetHashCode"/>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`3.op_Equality(PeroTools2.AccessKing.WeakActionEventHandler{`0,`1,`2},System.Object)">
+            <summary>
+            Verify if the target equals to event handler.
+            </summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`3.op_Inequality(PeroTools2.AccessKing.WeakActionEventHandler{`0,`1,`2},System.Object)">
+            <summary>
+            Verify if the target not equals to event handler.
+            </summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`3.Equals(PeroTools2.AccessKing.WeakActionEventHandler{`0,`1,`2})">
+            <summary>
+            Verify if the target equals to event handler.
+            </summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`3.Equals(System.Object)">
+            <summary>
+            Verify if the target equals to event handler.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`3.IInvocation.isAlive">
+            <summary>
+            Whether the event provider that this invocation targets is still alive.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`3.ActionInvoker`1.m_Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`3.ActionInvoker`1.m_Invocation">
+            <summary>
+            Wrapped action.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`3.ActionInvoker`1.isAlive">
+            <summary>
+            Whether the wrapped event provider is still alive.
+            </summary>
+        </member>
+        <member name="T:PeroTools2.AccessKing.WeakActionEventHandler`4">
+            <summary>
+            Event handler with System.Action which would reference the event provider by weak.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`4.m_Invocation">
+            <summary>
+            Delegate with instance method provider.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`4.m_Owner">
+            <summary>
+            The owner that control this weak event's lifecycle.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`4.m_Method">
+            <summary>
+            Raw method of the event provider.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`4.PeroTools2#AccessKing#IWeakEventInvocation#invocationMethod">
+            <summary>
+            The method that this weak handler invokes.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`4.currentOwner">
+            <summary>
+            The owner that controls the lifecycle of this handler, or null when it was already collected.
+            It takes part in the equality because two providers may invoke the same method.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`4.isAlive">
+            <summary>Whether the provider that owns this handler is still alive.</summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`4.#ctor(System.Action{`0,`1,`2,`3},System.Object)">
+            <summary>
+            Create a weak event handler from a System.Action.
+            </summary>
+            <param name="delegation">Delegation for creating EventHandler.</param>
+            <param name="owner">The owner that control this weak event's lifecycle.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`4.TryHandle(PeroTools2.AccessKing.ParameterNotification{`0,`1,`2,`3}@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`4.TryHandle(`0,`1,`2,`3)">
+            <summary>Try to handle the notification and report whether the provider is still alive.</summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`4.Handle(PeroTools2.AccessKing.ParameterNotification{`0,`1,`2,`3}@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`4.Handle(`0,`1,`2,`3)">
+            <summary>Handle the notification when the provider is still alive.</summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`4.GetHashCode">
+            <inheritdoc cref="M:System.Object.GetHashCode"/>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`4.op_Equality(PeroTools2.AccessKing.WeakActionEventHandler{`0,`1,`2,`3},System.Object)">
+            <summary>
+            Verify if the target equals to event handler.
+            </summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`4.op_Inequality(PeroTools2.AccessKing.WeakActionEventHandler{`0,`1,`2,`3},System.Object)">
+            <summary>
+            Verify if the target not equals to event handler.
+            </summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`4.Equals(PeroTools2.AccessKing.WeakActionEventHandler{`0,`1,`2,`3})">
+            <summary>
+            Verify if the target equals to event handler.
+            </summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`4.Equals(System.Object)">
+            <summary>
+            Verify if the target equals to event handler.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`4.IInvocation.isAlive">
+            <summary>
+            Whether the event provider that this invocation targets is still alive.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`4.ActionInvoker`1.m_Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`4.ActionInvoker`1.m_Invocation">
+            <summary>
+            Wrapped action.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`4.ActionInvoker`1.isAlive">
+            <summary>
+            Whether the wrapped event provider is still alive.
+            </summary>
+        </member>
+        <member name="T:PeroTools2.AccessKing.WeakActionEventHandler`5">
+            <summary>
+            Event handler with System.Action which would reference the event provider by weak.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`5.m_Invocation">
+            <summary>
+            Delegate with instance method provider.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`5.m_Owner">
+            <summary>
+            The owner that control this weak event's lifecycle.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`5.m_Method">
+            <summary>
+            Raw method of the event provider.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`5.PeroTools2#AccessKing#IWeakEventInvocation#invocationMethod">
+            <summary>
+            The method that this weak handler invokes.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`5.currentOwner">
+            <summary>
+            The owner that controls the lifecycle of this handler, or null when it was already collected.
+            It takes part in the equality because two providers may invoke the same method.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`5.isAlive">
+            <summary>Whether the provider that owns this handler is still alive.</summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`5.#ctor(System.Action{`0,`1,`2,`3,`4},System.Object)">
+            <summary>
+            Create a weak event handler from a System.Action.
+            </summary>
+            <param name="delegation">Delegation for creating EventHandler.</param>
+            <param name="owner">The owner that control this weak event's lifecycle.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`5.TryHandle(PeroTools2.AccessKing.ParameterNotification{`0,`1,`2,`3,`4}@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`5.TryHandle(`0,`1,`2,`3,`4)">
+            <summary>Try to handle the notification and report whether the provider is still alive.</summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`5.Handle(PeroTools2.AccessKing.ParameterNotification{`0,`1,`2,`3,`4}@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`5.Handle(`0,`1,`2,`3,`4)">
+            <summary>Handle the notification when the provider is still alive.</summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`5.GetHashCode">
+            <inheritdoc cref="M:System.Object.GetHashCode"/>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`5.op_Equality(PeroTools2.AccessKing.WeakActionEventHandler{`0,`1,`2,`3,`4},System.Object)">
+            <summary>
+            Verify if the target equals to event handler.
+            </summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`5.op_Inequality(PeroTools2.AccessKing.WeakActionEventHandler{`0,`1,`2,`3,`4},System.Object)">
+            <summary>
+            Verify if the target not equals to event handler.
+            </summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`5.Equals(PeroTools2.AccessKing.WeakActionEventHandler{`0,`1,`2,`3,`4})">
+            <summary>
+            Verify if the target equals to event handler.
+            </summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`5.Equals(System.Object)">
+            <summary>
+            Verify if the target equals to event handler.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`5.IInvocation.isAlive">
+            <summary>
+            Whether the event provider that this invocation targets is still alive.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`5.ActionInvoker`1.m_Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`5.ActionInvoker`1.m_Invocation">
+            <summary>
+            Wrapped action.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`5.ActionInvoker`1.isAlive">
+            <summary>
+            Whether the wrapped event provider is still alive.
+            </summary>
+        </member>
+        <member name="T:PeroTools2.AccessKing.WeakActionEventHandler`6">
+            <summary>
+            Event handler with System.Action which would reference the event provider by weak.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`6.m_Invocation">
+            <summary>
+            Delegate with instance method provider.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`6.m_Owner">
+            <summary>
+            The owner that control this weak event's lifecycle.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`6.m_Method">
+            <summary>
+            Raw method of the event provider.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`6.PeroTools2#AccessKing#IWeakEventInvocation#invocationMethod">
+            <summary>
+            The method that this weak handler invokes.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`6.currentOwner">
+            <summary>
+            The owner that controls the lifecycle of this handler, or null when it was already collected.
+            It takes part in the equality because two providers may invoke the same method.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`6.isAlive">
+            <summary>Whether the provider that owns this handler is still alive.</summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`6.#ctor(System.Action{`0,`1,`2,`3,`4,`5},System.Object)">
+            <summary>
+            Create a weak event handler from a System.Action.
+            </summary>
+            <param name="delegation">Delegation for creating EventHandler.</param>
+            <param name="owner">The owner that control this weak event's lifecycle.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`6.TryHandle(PeroTools2.AccessKing.ParameterNotification{`0,`1,`2,`3,`4,`5}@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`6.TryHandle(`0,`1,`2,`3,`4,`5)">
+            <summary>Try to handle the notification and report whether the provider is still alive.</summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`6.Handle(PeroTools2.AccessKing.ParameterNotification{`0,`1,`2,`3,`4,`5}@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`6.Handle(`0,`1,`2,`3,`4,`5)">
+            <summary>Handle the notification when the provider is still alive.</summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`6.GetHashCode">
+            <inheritdoc cref="M:System.Object.GetHashCode"/>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`6.op_Equality(PeroTools2.AccessKing.WeakActionEventHandler{`0,`1,`2,`3,`4,`5},System.Object)">
+            <summary>
+            Verify if the target equals to event handler.
+            </summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`6.op_Inequality(PeroTools2.AccessKing.WeakActionEventHandler{`0,`1,`2,`3,`4,`5},System.Object)">
+            <summary>
+            Verify if the target not equals to event handler.
+            </summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`6.Equals(PeroTools2.AccessKing.WeakActionEventHandler{`0,`1,`2,`3,`4,`5})">
+            <summary>
+            Verify if the target equals to event handler.
+            </summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`6.Equals(System.Object)">
+            <summary>
+            Verify if the target equals to event handler.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`6.IInvocation.isAlive">
+            <summary>
+            Whether the event provider that this invocation targets is still alive.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`6.ActionInvoker`1.m_Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`6.ActionInvoker`1.m_Invocation">
+            <summary>
+            Wrapped action.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`6.ActionInvoker`1.isAlive">
+            <summary>
+            Whether the wrapped event provider is still alive.
+            </summary>
+        </member>
+        <member name="T:PeroTools2.AccessKing.WeakActionEventHandler`7">
+            <summary>
+            Event handler with System.Action which would reference the event provider by weak.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`7.m_Invocation">
+            <summary>
+            Delegate with instance method provider.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`7.m_Owner">
+            <summary>
+            The owner that control this weak event's lifecycle.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`7.m_Method">
+            <summary>
+            Raw method of the event provider.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`7.PeroTools2#AccessKing#IWeakEventInvocation#invocationMethod">
+            <summary>
+            The method that this weak handler invokes.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`7.currentOwner">
+            <summary>
+            The owner that controls the lifecycle of this handler, or null when it was already collected.
+            It takes part in the equality because two providers may invoke the same method.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`7.isAlive">
+            <summary>Whether the provider that owns this handler is still alive.</summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`7.#ctor(System.Action{`0,`1,`2,`3,`4,`5,`6},System.Object)">
+            <summary>
+            Create a weak event handler from a System.Action.
+            </summary>
+            <param name="delegation">Delegation for creating EventHandler.</param>
+            <param name="owner">The owner that control this weak event's lifecycle.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`7.TryHandle(PeroTools2.AccessKing.ParameterNotification{`0,`1,`2,`3,`4,`5,`6}@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`7.TryHandle(`0,`1,`2,`3,`4,`5,`6)">
+            <summary>Try to handle the notification and report whether the provider is still alive.</summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`7.Handle(PeroTools2.AccessKing.ParameterNotification{`0,`1,`2,`3,`4,`5,`6}@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`7.Handle(`0,`1,`2,`3,`4,`5,`6)">
+            <summary>Handle the notification when the provider is still alive.</summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`7.GetHashCode">
+            <inheritdoc cref="M:System.Object.GetHashCode"/>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`7.op_Equality(PeroTools2.AccessKing.WeakActionEventHandler{`0,`1,`2,`3,`4,`5,`6},System.Object)">
+            <summary>
+            Verify if the target equals to event handler.
+            </summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`7.op_Inequality(PeroTools2.AccessKing.WeakActionEventHandler{`0,`1,`2,`3,`4,`5,`6},System.Object)">
+            <summary>
+            Verify if the target not equals to event handler.
+            </summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`7.Equals(PeroTools2.AccessKing.WeakActionEventHandler{`0,`1,`2,`3,`4,`5,`6})">
+            <summary>
+            Verify if the target equals to event handler.
+            </summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`7.Equals(System.Object)">
+            <summary>
+            Verify if the target equals to event handler.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`7.IInvocation.isAlive">
+            <summary>
+            Whether the event provider that this invocation targets is still alive.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`7.ActionInvoker`1.m_Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`7.ActionInvoker`1.m_Invocation">
+            <summary>
+            Wrapped action.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`7.ActionInvoker`1.isAlive">
+            <summary>
+            Whether the wrapped event provider is still alive.
+            </summary>
+        </member>
+        <member name="T:PeroTools2.AccessKing.WeakActionEventHandler`8">
+            <summary>
+            Event handler with System.Action which would reference the event provider by weak.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`8.m_Invocation">
+            <summary>
+            Delegate with instance method provider.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`8.m_Owner">
+            <summary>
+            The owner that control this weak event's lifecycle.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`8.m_Method">
+            <summary>
+            Raw method of the event provider.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`8.PeroTools2#AccessKing#IWeakEventInvocation#invocationMethod">
+            <summary>
+            The method that this weak handler invokes.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`8.currentOwner">
+            <summary>
+            The owner that controls the lifecycle of this handler, or null when it was already collected.
+            It takes part in the equality because two providers may invoke the same method.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`8.isAlive">
+            <summary>Whether the provider that owns this handler is still alive.</summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`8.#ctor(System.Action{`0,`1,`2,`3,`4,`5,`6,`7},System.Object)">
+            <summary>
+            Create a weak event handler from a System.Action.
+            </summary>
+            <param name="delegation">Delegation for creating EventHandler.</param>
+            <param name="owner">The owner that control this weak event's lifecycle.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`8.TryHandle(PeroTools2.AccessKing.ParameterNotification{`0,`1,`2,`3,`4,`5,`6,`7}@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`8.TryHandle(`0,`1,`2,`3,`4,`5,`6,`7)">
+            <summary>Try to handle the notification and report whether the provider is still alive.</summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`8.Handle(PeroTools2.AccessKing.ParameterNotification{`0,`1,`2,`3,`4,`5,`6,`7}@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`8.Handle(`0,`1,`2,`3,`4,`5,`6,`7)">
+            <summary>Handle the notification when the provider is still alive.</summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`8.GetHashCode">
+            <inheritdoc cref="M:System.Object.GetHashCode"/>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`8.op_Equality(PeroTools2.AccessKing.WeakActionEventHandler{`0,`1,`2,`3,`4,`5,`6,`7},System.Object)">
+            <summary>
+            Verify if the target equals to event handler.
+            </summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`8.op_Inequality(PeroTools2.AccessKing.WeakActionEventHandler{`0,`1,`2,`3,`4,`5,`6,`7},System.Object)">
+            <summary>
+            Verify if the target not equals to event handler.
+            </summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`8.Equals(PeroTools2.AccessKing.WeakActionEventHandler{`0,`1,`2,`3,`4,`5,`6,`7})">
+            <summary>
+            Verify if the target equals to event handler.
+            </summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`8.Equals(System.Object)">
+            <summary>
+            Verify if the target equals to event handler.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`8.IInvocation.isAlive">
+            <summary>
+            Whether the event provider that this invocation targets is still alive.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`8.ActionInvoker`1.m_Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`8.ActionInvoker`1.m_Invocation">
+            <summary>
+            Wrapped action.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`8.ActionInvoker`1.isAlive">
+            <summary>
+            Whether the wrapped event provider is still alive.
+            </summary>
+        </member>
+        <member name="T:PeroTools2.AccessKing.WeakActionEventHandler`9">
+            <summary>
+            Event handler with System.Action which would reference the event provider by weak.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`9.m_Invocation">
+            <summary>
+            Delegate with instance method provider.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`9.m_Owner">
+            <summary>
+            The owner that control this weak event's lifecycle.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`9.m_Method">
+            <summary>
+            Raw method of the event provider.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`9.PeroTools2#AccessKing#IWeakEventInvocation#invocationMethod">
+            <summary>
+            The method that this weak handler invokes.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`9.currentOwner">
+            <summary>
+            The owner that controls the lifecycle of this handler, or null when it was already collected.
+            It takes part in the equality because two providers may invoke the same method.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`9.isAlive">
+            <summary>Whether the provider that owns this handler is still alive.</summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`9.#ctor(System.Action{`0,`1,`2,`3,`4,`5,`6,`7,`8},System.Object)">
+            <summary>
+            Create a weak event handler from a System.Action.
+            </summary>
+            <param name="delegation">Delegation for creating EventHandler.</param>
+            <param name="owner">The owner that control this weak event's lifecycle.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`9.TryHandle(PeroTools2.AccessKing.ParameterNotification{`0,`1,`2,`3,`4,`5,`6,`7,`8}@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`9.TryHandle(`0,`1,`2,`3,`4,`5,`6,`7,`8)">
+            <summary>Try to handle the notification and report whether the provider is still alive.</summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`9.Handle(PeroTools2.AccessKing.ParameterNotification{`0,`1,`2,`3,`4,`5,`6,`7,`8}@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`9.Handle(`0,`1,`2,`3,`4,`5,`6,`7,`8)">
+            <summary>Handle the notification when the provider is still alive.</summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`9.GetHashCode">
+            <inheritdoc cref="M:System.Object.GetHashCode"/>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`9.op_Equality(PeroTools2.AccessKing.WeakActionEventHandler{`0,`1,`2,`3,`4,`5,`6,`7,`8},System.Object)">
+            <summary>
+            Verify if the target equals to event handler.
+            </summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`9.op_Inequality(PeroTools2.AccessKing.WeakActionEventHandler{`0,`1,`2,`3,`4,`5,`6,`7,`8},System.Object)">
+            <summary>
+            Verify if the target not equals to event handler.
+            </summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`9.Equals(PeroTools2.AccessKing.WeakActionEventHandler{`0,`1,`2,`3,`4,`5,`6,`7,`8})">
+            <summary>
+            Verify if the target equals to event handler.
+            </summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`9.Equals(System.Object)">
+            <summary>
+            Verify if the target equals to event handler.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`9.IInvocation.isAlive">
+            <summary>
+            Whether the event provider that this invocation targets is still alive.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`9.ActionInvoker`1.m_Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`9.ActionInvoker`1.m_Invocation">
+            <summary>
+            Wrapped action.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`9.ActionInvoker`1.isAlive">
+            <summary>
+            Whether the wrapped event provider is still alive.
+            </summary>
+        </member>
+        <member name="T:PeroTools2.AccessKing.WeakActionEventHandler`10">
+            <summary>
+            Event handler with System.Action which would reference the event provider by weak.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`10.m_Invocation">
+            <summary>
+            Delegate with instance method provider.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`10.m_Owner">
+            <summary>
+            The owner that control this weak event's lifecycle.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`10.m_Method">
+            <summary>
+            Raw method of the event provider.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`10.PeroTools2#AccessKing#IWeakEventInvocation#invocationMethod">
+            <summary>
+            The method that this weak handler invokes.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`10.currentOwner">
+            <summary>
+            The owner that controls the lifecycle of this handler, or null when it was already collected.
+            It takes part in the equality because two providers may invoke the same method.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`10.isAlive">
+            <summary>Whether the provider that owns this handler is still alive.</summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`10.#ctor(System.Action{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9},System.Object)">
+            <summary>
+            Create a weak event handler from a System.Action.
+            </summary>
+            <param name="delegation">Delegation for creating EventHandler.</param>
+            <param name="owner">The owner that control this weak event's lifecycle.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`10.TryHandle(PeroTools2.AccessKing.ParameterNotification{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9}@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`10.TryHandle(`0,`1,`2,`3,`4,`5,`6,`7,`8,`9)">
+            <summary>Try to handle the notification and report whether the provider is still alive.</summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`10.Handle(PeroTools2.AccessKing.ParameterNotification{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9}@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`10.Handle(`0,`1,`2,`3,`4,`5,`6,`7,`8,`9)">
+            <summary>Handle the notification when the provider is still alive.</summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`10.GetHashCode">
+            <inheritdoc cref="M:System.Object.GetHashCode"/>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`10.op_Equality(PeroTools2.AccessKing.WeakActionEventHandler{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9},System.Object)">
+            <summary>
+            Verify if the target equals to event handler.
+            </summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`10.op_Inequality(PeroTools2.AccessKing.WeakActionEventHandler{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9},System.Object)">
+            <summary>
+            Verify if the target not equals to event handler.
+            </summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`10.Equals(PeroTools2.AccessKing.WeakActionEventHandler{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9})">
+            <summary>
+            Verify if the target equals to event handler.
+            </summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`10.Equals(System.Object)">
+            <summary>
+            Verify if the target equals to event handler.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`10.IInvocation.isAlive">
+            <summary>
+            Whether the event provider that this invocation targets is still alive.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`10.ActionInvoker`1.m_Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`10.ActionInvoker`1.m_Invocation">
+            <summary>
+            Wrapped action.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`10.ActionInvoker`1.isAlive">
+            <summary>
+            Whether the wrapped event provider is still alive.
+            </summary>
+        </member>
+        <member name="T:PeroTools2.AccessKing.WeakActionEventHandler`11">
+            <summary>
+            Event handler with System.Action which would reference the event provider by weak.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`11.m_Invocation">
+            <summary>
+            Delegate with instance method provider.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`11.m_Owner">
+            <summary>
+            The owner that control this weak event's lifecycle.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`11.m_Method">
+            <summary>
+            Raw method of the event provider.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`11.PeroTools2#AccessKing#IWeakEventInvocation#invocationMethod">
+            <summary>
+            The method that this weak handler invokes.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`11.currentOwner">
+            <summary>
+            The owner that controls the lifecycle of this handler, or null when it was already collected.
+            It takes part in the equality because two providers may invoke the same method.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`11.isAlive">
+            <summary>Whether the provider that owns this handler is still alive.</summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`11.#ctor(System.Action{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10},System.Object)">
+            <summary>
+            Create a weak event handler from a System.Action.
+            </summary>
+            <param name="delegation">Delegation for creating EventHandler.</param>
+            <param name="owner">The owner that control this weak event's lifecycle.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`11.TryHandle(PeroTools2.AccessKing.ParameterNotification{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10}@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`11.TryHandle(`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10)">
+            <summary>Try to handle the notification and report whether the provider is still alive.</summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`11.Handle(PeroTools2.AccessKing.ParameterNotification{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10}@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`11.Handle(`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10)">
+            <summary>Handle the notification when the provider is still alive.</summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`11.GetHashCode">
+            <inheritdoc cref="M:System.Object.GetHashCode"/>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`11.op_Equality(PeroTools2.AccessKing.WeakActionEventHandler{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10},System.Object)">
+            <summary>
+            Verify if the target equals to event handler.
+            </summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`11.op_Inequality(PeroTools2.AccessKing.WeakActionEventHandler{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10},System.Object)">
+            <summary>
+            Verify if the target not equals to event handler.
+            </summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`11.Equals(PeroTools2.AccessKing.WeakActionEventHandler{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10})">
+            <summary>
+            Verify if the target equals to event handler.
+            </summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`11.Equals(System.Object)">
+            <summary>
+            Verify if the target equals to event handler.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`11.IInvocation.isAlive">
+            <summary>
+            Whether the event provider that this invocation targets is still alive.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`11.ActionInvoker`1.m_Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`11.ActionInvoker`1.m_Invocation">
+            <summary>
+            Wrapped action.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`11.ActionInvoker`1.isAlive">
+            <summary>
+            Whether the wrapped event provider is still alive.
+            </summary>
+        </member>
+        <member name="T:PeroTools2.AccessKing.WeakActionEventHandler`12">
+            <summary>
+            Event handler with System.Action which would reference the event provider by weak.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`12.m_Invocation">
+            <summary>
+            Delegate with instance method provider.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`12.m_Owner">
+            <summary>
+            The owner that control this weak event's lifecycle.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`12.m_Method">
+            <summary>
+            Raw method of the event provider.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`12.PeroTools2#AccessKing#IWeakEventInvocation#invocationMethod">
+            <summary>
+            The method that this weak handler invokes.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`12.currentOwner">
+            <summary>
+            The owner that controls the lifecycle of this handler, or null when it was already collected.
+            It takes part in the equality because two providers may invoke the same method.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`12.isAlive">
+            <summary>Whether the provider that owns this handler is still alive.</summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`12.#ctor(System.Action{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10,`11},System.Object)">
+            <summary>
+            Create a weak event handler from a System.Action.
+            </summary>
+            <param name="delegation">Delegation for creating EventHandler.</param>
+            <param name="owner">The owner that control this weak event's lifecycle.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`12.TryHandle(PeroTools2.AccessKing.ParameterNotification{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10,`11}@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`12.TryHandle(`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10,`11)">
+            <summary>Try to handle the notification and report whether the provider is still alive.</summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`12.Handle(PeroTools2.AccessKing.ParameterNotification{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10,`11}@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`12.Handle(`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10,`11)">
+            <summary>Handle the notification when the provider is still alive.</summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`12.GetHashCode">
+            <inheritdoc cref="M:System.Object.GetHashCode"/>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`12.op_Equality(PeroTools2.AccessKing.WeakActionEventHandler{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10,`11},System.Object)">
+            <summary>
+            Verify if the target equals to event handler.
+            </summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`12.op_Inequality(PeroTools2.AccessKing.WeakActionEventHandler{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10,`11},System.Object)">
+            <summary>
+            Verify if the target not equals to event handler.
+            </summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`12.Equals(PeroTools2.AccessKing.WeakActionEventHandler{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10,`11})">
+            <summary>
+            Verify if the target equals to event handler.
+            </summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`12.Equals(System.Object)">
+            <summary>
+            Verify if the target equals to event handler.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`12.IInvocation.isAlive">
+            <summary>
+            Whether the event provider that this invocation targets is still alive.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`12.ActionInvoker`1.m_Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`12.ActionInvoker`1.m_Invocation">
+            <summary>
+            Wrapped action.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`12.ActionInvoker`1.isAlive">
+            <summary>
+            Whether the wrapped event provider is still alive.
+            </summary>
+        </member>
+        <member name="T:PeroTools2.AccessKing.WeakActionEventHandler`13">
+            <summary>
+            Event handler with System.Action which would reference the event provider by weak.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`13.m_Invocation">
+            <summary>
+            Delegate with instance method provider.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`13.m_Owner">
+            <summary>
+            The owner that control this weak event's lifecycle.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`13.m_Method">
+            <summary>
+            Raw method of the event provider.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`13.PeroTools2#AccessKing#IWeakEventInvocation#invocationMethod">
+            <summary>
+            The method that this weak handler invokes.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`13.currentOwner">
+            <summary>
+            The owner that controls the lifecycle of this handler, or null when it was already collected.
+            It takes part in the equality because two providers may invoke the same method.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`13.isAlive">
+            <summary>Whether the provider that owns this handler is still alive.</summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`13.#ctor(System.Action{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10,`11,`12},System.Object)">
+            <summary>
+            Create a weak event handler from a System.Action.
+            </summary>
+            <param name="delegation">Delegation for creating EventHandler.</param>
+            <param name="owner">The owner that control this weak event's lifecycle.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`13.TryHandle(PeroTools2.AccessKing.ParameterNotification{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10,`11,`12}@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`13.TryHandle(`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10,`11,`12)">
+            <summary>Try to handle the notification and report whether the provider is still alive.</summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`13.Handle(PeroTools2.AccessKing.ParameterNotification{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10,`11,`12}@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`13.Handle(`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10,`11,`12)">
+            <summary>Handle the notification when the provider is still alive.</summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`13.GetHashCode">
+            <inheritdoc cref="M:System.Object.GetHashCode"/>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`13.op_Equality(PeroTools2.AccessKing.WeakActionEventHandler{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10,`11,`12},System.Object)">
+            <summary>
+            Verify if the target equals to event handler.
+            </summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`13.op_Inequality(PeroTools2.AccessKing.WeakActionEventHandler{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10,`11,`12},System.Object)">
+            <summary>
+            Verify if the target not equals to event handler.
+            </summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`13.Equals(PeroTools2.AccessKing.WeakActionEventHandler{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10,`11,`12})">
+            <summary>
+            Verify if the target equals to event handler.
+            </summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`13.Equals(System.Object)">
+            <summary>
+            Verify if the target equals to event handler.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`13.IInvocation.isAlive">
+            <summary>
+            Whether the event provider that this invocation targets is still alive.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`13.ActionInvoker`1.m_Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`13.ActionInvoker`1.m_Invocation">
+            <summary>
+            Wrapped action.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`13.ActionInvoker`1.isAlive">
+            <summary>
+            Whether the wrapped event provider is still alive.
+            </summary>
+        </member>
+        <member name="T:PeroTools2.AccessKing.WeakActionEventHandler`14">
+            <summary>
+            Event handler with System.Action which would reference the event provider by weak.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`14.m_Invocation">
+            <summary>
+            Delegate with instance method provider.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`14.m_Owner">
+            <summary>
+            The owner that control this weak event's lifecycle.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`14.m_Method">
+            <summary>
+            Raw method of the event provider.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`14.PeroTools2#AccessKing#IWeakEventInvocation#invocationMethod">
+            <summary>
+            The method that this weak handler invokes.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`14.currentOwner">
+            <summary>
+            The owner that controls the lifecycle of this handler, or null when it was already collected.
+            It takes part in the equality because two providers may invoke the same method.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`14.isAlive">
+            <summary>Whether the provider that owns this handler is still alive.</summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`14.#ctor(System.Action{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10,`11,`12,`13},System.Object)">
+            <summary>
+            Create a weak event handler from a System.Action.
+            </summary>
+            <param name="delegation">Delegation for creating EventHandler.</param>
+            <param name="owner">The owner that control this weak event's lifecycle.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`14.TryHandle(PeroTools2.AccessKing.ParameterNotification{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10,`11,`12,`13}@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`14.TryHandle(`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10,`11,`12,`13)">
+            <summary>Try to handle the notification and report whether the provider is still alive.</summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`14.Handle(PeroTools2.AccessKing.ParameterNotification{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10,`11,`12,`13}@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`14.Handle(`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10,`11,`12,`13)">
+            <summary>Handle the notification when the provider is still alive.</summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`14.GetHashCode">
+            <inheritdoc cref="M:System.Object.GetHashCode"/>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`14.op_Equality(PeroTools2.AccessKing.WeakActionEventHandler{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10,`11,`12,`13},System.Object)">
+            <summary>
+            Verify if the target equals to event handler.
+            </summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`14.op_Inequality(PeroTools2.AccessKing.WeakActionEventHandler{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10,`11,`12,`13},System.Object)">
+            <summary>
+            Verify if the target not equals to event handler.
+            </summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`14.Equals(PeroTools2.AccessKing.WeakActionEventHandler{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10,`11,`12,`13})">
+            <summary>
+            Verify if the target equals to event handler.
+            </summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`14.Equals(System.Object)">
+            <summary>
+            Verify if the target equals to event handler.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`14.IInvocation.isAlive">
+            <summary>
+            Whether the event provider that this invocation targets is still alive.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`14.ActionInvoker`1.m_Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`14.ActionInvoker`1.m_Invocation">
+            <summary>
+            Wrapped action.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`14.ActionInvoker`1.isAlive">
+            <summary>
+            Whether the wrapped event provider is still alive.
+            </summary>
+        </member>
+        <member name="T:PeroTools2.AccessKing.WeakActionEventHandler`15">
+            <summary>
+            Event handler with System.Action which would reference the event provider by weak.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`15.m_Invocation">
+            <summary>
+            Delegate with instance method provider.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`15.m_Owner">
+            <summary>
+            The owner that control this weak event's lifecycle.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`15.m_Method">
+            <summary>
+            Raw method of the event provider.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`15.PeroTools2#AccessKing#IWeakEventInvocation#invocationMethod">
+            <summary>
+            The method that this weak handler invokes.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`15.currentOwner">
+            <summary>
+            The owner that controls the lifecycle of this handler, or null when it was already collected.
+            It takes part in the equality because two providers may invoke the same method.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`15.isAlive">
+            <summary>Whether the provider that owns this handler is still alive.</summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`15.#ctor(System.Action{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10,`11,`12,`13,`14},System.Object)">
+            <summary>
+            Create a weak event handler from a System.Action.
+            </summary>
+            <param name="delegation">Delegation for creating EventHandler.</param>
+            <param name="owner">The owner that control this weak event's lifecycle.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`15.TryHandle(PeroTools2.AccessKing.ParameterNotification{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10,`11,`12,`13,`14}@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`15.TryHandle(`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10,`11,`12,`13,`14)">
+            <summary>Try to handle the notification and report whether the provider is still alive.</summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`15.Handle(PeroTools2.AccessKing.ParameterNotification{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10,`11,`12,`13,`14}@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`15.Handle(`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10,`11,`12,`13,`14)">
+            <summary>Handle the notification when the provider is still alive.</summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`15.GetHashCode">
+            <inheritdoc cref="M:System.Object.GetHashCode"/>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`15.op_Equality(PeroTools2.AccessKing.WeakActionEventHandler{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10,`11,`12,`13,`14},System.Object)">
+            <summary>
+            Verify if the target equals to event handler.
+            </summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`15.op_Inequality(PeroTools2.AccessKing.WeakActionEventHandler{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10,`11,`12,`13,`14},System.Object)">
+            <summary>
+            Verify if the target not equals to event handler.
+            </summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`15.Equals(PeroTools2.AccessKing.WeakActionEventHandler{`0,`1,`2,`3,`4,`5,`6,`7,`8,`9,`10,`11,`12,`13,`14})">
+            <summary>
+            Verify if the target equals to event handler.
+            </summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.WeakActionEventHandler`15.Equals(System.Object)">
+            <summary>
+            Verify if the target equals to event handler.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`15.IInvocation.isAlive">
+            <summary>
+            Whether the event provider that this invocation targets is still alive.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`15.ActionInvoker`1.m_Provider">
+            <summary>
+            The event provider.
+            </summary>
+        </member>
+        <member name="F:PeroTools2.AccessKing.WeakActionEventHandler`15.ActionInvoker`1.m_Invocation">
+            <summary>
+            Wrapped action.
+            </summary>
+        </member>
+        <member name="P:PeroTools2.AccessKing.WeakActionEventHandler`15.ActionInvoker`1.isAlive">
+            <summary>
+            Whether the wrapped event provider is still alive.
+            </summary>
         </member>
         <member name="T:PeroTools2.AccessKing.WeakEventHandler`1">
             <summary>

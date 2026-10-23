@@ -7,13 +7,12 @@
  * Author: Gatongone
  * Created On: 2023/05/23 16:05:45
  */
-
 using System;
 
 namespace PeroTools2.AccessKing
 {
     /// <summary>
-    /// Event bus extensions whose provider is a <c>UnityEngine.Object</c>.
+    /// Event bus extensions whose provider is a <c>object</c>.
     /// </summary>
     public static class EventBusWeakExtensions
     {
@@ -34,8 +33,8 @@ namespace PeroTools2.AccessKing
         /// <param name="eventBus">Event bus.</param>
         /// <param name="action">The delegate which convert to ActionEventHandler.</param>
         /// <param name="provider">The event provider which should contains the delegation that from instance method.</param>
-        [Obsolete("Use SubscribeWeakly<#= genericArgsWithAngleBrackets #>(UnityEngine.Object provider, <#= action #> action) instead.")]
-        public static void SubscribeWeakly<#= genericArgsWithAngleBrackets #>(this IWeakEventSubscriable<<#= parameterNotification #>> eventBus, <#= action #> action, UnityEngine.Object provider)
+        [Obsolete("Use SubscribeWeakly<#= genericArgsWithAngleBrackets #>(object provider, <#= action #> action) instead.")]
+        public static void SubscribeWeakly<#= genericArgsWithAngleBrackets #>(this IWeakEventSubscriable<<#= parameterNotification #>> eventBus, <#= action #> action, object provider)
             => eventBus.SubscribeWeakly(new <#= handler #>(action, provider));
 <#
     }
@@ -55,7 +54,7 @@ namespace PeroTools2.AccessKing
         /// <param name="eventBus">Event bus.</param>
         /// <param name="provider">The event provider which should contains the delegation that from instance method.</param>
         /// <param name="action">The delegate which convert to ActionEventHandler.</param>
-        public static void SubscribeWeakly<#= genericArgsWithAngleBrackets #>(this IWeakEventSubscriable<<#= parameterNotification #>> eventBus, UnityEngine.Object provider, <#= action #> action)
+        public static void SubscribeWeakly<#= genericArgsWithAngleBrackets #>(this IWeakEventSubscriable<<#= parameterNotification #>> eventBus, object provider, <#= action #> action)
             => eventBus.SubscribeWeakly(new <#= handler #>(action, provider));
 <#
     }

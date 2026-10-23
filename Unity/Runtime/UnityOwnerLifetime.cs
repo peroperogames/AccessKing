@@ -20,6 +20,15 @@ namespace PeroTools2.AccessKing
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         private static void Install() => OwnerLifetime.comparer = UnityOwnerComparer.instance;
 
+#if UNITY_EDITOR
+        /// <summary>
+        /// The runtime hook does not run outside play mode, install the comparer as soon as the editor loads so that
+        /// edit mode tests and tooling also see the <c>UnityEngine.Object</c> semantics.
+        /// </summary>
+        [UnityEditor.InitializeOnLoadMethod]
+        private static void InstallInEditor() => Install();
+#endif
+
         /// <summary>
         /// Compares owners the way <c>UnityEngine.Object</c> does: a destroyed object equals null.
         /// </summary>

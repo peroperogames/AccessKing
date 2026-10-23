@@ -8,4 +8,5 @@ jobs:
     uses: peroperogames/ToolsWorkflow/.github/workflows/publish-npm.yml@main
     with:
           working-directory: 'Unity'
+          channels: peronpm,npmjs,nuget
     secrets: inherit

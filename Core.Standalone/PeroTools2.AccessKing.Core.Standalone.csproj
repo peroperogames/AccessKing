@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--
+    Standalone flavour of the engine free core. It compiles the same sources as Core/ and additionally enables
+    ACCESSKING_STANDALONE, which adds the Task based CommandOperation async helpers. Those helpers are left out of the
+    assembly that ships to Unity, because the Unity layer implements them itself and two identical extension methods
+    would make every call ambiguous.
+  -->
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>14</LangVersion>
+    <AssemblyName>PeroTools2.AccessKing.Core.Standalone</AssemblyName>
+    <RootNamespace>PeroTools2.AccessKing</RootNamespace>
+    <Nullable>disable</Nullable>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <DefineConstants>$(DefineConstants);ACCESSKING_STANDALONE</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../Core/**/*.cs" Exclude="../Core/bin/**;../Core/obj/**" />
+  </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="PeroTools2.AccessKing" />
+  </ItemGroup>
+</Project>

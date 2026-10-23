@@ -14,6 +14,6 @@
     <PackageReference Include="NUnit3TestAdapter" Version="4.6.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Core\PeroTools2.AccessKing.Core.csproj" AdditionalProperties="AccessKingStandalone=true" />
+    <ProjectReference Include="..\Core.Standalone\PeroTools2.AccessKing.Core.Standalone.csproj" />
   </ItemGroup>
 </Project>

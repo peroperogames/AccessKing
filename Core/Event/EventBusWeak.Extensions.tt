@@ -1,0 +1,65 @@
+<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ import namespace="System.Linq" #>
+<#@ assembly name="System.Core" #>
+<#@ output extension=".cs" #>
+/*
+ * Copyright (c) PeroPeroGames Co., Ltd.
+ * Author: Gatongone
+ * Created On: 2023/05/23 16:05:45
+ */
+using System;
+
+namespace PeroTools2.AccessKing
+{
+    /// <summary>
+    /// Event bus extensions whose provider is a <c>object</c>.
+    /// </summary>
+    public static class EventBusWeakExtensions
+    {
+        #region SubscribeWeakly
+<#
+    for (var i = 0; i < 16; i++)
+    {
+        var genericArgs = i == 0 ? string.Empty : (i == 1 ? "T" : string.Join(", ", from index in Enumerable.Range(1, i) select $"T{index}"));
+        var genericArgsWithAngleBrackets = i == 0 ? string.Empty : $"<{genericArgs}>";
+        var parameterNotification = i == 0 ? "Empty" : $"ParameterNotification<{genericArgs}>";
+        var action = i == 0 ? "Action" : $"Action<{genericArgs}>";
+        var handler = i == 0 ? "WeakActionEventHandler" : $"WeakActionEventHandler<{genericArgs}>";
+#>
+
+        /// <summary>
+        /// Convert action delegate to ActionEventHandler, then register to event bus.
+        /// </summary>
+        /// <param name="eventBus">Event bus.</param>
+        /// <param name="action">The delegate which convert to ActionEventHandler.</param>
+        /// <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+        [Obsolete("Use SubscribeWeakly<#= genericArgsWithAngleBrackets #>(object provider, <#= action #> action) instead.")]
+        public static void SubscribeWeakly<#= genericArgsWithAngleBrackets #>(this IWeakEventSubscriable<<#= parameterNotification #>> eventBus, <#= action #> action, object provider)
+            => eventBus.SubscribeWeakly(new <#= handler #>(action, provider));
+<#
+    }
+
+    for (var i = 0; i < 16; i++)
+    {
+        var genericArgs = i == 0 ? string.Empty : (i == 1 ? "T" : string.Join(", ", from index in Enumerable.Range(1, i) select $"T{index}"));
+        var genericArgsWithAngleBrackets = i == 0 ? string.Empty : $"<{genericArgs}>";
+        var parameterNotification = i == 0 ? "Empty" : $"ParameterNotification<{genericArgs}>";
+        var action = i == 0 ? "Action" : $"Action<{genericArgs}>";
+        var handler = i == 0 ? "WeakActionEventHandler" : $"WeakActionEventHandler<{genericArgs}>";
+#>
+
+        /// <summary>
+        /// Convert action delegate to ActionEventHandler, then register to event bus.
+        /// </summary>
+        /// <param name="eventBus">Event bus.</param>
+        /// <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+        /// <param name="action">The delegate which convert to ActionEventHandler.</param>
+        public static void SubscribeWeakly<#= genericArgsWithAngleBrackets #>(this IWeakEventSubscriable<<#= parameterNotification #>> eventBus, object provider, <#= action #> action)
+            => eventBus.SubscribeWeakly(new <#= handler #>(action, provider));
+<#
+    }
+#>
+
+        #endregion
+    }
+}

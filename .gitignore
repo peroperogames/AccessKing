@@ -10,3 +10,6 @@
 [Bb]in
 [Oo]bj
 [Ll]og
+
+# Rider user settings
+*.DotSettings.user

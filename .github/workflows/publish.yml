@@ -11,5 +11,5 @@ jobs:
       id-token: write
     with:
       unity-plugin-project: Core/PeroTools2.AccessKing.Core.csproj
-      working-directory: 'Unity
+      working-directory: 'Unity'
     secrets: inherit

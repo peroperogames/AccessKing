@@ -4532,267 +4532,6 @@
             Comparer used for weak subscription owners.
             </summary>
         </member>
-        <member name="T:PeroTools2.AccessKing.EventBusWeakExtensions">
-            <summary>
-            Event bus extensions whose provider is a <c>object</c>.
-            </summary>
-        </member>
-        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.Empty},System.Action,System.Object)">
-            <summary>
-            Convert action delegate to ActionEventHandler, then register to event bus.
-            </summary>
-            <param name="eventBus">Event bus.</param>
-            <param name="action">The delegate which convert to ActionEventHandler.</param>
-            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
-        </member>
-        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``1(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0}},System.Action{``0},System.Object)">
-            <summary>
-            Convert action delegate to ActionEventHandler, then register to event bus.
-            </summary>
-            <param name="eventBus">Event bus.</param>
-            <param name="action">The delegate which convert to ActionEventHandler.</param>
-            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
-        </member>
-        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``2(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1}},System.Action{``0,``1},System.Object)">
-            <summary>
-            Convert action delegate to ActionEventHandler, then register to event bus.
-            </summary>
-            <param name="eventBus">Event bus.</param>
-            <param name="action">The delegate which convert to ActionEventHandler.</param>
-            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
-        </member>
-        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``3(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2}},System.Action{``0,``1,``2},System.Object)">
-            <summary>
-            Convert action delegate to ActionEventHandler, then register to event bus.
-            </summary>
-            <param name="eventBus">Event bus.</param>
-            <param name="action">The delegate which convert to ActionEventHandler.</param>
-            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
-        </member>
-        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``4(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3}},System.Action{``0,``1,``2,``3},System.Object)">
-            <summary>
-            Convert action delegate to ActionEventHandler, then register to event bus.
-            </summary>
-            <param name="eventBus">Event bus.</param>
-            <param name="action">The delegate which convert to ActionEventHandler.</param>
-            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
-        </member>
-        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``5(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4}},System.Action{``0,``1,``2,``3,``4},System.Object)">
-            <summary>
-            Convert action delegate to ActionEventHandler, then register to event bus.
-            </summary>
-            <param name="eventBus">Event bus.</param>
-            <param name="action">The delegate which convert to ActionEventHandler.</param>
-            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
-        </member>
-        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``6(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5}},System.Action{``0,``1,``2,``3,``4,``5},System.Object)">
-            <summary>
-            Convert action delegate to ActionEventHandler, then register to event bus.
-            </summary>
-            <param name="eventBus">Event bus.</param>
-            <param name="action">The delegate which convert to ActionEventHandler.</param>
-            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
-        </member>
-        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``7(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5,``6}},System.Action{``0,``1,``2,``3,``4,``5,``6},System.Object)">
-            <summary>
-            Convert action delegate to ActionEventHandler, then register to event bus.
-            </summary>
-            <param name="eventBus">Event bus.</param>
-            <param name="action">The delegate which convert to ActionEventHandler.</param>
-            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
-        </member>
-        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``8(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5,``6,``7}},System.Action{``0,``1,``2,``3,``4,``5,``6,``7},System.Object)">
-            <summary>
-            Convert action delegate to ActionEventHandler, then register to event bus.
-            </summary>
-            <param name="eventBus">Event bus.</param>
-            <param name="action">The delegate which convert to ActionEventHandler.</param>
-            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
-        </member>
-        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``9(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5,``6,``7,``8}},System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8},System.Object)">
-            <summary>
-            Convert action delegate to ActionEventHandler, then register to event bus.
-            </summary>
-            <param name="eventBus">Event bus.</param>
-            <param name="action">The delegate which convert to ActionEventHandler.</param>
-            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
-        </member>
-        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``10(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9}},System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9},System.Object)">
-            <summary>
-            Convert action delegate to ActionEventHandler, then register to event bus.
-            </summary>
-            <param name="eventBus">Event bus.</param>
-            <param name="action">The delegate which convert to ActionEventHandler.</param>
-            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
-        </member>
-        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``11(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10}},System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10},System.Object)">
-            <summary>
-            Convert action delegate to ActionEventHandler, then register to event bus.
-            </summary>
-            <param name="eventBus">Event bus.</param>
-            <param name="action">The delegate which convert to ActionEventHandler.</param>
-            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
-        </member>
-        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``12(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11}},System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11},System.Object)">
-            <summary>
-            Convert action delegate to ActionEventHandler, then register to event bus.
-            </summary>
-            <param name="eventBus">Event bus.</param>
-            <param name="action">The delegate which convert to ActionEventHandler.</param>
-            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
-        </member>
-        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``13(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12}},System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12},System.Object)">
-            <summary>
-            Convert action delegate to ActionEventHandler, then register to event bus.
-            </summary>
-            <param name="eventBus">Event bus.</param>
-            <param name="action">The delegate which convert to ActionEventHandler.</param>
-            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
-        </member>
-        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``14(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13}},System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13},System.Object)">
-            <summary>
-            Convert action delegate to ActionEventHandler, then register to event bus.
-            </summary>
-            <param name="eventBus">Event bus.</param>
-            <param name="action">The delegate which convert to ActionEventHandler.</param>
-            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
-        </member>
-        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``15(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14}},System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14},System.Object)">
-            <summary>
-            Convert action delegate to ActionEventHandler, then register to event bus.
-            </summary>
-            <param name="eventBus">Event bus.</param>
-            <param name="action">The delegate which convert to ActionEventHandler.</param>
-            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
-        </member>
-        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.Empty},System.Object,System.Action)">
-            <summary>
-            Convert action delegate to ActionEventHandler, then register to event bus.
-            </summary>
-            <param name="eventBus">Event bus.</param>
-            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
-            <param name="action">The delegate which convert to ActionEventHandler.</param>
-        </member>
-        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``1(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0}},System.Object,System.Action{``0})">
-            <summary>
-            Convert action delegate to ActionEventHandler, then register to event bus.
-            </summary>
-            <param name="eventBus">Event bus.</param>
-            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
-            <param name="action">The delegate which convert to ActionEventHandler.</param>
-        </member>
-        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``2(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1}},System.Object,System.Action{``0,``1})">
-            <summary>
-            Convert action delegate to ActionEventHandler, then register to event bus.
-            </summary>
-            <param name="eventBus">Event bus.</param>
-            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
-            <param name="action">The delegate which convert to ActionEventHandler.</param>
-        </member>
-        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``3(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2}},System.Object,System.Action{``0,``1,``2})">
-            <summary>
-            Convert action delegate to ActionEventHandler, then register to event bus.
-            </summary>
-            <param name="eventBus">Event bus.</param>
-            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
-            <param name="action">The delegate which convert to ActionEventHandler.</param>
-        </member>
-        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``4(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3}},System.Object,System.Action{``0,``1,``2,``3})">
-            <summary>
-            Convert action delegate to ActionEventHandler, then register to event bus.
-            </summary>
-            <param name="eventBus">Event bus.</param>
-            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
-            <param name="action">The delegate which convert to ActionEventHandler.</param>
-        </member>
-        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``5(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4}},System.Object,System.Action{``0,``1,``2,``3,``4})">
-            <summary>
-            Convert action delegate to ActionEventHandler, then register to event bus.
-            </summary>
-            <param name="eventBus">Event bus.</param>
-            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
-            <param name="action">The delegate which convert to ActionEventHandler.</param>
-        </member>
-        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``6(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5}},System.Object,System.Action{``0,``1,``2,``3,``4,``5})">
-            <summary>
-            Convert action delegate to ActionEventHandler, then register to event bus.
-            </summary>
-            <param name="eventBus">Event bus.</param>
-            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
-            <param name="action">The delegate which convert to ActionEventHandler.</param>
-        </member>
-        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``7(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5,``6}},System.Object,System.Action{``0,``1,``2,``3,``4,``5,``6})">
-            <summary>
-            Convert action delegate to ActionEventHandler, then register to event bus.
-            </summary>
-            <param name="eventBus">Event bus.</param>
-            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
-            <param name="action">The delegate which convert to ActionEventHandler.</param>
-        </member>
-        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``8(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5,``6,``7}},System.Object,System.Action{``0,``1,``2,``3,``4,``5,``6,``7})">
-            <summary>
-            Convert action delegate to ActionEventHandler, then register to event bus.
-            </summary>
-            <param name="eventBus">Event bus.</param>
-            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
-            <param name="action">The delegate which convert to ActionEventHandler.</param>
-        </member>
-        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``9(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5,``6,``7,``8}},System.Object,System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8})">
-            <summary>
-            Convert action delegate to ActionEventHandler, then register to event bus.
-            </summary>
-            <param name="eventBus">Event bus.</param>
-            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
-            <param name="action">The delegate which convert to ActionEventHandler.</param>
-        </member>
-        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``10(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9}},System.Object,System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9})">
-            <summary>
-            Convert action delegate to ActionEventHandler, then register to event bus.
-            </summary>
-            <param name="eventBus">Event bus.</param>
-            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
-            <param name="action">The delegate which convert to ActionEventHandler.</param>
-        </member>
-        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``11(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10}},System.Object,System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10})">
-            <summary>
-            Convert action delegate to ActionEventHandler, then register to event bus.
-            </summary>
-            <param name="eventBus">Event bus.</param>
-            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
-            <param name="action">The delegate which convert to ActionEventHandler.</param>
-        </member>
-        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``12(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11}},System.Object,System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11})">
-            <summary>
-            Convert action delegate to ActionEventHandler, then register to event bus.
-            </summary>
-            <param name="eventBus">Event bus.</param>
-            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
-            <param name="action">The delegate which convert to ActionEventHandler.</param>
-        </member>
-        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``13(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12}},System.Object,System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12})">
-            <summary>
-            Convert action delegate to ActionEventHandler, then register to event bus.
-            </summary>
-            <param name="eventBus">Event bus.</param>
-            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
-            <param name="action">The delegate which convert to ActionEventHandler.</param>
-        </member>
-        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``14(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13}},System.Object,System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13})">
-            <summary>
-            Convert action delegate to ActionEventHandler, then register to event bus.
-            </summary>
-            <param name="eventBus">Event bus.</param>
-            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
-            <param name="action">The delegate which convert to ActionEventHandler.</param>
-        </member>
-        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``15(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14}},System.Object,System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14})">
-            <summary>
-            Convert action delegate to ActionEventHandler, then register to event bus.
-            </summary>
-            <param name="eventBus">Event bus.</param>
-            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
-            <param name="action">The delegate which convert to ActionEventHandler.</param>
-        </member>
         <member name="T:PeroTools2.AccessKing.EventBus`1">
             <inheritdoc cref="T:PeroTools2.AccessKing.IEventBus`1"/>
         </member>
@@ -5416,6 +5155,267 @@
             <summary>
             Event bus with ParameterNotification wrapper.
             </summary>
+        </member>
+        <member name="T:PeroTools2.AccessKing.EventBusWeakExtensions">
+            <summary>
+            Event bus extensions whose provider is a <c>object</c>.
+            </summary>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.Empty},System.Action,System.Object)">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``1(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0}},System.Action{``0},System.Object)">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``2(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1}},System.Action{``0,``1},System.Object)">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``3(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2}},System.Action{``0,``1,``2},System.Object)">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``4(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3}},System.Action{``0,``1,``2,``3},System.Object)">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``5(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4}},System.Action{``0,``1,``2,``3,``4},System.Object)">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``6(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5}},System.Action{``0,``1,``2,``3,``4,``5},System.Object)">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``7(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5,``6}},System.Action{``0,``1,``2,``3,``4,``5,``6},System.Object)">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``8(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5,``6,``7}},System.Action{``0,``1,``2,``3,``4,``5,``6,``7},System.Object)">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``9(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5,``6,``7,``8}},System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8},System.Object)">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``10(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9}},System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9},System.Object)">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``11(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10}},System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10},System.Object)">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``12(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11}},System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11},System.Object)">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``13(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12}},System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12},System.Object)">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``14(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13}},System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13},System.Object)">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``15(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14}},System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14},System.Object)">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.Empty},System.Object,System.Action)">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``1(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0}},System.Object,System.Action{``0})">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``2(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1}},System.Object,System.Action{``0,``1})">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``3(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2}},System.Object,System.Action{``0,``1,``2})">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``4(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3}},System.Object,System.Action{``0,``1,``2,``3})">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``5(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4}},System.Object,System.Action{``0,``1,``2,``3,``4})">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``6(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5}},System.Object,System.Action{``0,``1,``2,``3,``4,``5})">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``7(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5,``6}},System.Object,System.Action{``0,``1,``2,``3,``4,``5,``6})">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``8(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5,``6,``7}},System.Object,System.Action{``0,``1,``2,``3,``4,``5,``6,``7})">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``9(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5,``6,``7,``8}},System.Object,System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8})">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``10(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9}},System.Object,System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9})">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``11(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10}},System.Object,System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10})">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``12(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11}},System.Object,System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11})">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``13(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12}},System.Object,System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12})">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``14(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13}},System.Object,System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13})">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
+        </member>
+        <member name="M:PeroTools2.AccessKing.EventBusWeakExtensions.SubscribeWeakly``15(PeroTools2.AccessKing.IWeakEventSubscriable{PeroTools2.AccessKing.ParameterNotification{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14}},System.Object,System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14})">
+            <summary>
+            Convert action delegate to ActionEventHandler, then register to event bus.
+            </summary>
+            <param name="eventBus">Event bus.</param>
+            <param name="provider">The event provider which should contains the delegation that from instance method.</param>
+            <param name="action">The delegate which convert to ActionEventHandler.</param>
         </member>
         <member name="T:PeroTools2.AccessKing.EventSchedule`1">
             <summary>

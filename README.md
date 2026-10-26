@@ -28,7 +28,7 @@ Append following content to `Packages/manifest.json`:
 {
   "dependencies":
   {
-    "com.prpr.accessking": "https://github.com/peroperogames/AccessKing.git#v0.2.5"
+    "com.prpr.accessking": "https://github.com/peroperogames/AccessKing.git#0.3.0-base"
   }
 }
 ```
@@ -47,7 +47,7 @@ Append following content to `Packages/manifest.json`:
   ],
   "dependencies":
   {
-    "com.prpr.accessking": "0.2.5"
+    "com.prpr.accessking": "0.3.0"
   }
 }
 ```
@@ -66,7 +66,7 @@ Append following content to `Packages/manifest.json`:
   ],
   "dependencies":
   {
-    "com.prpr.accessking": "0.2.5"
+    "com.prpr.accessking": "0.3.0"
   }
 }
 ```

@@ -18,6 +18,22 @@ A cross-domain message bus for Unity: **event bus**, **command bus** and theme k
 
 ## Install
 
+### Nuget
+
+Append following content to project file (`.csproj`):
+
+```xml
+<ItemGroup>
+    <PackageReference Include="PeroTools2.AccessKing" Version="0.3.0" />
+</ItemGroup>
+```
+
+Or install via CLI:
+
+```
+dotnet add package PeroTools2.AccessKing --version 0.3.0
+```
+
 ### Unity
 
 Append following content to `Packages/manifest.json`:

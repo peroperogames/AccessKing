@@ -2,6 +2,7 @@
     <PropertyGroup>
         <TargetFramework>netstandard2.1</TargetFramework>
         <LangVersion>14</LangVersion>
+        <PackageId>PeroTools2.AccessKing</PackageId>
         <AssemblyName>PeroTools2.AccessKing.Core</AssemblyName>
         <RootNamespace>PeroTools2.AccessKing</RootNamespace>
         <Nullable>disable</Nullable>

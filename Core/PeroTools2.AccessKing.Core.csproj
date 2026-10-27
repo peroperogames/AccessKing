@@ -14,7 +14,8 @@
         <Description>Event Bus &amp; Command Bus</Description>
         <Copyright>© 2026 PeroperoGames</Copyright>
         <PackageProjectUrl>https://github.com/peroperogames/AccessKing</PackageProjectUrl>
-        <PackageLicenseUrl>https://github.com/peroperogames/AccessKing/LICENSE</PackageLicenseUrl>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
         <RepositoryUrl>https://github.com/peroperogames/AccessKing</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <PackageTags>event-bus;command-bus</PackageTags>
@@ -45,5 +46,9 @@
     <!-- The unity layer implements the internal invocation interfaces, keep the public surface tight. -->
     <ItemGroup>
         <InternalsVisibleTo Include="PeroTools2.AccessKing"/>
+    </ItemGroup>
+    <!-- The readme lives at the root of the repository, the package serves it as its own documentation page. -->
+    <ItemGroup>
+        <None Include="../README.md" Pack="true" PackagePath="\"/>
     </ItemGroup>
 </Project>

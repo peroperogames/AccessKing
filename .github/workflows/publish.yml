@@ -12,4 +12,5 @@ jobs:
     with:
       unity-plugin-project: 'Core/PeroTools2.AccessKing.Core.csproj'
       working-directory: 'Unity'
+      channels: peronpm,npmjs,nuget
     secrets: inherit

@@ -44,7 +44,7 @@ Append following content to `Packages/manifest.json`:
 {
   "dependencies":
   {
-    "com.prpr.accessking": "https://github.com/peroperogames/AccessKing.git#0.3.0-base"
+    "com.prpr.accessking": "https://github.com/peroperogames/AccessKing.git#0.3.0"
   }
 }
 ```
